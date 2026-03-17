@@ -221,7 +221,6 @@ GameObject:
   - component: {fileID: 668499709}
   - component: {fileID: 668499708}
   - component: {fileID: 668499707}
-  - component: {fileID: 668499711}
   m_Layer: 0
   m_Name: CAM_STRANGE_OBJECT
   m_TagString: Untagged
@@ -329,33 +328,12 @@ Transform:
   m_GameObject: {fileID: 668499706}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 41.4, y: 12.429196, z: 3.695034}
+  m_LocalPosition: {x: 41.399998, y: 14.049196, z: 3.695034}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 567591829}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &668499711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 668499706}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4eb4843bae7d24943842ea23130dcd55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineGroupFraming
-  FramingMode: 2
-  FramingSize: 0.6
-  CenterOffset: {x: 0, y: -0.25}
-  Damping: 2
-  SizeAdjustment: 2
-  LateralAdjustment: 0
-  FovRange: {x: 1, y: 70}
-  DollyRange: {x: -100, y: 100}
-  OrthoSizeRange: {x: 1, y: 1000}
 --- !u!1 &694164059
 GameObject:
   m_ObjectHideFlags: 0
