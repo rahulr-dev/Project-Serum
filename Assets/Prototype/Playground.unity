@@ -131,6 +131,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: CORE
       objectReference: {fileID: 0}
+    - target: {fileID: 3009607472295989001, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
+      propertyPath: maxSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009607472295989001, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
+      propertyPath: acceleration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009607472295989001, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
+      propertyPath: deceleration
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3697113393293348485, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -170,6 +182,14 @@ PrefabInstance:
     - target: {fileID: 3697113393293348485, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4606021793260282207, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
+      propertyPath: DefaultBlend.Style
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6490644136241747183, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
+      propertyPath: m_TagString
+      value: PlayerCam
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -460,8 +480,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CinemachineCameraBlender
   cam: {fileID: 668499709}
   targetTag: Player
-  activePriority: 99
-  inactivePriority: 0
+  blendMode: 0
+  blendCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   gizmoColor: {r: 0, g: 0.8, b: 1, a: 0.2}
 --- !u!65 &878685708
 BoxCollider:

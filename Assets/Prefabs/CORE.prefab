@@ -120,9 +120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1beb64d7292f69b4f8f92664601f9bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  maxSpeed: 6
-  acceleration: 15
-  deceleration: 25
+  maxSpeed: 4
+  acceleration: 10
+  deceleration: 15
   gravity: -20
   groundedGravity: -2
   rotationSpeed: 12
@@ -514,7 +514,7 @@ GameObject:
   - component: {fileID: 420678287606454745}
   m_Layer: 0
   m_Name: PlayerCamera
-  m_TagString: Untagged
+  m_TagString: PlayerCam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
