@@ -155,8 +155,20 @@ MonoBehaviour:
   maxSpeed: 4
   acceleration: 10
   deceleration: 15
+  crouchSpeedMultiplier: 0.4
+  jumpForce: 5
+  fallMultiplier: 3.2
+  jumpCutMultiplier: 2.5
+  coyoteTime: 0.01
   gravity: -20
   groundedGravity: -2
+  standHeight: 1.5
+  crouchHeight: 1
+  crouchTransitionSpeed: 12
+  slideSpeed: 10
+  slideDuration: 1
+  slideDeceleration: 14
+  slideSpeedThreshold: 0.75
   rotationSpeed: 12
 --- !u!1 &2704652515931220796
 GameObject:
@@ -644,7 +656,7 @@ MonoBehaviour:
     ScreenPosition: {x: 0, y: 0}
     DeadZone:
       Enabled: 1
-      Size: {x: 0.2, y: 0.2}
+      Size: {x: 0.2, y: 0.4}
     HardLimits:
       Enabled: 0
       Size: {x: 0.8, y: 0.8}
