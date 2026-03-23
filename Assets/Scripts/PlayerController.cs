@@ -61,7 +61,6 @@ public class PlayerController : MonoBehaviour
     private bool jumpHeld;
     private bool prevCrouchHeld;
 
-    // ─────────────────────────────────────────────────────────────────────────
     void Start()
     {
         cc = GetComponent<CharacterController>();
@@ -83,7 +82,6 @@ public class PlayerController : MonoBehaviour
         cc.Move(new Vector3(0f, velocityY, finalSpeedZ) * Time.deltaTime);
     }
 
-    // ─── Input ────────────────────────────────────────────────────────────────
     private void CacheInput()
     {
         inputAxis = InputSystem.Instance.Move();
@@ -94,29 +92,12 @@ public class PlayerController : MonoBehaviour
         prevCrouchHeld = crouchHeld;
     }
 
-    // ─── Coyote ───────────────────────────────────────────────────────────────
     private void UpdateCoyote()
     {
         if (cc.isGrounded) { coyoteTimer = coyoteTime; jumpConsumed = false; }
         else { coyoteTimer -= Time.deltaTime; }
     }
 
-    // ─── State Transitions ────────────────────────────────────────────────────
-    //
-    //  GROUNDED                         AIRBORNE
-    //  ┌──────┐  input    ┌──────┐      ┌──────┐  vy<0   ┌──────┐
-    //  │ Idle │ ────────► │ Walk │      │ Jump │ ──────► │ Fall │
-    //  └──────┘           └──┬───┘      └──────┘         └──┬───┘
-    //     ▲                  │ crouch+speed                  │ land
-    //     │ land             ▼                               ▼
-    //     │              ┌───────┐                       (Idle/Walk)
-    //     │              │ Slide │
-    //     │              └───────┘
-    //     │  crouch
-    //     └──────────── ┌────────┐
-    //                   │ Crouch │
-    //                   └────────┘
-    //
     private void HandleStateTransition()
     {
         LocomotionState next = CurrentState;
@@ -273,7 +254,6 @@ public class PlayerController : MonoBehaviour
         currentSlideSpeed = Mathf.MoveTowards(currentSlideSpeed, 0f, slideDeceleration * Time.deltaTime);
     }
 
-    // ─── Rotation ─────────────────────────────────────────────────────────────
     private void HandleRotation()
     {
         if (inputAxis > 0f) targetYAngle = 0f;
@@ -283,7 +263,6 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, currentYAngle, 0f);
     }
 
-    // ─── Capsule ──────────────────────────────────────────────────────────────
     private void HandleCapsuleResize()
     {
         float newHeight = Mathf.Lerp(cc.height, targetCapsuleHeight, crouchTransitionSpeed * Time.deltaTime);
@@ -291,7 +270,6 @@ public class PlayerController : MonoBehaviour
         cc.center = new Vector3(0f, newHeight / 2f, 0f);
     }
 
-    // ─── Transition Guards ────────────────────────────────────────────────────
     private bool TryJump() => jumpPressed && coyoteTimer > 0f && !jumpConsumed;
     private bool TrySlide() => crouchPressed && Mathf.Abs(currentSpeedZ) >= maxSpeed * slideSpeedThreshold;
     private bool SlideExpired() => slideTimer <= 0f || Mathf.Abs(currentSlideSpeed) < 0.1f;

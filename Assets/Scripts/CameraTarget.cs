@@ -7,22 +7,19 @@ public class CameraTarget : MonoBehaviour
 
     [Header("Follow")]
     [SerializeField] private float horizontalSmoothing = 12f;
-    [SerializeField] private float verticalSmoothing = 3f;   // low = ignores jump bounce
-    [SerializeField] private float verticalDeadzone = 0.05f; // stops micro-drift on flat ground
+    [SerializeField] private float verticalSmoothing = 3f;
+    [SerializeField] private float verticalDeadzone = 0.05f;
 
     private float smoothedY;
 
     void Start()
     {
-        // Snap to player immediately — no lerp on first frame
         transform.position = player.position;
         smoothedY = player.position.y;
     }
 
     void LateUpdate()
     {
-        // X/Z follow instantly-smoothed (tracks left/right, depth)
-        // Y follows sluggishly — absorbs jump/fall without bouncing
         float targetY = player.position.y;
 
         if (Mathf.Abs(targetY - smoothedY) > verticalDeadzone)
@@ -33,7 +30,5 @@ public class CameraTarget : MonoBehaviour
             smoothedY,
             Mathf.Lerp(transform.position.z, player.position.z, horizontalSmoothing * Time.deltaTime)
         );
-
-        // Rotation is never inherited — this transform stays axis-aligned
     }
 }
