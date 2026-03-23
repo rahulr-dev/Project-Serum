@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.039215688, g: 0.050980393, b: 0.101960786, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.02
+  m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.06213589, g: 0.071086414, b: 0.110956945, a: 1}
@@ -1795,7 +1795,7 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 5316.9
+  m_Intensity: 3000
   m_Range: 64
   m_SpotAngle: 179
   m_InnerSpotAngle: 0
@@ -2249,7 +2249,7 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 792
+  m_Intensity: 1000
   m_Range: 50.7
   m_SpotAngle: 179
   m_InnerSpotAngle: 0
@@ -3476,8 +3476,8 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 5949
-  m_Range: 358.1
+  m_Intensity: 1000
+  m_Range: 400
   m_SpotAngle: 179
   m_InnerSpotAngle: 0
   m_CookieSize2D: {x: 0.5, y: 0.5}

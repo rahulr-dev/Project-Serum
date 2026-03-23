@@ -173,6 +173,7 @@ public class PlayerController : MonoBehaviour
         switch (CurrentState)
         {
             case LocomotionState.Slide:
+                currentSpeedZ = currentSlideSpeed;
                 currentSlideSpeed = 0f;
                 break;
         }
