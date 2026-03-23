@@ -65,6 +65,7 @@ Transform:
   - {fileID: 4932495677728137794}
   - {fileID: 1738692028893282098}
   - {fileID: 8093785684644587184}
+  - {fileID: 6327620785252923524}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1635948263843606616
@@ -155,8 +156,20 @@ MonoBehaviour:
   maxSpeed: 4
   acceleration: 10
   deceleration: 15
+  crouchSpeedMultiplier: 0.4
+  jumpForce: 6
+  fallMultiplier: 3.2
+  jumpCutMultiplier: 2.5
+  coyoteTime: 0.01
   gravity: -20
   groundedGravity: -2
+  standHeight: 1.5
+  crouchHeight: 1
+  crouchTransitionSpeed: 12
+  slideSpeed: 10
+  slideDuration: 1
+  slideDeceleration: 14
+  slideSpeedThreshold: 0.75
   rotationSpeed: 12
 --- !u!1 &2704652515931220796
 GameObject:
@@ -530,6 +543,54 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!1 &5428041139166434623
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6327620785252923524}
+  - component: {fileID: 6046250064195173897}
+  m_Layer: 0
+  m_Name: CameraFollowTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6327620785252923524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5428041139166434623}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3697113393293348485}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6046250064195173897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5428041139166434623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a47a29a3a8fef241a514b22676c0a96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraTarget
+  player: {fileID: 8093785684644587184}
+  horizontalSmoothing: 12
+  verticalSmoothing: 3
+  verticalDeadzone: 0.5
 --- !u!1 &6490644136241747183
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,7 +647,7 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 8093785684644587184}
+    TrackingTarget: {fileID: 6327620785252923524}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
@@ -623,7 +684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineFollow
   TrackerSettings:
     BindingMode: 4
-    PositionDamping: {x: 1, y: 1, z: 1}
+    PositionDamping: {x: 1, y: 3, z: 1}
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
@@ -644,7 +705,7 @@ MonoBehaviour:
     ScreenPosition: {x: 0, y: 0}
     DeadZone:
       Enabled: 1
-      Size: {x: 0.2, y: 0.2}
+      Size: {x: 0.2, y: 0.4}
     HardLimits:
       Enabled: 0
       Size: {x: 0.8, y: 0.8}
@@ -655,7 +716,7 @@ MonoBehaviour:
   Lookahead:
     Enabled: 1
     Time: 0.8
-    Smoothing: 15
+    Smoothing: 6
     IgnoreY: 1
 --- !u!114 &5657695331447025494
 MonoBehaviour:
