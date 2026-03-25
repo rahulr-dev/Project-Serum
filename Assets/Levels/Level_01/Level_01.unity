@@ -701,46 +701,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CORE
       objectReference: {fileID: 0}
-    - target: {fileID: 420678287606454745, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: Offset.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 420678287606454745, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: ApplyAfter
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738692028893282098, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738692028893282098, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738692028893282098, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7068863
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738692028893282098, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.017661132
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738692028893282098, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7068862
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738692028893282098, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.017661156
-      objectReference: {fileID: 0}
-    - target: {fileID: 3009607472295989001, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: jumpForce
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3009607472295989001, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: fallMultiplier
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 3697113393293348485, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -780,50 +740,6 @@ PrefabInstance:
     - target: {fileID: 3697113393293348485, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4932495677728137794, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 9.950063
-      objectReference: {fileID: 0}
-    - target: {fileID: 4932495677728137794, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.9987524
-      objectReference: {fileID: 0}
-    - target: {fileID: 4932495677728137794, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.0000000055879354
-      objectReference: {fileID: 0}
-    - target: {fileID: 4932495677728137794, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.70688623
-      objectReference: {fileID: 0}
-    - target: {fileID: 4932495677728137794, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.017661143
-      objectReference: {fileID: 0}
-    - target: {fileID: 4932495677728137794, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7068862
-      objectReference: {fileID: 0}
-    - target: {fileID: 4932495677728137794, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.017661141
-      objectReference: {fileID: 0}
-    - target: {fileID: 4977859443596999002, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: field of view
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 5803443268118829291, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: FollowOffset.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5803443268118829291, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: FollowOffset.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8222842570055736128, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      propertyPath: Lens.FieldOfView
-      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
