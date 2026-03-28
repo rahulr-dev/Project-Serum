@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+// Interface for damageable entities
 public interface IDamageable
 {
     void TakeDamage(int amount);
@@ -11,18 +12,17 @@ public class HealthComponent : MonoBehaviour, IDamageable
 {
     [Header("Health Settings")]
     public int maxHealth = 100;
-    public int currentHealth;
+    public int currentHealth { get; private set; }
 
     [Header("Defense")]
-    public int defense = 0; // reduces incoming damage kinda shield
+    public int defense = 0; // reduces incoming damage for shielding mechanics
 
     [Header("Options")]
-    public bool destroyOnDeath = true; // deletes the GameObject when health reaches zero
     public float invincibleTime = 0.3f; // after taking damage, prevents further damage for this duration in seconds
 
     // Events for other systems (Effects, AI, etc.)
-    public Action<int, int> OnHealthChanged; // (current, max)
-    public Action OnDeath;
+    public event Action<int, int> OnHealthChanged; // (current, max)
+    public event Action OnDeath;
 
     private bool isDead = false;
     private bool isInvincible = false;
@@ -30,12 +30,17 @@ public class HealthComponent : MonoBehaviour, IDamageable
     void Awake()
     {
         currentHealth = maxHealth;
+    }
+
+    void Start()
+    {
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
-    // Called by any damage source
+    // Applies damage to the entity, factoring in defense and invincibility
     public void TakeDamage(int amount)
     {
+        if (amount <= 0) return; // Ignore non-positive damage
         if (isDead || isInvincible) return;
 
         StartCoroutine(Invincibility());
@@ -56,6 +61,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
     // Heal function
     public void Heal(int amount)
     {
+        if (amount <= 0) return;
         if (isDead) return;
 
         currentHealth += amount;
@@ -68,15 +74,8 @@ public class HealthComponent : MonoBehaviour, IDamageable
     private void Die()
     {
         if (isDead) return;
-
         isDead = true;
-
         OnDeath?.Invoke();
-
-        if (destroyOnDeath)
-        {
-            Destroy(gameObject);
-        }
     }
 
     // Temporary invulnerability
