@@ -174,10 +174,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1635948263843606616, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1762852286}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
 --- !u!1 &567591828
 GameObject:
@@ -689,7 +686,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LowHealthEffectController
   health: {fileID: 1762852286}
   volume: {fileID: 2012951405}
-  threshold: 0.5
+  threshold: 0.8
 --- !u!4 &1074712121
 Transform:
   m_ObjectHideFlags: 0
@@ -837,26 +834,17 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!1 &1762852281 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1635948263843606616, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
+--- !u!114 &1762852286 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9036991856350963617, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
   m_PrefabInstance: {fileID: 366862723}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1762852286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1762852281}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26fd5a1f79ca92e4e8e4bd49c1d64c6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthComponent
-  maxHealth: 100
-  defense: 0
-  invincibleTime: 0.3
 --- !u!1 &1957914366
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,7 +907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
   m_IsGlobal: 1
-  priority: 0
+  priority: 99
   blendDistance: 0
   weight: 0
   sharedProfile: {fileID: 11400000, guid: 061492f197492354fa862eaba677b993, type: 2}

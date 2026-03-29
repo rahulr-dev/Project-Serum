@@ -4,7 +4,7 @@ using UnityEngine.Rendering;
 
 public class LowHealthEffectController : MonoBehaviour
 {
-    public HealthComponent health;
+    public Health health;
     public Volume volume;
 
     [Range(0f, 1f)]
@@ -15,7 +15,7 @@ public class LowHealthEffectController : MonoBehaviour
         volume.profile = Instantiate(volume.profile);
         health.OnHealthChanged += UpdateEffect;
         volume.weight = 0f;
-        UpdateEffect(health.currentHealth, health.maxHealth);
+        UpdateEffect(health.currentHealth, health.MaxHealth);
     }
 
     void UpdateEffect(int current, int max)

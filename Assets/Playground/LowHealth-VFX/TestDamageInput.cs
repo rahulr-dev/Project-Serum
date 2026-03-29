@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 // Simple test script to apply damage and healing to the HealthComponent using keyboard input
 public class TestDamageInput : MonoBehaviour
 {
-    public HealthComponent health;
+    public Health health;
 
     void Update()
     {
