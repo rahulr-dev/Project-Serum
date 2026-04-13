@@ -4,15 +4,15 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - PlayerCam
+  - Trap
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
+  - Clone
   - 
   - 
   - 
