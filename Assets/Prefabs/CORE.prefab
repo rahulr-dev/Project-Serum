@@ -80,6 +80,7 @@ GameObject:
   - component: {fileID: 4292220086733222455}
   - component: {fileID: 1768684860980695109}
   - component: {fileID: 3009607472295989001}
+  - component: {fileID: 9036991856350963617}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -96,7 +97,7 @@ Transform:
   m_GameObject: {fileID: 1635948263843606616}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -171,6 +172,21 @@ MonoBehaviour:
   slideDeceleration: 14
   slideSpeedThreshold: 0.75
   rotationSpeed: 12
+--- !u!114 &9036991856350963617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635948263843606616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26fd5a1f79ca92e4e8e4bd49c1d64c6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthComponent
+  <MaxHealth>k__BackingField: 30
+  defense: 0
+  invincibleTime: 0.3
 --- !u!1 &2704652515931220796
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,8 +417,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4576115357008275715}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.017661143, y: -0.7068862, z: 0.017661141, w: 0.70688623}
-  m_LocalPosition: {x: 9.950063, y: 2.9987524, z: 0.0000000055879354}
+  m_LocalRotation: {x: 0.009818058, y: -0.70703864, z: 0.0098180575, w: 0.70703864}
+  m_LocalPosition: {x: 17.972233, y: 2.9996145, z: 0.0000000018626451}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -441,7 +457,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 80
+  field of view: 40
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -620,8 +636,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6490644136241747183}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.017661132, y: -0.7068862, z: 0.017661156, w: 0.7068863}
-  m_LocalPosition: {x: 10, y: 2, z: 0}
+  m_LocalRotation: {x: 0.009818053, y: -0.7070386, z: 0.009818064, w: 0.7070387}
+  m_LocalPosition: {x: 18, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -651,7 +667,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 80
+    FieldOfView: 40
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -688,7 +704,7 @@ MonoBehaviour:
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
-  FollowOffset: {x: 10, y: 2, z: 0}
+  FollowOffset: {x: 18, y: 2, z: 0}
 --- !u!114 &2260961527908909040
 MonoBehaviour:
   m_ObjectHideFlags: 0
