@@ -1,0 +1,11 @@
+*.unity                  merge=unityyamlmerge
+*.prefab                 merge=unityyamlmerge
+*.mat                    merge=unityyamlmerge
+*.physicMaterial         merge=unityyamlmerge
+*.physicsMaterial2D      merge=unityyamlmerge
+*.controller             merge=unityyamlmerge
+*.anim                   merge=unityyamlmerge
+*.overrideController     merge=unityyamlmerge
+*.mask                   merge=unityyamlmerge
+
+*.meta                   merge=ours
