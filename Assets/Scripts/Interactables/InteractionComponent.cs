@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class InteractionComponent : MonoBehaviour
 {
@@ -13,7 +12,7 @@ public class InteractionComponent : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current.eKey.wasPressedThisFrame)
+        if (InputSystem.Instance.InteractPressed())
         {
             TryInteract();
         }
@@ -29,27 +28,13 @@ public class InteractionComponent : MonoBehaviour
 
         Collider[] hits = Physics.OverlapBox(center, boxSize / 2, Quaternion.identity, interactLayer);
 
-        BaseInteractable closest = null;
-        float minDist = Mathf.Infinity;
-
-        foreach (var hit in hits)
+        if (hits.Length > 0)
         {
-            BaseInteractable interactable = hit.GetComponent<BaseInteractable>();
-            if (interactable == null) continue;
-
-            float dist = Vector3.Distance(transform.position, hit.transform.position);
-
-            if (dist < minDist)
-            {
-                minDist = dist;
-                closest = interactable;
-            }
+            var interactable = hits[0].GetComponent<BaseInteractable>();
+            interactable?.Interact();
         }
-
-        closest?.Interact();
     }
 
-    // Debug visualization
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;

@@ -251,9 +251,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 282203369}
-  - component: {fileID: 282203368}
   - component: {fileID: 282203367}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Door (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,27 +268,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 282203366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bba84da954a47c648a26738dc64781b8, type: 3}
+  m_Script: {fileID: 11500000, guid: 35cfb7b1dbec8df4aae0e048ec2d2f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Door_01
   doorVisual: {fileID: 858528371}
   openOffset: {x: 0, y: 3, z: 0}
   speed: 3
---- !u!114 &282203368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 282203366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35cfb7b1dbec8df4aae0e048ec2d2f4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Door
-  interactMessage: E
-  cooldown: 0.2
-  isOpen: 0
 --- !u!4 &282203369
 Transform:
   m_ObjectHideFlags: 0
@@ -358,6 +342,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4932495677728137794, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 17.972233
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932495677728137794, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.9996145
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932495677728137794, guid: 35dba4a3373aca94385f89abf6540376, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0000000018626451
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -380,10 +376,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 432456277}
-  - component: {fileID: 432456279}
   - component: {fileID: 432456278}
   - component: {fileID: 432456280}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Switch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +422,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &432456279
+--- !u!114 &432456280
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -438,22 +433,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb36f21707e40841be9977959b0f872, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Switch
-  interactMessage: Press E
-  cooldown: 0.2
---- !u!114 &432456280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 432456276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 308b3ebf947b3e541956d2c8ffa7fdbe, type: 3}
-  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Switch_01
-  targetSwitch: {fileID: 432456279}
+  cooldown: 0.2
+  isOn: 0
   door: {fileID: 282203367}
 --- !u!1 &458497801
 GameObject:
@@ -813,10 +795,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 773747654}
-  - component: {fileID: 773747653}
   - component: {fileID: 773747652}
   - component: {fileID: 773747655}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Lever
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -844,21 +825,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &773747653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773747649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20ef404e5e72cc540b9198990cec742d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lever
-  interactMessage: Press E
-  cooldown: 0.2
-  isOn: 0
 --- !u!4 &773747654
 Transform:
   m_ObjectHideFlags: 0
@@ -884,10 +850,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 773747649}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 238b42224577d0e4783171d60d29be14, type: 3}
+  m_Script: {fileID: 11500000, guid: 20ef404e5e72cc540b9198990cec742d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lever_01
-  lever: {fileID: 773747653}
+  cooldown: 0.2
+  isOn: 0
   door: {fileID: 2006940820}
 --- !u!1 &858528370
 GameObject:
@@ -1629,8 +1596,8 @@ MonoBehaviour:
   boxSize: {x: 1.5, y: 1.5, z: 1.5}
   interactLayer:
     serializedVersion: 2
-    m_Bits: 1
-  offset: {x: 0, y: 1, z: 0}
+    m_Bits: 64
+  offset: {x: 0, y: 0.5, z: 0}
 --- !u!1 &1957914366
 GameObject:
   m_ObjectHideFlags: 0
@@ -1672,9 +1639,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2006940818}
-  - component: {fileID: 2006940819}
   - component: {fileID: 2006940820}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1697,21 +1663,6 @@ Transform:
   - {fileID: 1226639079}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2006940819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2006940817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35cfb7b1dbec8df4aae0e048ec2d2f4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Door
-  interactMessage: E
-  cooldown: 0.2
-  isOpen: 0
 --- !u!114 &2006940820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1721,7 +1672,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2006940817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bba84da954a47c648a26738dc64781b8, type: 3}
+  m_Script: {fileID: 11500000, guid: 35cfb7b1dbec8df4aae0e048ec2d2f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Door_01
   doorVisual: {fileID: 1226639079}

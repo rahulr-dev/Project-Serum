@@ -3,7 +3,6 @@ using UnityEngine;
 public abstract class BaseInteractable : MonoBehaviour
 {
     [Header("Common Settings")]
-    public string interactMessage = "Press E";
     public float cooldown = 0.2f;
 
     private bool canInteract = true;

@@ -2,11 +2,17 @@ using UnityEngine;
 
 public class Switch : BaseInteractable
 {
-    public event System.Action OnActivated;
+    public bool isOn = false;
+    public Door door;
 
     protected override void OnInteract()
     {
-        Debug.Log("Switch Activated");
-        OnActivated?.Invoke();
+        isOn = !isOn;
+
+        if (door != null)
+        {
+            if (isOn) door.Activate();
+            else door.Deactivate();
+        }
     }
 }
