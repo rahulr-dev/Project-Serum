@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,10 +7,10 @@ public class InputSystem : MonoBehaviour
 
     [SerializeField] private InputActionAsset inputActionAsset;
     private InputActionMap _playerMap;
-
     private InputAction _moveAction;
     private InputAction _crouchAction;
     private InputAction _jumpAction;
+    private InputAction _interactAction;
 
     private void Awake()
     {
@@ -26,6 +25,7 @@ public class InputSystem : MonoBehaviour
         _moveAction = _playerMap.FindAction("Move");
         _crouchAction = _playerMap.FindAction("Crouch");
         _jumpAction = _playerMap.FindAction("Jump");
+        _interactAction = _playerMap.FindAction("Interact");
     }
 
     private void OnEnable()
@@ -45,4 +45,6 @@ public class InputSystem : MonoBehaviour
     public bool JumpPressed() => _jumpAction?.WasPressedThisFrame() ?? false;
 
     public bool JumpHeld() => _jumpAction?.inProgress ?? false;
+
+    public bool InteractPressed() => _interactAction?.WasPressedThisFrame() ?? false;
 }
