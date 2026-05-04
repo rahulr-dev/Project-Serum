@@ -436,8 +436,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4576115357008275715}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.009818058, y: -0.70703864, z: 0.0098180575, w: 0.70703864}
-  m_LocalPosition: {x: 17.972233, y: 2.9996145, z: 0.0000000018626451}
+  m_LocalRotation: {x: -0.000000035803932, y: -0.7071068, z: -0.00000003580393, w: 0.7071068}
+  m_LocalPosition: {x: 12, y: 3, z: 0.6000001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -454,19 +454,19 @@ Camera:
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.6745098, g: 0.7019608, b: 0.7490196, a: 1}
-  m_projectionMatrixMode: 1
+  m_projectionMatrixMode: 2
   m_GateFitMode: 2
   m_FOVAxisMode: 0
   m_Iso: 200
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 50
+  m_FocalLength: 35.000004
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
-  m_Anamorphism: 0
-  m_SensorSize: {x: 36, y: 24}
+  m_Anamorphism: 1
+  m_SensorSize: {x: 70.41, y: 52.63}
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -476,7 +476,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 40
+  field of view: 73.87587
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -526,10 +526,10 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 1
+  m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 1
-  m_Dithering: 0
+  m_Dithering: 1
   m_ClearDepth: 1
   m_AllowXRRendering: 1
   m_AllowHDROutput: 1
@@ -566,7 +566,7 @@ MonoBehaviour:
   UpdateMethod: 2
   BlendUpdateMethod: 1
   LensModeOverride:
-    Enabled: 0
+    Enabled: 1
     DefaultMode: 2
   DefaultBlend:
     Style: 1
@@ -655,8 +655,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6490644136241747183}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.009818053, y: -0.7070386, z: 0.009818064, w: 0.7070387}
-  m_LocalPosition: {x: 18, y: 2, z: 0}
+  m_LocalRotation: {x: -0.00000003705841, y: -0.70710677, z: -0.000000034549437, w: 0.7071068}
+  m_LocalPosition: {x: 12, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -686,15 +686,15 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 40
+    FieldOfView: 73.87587
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
-    ModeOverride: 0
+    ModeOverride: 3
     PhysicalProperties:
       GateFit: 2
-      SensorSize: {x: 21.946, y: 16.002}
+      SensorSize: {x: 70.41, y: 52.63}
       LensShift: {x: 0, y: 0}
       FocusDistance: 10
       Iso: 200
@@ -703,7 +703,7 @@ MonoBehaviour:
       BladeCount: 5
       Curvature: {x: 2, y: 11}
       BarrelClipping: 0.25
-      Anamorphism: 0
+      Anamorphism: 1
   BlendHint: 1
 --- !u!114 &5803443268118829291
 MonoBehaviour:
@@ -723,7 +723,7 @@ MonoBehaviour:
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
-  FollowOffset: {x: 18, y: 2, z: 0}
+  FollowOffset: {x: 12, y: 2, z: 0}
 --- !u!114 &2260961527908909040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -746,7 +746,7 @@ MonoBehaviour:
       Size: {x: 0.8, y: 0.8}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
-  TargetOffset: {x: 0, y: 1.5, z: 0}
+  TargetOffset: {x: 0, y: 2, z: 0}
   Damping: {x: 1, y: 1}
   Lookahead:
     Enabled: 1
@@ -782,6 +782,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44d70cc20219cd84593f67d248eafe36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCameraOffset
-  Offset: {x: 0, y: 1, z: 0}
+  Offset: {x: 0.6, y: 1, z: 0}
   ApplyAfter: 3
   PreserveComposition: 0
