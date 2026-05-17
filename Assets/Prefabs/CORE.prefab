@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7973836291129344928}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: VISUAL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 3009607472295989001}
   - component: {fileID: 9036991856350963617}
   - component: {fileID: 1315857549184815520}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 7937891056110346409}
   - component: {fileID: 5915782082623684538}
   - component: {fileID: 2667870236430463417}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 6018180511967820340}
   - component: {fileID: 524784908506287968}
   - component: {fileID: 8217730412782059178}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: M_Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
