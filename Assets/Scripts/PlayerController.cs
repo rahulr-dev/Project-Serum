@@ -9,12 +9,13 @@ public class PlayerController : MonoBehaviour
 
     // ─── Inspector ────────────────────────────────────────────────────────────
     [Header("Movement")]
-    [SerializeField] private float maxSpeed = 6f;
+    public float moveSpeed = 5f;
     [SerializeField] private float acceleration = 20f;
     [SerializeField] private float deceleration = 25f;
     [SerializeField] private float crouchSpeedMultiplier = 0.4f;
 
     [Header("Jump")]
+    public bool canJump = true;
     [SerializeField] private float jumpForce = 9f;
     [SerializeField] private float fallMultiplier = 3.2f;
     [SerializeField] private float jumpCutMultiplier = 2.5f;
@@ -197,23 +198,23 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case LocomotionState.Walk:
-                ApplyMovement(maxSpeed);
+                ApplyMovement(moveSpeed);
                 ApplyGroundedGravity();
                 break;
 
             case LocomotionState.Crouch:
-                ApplyMovement(maxSpeed * crouchSpeedMultiplier);
+                ApplyMovement(moveSpeed * crouchSpeedMultiplier);
                 ApplyGroundedGravity();
                 targetCapsuleHeight = crouchHeight;
                 break;
 
             case LocomotionState.Jump:
-                ApplyMovement(maxSpeed);
+                ApplyMovement(moveSpeed);
                 ApplyAirGravity();
                 break;
 
             case LocomotionState.Fall:
-                ApplyMovement(maxSpeed);
+                ApplyMovement(moveSpeed);
                 ApplyAirGravity();
                 break;
 
@@ -270,8 +271,8 @@ public class PlayerController : MonoBehaviour
         cc.center = new Vector3(0f, newHeight / 2f, 0f);
     }
 
-    private bool TryJump() => jumpPressed && coyoteTimer > 0f && !jumpConsumed;
-    private bool TrySlide() => crouchPressed && Mathf.Abs(currentSpeedZ) >= maxSpeed * slideSpeedThreshold;
+    private bool TryJump() => canJump && jumpPressed && coyoteTimer > 0f && !jumpConsumed;
+    private bool TrySlide() => crouchPressed && Mathf.Abs(currentSpeedZ) >= moveSpeed * slideSpeedThreshold;
     private bool SlideExpired() => slideTimer <= 0f || Mathf.Abs(currentSlideSpeed) < 0.1f;
     private bool CeilingBlocked()
     {
