@@ -5,10 +5,11 @@ using UnityEngine;
 public class CinemachineCameraBlender : MonoBehaviour
 {
     public enum BlendMode { Priority, PositionBased }
-
+    public enum CalculationMethod { CenterRadial, LinearZ }
     [SerializeField] private CinemachineCamera cam;
     [SerializeField] private string targetTag = "Player";
     [SerializeField] private BlendMode blendMode = BlendMode.PositionBased;
+    [SerializeField] private CalculationMethod calculationMethod = CalculationMethod.CenterRadial;
 
     [Header("Position Based")]
     [SerializeField] private AnimationCurve blendCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
@@ -29,9 +30,9 @@ public class CinemachineCameraBlender : MonoBehaviour
     {
         trigger = GetComponent<BoxCollider>();
         trigger.isTrigger = true;
-        transform.position = new Vector3(0f, transform.position.y, transform.position.z);
+        // transform.position = new Vector3(0f, transform.position.y, transform.position.z);
         brain = CinemachineBrain.GetActiveBrain(0);
-        previousCam = FindPlayerCam();
+        // previousCam = FindPlayerCam();
         cam.Priority = INACTIVE_PRIORITY;
     }
 
@@ -42,6 +43,8 @@ public class CinemachineCameraBlender : MonoBehaviour
 
         if (blendMode == BlendMode.Priority)
             cam.Priority = ACTIVE_PRIORITY;
+        else
+            previousCam = brain.ActiveVirtualCamera as CinemachineCamera;
     }
 
     void OnTriggerExit(Collider other)
@@ -71,7 +74,7 @@ public class CinemachineCameraBlender : MonoBehaviour
 
         overrideId = brain.SetCameraOverride(
             overrideId,
-            priority: 0,
+            priority: ACTIVE_PRIORITY,
             camA: previousCam,
             camB: cam,
             weightB: weight,
@@ -84,10 +87,20 @@ public class CinemachineCameraBlender : MonoBehaviour
         Vector3 local = transform.InverseTransformPoint(player.position) - trigger.center;
         Vector3 half = trigger.size * 0.5f;
 
-        float dx = 1f - Mathf.Clamp01(Mathf.Abs(local.x) / half.x);
-        float dz = 1f - Mathf.Clamp01(Mathf.Abs(local.z) / half.z);
+        switch (calculationMethod)
+        {
+            case CalculationMethod.LinearZ:
+                return 1f - Mathf.Clamp01((local.z + (trigger.size.z * 0.5f)) / trigger.size.z);
 
-        return Mathf.Min(dx, dz);
+            case CalculationMethod.CenterRadial:
+                // 1 at the exact center, 0 at all edges
+                float dx = 1f - Mathf.Clamp01(Mathf.Abs(local.x) / half.x);
+                float dz = 1f - Mathf.Clamp01(Mathf.Abs(local.z) / half.z);
+                return Mathf.Min(dx, dz);
+            default:
+                throw new System.NotImplementedException("Unknown calculation method");
+
+        }
     }
 
     CinemachineCamera FindPlayerCam()
