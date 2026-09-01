@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: VolumetricCloudsURP
   m_EditorClassIdentifier: VolumetricCloudsURP::VolumetricCloudsURP
   m_Active: 1
-  material: {fileID: 2100000, guid: 3748131af20412e478461c6445c73923, type: 2}
+  material: {fileID: 0}
   renderingDebugger: 0
   reflectionProbe: 0
   resolutionScale: 0.5
@@ -24,6 +24,8 @@ MonoBehaviour:
   resetOnStart: 1
   outputDepth: 1
   depthTexture: 0
+  isLogPrinted: 0
+  isCookiePrinted: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50,7 +52,7 @@ MonoBehaviour:
     probeVolumeBlendStatesCS: {fileID: 7200000, guid: b9a23f869c4fd45f19c5ada54dd82176, type: 3}
   m_RendererFeatures:
   - {fileID: 7833122117494664109}
-  - {fileID: -7216175672574855179}
+  - {fileID: 0}
   m_RendererFeatureMap: ad6b866f10d7b46cf5375c6f75feda9b
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 0}
