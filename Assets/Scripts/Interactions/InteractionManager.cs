@@ -14,17 +14,23 @@ namespace Interaction
         public static event Action<Vector2> OnMove;
         public static event Action OnInteractStarted;
         public static event Action OnInteractCanceled;
+        public static event Action OnJumpStarted;
+        public static event Action OnJumpCanceled;
 
         public Vector2 MoveInput { get; private set; }
         public bool IsInteractHeld { get; private set; }
+        public bool IsJumpHeld { get; private set; }
+        public bool JumpPressedThisFrame { get; private set; }
 
         public bool KeyW { get; private set; }
         public bool KeyA { get; private set; }
         public bool KeyS { get; private set; }
         public bool KeyD { get; private set; }
         public bool KeyE { get; private set; }
+        public bool KeySpace { get; private set; }
 
         public bool GamepadSouth { get; private set; }
+        public bool GamepadWest { get; private set; }
         public bool GamepadDpadUp { get; private set; }
         public bool GamepadDpadDown { get; private set; }
         public bool GamepadDpadLeft { get; private set; }
@@ -36,12 +42,13 @@ namespace Interaction
         InputActionMap _map;
         InputAction _move;
         InputAction _interact;
+        InputAction _jump;
 
 #if UNITY_EDITOR
         static readonly Color OverlayIdleBg = new Color(0.18f, 0.18f, 0.18f, 1f);
         static readonly Color OverlayActiveBg = new Color(0.15f, 0.85f, 0.28f, 1f);
         static readonly Color OverlayIdleText = new Color(0.75f, 0.75f, 0.75f, 1f);
-        Rect _overlayRect = new Rect(12f, 12f, 210f, 250f);
+        Rect _overlayRect = new Rect(12f, 12f, 210f, 310f);
         GUIStyle _overlayKeyStyle;
 #endif
 
@@ -78,6 +85,12 @@ namespace Interaction
                 _interact.canceled -= HandleInteractCanceled;
             }
 
+            if (_jump != null)
+            {
+                _jump.started -= HandleJumpStarted;
+                _jump.canceled -= HandleJumpCanceled;
+            }
+
             _map?.Dispose();
             _map = null;
         }
@@ -96,7 +109,13 @@ namespace Interaction
             }
 
             IsInteractHeld = _interact != null && _interact.IsPressed();
+            IsJumpHeld = _jump != null && _jump.IsPressed();
             RefreshDeviceFlags();
+        }
+
+        void LateUpdate()
+        {
+            JumpPressedThisFrame = false;
         }
 
         void BuildActions()
@@ -118,9 +137,15 @@ namespace Interaction
 
             _interact = _map.AddAction("Interact", InputActionType.Button);
             _interact.AddBinding("<Keyboard>/e");
-            _interact.AddBinding("<Gamepad>/buttonSouth");
+            _interact.AddBinding("<Gamepad>/buttonWest");
             _interact.started += HandleInteractStarted;
             _interact.canceled += HandleInteractCanceled;
+
+            _jump = _map.AddAction("Jump", InputActionType.Button);
+            _jump.AddBinding("<Keyboard>/space");
+            _jump.AddBinding("<Gamepad>/buttonSouth");
+            _jump.started += HandleJumpStarted;
+            _jump.canceled += HandleJumpCanceled;
         }
 
         void HandleInteractStarted(InputAction.CallbackContext context)
@@ -135,6 +160,19 @@ namespace Interaction
             OnInteractCanceled?.Invoke();
         }
 
+        void HandleJumpStarted(InputAction.CallbackContext context)
+        {
+            IsJumpHeld = true;
+            JumpPressedThisFrame = true;
+            OnJumpStarted?.Invoke();
+        }
+
+        void HandleJumpCanceled(InputAction.CallbackContext context)
+        {
+            IsJumpHeld = false;
+            OnJumpCanceled?.Invoke();
+        }
+
         void RefreshDeviceFlags()
         {
             Keyboard keyboard = Keyboard.current;
@@ -143,11 +181,13 @@ namespace Interaction
             KeyS = keyboard != null && keyboard.sKey.isPressed;
             KeyD = keyboard != null && keyboard.dKey.isPressed;
             KeyE = keyboard != null && keyboard.eKey.isPressed;
+            KeySpace = keyboard != null && keyboard.spaceKey.isPressed;
 
             Gamepad pad = Gamepad.current;
             if (pad == null)
             {
                 GamepadSouth = false;
+                GamepadWest = false;
                 GamepadDpadUp = false;
                 GamepadDpadDown = false;
                 GamepadDpadLeft = false;
@@ -157,6 +197,7 @@ namespace Interaction
             }
 
             GamepadSouth = pad.buttonSouth.isPressed;
+            GamepadWest = pad.buttonWest.isPressed;
             GamepadDpadUp = pad.dpad.up.isPressed;
             GamepadDpadDown = pad.dpad.down.isPressed;
             GamepadDpadLeft = pad.dpad.left.isPressed;
@@ -190,6 +231,7 @@ namespace Interaction
 
             GUILayout.Space(4);
             DrawOverlayKey("E  Interact", KeyE, 180f);
+            DrawOverlayKey("Space  Jump", KeySpace, 180f);
 
             GUILayout.Space(8);
             GUILayout.Label("Gamepad");
@@ -203,7 +245,8 @@ namespace Interaction
             DrawOverlayKey("Rt", GamepadDpadRight, 40f);
             GUILayout.EndHorizontal();
 
-            DrawOverlayKey("A / Cross  Interact", GamepadSouth, 180f);
+            DrawOverlayKey("A / Cross  Jump", GamepadSouth, 180f);
+            DrawOverlayKey("X / Square  Interact", GamepadWest, 180f);
             GUI.DragWindow(new Rect(0f, 0f, 10000f, 20f));
         }
 
