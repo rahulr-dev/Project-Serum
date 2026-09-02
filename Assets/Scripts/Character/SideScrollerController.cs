@@ -1,3 +1,4 @@
+using System;
 using Interaction;
 using UnityEngine;
 
@@ -26,6 +27,13 @@ namespace Character
         [SerializeField] float groundProbeExtra = 0.08f;
         [SerializeField] float groundedStickVelocity = -2f;
 
+        public event Action OnJumped;
+        public event Action OnLanded;
+        public event Action<bool> OnMovingChanged;
+
+        public bool IsGrounded { get; private set; }
+        public bool IsMoving { get; private set; }
+
         CharacterController _controller;
         float _currentSpeed;
         float _speedVelocity;
@@ -36,7 +44,6 @@ namespace Character
         float _jumpBufferTimer;
         bool _jumpCutApplied;
         bool _wasJumpHeld;
-        bool _grounded;
 
         void Awake()
         {
@@ -60,8 +67,19 @@ namespace Character
             float targetSpeed = moveSpeed * inputX;
             _currentSpeed = Mathf.SmoothDamp(_currentSpeed, targetSpeed, ref _speedVelocity, moveSmoothTime);
 
-            _grounded = IsGrounded();
-            if (_grounded)
+            bool moving = Mathf.Abs(_currentSpeed) > inputDeadzone;
+            if (moving != IsMoving)
+            {
+                IsMoving = moving;
+                OnMovingChanged?.Invoke(IsMoving);
+            }
+
+            bool wasGrounded = IsGrounded;
+            IsGrounded = CheckGrounded();
+            if (IsGrounded && !wasGrounded)
+                OnLanded?.Invoke();
+
+            if (IsGrounded)
                 _coyoteTimer = coyoteTime;
             else
                 _coyoteTimer -= Time.deltaTime;
@@ -78,8 +96,9 @@ namespace Character
                 _jumpBufferTimer = 0f;
                 _coyoteTimer = 0f;
                 _jumpCutApplied = false;
-                _grounded = false;
+                IsGrounded = false;
                 jumpedThisFrame = true;
+                OnJumped?.Invoke();
             }
 
             if (!jumpHeld && _verticalVelocity > 0f && !_jumpCutApplied)
@@ -90,7 +109,7 @@ namespace Character
 
             if (!jumpedThisFrame)
             {
-                if (_grounded && _verticalVelocity <= 0f)
+                if (IsGrounded && _verticalVelocity <= 0f)
                 {
                     _verticalVelocity = groundedStickVelocity;
                 }
@@ -119,7 +138,7 @@ namespace Character
             transform.rotation = Quaternion.Euler(0f, yaw, 0f);
         }
 
-        bool IsGrounded()
+        bool CheckGrounded()
         {
             if (_controller.isGrounded)
                 return true;

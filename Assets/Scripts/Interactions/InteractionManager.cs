@@ -1,4 +1,5 @@
 using System;
+using Game;
 using UnityEngine;
 using UnityEngine.InputSystem;
 #if UNITY_EDITOR
@@ -95,9 +96,13 @@ namespace Interaction
             _map = null;
         }
 
+        static bool AllowsMove => GameStateManager.Instance == null || GameStateManager.Instance.AllowsMove;
+        static bool AllowsJump => GameStateManager.Instance == null || GameStateManager.Instance.AllowsJump;
+        static bool AllowsInteract => GameStateManager.Instance == null || GameStateManager.Instance.AllowsInteract;
+
         void Update()
         {
-            Vector2 move = _move != null ? _move.ReadValue<Vector2>() : Vector2.zero;
+            Vector2 move = AllowsMove && _move != null ? _move.ReadValue<Vector2>() : Vector2.zero;
             if (move != MoveInput)
             {
                 MoveInput = move;
@@ -108,8 +113,16 @@ namespace Interaction
                 MoveInput = move;
             }
 
-            IsInteractHeld = _interact != null && _interact.IsPressed();
-            IsJumpHeld = _jump != null && _jump.IsPressed();
+            bool interactHeld = AllowsInteract && _interact != null && _interact.IsPressed();
+            if (IsInteractHeld && !interactHeld)
+                OnInteractCanceled?.Invoke();
+            IsInteractHeld = interactHeld;
+
+            bool jumpHeld = AllowsJump && _jump != null && _jump.IsPressed();
+            if (IsJumpHeld && !jumpHeld)
+                OnJumpCanceled?.Invoke();
+            IsJumpHeld = jumpHeld;
+
             RefreshDeviceFlags();
         }
 
@@ -150,18 +163,27 @@ namespace Interaction
 
         void HandleInteractStarted(InputAction.CallbackContext context)
         {
+            if (!AllowsInteract)
+                return;
+
             IsInteractHeld = true;
             OnInteractStarted?.Invoke();
         }
 
         void HandleInteractCanceled(InputAction.CallbackContext context)
         {
+            if (!IsInteractHeld)
+                return;
+
             IsInteractHeld = false;
             OnInteractCanceled?.Invoke();
         }
 
         void HandleJumpStarted(InputAction.CallbackContext context)
         {
+            if (!AllowsJump)
+                return;
+
             IsJumpHeld = true;
             JumpPressedThisFrame = true;
             OnJumpStarted?.Invoke();
@@ -169,6 +191,9 @@ namespace Interaction
 
         void HandleJumpCanceled(InputAction.CallbackContext context)
         {
+            if (!IsJumpHeld)
+                return;
+
             IsJumpHeld = false;
             OnJumpCanceled?.Invoke();
         }
