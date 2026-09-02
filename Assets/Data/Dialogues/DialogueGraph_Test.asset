@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16f6336ad21230c468ac096c409b2a9e, type: 3}
+  m_Name: DialogueGraph_Test
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue.DialogueGraph
+  playState: 4
+  endState: 2
+  charsPerSecond: 20
+  choiceRepeatDelay: 0.2
+  nodes:
+  - id: ac0c27fc0edc40a991871ae66ac4f950
+    kind: 0
+    position: {x: 80, y: 160}
+    speaker: 
+    body: 
+    advanceMode: 0
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  - id: 7bdac539f2fd4ae9911b944b9b4ec628
+    kind: 3
+    position: {x: 754, y: 81.333336}
+    speaker: 
+    body: 
+    advanceMode: 0
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  - id: 5a3e84afccb2422fa3f2facd2002cc75
+    kind: 1
+    position: {x: 237.33334, y: 112.66667}
+    speaker: Dummy
+    body: Testing 1
+    advanceMode: 0
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  - id: 6effe4a0774844559229a613fc602cfc
+    kind: 1
+    position: {x: 491.3333, y: 127.33333}
+    speaker: Dummy 2
+    body: Testing 2
+    advanceMode: 0
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  edges:
+  - fromId: ac0c27fc0edc40a991871ae66ac4f950
+    fromPort: 0
+    toId: 5a3e84afccb2422fa3f2facd2002cc75
+  - fromId: 5a3e84afccb2422fa3f2facd2002cc75
+    fromPort: 0
+    toId: 6effe4a0774844559229a613fc602cfc
+  - fromId: 6effe4a0774844559229a613fc602cfc
+    fromPort: 0
+    toId: 7bdac539f2fd4ae9911b944b9b4ec628
