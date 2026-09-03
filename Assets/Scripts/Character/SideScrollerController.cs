@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Character
 {
     [RequireComponent(typeof(CharacterController))]
-    public class SideScrollerController : MonoBehaviour
+    public class SideScrollerController : MonoBehaviour, INormalizedMoveSpeed
     {
         [SerializeField] float moveSpeed = 6f;
         [SerializeField] float moveSmoothTime = 0.12f;
@@ -33,6 +33,10 @@ namespace Character
 
         public bool IsGrounded { get; private set; }
         public bool IsMoving { get; private set; }
+        public float MoveSpeed => moveSpeed;
+        public float HorizontalSpeed => _currentSpeed;
+        public float NormalizedSpeed =>
+            moveSpeed > 0f ? Mathf.Clamp01(Mathf.Abs(_currentSpeed) / moveSpeed) : 0f;
 
         CharacterController _controller;
         float _currentSpeed;
