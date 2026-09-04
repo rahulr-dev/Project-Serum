@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e81a37c9521345d8b8a97c88b0a1a2b3, type: 3}
+  m_Name: InteractionSequenceSO
+  m_EditorClassIdentifier: InteractionSystem::InteractionSequenceSO
+  interactionName: Door Interaction Sequence
+  nodes:
+  - id: 16fc6f04-ceb0-4f45-9c48-267311e7f76f
+    nodeType: 0
+    editorX: 250
+    editorY: 60
+    switchEvent: {fileID: 0}
+  - id: c7e28a33-ad7d-4e7a-8451-750611d012fc
+    nodeType: 1
+    editorX: 258
+    editorY: 185
+    switchEvent: {fileID: 0}
+  - id: e91baca1-158b-4273-8bb8-f1af7a5c4995
+    nodeType: 2
+    editorX: 251
+    editorY: 342
+    switchEvent: {fileID: 0}
+  edges:
+  - fromNodeID: c7e28a33-ad7d-4e7a-8451-750611d012fc
+    toNodeID: e91baca1-158b-4273-8bb8-f1af7a5c4995
+  - fromNodeID: 16fc6f04-ceb0-4f45-9c48-267311e7f76f
+    toNodeID: c7e28a33-ad7d-4e7a-8451-750611d012fc
