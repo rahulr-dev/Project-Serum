@@ -26,6 +26,21 @@ MonoBehaviour:
   depthTexture: 0
   isLogPrinted: 0
   isCookiePrinted: 0
+--- !u!114 &-3649136344493293331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cc70a8037c1b70499f4123cdac0f2fa, type: 3}
+  m_Name: FullscreenCustomLightingFeature
+  m_EditorClassIdentifier: Assembly-CSharp::Mirza.AERO.FullscreenCustomLightingFeature
+  m_Active: 1
+  renderPassEvent: 500
+  material: {fileID: 2100000, guid: fedf334cf2cc1b44d9ae7b524decb528, type: 2}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

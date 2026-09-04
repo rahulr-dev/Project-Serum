@@ -280,43 +280,6 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
---- !u!84 &75486833
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Blur Camera - Live Render Texture
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 6
-  m_Width: 480
-  m_Height: 270
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 90
-  m_ColorFormat: 48
-  m_MipMap: 0
-  m_GenerateMips: 0
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_UseDynamicScaleExplicit: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!43 &110330077
 Mesh:
   m_ObjectHideFlags: 0
@@ -805,6 +768,58 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!86 &499709034
+CustomRenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Blur Camera - Live Custom Render Texture
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 6
+  m_Width: 47
+  m_Height: 26
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 48
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_UseDynamicScaleExplicit: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
+  m_Material: {fileID: 2100000, guid: cb45e2f36421b0c44a5b0b9288f414b0, type: 2}
+  m_InitSource: 0
+  m_InitMaterial: {fileID: 0}
+  m_InitColor: {r: 1, g: 1, b: 1, a: 1}
+  m_InitTexture: {fileID: 0}
+  m_UpdateMode: 1
+  m_InitializationMode: 2
+  m_UpdateZoneSpace: 0
+  m_CurrentUpdateZoneSpace: 0
+  m_UpdateZones: []
+  m_UpdatePeriod: 0
+  m_ShaderPass: 0
+  m_CubemapFaceMask: 4294967295
+  m_DoubleBuffered: 0
+  m_WrapUpdateZones: 0
 --- !u!1 &544741238
 GameObject:
   m_ObjectHideFlags: 0
@@ -1044,7 +1059,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &685748052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2233,23 +2248,23 @@ PrefabInstance:
     - target: {fileID: 5322863627773938305, guid: 8561c4e164b6b9c41b120fe3376c96b0, type: 3}
       propertyPath: renderTexture
       value: 
-      objectReference: {fileID: 1317422270}
+      objectReference: {fileID: 499709034}
     - target: {fileID: 5322863627773938305, guid: 8561c4e164b6b9c41b120fe3376c96b0, type: 3}
       propertyPath: updateMaterial
       value: 
       objectReference: {fileID: 2100000, guid: cb45e2f36421b0c44a5b0b9288f414b0, type: 2}
     - target: {fileID: 5322863627773938305, guid: 8561c4e164b6b9c41b120fe3376c96b0, type: 3}
       propertyPath: aspectResolution.x
-      value: 240
+      value: 47
       objectReference: {fileID: 0}
     - target: {fileID: 5322863627773938305, guid: 8561c4e164b6b9c41b120fe3376c96b0, type: 3}
       propertyPath: aspectResolution.y
-      value: 135
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 5322863627773938305, guid: 8561c4e164b6b9c41b120fe3376c96b0, type: 3}
       propertyPath: customRenderTexture
       value: 
-      objectReference: {fileID: 1317422270}
+      objectReference: {fileID: 499709034}
     - target: {fileID: 5387164068574360870, guid: 8561c4e164b6b9c41b120fe3376c96b0, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -2301,7 +2316,7 @@ PrefabInstance:
     - target: {fileID: 6344858012778047457, guid: 8561c4e164b6b9c41b120fe3376c96b0, type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 75486833}
+      objectReference: {fileID: 1853580815}
     - target: {fileID: 6358530920181398477, guid: 8561c4e164b6b9c41b120fe3376c96b0, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -2309,14 +2324,14 @@ PrefabInstance:
     - target: {fileID: 6555601803519644698, guid: 8561c4e164b6b9c41b120fe3376c96b0, type: 3}
       propertyPath: renderTexture
       value: 
-      objectReference: {fileID: 75486833}
+      objectReference: {fileID: 1853580815}
     - target: {fileID: 6555601803519644698, guid: 8561c4e164b6b9c41b120fe3376c96b0, type: 3}
       propertyPath: aspectResolution.x
-      value: 480
+      value: 94
       objectReference: {fileID: 0}
     - target: {fileID: 6555601803519644698, guid: 8561c4e164b6b9c41b120fe3376c96b0, type: 3}
       propertyPath: aspectResolution.y
-      value: 270
+      value: 53
       objectReference: {fileID: 0}
     - target: {fileID: 6600489751535962559, guid: 8561c4e164b6b9c41b120fe3376c96b0, type: 3}
       propertyPath: m_Mesh
@@ -2902,58 +2917,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 30.536, y: -254.17, z: -357.225}
---- !u!86 &1317422270
-CustomRenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Blur Camera - Live Custom Render Texture
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 6
-  m_Width: 240
-  m_Height: 135
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 94
-  m_ColorFormat: 48
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_UseDynamicScaleExplicit: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
-  m_Material: {fileID: 2100000, guid: cb45e2f36421b0c44a5b0b9288f414b0, type: 2}
-  m_InitSource: 0
-  m_InitMaterial: {fileID: 0}
-  m_InitColor: {r: 1, g: 1, b: 1, a: 1}
-  m_InitTexture: {fileID: 0}
-  m_UpdateMode: 1
-  m_InitializationMode: 2
-  m_UpdateZoneSpace: 0
-  m_CurrentUpdateZoneSpace: 0
-  m_UpdateZones: []
-  m_UpdatePeriod: 0
-  m_ShaderPass: 0
-  m_CubemapFaceMask: 4294967295
-  m_DoubleBuffered: 0
-  m_WrapUpdateZones: 0
 --- !u!1 &1366959343
 GameObject:
   m_ObjectHideFlags: 0
@@ -4054,6 +4017,43 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1806285044}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!84 &1853580815
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Blur Camera - Live Render Texture
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 6
+  m_Width: 94
+  m_Height: 53
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 90
+  m_ColorFormat: 48
+  m_MipMap: 0
+  m_GenerateMips: 0
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_UseDynamicScaleExplicit: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &2017316396
 GameObject:
   m_ObjectHideFlags: 0

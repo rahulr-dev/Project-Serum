@@ -156,7 +156,7 @@ Material:
     - _ENABLE_MAIN_LIGHT: 1
     - _ENABLE_MAIN_LIGHT_SHADOWS: 0
     - _Enable_Adaptive_Probe_Volumes: 0
-    - _Enable_Additional_Light_Self_Shadow: 1
+    - _Enable_Additional_Light_Self_Shadow: 0
     - _Enable_Additional_Lights_Self_Shadow: 0
     - _Enable_Anisotropy: 1
     - _Enable_Blur_Texture: 1
@@ -206,7 +206,7 @@ Material:
     - _Main_Light_Self_Shadow_Power: 2
     - _Main_Light_Self_Shadow_Remap_Max: 0.8
     - _Main_Light_Self_Shadow_Remap_Min: 0.2
-    - _Main_Light_Self_Shadow_Steps: 5
+    - _Main_Light_Self_Shadow_Steps: 2
     - _Max_Distance: 100
     - _Metallic: 0
     - _OUTPUT: 0
@@ -243,7 +243,7 @@ Material:
     - _Colour: {r: 0.8, g: 0.96103895, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Height_Gradient_Colour_Bottom: {r: 0.41823885, g: 0.7923646, b: 1, a: 1}
-    - _Height_Gradient_Colour_Top: {r: 1, g: 0, b: 0.64705896, a: 1}
+    - _Height_Gradient_Colour_Top: {r: 1, g: 0, b: 0.6454634, a: 1}
     - _Height_Gradient_Texture_Animation: {r: 0, g: 0, b: 0, a: 0}
     - _Height_Mask_Texture_Animation: {r: 0.025, g: 0.0125, b: 0, a: 0}
     - _Height_Mask_Texture_Offset: {r: 0, g: 0, b: 0, a: 0}
