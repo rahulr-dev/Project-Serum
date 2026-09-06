@@ -1,0 +1,184 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2, type: 3}
+  m_Name: QTEGraph_DodgeTest
+  m_EditorClassIdentifier: Assembly-CSharp::QTE.QTEGraph
+  playState: 6
+  endState: 2
+  defaultOutcome: 3
+  nodes:
+  - id: 11111111111111111111111111111111
+    kind: 0
+    position: {x: 79.20001, y: 160}
+    duration: 1
+    executeHandlerId: 
+    promptText: 
+    requiredInput: 1
+    windowDuration: 1
+    failOnTimeout: 1
+    holdDuration: 0.5
+    targetCount: 5
+    inputSequence: 
+    windowPerStep: 1
+    totalWindow: 3
+    childNodeIds: []
+    branchMode: 0
+    branchLabels: []
+    endOutcome: 0
+  - id: 22222222222222222222222222222222
+    kind: 4
+    position: {x: 240, y: 160}
+    duration: 1
+    executeHandlerId: 
+    promptText: 
+    requiredInput: 1
+    windowDuration: 1
+    failOnTimeout: 1
+    holdDuration: 0.5
+    targetCount: 5
+    inputSequence: 
+    windowPerStep: 1
+    totalWindow: 3
+    childNodeIds: []
+    branchMode: 0
+    branchLabels: []
+    endOutcome: 0
+  - id: 55555555555555555555555555555555
+    kind: 4
+    position: {x: 896, y: 27.199999}
+    duration: 1
+    executeHandlerId: 540f6e7e3f574c00a40bede866dceb22
+    promptText: 
+    requiredInput: 1
+    windowDuration: 1
+    failOnTimeout: 1
+    holdDuration: 0.5
+    targetCount: 5
+    inputSequence: 
+    windowPerStep: 1
+    totalWindow: 3
+    childNodeIds: []
+    branchMode: 0
+    branchLabels: []
+    endOutcome: 0
+  - id: 66666666666666666666666666666666
+    kind: 4
+    position: {x: 913.6, y: 232}
+    duration: 1
+    executeHandlerId: 4c8deee1000b41488471b48f1d3f8b48
+    promptText: 
+    requiredInput: 1
+    windowDuration: 1
+    failOnTimeout: 1
+    holdDuration: 0.5
+    targetCount: 5
+    inputSequence: 
+    windowPerStep: 1
+    totalWindow: 3
+    childNodeIds: []
+    branchMode: 0
+    branchLabels: []
+    endOutcome: 0
+  - id: 77777777777777777777777777777777
+    kind: 1
+    position: {x: 1064.8, y: 55.199997}
+    duration: 1
+    executeHandlerId: 
+    promptText: 
+    requiredInput: 1
+    windowDuration: 1
+    failOnTimeout: 1
+    holdDuration: 0.5
+    targetCount: 5
+    inputSequence: 
+    windowPerStep: 1
+    totalWindow: 3
+    childNodeIds: []
+    branchMode: 0
+    branchLabels: []
+    endOutcome: 0
+  - id: 88888888888888888888888888888888
+    kind: 1
+    position: {x: 1064.8, y: 232}
+    duration: 1
+    executeHandlerId: 
+    promptText: 
+    requiredInput: 1
+    windowDuration: 1
+    failOnTimeout: 1
+    holdDuration: 0.5
+    targetCount: 5
+    inputSequence: 
+    windowPerStep: 1
+    totalWindow: 3
+    childNodeIds: []
+    branchMode: 0
+    branchLabels: []
+    endOutcome: 1
+  - id: 6d4f5258d8a847049d3d3390028b44ec
+    kind: 7
+    position: {x: 656, y: 155.20001}
+    duration: 1
+    executeHandlerId: 
+    promptText: Jump
+    requiredInput: 1
+    windowDuration: 3
+    failOnTimeout: 1
+    holdDuration: 0.5
+    targetCount: 5
+    inputSequence: 
+    windowPerStep: 1
+    totalWindow: 3
+    childNodeIds: []
+    branchMode: 0
+    branchLabels: []
+    endOutcome: 0
+  - id: 05b7da04c83348deb3f88622ff6cf83e
+    kind: 2
+    position: {x: 438.40002, y: 160}
+    duration: 1
+    executeHandlerId: 
+    promptText: 
+    requiredInput: 1
+    windowDuration: 1
+    failOnTimeout: 1
+    holdDuration: 0.5
+    targetCount: 5
+    inputSequence: 
+    windowPerStep: 1
+    totalWindow: 3
+    childNodeIds: []
+    branchMode: 0
+    branchLabels: []
+    endOutcome: 0
+  edges:
+  - fromId: 11111111111111111111111111111111
+    fromPort: 0
+    toId: 22222222222222222222222222222222
+  - fromId: 66666666666666666666666666666666
+    fromPort: 0
+    toId: 88888888888888888888888888888888
+  - fromId: 55555555555555555555555555555555
+    fromPort: 0
+    toId: 77777777777777777777777777777777
+  - fromId: 6d4f5258d8a847049d3d3390028b44ec
+    fromPort: 0
+    toId: 55555555555555555555555555555555
+  - fromId: 6d4f5258d8a847049d3d3390028b44ec
+    fromPort: 1
+    toId: 66666666666666666666666666666666
+  - fromId: 22222222222222222222222222222222
+    fromPort: 0
+    toId: 05b7da04c83348deb3f88622ff6cf83e
+  - fromId: 05b7da04c83348deb3f88622ff6cf83e
+    fromPort: 0
+    toId: 6d4f5258d8a847049d3d3390028b44ec

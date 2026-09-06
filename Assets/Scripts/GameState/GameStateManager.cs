@@ -25,6 +25,7 @@ namespace Game
             CurrentState == GameState.Gameplay ||
             CurrentState == GameState.GameplayDialogue ||
             CurrentState == GameState.Dialogue;
+        public bool AllowsQTEInput => CurrentState == GameState.QTE;
 
 #if UNITY_EDITOR
         static readonly Color OverlayIdleBg = new Color(0.18f, 0.18f, 0.18f, 1f);
@@ -43,6 +44,7 @@ namespace Game
             }
 
             Instance = this;
+            DontDestroyOnLoad(gameObject);
             CurrentState = initialState;
             PreviousState = initialState;
         }
@@ -94,6 +96,7 @@ namespace Game
         public void EnterGameplayDialogue() => SetState(GameState.GameplayDialogue);
         public void EnterDialogue() => SetState(GameState.Dialogue);
         public void EnterCutscene() => SetState(GameState.Cutscene);
+        public void EnterQTE() => SetState(GameState.QTE);
         public void EnterGameOver() => SetState(GameState.GameOver);
 
         public void Pause()
@@ -126,6 +129,7 @@ namespace Game
             DrawRow("Move", AllowsMove, 200f);
             DrawRow("Jump", AllowsJump, 200f);
             DrawRow("Interact", AllowsInteract, 200f);
+            DrawRow("QTE Input", AllowsQTEInput, 200f);
             GUILayout.Space(6);
 
             if (GUILayout.Button("Gameplay"))
@@ -136,6 +140,8 @@ namespace Game
                 EnterDialogue();
             if (GUILayout.Button("Cutscene"))
                 EnterCutscene();
+            if (GUILayout.Button("QTE"))
+                EnterQTE();
             if (GUILayout.Button("Main Menu"))
                 EnterMainMenu();
             if (GUILayout.Button("Loading"))

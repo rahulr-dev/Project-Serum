@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16f6336ad21230c468ac096c409b2a9e, type: 3}
   m_Name: DialogueGraph_Test 1
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue.DialogueGraph
-  playState: 4
+  playState: 3
   endState: 2
   charsPerSecond: 20
   choiceRepeatDelay: 0.2
@@ -31,7 +31,7 @@ MonoBehaviour:
     choiceLabels: []
   - id: 7bdac539f2fd4ae9911b944b9b4ec628
     kind: 3
-    position: {x: 1208.6666, y: 210}
+    position: {x: 1208.8, y: 209.6}
     speaker: 
     body: 
     advanceMode: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
     choiceLabels: []
   - id: 5a3e84afccb2422fa3f2facd2002cc75
     kind: 1
-    position: {x: 237.33334, y: 112.66667}
+    position: {x: 237.6, y: 111.99999}
     speaker: Dummy
     body: Hi Bruh
     advanceMode: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
     choiceLabels: []
   - id: 6effe4a0774844559229a613fc602cfc
     kind: 1
-    position: {x: 770.6667, y: -38}
+    position: {x: 770.4, y: -38.4}
     speaker: Dummy 2
     body: Hi, See you araound!
     advanceMode: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
     choiceLabels: []
   - id: 8187a9d421bd42dcba667028dcf103ff
     kind: 2
-    position: {x: 545.3333, y: 210}
+    position: {x: 545.6, y: 209.6}
     speaker: 
     body: 
     advanceMode: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
     - Bye
   - id: a94240fb1e424b718f91eec454b6ca46
     kind: 1
-    position: {x: 770.6667, y: 302}
+    position: {x: 770.4, y: 301.6}
     speaker: Dummy 3
     body: YO, WTF is wrong with you bruh
     advanceMode: 0
