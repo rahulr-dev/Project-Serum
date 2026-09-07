@@ -1,0 +1,160 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2, type: 3}
+  m_Name: QTEGraph_DodgeTest
+  m_EditorClassIdentifier: Assembly-CSharp::QTE.QTEGraph
+  playState: 6
+  endState: 2
+  defaultOutcome: 3
+  nodes:
+  - id: 11111111111111111111111111111111
+    kind: 0
+    position: {x: 107.20001, y: 160}
+    duration: 1
+    executeHandlerId: 
+    promptText: 
+    requiredInput: 1
+    windowDuration: 1
+    failOnTimeout: 1
+    holdDuration: 0.5
+    targetCount: 5
+    inputSequence: 
+    windowPerStep: 1
+    totalWindow: 3
+    childNodeIds: []
+    branchMode: 0
+    branchLabels: []
+    endOutcome: 0
+  - id: 77777777777777777777777777777777
+    kind: 1
+    position: {x: 940.80005, y: 168.8}
+    duration: 1
+    executeHandlerId: 
+    promptText: 
+    requiredInput: 1
+    windowDuration: 1
+    failOnTimeout: 1
+    holdDuration: 0.5
+    targetCount: 5
+    inputSequence: 
+    windowPerStep: 1
+    totalWindow: 3
+    childNodeIds: []
+    branchMode: 0
+    branchLabels: []
+    endOutcome: 0
+  - id: 05b7da04c83348deb3f88622ff6cf83e
+    kind: 2
+    position: {x: 378.40002, y: -136.8}
+    duration: 1
+    executeHandlerId: 
+    promptText: 
+    requiredInput: 1
+    windowDuration: 1
+    failOnTimeout: 1
+    holdDuration: 0.5
+    targetCount: 5
+    inputSequence: 
+    windowPerStep: 1
+    totalWindow: 3
+    childNodeIds: []
+    branchMode: 0
+    branchLabels: []
+    endOutcome: 0
+  - id: bec39da08beb46ac92c9573a2713e486
+    kind: 4
+    position: {x: 448, y: 160}
+    duration: 1
+    executeHandlerId: 540f6e7e3f574c00a40bede866dceb22
+    promptText: 
+    requiredInput: 1
+    windowDuration: 1
+    failOnTimeout: 1
+    holdDuration: 0.5
+    targetCount: 5
+    inputSequence: 
+    windowPerStep: 1
+    totalWindow: 3
+    childNodeIds: []
+    branchMode: 0
+    branchLabels: []
+    endOutcome: 0
+  - id: 1c7fc18411914c21988a272c052a4d28
+    kind: 5
+    position: {x: 212.79999, y: 160}
+    duration: 1
+    executeHandlerId: 
+    promptText: Press E
+    requiredInput: 0
+    windowDuration: 2
+    failOnTimeout: 1
+    holdDuration: 0.5
+    targetCount: 5
+    inputSequence: 
+    windowPerStep: 1
+    totalWindow: 3
+    childNodeIds: []
+    branchMode: 0
+    branchLabels: []
+    endOutcome: 0
+  - id: dd952cb7d4ae44ea92bafeb3d9e0998d
+    kind: 2
+    position: {x: 590.4, y: 160}
+    duration: 5
+    executeHandlerId: 
+    promptText: 
+    requiredInput: 1
+    windowDuration: 1
+    failOnTimeout: 1
+    holdDuration: 0.5
+    targetCount: 5
+    inputSequence: 
+    windowPerStep: 1
+    totalWindow: 3
+    childNodeIds: []
+    branchMode: 0
+    branchLabels: []
+    endOutcome: 0
+  - id: c02d98be099a43b39e8fad26ba65442e
+    kind: 4
+    position: {x: 790.4, y: 160}
+    duration: 1
+    executeHandlerId: 4c8deee1000b41488471b48f1d3f8b48
+    promptText: 
+    requiredInput: 1
+    windowDuration: 1
+    failOnTimeout: 1
+    holdDuration: 0.5
+    targetCount: 5
+    inputSequence: 
+    windowPerStep: 1
+    totalWindow: 3
+    childNodeIds: []
+    branchMode: 0
+    branchLabels: []
+    endOutcome: 0
+  edges:
+  - fromId: 11111111111111111111111111111111
+    fromPort: 0
+    toId: 1c7fc18411914c21988a272c052a4d28
+  - fromId: 1c7fc18411914c21988a272c052a4d28
+    fromPort: 0
+    toId: bec39da08beb46ac92c9573a2713e486
+  - fromId: bec39da08beb46ac92c9573a2713e486
+    fromPort: 0
+    toId: dd952cb7d4ae44ea92bafeb3d9e0998d
+  - fromId: dd952cb7d4ae44ea92bafeb3d9e0998d
+    fromPort: 0
+    toId: c02d98be099a43b39e8fad26ba65442e
+  - fromId: c02d98be099a43b39e8fad26ba65442e
+    fromPort: 0
+    toId: 77777777777777777777777777777777

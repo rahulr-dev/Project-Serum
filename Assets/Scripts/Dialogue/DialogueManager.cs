@@ -47,6 +47,7 @@ namespace Dialogue
             }
 
             Instance = this;
+            DontDestroyOnLoad(gameObject);
             _runner.OnLineStarted += HandleLineStarted;
             _runner.OnLineTextUpdated += HandleLineTextUpdated;
             _runner.OnChoicesPresented += HandleChoicesPresented;

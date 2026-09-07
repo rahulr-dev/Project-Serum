@@ -8,6 +8,7 @@ namespace Game
         GameplayDialogue,
         Dialogue,
         Cutscene,
+        QTE,
         Paused,
         GameOver
     }
