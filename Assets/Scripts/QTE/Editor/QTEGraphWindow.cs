@@ -13,6 +13,7 @@ namespace QTE.Editor
         QTEGraph _graph;
         List<QTEGraph> _assets = new List<QTEGraph>();
         Vector2 _listScroll;
+        Vector2 _inspectorScroll;
         string _filter = "";
         QTESearchWindow _search;
         SerializedObject _serializedGraph;
@@ -65,7 +66,8 @@ namespace QTE.Editor
             right.Add(_graphView);
 
             IMGUIContainer inspector = new IMGUIContainer(DrawInspector);
-            inspector.style.height = 180;
+            inspector.style.height = 240;
+            inspector.style.minHeight = 140;
             right.Add(inspector);
 
             _search = CreateInstance<QTESearchWindow>();
@@ -137,8 +139,13 @@ namespace QTE.Editor
 
         void DrawInspector()
         {
+            _inspectorScroll = EditorGUILayout.BeginScrollView(_inspectorScroll);
+
             if (_graphView == null || _graph == null)
+            {
+                EditorGUILayout.EndScrollView();
                 return;
+            }
 
             QTENodeView selected = null;
             foreach (GraphElement element in _graphView.selection)
@@ -153,6 +160,7 @@ namespace QTE.Editor
             if (selected == null)
             {
                 EditorGUILayout.HelpBox("Select a node to edit serialized fields (Action target GameObject, Sequence child IDs).", MessageType.Info);
+                EditorGUILayout.EndScrollView();
                 return;
             }
 
@@ -179,6 +187,8 @@ namespace QTE.Editor
                 so.ApplyModifiedProperties();
                 break;
             }
+
+            EditorGUILayout.EndScrollView();
         }
 
         void Load(QTEGraph graph)

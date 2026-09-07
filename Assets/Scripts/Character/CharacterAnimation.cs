@@ -11,6 +11,8 @@ namespace Character
 
         INormalizedMoveSpeed _speedSource;
         int _speedHash;
+        bool _speedOverrideActive;
+        float _speedOverride;
 
         void Awake()
         {
@@ -29,14 +31,35 @@ namespace Character
 
         void Update()
         {
-            if (animator == null || _speedSource == null)
+            if (animator == null)
                 return;
 
-            float speed = _speedSource.NormalizedSpeed;
+            float speed = _speedOverrideActive
+                ? _speedOverride
+                : _speedSource != null
+                    ? _speedSource.NormalizedSpeed
+                    : 0f;
+
             if (dampTime > 0f)
                 animator.SetFloat(_speedHash, speed, dampTime, Time.deltaTime);
             else
                 animator.SetFloat(_speedHash, speed);
+        }
+
+        public void SetSpeed(float value)
+        {
+            _speedOverride = value;
+            _speedOverrideActive = true;
+
+            if (animator == null)
+                return;
+
+            animator.SetFloat(_speedHash, value);
+        }
+
+        public void ClearSpeedOverride()
+        {
+            _speedOverrideActive = false;
         }
     }
 }
