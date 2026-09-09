@@ -594,10 +594,12 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fdb1e4e3c1f879e4e8332eff429081f5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: InteractionSystem::InteractionController
-  interactionDistance: 1.18
-  interactionKey: 45
-  interactionPoint: {fileID: 450001}
+  m_EditorClassIdentifier: InteractionSystem::PlayerInteractor
+  detectionOffset: {x: 0.6, y: 1, z: 0}
+  radius: 1.18
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &450000
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,7 +646,6 @@ GameObject:
   - component: {fileID: 500005}
   - component: {fileID: 500006}
   - component: {fileID: 500007}
-  - component: {fileID: 500008}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -771,8 +772,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b57ee251c8d7af44bc3491368f9f4f2, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: InteractionSystem::InteractionInteractable
-  interactionGraph: {fileID: 500008}
+  m_EditorClassIdentifier: InteractionSystem::Interactable
+  graph: {fileID: 0}
 --- !u!114 &500007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -784,8 +785,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bda9a36e6ac94d84aa3814818b61f79b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: InteractionSystem::SwitchEvent
-  onSwitch:
+  m_EditorClassIdentifier: InteractionSystem::InteractionActionHandler
+  handlerId: 
+  onExecute:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 500005}
@@ -800,20 +802,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &500008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 500000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d2d17ca1516f7043934cc413c30988a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: InteractionSystem::InteractionGraph
-  sequence: {fileID: 11400000, guid: c4b9281a70424597b4fa51f034789abc, type: 2}
-  switchEvent: {fileID: 500007}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
