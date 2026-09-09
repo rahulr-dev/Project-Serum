@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d2d17ca1516f7043934cc413c30988a, type: 3}
+  m_Name: LeavePushCart
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionSystem.InteractionGraph
+  playState: 2
+  endState: 2
+  nodes:
+  - id: e542dc4b73984115a2af022279534bd3
+    kind: 0
+    position: {x: 80, y: 160}
+    duration: 1
+    executeHandlerId: 
+  - id: 11f7aff302374f67afdb20aeb6bb3443
+    kind: 2
+    position: {x: 222.66666, y: 120.66667}
+    duration: 0
+    executeHandlerId: f6be0c450e6743ae90b33f06205d8a6c
+  - id: edefc3ed23524a8cba8e9f8076048413
+    kind: 3
+    position: {x: 398.6667, y: 120.66667}
+    duration: 0
+    executeHandlerId: 
+  edges:
+  - fromId: e542dc4b73984115a2af022279534bd3
+    fromPort: 0
+    toId: 11f7aff302374f67afdb20aeb6bb3443
+  - fromId: 11f7aff302374f67afdb20aeb6bb3443
+    fromPort: 0
+    toId: edefc3ed23524a8cba8e9f8076048413

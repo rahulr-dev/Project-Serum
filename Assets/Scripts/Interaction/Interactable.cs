@@ -15,6 +15,7 @@ namespace InteractionSystem
         Coroutine _running;
 
         public bool IsRunning => _running != null;
+        public InteractionGraph Graph => graph;
 
         public void Interact()
         {

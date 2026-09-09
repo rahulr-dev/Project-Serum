@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - PlayerCam
+  - Player
   layers:
   - Default
   - TransparentFX

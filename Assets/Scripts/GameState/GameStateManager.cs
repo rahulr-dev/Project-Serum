@@ -19,10 +19,16 @@ namespace Game
         public GameState CurrentState { get; private set; }
         public GameState PreviousState { get; private set; }
 
-        public bool AllowsMove => CurrentState == GameState.Gameplay || CurrentState == GameState.GameplayDialogue;
-        public bool AllowsJump => AllowsMove;
+        public bool AllowsMove =>
+            CurrentState == GameState.Gameplay ||
+            CurrentState == GameState.GameplayNoJump ||
+            CurrentState == GameState.GameplayDialogue;
+
+        public bool AllowsJump => CurrentState == GameState.Gameplay || CurrentState == GameState.GameplayDialogue;
+
         public bool AllowsInteract =>
             CurrentState == GameState.Gameplay ||
+            CurrentState == GameState.GameplayNoJump ||
             CurrentState == GameState.GameplayDialogue ||
             CurrentState == GameState.Dialogue;
         public bool AllowsQTEInput => CurrentState == GameState.QTE;
@@ -93,6 +99,7 @@ namespace Game
         public void EnterLoading() => SetState(GameState.Loading);
         public void EnterMainMenu() => SetState(GameState.MainMenu);
         public void EnterGameplay() => SetState(GameState.Gameplay);
+        public void EnterGameplayNoJump() => SetState(GameState.GameplayNoJump);
         public void EnterGameplayDialogue() => SetState(GameState.GameplayDialogue);
         public void EnterDialogue() => SetState(GameState.Dialogue);
         public void EnterCutscene() => SetState(GameState.Cutscene);
@@ -134,6 +141,8 @@ namespace Game
 
             if (GUILayout.Button("Gameplay"))
                 EnterGameplay();
+            if (GUILayout.Button("Gameplay No Jump"))
+                EnterGameplayNoJump();
             if (GUILayout.Button("Gameplay Dialogue"))
                 EnterGameplayDialogue();
             if (GUILayout.Button("Dialogue"))
