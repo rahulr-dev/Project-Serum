@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e81a37c9521345d8b8a97c88b0a1a2b3, type: 3}
+  m_Name: InteractionSequenceSO
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionSystem.InteractionSequenceSO
+  interactionName: Door Interaction Sequence
+  nodes:
+  - id: a03e9620-f4ca-4b2e-84ed-b0945ec0ca21
+    nodeType: 0
+    editorX: 250
+    editorY: 60
+    invokeEvent: {fileID: 0}
+    waitDuration: 1
+    actions: []
+  - id: 90a1bad2-1b6c-47a8-a7c1-068d47329faf
+    nodeType: 1
+    editorX: 252
+    editorY: 162
+    invokeEvent: {fileID: 0}
+    waitDuration: 1
+    actions:
+    - targetObject: {fileID: 0}
+      actionType: 4
+      stringParam: 
+      customEvent:
+        m_PersistentCalls:
+          m_Calls: []
+  - id: a64f413a-06ff-4e3b-af58-5da997bee398
+    nodeType: 2
+    editorX: 258
+    editorY: 431
+    invokeEvent: {fileID: 0}
+    waitDuration: 1
+    actions: []
+  edges:
+  - fromNodeID: a03e9620-f4ca-4b2e-84ed-b0945ec0ca21
+    toNodeID: 90a1bad2-1b6c-47a8-a7c1-068d47329faf
+  - fromNodeID: 90a1bad2-1b6c-47a8-a7c1-068d47329faf
+    toNodeID: a64f413a-06ff-4e3b-af58-5da997bee398

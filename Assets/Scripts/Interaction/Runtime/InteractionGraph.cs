@@ -8,7 +8,7 @@ namespace InteractionSystem
         private InteractionSequenceSO sequence;
 
         [SerializeField]
-        private SwitchEvent switchEvent;
+        private InvokeEvent invokeEvent;
 
         public InteractionSequenceSO Sequence
         {
@@ -16,17 +16,23 @@ namespace InteractionSystem
             set => sequence = value;
         }
 
+        public InvokeEvent InvokeEvent
+        {
+            get => invokeEvent;
+            set => invokeEvent = value;
+        }
+
         public SwitchEvent SwitchEvent
         {
-            get => switchEvent;
-            set => switchEvent = value;
+            get => invokeEvent as SwitchEvent;
+            set => invokeEvent = value;
         }
 
         private void Awake()
         {
-            if (switchEvent == null)
+            if (invokeEvent == null)
             {
-                switchEvent = GetComponent<SwitchEvent>();
+                invokeEvent = GetComponent<InvokeEvent>();
             }
         }
 
@@ -38,12 +44,12 @@ namespace InteractionSystem
                 return;
             }
 
-            if (switchEvent == null)
+            if (invokeEvent == null)
             {
-                switchEvent = GetComponent<SwitchEvent>();
+                invokeEvent = GetComponent<InvokeEvent>();
             }
 
-            InteractionGraphRunner.Run(sequence, switchEvent);
+            InteractionGraphRunner.Run(sequence, invokeEvent, this);
         }
     }
 }

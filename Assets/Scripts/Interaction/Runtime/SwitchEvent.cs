@@ -3,19 +3,9 @@ using UnityEngine.Events;
 
 namespace InteractionSystem
 {
-    public class SwitchEvent : MonoBehaviour
+    public class SwitchEvent : InvokeEvent
     {
-        [SerializeField]
-        private UnityEvent onSwitch = new UnityEvent();
-
-        public UnityEvent OnSwitch => onSwitch;
-
-        public void Play()
-        {
-            if (onSwitch != null)
-            {
-                onSwitch.Invoke();
-            }
-        }
+        public UnityEvent OnSwitch => OnInvoke;
     }
 }
+

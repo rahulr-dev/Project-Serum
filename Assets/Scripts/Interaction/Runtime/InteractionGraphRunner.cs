@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,13 +6,27 @@ namespace InteractionSystem
 {
     public static class InteractionGraphRunner
     {
-        public static void Run(InteractionSequenceSO sequence, SwitchEvent defaultSwitchEvent)
+        public static void Run(InteractionSequenceSO sequence, InvokeEvent defaultInvokeEvent, MonoBehaviour coroutineRunner)
         {
             if (sequence == null)
             {
                 Debug.LogWarning("[InteractionGraphRunner] InteractionSequenceSO is null.");
                 return;
             }
+
+            if (coroutineRunner != null)
+            {
+                coroutineRunner.StartCoroutine(RunSequenceCoroutine(sequence, defaultInvokeEvent));
+            }
+            else
+            {
+                Debug.LogWarning("[InteractionGraphRunner] No coroutine runner provided. Cannot execute WAIT nodes properly.");
+            }
+        }
+
+        public static IEnumerator RunSequenceCoroutine(InteractionSequenceSO sequence, InvokeEvent defaultInvokeEvent)
+        {
+            if (sequence == null) yield break;
 
             // 1. Find Start Node
             InteractionNode startNode = null;
@@ -30,10 +45,10 @@ namespace InteractionSystem
             if (startNode == null)
             {
                 Debug.LogWarning("[InteractionGraphRunner] No Start node found in sequence.");
-                return;
+                yield break;
             }
 
-            // 2. Traverse Graph
+            // 2. Traverse Graph sequentially
             HashSet<string> visited = new HashSet<string>();
             Queue<InteractionNode> queue = new Queue<InteractionNode>();
             queue.Enqueue(startNode);
@@ -42,29 +57,44 @@ namespace InteractionSystem
             while (queue.Count > 0)
             {
                 InteractionNode current = queue.Dequeue();
+                if (current == null) continue;
 
                 // Process Node
                 switch (current.NodeType)
                 {
                     case InteractionNodeType.Start:
-                        // Start node begins flow
                         break;
 
-                    case InteractionNodeType.SwitchEvent:
-                        SwitchEvent targetEvent = (current.SwitchEvent != null) ? current.SwitchEvent : defaultSwitchEvent;
+                    case InteractionNodeType.InvokeEvent:
+                        // Execute node actions defined in graph
+                        if (current.Actions != null)
+                        {
+                            for (int i = 0; i < current.Actions.Count; i++)
+                            {
+                                if (current.Actions[i] != null)
+                                {
+                                    current.Actions[i].Execute();
+                                }
+                            }
+                        }
+
+                        // Execute assigned InvokeEvent component if present
+                        InvokeEvent targetEvent = (current.InvokeEvent != null) ? current.InvokeEvent : defaultInvokeEvent;
                         if (targetEvent != null)
                         {
                             targetEvent.Play();
                         }
-                        else
+                        break;
+
+                    case InteractionNodeType.Wait:
+                        if (current.WaitDuration > 0f)
                         {
-                            Debug.LogWarning("[InteractionGraphRunner] SwitchEvent node encountered but no SwitchEvent component was found.");
+                            yield return new WaitForSeconds(current.WaitDuration);
                         }
                         break;
 
                     case InteractionNodeType.End:
-                        // End node stops execution of this branch
-                        continue;
+                        yield break;
                 }
 
                 // Follow outgoing edges

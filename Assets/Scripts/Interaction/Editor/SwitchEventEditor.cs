@@ -3,14 +3,18 @@ using UnityEngine;
 
 namespace InteractionSystem.Editor
 {
-    [CustomEditor(typeof(SwitchEvent))]
-    public class SwitchEventEditor : UnityEditor.Editor
+    [CustomEditor(typeof(InvokeEvent), true)]
+    public class InvokeEventEditor : UnityEditor.Editor
     {
-        private SerializedProperty onSwitchProp;
+        private SerializedProperty onInvokeProp;
 
         private void OnEnable()
         {
-            onSwitchProp = serializedObject.FindProperty("onSwitch");
+            onInvokeProp = serializedObject.FindProperty("onInvoke");
+            if (onInvokeProp == null)
+            {
+                onInvokeProp = serializedObject.FindProperty("onSwitch");
+            }
         }
 
         public override void OnInspectorGUI()
@@ -25,16 +29,16 @@ namespace InteractionSystem.Editor
                 fontSize = 12,
                 normal = { textColor = new Color(0.3f, 0.7f, 1f) }
             };
-            EditorGUILayout.LabelField("Switch Event (Universal Action Hub)", headerStyle);
-            EditorGUILayout.LabelField("Click '+' below, drag a target component (Door, AudioSource, ParticleSystem, Animator, QTE, etc.), and select the method to execute.", EditorStyles.wordWrappedMiniLabel);
+            EditorGUILayout.LabelField("Invoke Event (Universal Action Hub)", headerStyle);
+            EditorGUILayout.LabelField("Configured actions will be executed when Play() is called.", EditorStyles.wordWrappedMiniLabel);
             EditorGUILayout.EndVertical();
 
             EditorGUILayout.Space(4);
 
             // UnityEvent property drawer
-            if (onSwitchProp != null)
+            if (onInvokeProp != null)
             {
-                EditorGUILayout.PropertyField(onSwitchProp, new GUIContent("On Switch"));
+                EditorGUILayout.PropertyField(onInvokeProp, new GUIContent("On Invoke"));
             }
 
             serializedObject.ApplyModifiedProperties();
@@ -45,7 +49,7 @@ namespace InteractionSystem.Editor
                 EditorGUILayout.Space(6);
                 if (GUILayout.Button("▶ Test Play()", GUILayout.Height(24)))
                 {
-                    ((SwitchEvent)target).Play();
+                    ((InvokeEvent)target).Play();
                 }
             }
         }

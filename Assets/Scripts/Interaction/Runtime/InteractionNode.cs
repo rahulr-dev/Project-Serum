@@ -1,13 +1,15 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace InteractionSystem
 {
     public enum InteractionNodeType
     {
-        Start,
-        SwitchEvent,
-        End
+        Start = 0,
+        InvokeEvent = 1,
+        End = 2,
+        Wait = 3
     }
 
     [Serializable]
@@ -26,7 +28,13 @@ namespace InteractionSystem
         private float editorY;
 
         [SerializeField]
-        private SwitchEvent switchEvent;
+        private InvokeEvent invokeEvent;
+
+        [SerializeField]
+        private float waitDuration = 1.0f;
+
+        [SerializeField]
+        private List<InteractionAction> actions = new List<InteractionAction>();
 
         public string ID
         {
@@ -62,16 +70,40 @@ namespace InteractionSystem
             }
         }
 
+        public InvokeEvent InvokeEvent
+        {
+            get => invokeEvent;
+            set => invokeEvent = value;
+        }
+
+        // Backward compatibility property
         public SwitchEvent SwitchEvent
         {
-            get => switchEvent;
-            set => switchEvent = value;
+            get => invokeEvent as SwitchEvent;
+            set => invokeEvent = value;
+        }
+
+        public float WaitDuration
+        {
+            get => waitDuration;
+            set => waitDuration = Mathf.Max(0f, value);
+        }
+
+        public List<InteractionAction> Actions
+        {
+            get
+            {
+                if (actions == null) actions = new List<InteractionAction>();
+                return actions;
+            }
+            set => actions = value;
         }
 
         public InteractionNode()
         {
             id = Guid.NewGuid().ToString();
-            nodeType = InteractionNodeType.SwitchEvent;
+            nodeType = InteractionNodeType.InvokeEvent;
+            actions = new List<InteractionAction>();
         }
 
         public InteractionNode(InteractionNodeType type, Vector2 position)
@@ -80,6 +112,7 @@ namespace InteractionSystem
             nodeType = type;
             editorX = position.x;
             editorY = position.y;
+            actions = new List<InteractionAction>();
         }
     }
 }
