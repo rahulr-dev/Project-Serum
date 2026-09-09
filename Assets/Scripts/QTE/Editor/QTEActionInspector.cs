@@ -1,3 +1,4 @@
+using Events;
 using UnityEditor;
 using UnityEngine;
 
@@ -45,6 +46,21 @@ namespace QTE.Editor
                 executeHandlerIdProperty.stringValue = activeHandler.HandlerId;
 
             EditorGUILayout.LabelField("Handler Id", activeHandler.HandlerId);
+
+            SerumActionBridge bridge = picked.GetComponent<SerumActionBridge>();
+            if (bridge != null)
+            {
+                EditorGUILayout.HelpBox(
+                    "SerumActionBridge methods:\n" +
+                    "Transform: SmoothMoveLeft/Right/Forward/Backward/Up (distance, speed), " +
+                    "SmoothFaceLeft/Right (speed), MoveLeft, MoveRight, Activate, Deactivate\n" +
+                    "Events: Raise (string id)\n" +
+                    "Player: PlayIdle, PlayRun, RunLeft/Right/Forward/Backward (distance, speed), " +
+                    "RunTo (offsetX, offsetZ, speed), StopSmoothMotion, ForceJump, EnableLocomotion, " +
+                    "DisableLocomotion, FacePlayerLeft, FacePlayerRight, LockPlayerControl, " +
+                    "UnlockPlayerControl, EnterQTEState, ExitQTEState",
+                    MessageType.Info);
+            }
 
             SerializedObject handlerSo = new SerializedObject(activeHandler);
             handlerSo.Update();

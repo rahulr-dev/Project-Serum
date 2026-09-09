@@ -36,7 +36,7 @@ MonoBehaviour:
     endOutcome: 0
   - id: 77777777777777777777777777777777
     kind: 1
-    position: {x: 940.80005, y: 168.8}
+    position: {x: 711.2, y: 160}
     duration: 1
     executeHandlerId: 
     promptText: 
@@ -72,7 +72,7 @@ MonoBehaviour:
     endOutcome: 0
   - id: bec39da08beb46ac92c9573a2713e486
     kind: 4
-    position: {x: 448, y: 160}
+    position: {x: 576, y: 160}
     duration: 1
     executeHandlerId: 540f6e7e3f574c00a40bede866dceb22
     promptText: 
@@ -106,27 +106,9 @@ MonoBehaviour:
     branchMode: 0
     branchLabels: []
     endOutcome: 0
-  - id: dd952cb7d4ae44ea92bafeb3d9e0998d
-    kind: 2
-    position: {x: 590.4, y: 160}
-    duration: 5
-    executeHandlerId: 
-    promptText: 
-    requiredInput: 1
-    windowDuration: 1
-    failOnTimeout: 1
-    holdDuration: 0.5
-    targetCount: 5
-    inputSequence: 
-    windowPerStep: 1
-    totalWindow: 3
-    childNodeIds: []
-    branchMode: 0
-    branchLabels: []
-    endOutcome: 0
-  - id: c02d98be099a43b39e8fad26ba65442e
+  - id: 31a8682ec83e4fb0b603400e16c5a7db
     kind: 4
-    position: {x: 790.4, y: 160}
+    position: {x: 444.8, y: 160}
     duration: 1
     executeHandlerId: 4c8deee1000b41488471b48f1d3f8b48
     promptText: 
@@ -146,15 +128,12 @@ MonoBehaviour:
   - fromId: 11111111111111111111111111111111
     fromPort: 0
     toId: 1c7fc18411914c21988a272c052a4d28
-  - fromId: 1c7fc18411914c21988a272c052a4d28
-    fromPort: 0
-    toId: bec39da08beb46ac92c9573a2713e486
   - fromId: bec39da08beb46ac92c9573a2713e486
     fromPort: 0
-    toId: dd952cb7d4ae44ea92bafeb3d9e0998d
-  - fromId: dd952cb7d4ae44ea92bafeb3d9e0998d
-    fromPort: 0
-    toId: c02d98be099a43b39e8fad26ba65442e
-  - fromId: c02d98be099a43b39e8fad26ba65442e
-    fromPort: 0
     toId: 77777777777777777777777777777777
+  - fromId: 1c7fc18411914c21988a272c052a4d28
+    fromPort: 0
+    toId: 31a8682ec83e4fb0b603400e16c5a7db
+  - fromId: 31a8682ec83e4fb0b603400e16c5a7db
+    fromPort: 0
+    toId: bec39da08beb46ac92c9573a2713e486
