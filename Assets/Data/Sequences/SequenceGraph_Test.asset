@@ -23,38 +23,101 @@ MonoBehaviour:
     ignoreKeys: 
   - id: bffbb9a8adcc405a9874ab375e5ce937
     kind: 2
-    position: {x: 202.66666, y: 138.66667}
+    position: {x: 207.33334, y: 160}
     actionId: 
     conditionKey: Bell1
     ignoreKeys: 
-  - id: a96ab3255dc54becb51ecb9b3d7e24de
-    kind: 4
-    position: {x: 1014.6666, y: 64.666664}
-    actionId: 
-    conditionKey: 
-    ignoreKeys: 
   - id: 00a78804bda74d0fbf65d854340c4f0d
     kind: 1
-    position: {x: 755.3333, y: 64.666664}
-    actionId: HideObject
+    position: {x: 784.6666, y: -49.333336}
+    actionId: DoorOpen2
     conditionKey: 
     ignoreKeys: 
   - id: 5c1dbc41d0444677a4b1b6255271ac9d
     kind: 2
-    position: {x: 500, y: 138.66667}
+    position: {x: 610, y: 111.33333}
     actionId: 
     conditionKey: Bell2
     ignoreKeys: Bell1
+  - id: e0776d9a4c914e338d1542ff9d1d9d1f
+    kind: 1
+    position: {x: 422.6667, y: 316.66666}
+    actionId: DoorOpen1
+    conditionKey: 
+    ignoreKeys: 
+  - id: 456d417658964778bc31d1cf217bc870
+    kind: 1
+    position: {x: 1715.3334, y: 504.6667}
+    actionId: DoorClose
+    conditionKey: 
+    ignoreKeys: 
+  - id: 036217db9cf445518942f69979755b43
+    kind: 2
+    position: {x: 1024, y: 73.333336}
+    actionId: 
+    conditionKey: Bell3
+    ignoreKeys: 
+  - id: 6b9f92799461474ca5301897c8d29dae
+    kind: 1
+    position: {x: 1223.3334, y: 217.33333}
+    actionId: DoorOpen3
+    conditionKey: 
+    ignoreKeys: 
+  - id: 4390616ee1ac44dd9f08a04725952fef
+    kind: 2
+    position: {x: 1509.3334, y: 217.33333}
+    actionId: 
+    conditionKey: Bell4
+    ignoreKeys: 
+  - id: 3e9eebf3132442ba8440db98fa2d79d5
+    kind: 1
+    position: {x: 1744, y: 289.33334}
+    actionId: DoorOpen4
+    conditionKey: 
+    ignoreKeys: 
+  - id: bf6ffe99947d4219b60156a0d7ae6373
+    kind: 4
+    position: {x: 1986, y: 310.66666}
+    actionId: 
+    conditionKey: 
+    ignoreKeys: 
   edges:
   - fromId: a11c0000000000000000000000000001
     fromPort: 0
     toId: bffbb9a8adcc405a9874ab375e5ce937
-  - fromId: 00a78804bda74d0fbf65d854340c4f0d
-    fromPort: 0
-    toId: a96ab3255dc54becb51ecb9b3d7e24de
-  - fromId: bffbb9a8adcc405a9874ab375e5ce937
-    fromPort: 0
-    toId: 5c1dbc41d0444677a4b1b6255271ac9d
   - fromId: 5c1dbc41d0444677a4b1b6255271ac9d
     fromPort: 0
     toId: 00a78804bda74d0fbf65d854340c4f0d
+  - fromId: bffbb9a8adcc405a9874ab375e5ce937
+    fromPort: 0
+    toId: e0776d9a4c914e338d1542ff9d1d9d1f
+  - fromId: e0776d9a4c914e338d1542ff9d1d9d1f
+    fromPort: 0
+    toId: 5c1dbc41d0444677a4b1b6255271ac9d
+  - fromId: 00a78804bda74d0fbf65d854340c4f0d
+    fromPort: 0
+    toId: 036217db9cf445518942f69979755b43
+  - fromId: 036217db9cf445518942f69979755b43
+    fromPort: 0
+    toId: 6b9f92799461474ca5301897c8d29dae
+  - fromId: 5c1dbc41d0444677a4b1b6255271ac9d
+    fromPort: 1
+    toId: 456d417658964778bc31d1cf217bc870
+  - fromId: 036217db9cf445518942f69979755b43
+    fromPort: 1
+    toId: 456d417658964778bc31d1cf217bc870
+  - fromId: 6b9f92799461474ca5301897c8d29dae
+    fromPort: 0
+    toId: 4390616ee1ac44dd9f08a04725952fef
+  - fromId: 4390616ee1ac44dd9f08a04725952fef
+    fromPort: 0
+    toId: 3e9eebf3132442ba8440db98fa2d79d5
+  - fromId: 3e9eebf3132442ba8440db98fa2d79d5
+    fromPort: 0
+    toId: bf6ffe99947d4219b60156a0d7ae6373
+  - fromId: 4390616ee1ac44dd9f08a04725952fef
+    fromPort: 1
+    toId: 456d417658964778bc31d1cf217bc870
+  - fromId: 456d417658964778bc31d1cf217bc870
+    fromPort: 0
+    toId: bf6ffe99947d4219b60156a0d7ae6373

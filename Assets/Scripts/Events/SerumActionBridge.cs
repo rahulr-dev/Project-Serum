@@ -348,6 +348,81 @@ namespace Events
             SmoothMoveTo(worldPos, defaultMoveSpeed);
         }
 
+        public void SmoothMoveTo(float x, float y, float z, float speed)
+        {
+            SmoothMoveTo(new Vector3(x, y, z), speed);
+        }
+
+        public void SmoothMoveTo(float x, float y, float z)
+        {
+            SmoothMoveTo(new Vector3(x, y, z), defaultMoveSpeed);
+        }
+
+        public void SmoothMoveToX(float worldX)
+        {
+            SmoothMoveToX(worldX, defaultMoveSpeed);
+        }
+
+        public void SmoothMoveToX(float worldX, float speed)
+        {
+            Vector3 pos = _transform.position;
+            pos.x = worldX;
+            SmoothMoveTo(pos, speed);
+        }
+
+        public void SmoothMoveToY(float worldY)
+        {
+            SmoothMoveToY(worldY, defaultMoveSpeed);
+        }
+
+        public void SmoothMoveToY(float worldY, float speed)
+        {
+            Vector3 pos = _transform.position;
+            pos.y = worldY;
+            SmoothMoveTo(pos, speed);
+        }
+
+        public void SmoothMoveToZ(float worldZ)
+        {
+            SmoothMoveToZ(worldZ, defaultMoveSpeed);
+        }
+
+        public void SmoothMoveToZ(float worldZ, float speed)
+        {
+            Vector3 pos = _transform.position;
+            pos.z = worldZ;
+            SmoothMoveTo(pos, speed);
+        }
+
+        public void MoveTo(float x, float y, float z)
+        {
+            SetPosition(new Vector3(x, y, z));
+        }
+
+        public void MoveToX(float worldX)
+        {
+            StopSmoothMotion();
+            Vector3 pos = _transform.position;
+            pos.x = worldX;
+            _transform.position = pos;
+        }
+
+        public void MoveToY(float worldY)
+        {
+            StopSmoothMotion();
+            Vector3 pos = _transform.position;
+            pos.y = worldY;
+            _transform.position = pos;
+        }
+
+        public void MoveToZ(float worldZ)
+        {
+            StopSmoothMotion();
+            Vector3 pos = _transform.position;
+            pos.z = worldZ;
+            _transform.position = pos;
+        }
+
         public void SetRotation(Vector3 euler)
         {
             StopSmoothMotion();
