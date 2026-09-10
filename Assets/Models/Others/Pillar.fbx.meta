@@ -1,39 +1,9 @@
 fileFormatVersion: 2
-guid: 67a2eba4421dd494d86e3428d02b4506
+guid: 3d2e7adeb9fc7d541a5d9541063d1d4e
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Blue
-    second: {fileID: 2100000, guid: 864e4fb705b2842418355434f7b72e45, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: GLOW RING
-    second: {fileID: 2100000, guid: caf936863408e1c45a7f7f17fdb2c3bc, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Glow
-    second: {fileID: 2100000, guid: 9d6307bd188f9f74292411c88e895ea9, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Green
-    second: {fileID: 2100000, guid: 5fab91afc068e7a4daf25f87f77a0965, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.001
-    second: {fileID: 2100000, guid: bca1a51be602bcd459dbcd1fabf7605f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Pillar
-    second: {fileID: 2100000, guid: b79d1e4569ca4124b868311b5fd2e1c2, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
