@@ -22,13 +22,17 @@ namespace Game
         public bool AllowsMove =>
             CurrentState == GameState.Gameplay ||
             CurrentState == GameState.GameplayNoJump ||
+            CurrentState == GameState.GameplayStealth ||
             CurrentState == GameState.GameplayDialogue;
 
-        public bool AllowsJump => CurrentState == GameState.Gameplay || CurrentState == GameState.GameplayDialogue;
+        public bool AllowsJump =>
+            CurrentState == GameState.Gameplay ||
+            CurrentState == GameState.GameplayDialogue;
 
         public bool AllowsInteract =>
             CurrentState == GameState.Gameplay ||
             CurrentState == GameState.GameplayNoJump ||
+            CurrentState == GameState.GameplayStealth ||
             CurrentState == GameState.GameplayDialogue ||
             CurrentState == GameState.Dialogue;
         public bool AllowsQTEInput => CurrentState == GameState.QTE;
@@ -100,6 +104,7 @@ namespace Game
         public void EnterMainMenu() => SetState(GameState.MainMenu);
         public void EnterGameplay() => SetState(GameState.Gameplay);
         public void EnterGameplayNoJump() => SetState(GameState.GameplayNoJump);
+        public void EnterGameplayStealth() => SetState(GameState.GameplayStealth);
         public void EnterGameplayDialogue() => SetState(GameState.GameplayDialogue);
         public void EnterDialogue() => SetState(GameState.Dialogue);
         public void EnterCutscene() => SetState(GameState.Cutscene);
@@ -143,6 +148,8 @@ namespace Game
                 EnterGameplay();
             if (GUILayout.Button("Gameplay No Jump"))
                 EnterGameplayNoJump();
+            if (GUILayout.Button("Gameplay Stealth"))
+                EnterGameplayStealth();
             if (GUILayout.Button("Gameplay Dialogue"))
                 EnterGameplayDialogue();
             if (GUILayout.Button("Dialogue"))

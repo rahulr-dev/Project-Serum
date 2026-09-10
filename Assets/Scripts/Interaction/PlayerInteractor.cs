@@ -99,6 +99,7 @@ namespace InteractionSystem
                 GameState state = states.CurrentState;
                 return state == GameState.Gameplay ||
                        state == GameState.GameplayNoJump ||
+                       state == GameState.GameplayStealth ||
                        state == GameState.GameplayDialogue;
             }
         }

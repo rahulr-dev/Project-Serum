@@ -1,4 +1,5 @@
 using System;
+using Game;
 using Interaction;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Character
     public class SideScrollerController : MonoBehaviour, INormalizedMoveSpeed
     {
         [SerializeField] float moveSpeed = 6f;
+        [SerializeField] float stealthMoveSpeed = 2.5f;
         [SerializeField] float moveSmoothTime = 0.12f;
         [SerializeField] float turnSmoothTime = 0.1f;
         [SerializeField] float inputDeadzone = 0.15f;
@@ -17,16 +19,29 @@ namespace Character
         public bool lockRotation;
 
         [Header("Jump")]
+        [Tooltip("Downward acceleration while airborne.")]
         [SerializeField] float gravity = 40f;
+        [Tooltip("Extra gravity applied while falling (after the jump apex).")]
         [SerializeField] float fallGravityMultiplier = 1.7f;
+        [Tooltip("Maximum downward speed.")]
         [SerializeField] float maxFallSpeed = 25f;
+        [Tooltip("Peak height of a jump.")]
         [SerializeField] float jumpHeight = 2.2f;
+        [Tooltip("When jump is released early, upward speed is multiplied by this (variable jump height).")]
         [SerializeField] float jumpCutMultiplier = 0.4f;
+        [Tooltip("Seconds after leaving the ground where jump is still allowed.")]
         [SerializeField] float coyoteTime = 0.1f;
+        [Tooltip("Seconds a jump press is remembered. If you land within this window, the jump still fires.")]
         [SerializeField] float jumpBufferTime = 0.1f;
+        [Tooltip("Seconds after a jump before another jump can start. Buffered presses still count when this wait ends.")]
+        [SerializeField] float jumpCooldown = 0.15f;
+        [Tooltip("Vertical speed near zero that counts as the jump apex (for hang gravity).")]
         [SerializeField] float apexHangThreshold = 2f;
+        [Tooltip("Gravity multiplier at the jump apex to linger in the air slightly.")]
         [SerializeField] float apexHangMultiplier = 0.5f;
+        [Tooltip("Extra distance below the capsule used to detect ground.")]
         [SerializeField] float groundProbeExtra = 0.08f;
+        [Tooltip("Small downward speed applied while grounded so the controller stays stuck to floors.")]
         [SerializeField] float groundedStickVelocity = -2f;
 
         public event Action OnJumped;
@@ -39,16 +54,31 @@ namespace Character
         public bool IsMoving { get; private set; }
         public bool LocomotionEnabled { get; private set; } = true;
         public bool IsScriptedRunning { get; private set; }
-        public float MoveSpeed => moveSpeed;
+        public float MoveSpeed => ActiveMoveSpeed;
+        public float WalkSpeed => moveSpeed;
+        public float StealthMoveSpeed => stealthMoveSpeed;
         public float HorizontalSpeed => _currentSpeed;
         public float NormalizedSpeed
         {
             get
             {
+                float maxSpeed = ActiveMoveSpeed;
                 if (IsScriptedRunning)
-                    return moveSpeed > 0f ? Mathf.Clamp01(_scriptedRunSpeed / moveSpeed) : 1f;
+                    return maxSpeed > 0f ? Mathf.Clamp01(_scriptedRunSpeed / maxSpeed) : 1f;
 
-                return moveSpeed > 0f ? Mathf.Clamp01(Mathf.Abs(_currentSpeed) / moveSpeed) : 0f;
+                return maxSpeed > 0f ? Mathf.Clamp01(Mathf.Abs(_currentSpeed) / maxSpeed) : 0f;
+            }
+        }
+
+        float ActiveMoveSpeed
+        {
+            get
+            {
+                if (GameStateManager.Instance != null &&
+                    GameStateManager.Instance.CurrentState == GameState.GameplayStealth)
+                    return stealthMoveSpeed;
+
+                return moveSpeed;
             }
         }
 
@@ -66,6 +96,7 @@ namespace Character
         float _verticalVelocity;
         float _coyoteTimer;
         float _jumpBufferTimer;
+        float _jumpCooldownTimer;
         bool _jumpCutApplied;
         bool _wasJumpHeld;
 
@@ -107,6 +138,9 @@ namespace Character
 
         public void ForceJump()
         {
+            if (_jumpCooldownTimer > 0f)
+                return;
+
             if (_coyoteTimer <= 0f && !CheckGrounded())
                 return;
 
@@ -204,7 +238,7 @@ namespace Character
 
             if (LocomotionEnabled && !IsScriptedRunning)
             {
-                float targetSpeed = moveSpeed * inputX;
+                float targetSpeed = ActiveMoveSpeed * inputX;
                 _currentSpeed = Mathf.SmoothDamp(_currentSpeed, targetSpeed, ref _speedVelocity, moveSmoothTime);
 
                 bool moving = Mathf.Abs(_currentSpeed) > inputDeadzone;
@@ -230,8 +264,14 @@ namespace Character
             else if (LocomotionEnabled && !IsScriptedRunning)
                 _jumpBufferTimer -= Time.deltaTime;
 
+            if (_jumpCooldownTimer > 0f)
+                _jumpCooldownTimer -= Time.deltaTime;
+
             bool jumpedThisFrame = false;
-            if (LocomotionEnabled && !IsScriptedRunning && _jumpBufferTimer > 0f && _coyoteTimer > 0f)
+            if (LocomotionEnabled && !IsScriptedRunning &&
+                _jumpBufferTimer > 0f &&
+                _coyoteTimer > 0f &&
+                _jumpCooldownTimer <= 0f)
             {
                 PerformJump();
                 jumpedThisFrame = true;
@@ -315,6 +355,7 @@ namespace Character
             _verticalVelocity = Mathf.Sqrt(2f * gravity * jumpHeight);
             _jumpBufferTimer = 0f;
             _coyoteTimer = 0f;
+            _jumpCooldownTimer = jumpCooldown;
             _jumpCutApplied = false;
             IsGrounded = false;
             OnJumped?.Invoke();

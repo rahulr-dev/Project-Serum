@@ -6,6 +6,7 @@ namespace Game
         MainMenu,
         Gameplay,
         GameplayNoJump,
+        GameplayStealth,
         GameplayDialogue,
         Dialogue,
         Cutscene,

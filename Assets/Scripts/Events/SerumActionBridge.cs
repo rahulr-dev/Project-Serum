@@ -787,6 +787,22 @@ namespace Events
             GameStateManager.Instance.EnterGameplay();
         }
 
+        public void EnterGameplayStealth()
+        {
+            if (GameStateManager.Instance == null)
+            {
+                Debug.LogWarning("SerumActionBridge.EnterGameplayStealth requires GameStateManager.", this);
+                return;
+            }
+
+            GameStateManager.Instance.EnterGameplayStealth();
+        }
+
+        public void ExitGameplayStealth()
+        {
+            UnlockPlayerControl();
+        }
+
         public void EnterQTEState()
         {
             if (GameStateManager.Instance == null)
