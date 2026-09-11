@@ -623,8 +623,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65756360}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.045939278, y: -0.6753955, z: 0.042224694, w: 0.7348113}
-  m_LocalPosition: {x: 395.60004, y: 27.490002, z: -241.39998}
+  m_LocalRotation: {x: -0.033038378, y: -0.27000186, z: -0.009270397, w: 0.9622482}
+  m_LocalPosition: {x: -257.90002, y: 2.399903, z: -240.41316}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7739,9 +7739,9 @@ MonoBehaviour:
         z: 27.719084
       Rotation:
         value:
-          x: -0.042630583
+          x: -0.042630576
           y: 0.71719986
-          z: 0.042394575
+          z: 0.042394567
           w: 0.69426906
     - Position:
         x: 513.0524
@@ -7793,10 +7793,10 @@ MonoBehaviour:
         z: 8.854798
       Rotation:
         value:
-          x: -0.15655875
+          x: -0.15655877
           y: 0.60085475
           z: 0.19945474
-          w: 0.758077
+          w: 0.7580771
     - Position:
         x: 608.11554
         y: 21.358047
@@ -7811,8 +7811,8 @@ MonoBehaviour:
         z: 9.12746
       Rotation:
         value:
-          x: 0.41620976
-          y: 0.4054538
+          x: 0.4162098
+          y: 0.40545383
           z: 0.65348727
           w: 0.48510933
     - Position:
@@ -15000,7 +15000,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineSplineDolly
   m_SplineSettings:
     Spline: {fileID: 1090854234}
-    Position: 1
+    Position: 0
     Units: 1
   SplineOffset: {x: 0, y: 0, z: 0}
   CameraRotation: 0
@@ -15071,8 +15071,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760746732}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.045939278, y: -0.6753954, z: 0.042224687, w: 0.73481137}
-  m_LocalPosition: {x: 395.60004, y: 27.490002, z: -241.39998}
+  m_LocalRotation: {x: -0.033038378, y: -0.2700019, z: -0.009270401, w: 0.96224815}
+  m_LocalPosition: {x: -257.90002, y: 2.399903, z: -240.41316}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17221,7 +17221,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1854758036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17414,7 +17414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6d4aeb8431ce884489075f2f925cca4c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 63.969353
+      value: 91.53517
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6d4aeb8431ce884489075f2f925cca4c, type: 3}
       propertyPath: m_LocalScale.z
@@ -17684,11 +17684,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4793900009940070578, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 264.7
+      value: -264.03
       objectReference: {fileID: 0}
     - target: {fileID: 4793900009940070578, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11
+      value: 3.21
       objectReference: {fileID: 0}
     - target: {fileID: 4793900009940070578, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: m_LocalPosition.z
