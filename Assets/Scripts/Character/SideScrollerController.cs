@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Character
 {
     [RequireComponent(typeof(CharacterController))]
-    public class SideScrollerController : MonoBehaviour, INormalizedMoveSpeed
+    public class SideScrollerController : MonoBehaviour, ICharacterLocomotion
     {
         [SerializeField] float moveSpeed = 6f;
         [SerializeField] float stealthMoveSpeed = 2.5f;

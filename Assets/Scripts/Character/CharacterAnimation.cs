@@ -1,3 +1,4 @@
+using System;
 using Game;
 using UnityEngine;
 
@@ -18,6 +19,7 @@ namespace Character
         [SerializeField] float stealthDampTime = 0.25f;
 
         INormalizedMoveSpeed _speedSource;
+        Action _unbindJump;
         int _speedHash;
         int _jumpHash;
         int _stealthHash;
@@ -36,7 +38,7 @@ namespace Character
             _speedHash = Animator.StringToHash(speedParam);
             _jumpHash = Animator.StringToHash(jumpParam);
             _stealthHash = Animator.StringToHash(stealthParam);
-            _speedSource = moveSpeedSource as INormalizedMoveSpeed;
+            _speedSource = FindSpeedSource();
             if (_speedSource == null)
             {
                 Debug.LogError(
@@ -47,11 +49,10 @@ namespace Character
 
         void OnEnable()
         {
-            if (locomotion != null)
-            {
-                locomotion.OnJumped += HandleJumped;
-                locomotion.OnLanded += HandleLanded;
-            }
+            if (locomotion == null)
+                locomotion = GetComponent<SideScrollerController>();
+
+            BindJumpEvents();
 
             GameStateManager.OnStateChanged += HandleStateChanged;
             ApplyStealth(GameStateManager.Instance != null
@@ -61,11 +62,8 @@ namespace Character
 
         void OnDisable()
         {
-            if (locomotion != null)
-            {
-                locomotion.OnJumped -= HandleJumped;
-                locomotion.OnLanded -= HandleLanded;
-            }
+            _unbindJump?.Invoke();
+            _unbindJump = null;
 
             GameStateManager.OnStateChanged -= HandleStateChanged;
         }
@@ -132,6 +130,45 @@ namespace Character
         void ApplyStealth(GameState state)
         {
             _stealthTarget = state == GameState.GameplayStealth ? StealthOn : StealthOff;
+        }
+
+        INormalizedMoveSpeed FindSpeedSource()
+        {
+            if (moveSpeedSource is INormalizedMoveSpeed fromAssigned)
+                return fromAssigned;
+
+            if (locomotion is INormalizedMoveSpeed fromLocomotion)
+                return fromLocomotion;
+
+            MonoBehaviour[] behaviours = GetComponents<MonoBehaviour>();
+            for (int i = 0; i < behaviours.Length; i++)
+            {
+                if (behaviours[i] is INormalizedMoveSpeed speed)
+                    return speed;
+            }
+
+            return null;
+        }
+
+        void BindJumpEvents()
+        {
+            _unbindJump?.Invoke();
+            _unbindJump = null;
+
+            IJumpEvents jump = GetComponent<IJumpEvents>();
+            if (jump == null)
+                jump = locomotion as IJumpEvents;
+
+            if (jump == null)
+                return;
+
+            jump.OnJumped += HandleJumped;
+            jump.OnLanded += HandleLanded;
+            _unbindJump = () =>
+            {
+                jump.OnJumped -= HandleJumped;
+                jump.OnLanded -= HandleLanded;
+            };
         }
     }
 }
