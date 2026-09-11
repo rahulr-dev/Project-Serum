@@ -23,63 +23,75 @@ MonoBehaviour:
     ignoreKeys: 
   - id: bffbb9a8adcc405a9874ab375e5ce937
     kind: 2
-    position: {x: 207.33334, y: 160}
+    position: {x: 207, y: 160}
     actionId: 
     conditionKey: Bell1
     ignoreKeys: 
   - id: 00a78804bda74d0fbf65d854340c4f0d
     kind: 1
-    position: {x: 784.6666, y: -49.333336}
+    position: {x: 785, y: -49}
     actionId: DoorOpen2
     conditionKey: 
     ignoreKeys: 
   - id: 5c1dbc41d0444677a4b1b6255271ac9d
     kind: 2
-    position: {x: 610, y: 111.33333}
+    position: {x: 610, y: 111}
     actionId: 
     conditionKey: Bell2
     ignoreKeys: Bell1
   - id: e0776d9a4c914e338d1542ff9d1d9d1f
     kind: 1
-    position: {x: 422.6667, y: 316.66666}
+    position: {x: 423, y: 317}
     actionId: DoorOpen1
     conditionKey: 
     ignoreKeys: 
   - id: 456d417658964778bc31d1cf217bc870
     kind: 1
-    position: {x: 1715.3334, y: 504.6667}
+    position: {x: 2190, y: 443}
     actionId: DoorClose
     conditionKey: 
     ignoreKeys: 
   - id: 036217db9cf445518942f69979755b43
     kind: 2
-    position: {x: 1024, y: 73.333336}
+    position: {x: 1024, y: 73}
     actionId: 
     conditionKey: Bell3
     ignoreKeys: 
   - id: 6b9f92799461474ca5301897c8d29dae
     kind: 1
-    position: {x: 1223.3334, y: 217.33333}
+    position: {x: 1223, y: 217}
     actionId: DoorOpen3
     conditionKey: 
     ignoreKeys: 
   - id: 4390616ee1ac44dd9f08a04725952fef
     kind: 2
-    position: {x: 1509.3334, y: 217.33333}
+    position: {x: 1509, y: 217}
     actionId: 
     conditionKey: Bell4
     ignoreKeys: 
   - id: 3e9eebf3132442ba8440db98fa2d79d5
     kind: 1
-    position: {x: 1744, y: 289.33334}
+    position: {x: 1744, y: 289}
     actionId: DoorOpen4
     conditionKey: 
     ignoreKeys: 
   - id: bf6ffe99947d4219b60156a0d7ae6373
     kind: 4
-    position: {x: 1986, y: 310.66666}
+    position: {x: 2511, y: 491}
     actionId: 
     conditionKey: 
+    ignoreKeys: 
+  - id: 71af1eb572d94cfe956f9968ed0d46f5
+    kind: 1
+    position: {x: 2266, y: 192}
+    actionId: DoorOpen5
+    conditionKey: 
+    ignoreKeys: 
+  - id: 138013035f4841aeb71ec8f525cbd264
+    kind: 2
+    position: {x: 2037, y: 219}
+    actionId: 
+    conditionKey: Bell5
     ignoreKeys: 
   edges:
   - fromId: a11c0000000000000000000000000001
@@ -112,12 +124,21 @@ MonoBehaviour:
   - fromId: 4390616ee1ac44dd9f08a04725952fef
     fromPort: 0
     toId: 3e9eebf3132442ba8440db98fa2d79d5
-  - fromId: 3e9eebf3132442ba8440db98fa2d79d5
-    fromPort: 0
-    toId: bf6ffe99947d4219b60156a0d7ae6373
   - fromId: 4390616ee1ac44dd9f08a04725952fef
     fromPort: 1
     toId: 456d417658964778bc31d1cf217bc870
   - fromId: 456d417658964778bc31d1cf217bc870
     fromPort: 0
     toId: bf6ffe99947d4219b60156a0d7ae6373
+  - fromId: 3e9eebf3132442ba8440db98fa2d79d5
+    fromPort: 0
+    toId: 138013035f4841aeb71ec8f525cbd264
+  - fromId: 138013035f4841aeb71ec8f525cbd264
+    fromPort: 0
+    toId: 71af1eb572d94cfe956f9968ed0d46f5
+  - fromId: 71af1eb572d94cfe956f9968ed0d46f5
+    fromPort: 0
+    toId: bf6ffe99947d4219b60156a0d7ae6373
+  - fromId: 138013035f4841aeb71ec8f525cbd264
+    fromPort: 1
+    toId: 456d417658964778bc31d1cf217bc870

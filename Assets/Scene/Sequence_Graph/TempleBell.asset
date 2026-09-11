@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f3c2a91e6b04d7aa1c45e90b2d8f314, type: 3}
+  m_Name: TempleBell
+  m_EditorClassIdentifier: Assembly-CSharp::SequenceSystem.SequenceGraph
+  playState: 2
+  endState: 2
+  nodes:
+  - id: 4b95640b405a45979b0d8053a04cf960
+    kind: 0
+    position: {x: 80, y: 160}
+    actionId: 
+    conditionKey: default
+    ignoreKeys: 
+  - id: 934d12d133ac467688bb062883f02ca8
+    kind: 2
+    position: {x: 231, y: 160}
+    actionId: 
+    conditionKey: Bell
+    ignoreKeys: 
+  - id: 20333b9633de40f6bc2f8b17ee26cc32
+    kind: 1
+    position: {x: 477, y: 263}
+    actionId: Open1
+    conditionKey: 
+    ignoreKeys: 
+  - id: 579959d1340249f2a6735d076670cbf6
+    kind: 2
+    position: {x: 719, y: 217}
+    actionId: 
+    conditionKey: Bell2
+    ignoreKeys: 
+  - id: 3850c29cf8a24ad492a38ec0a1da5618
+    kind: 1
+    position: {x: 983, y: 286}
+    actionId: Open2
+    conditionKey: 
+    ignoreKeys: 
+  - id: 2c418ea1c86543bb92561b71de9a568d
+    kind: 3
+    position: {x: 979, y: 143}
+    actionId: 
+    conditionKey: 
+    ignoreKeys: 
+  - id: 70b7f772b54c4c65b12959b810a8ca91
+    kind: 2
+    position: {x: 1179, y: 243}
+    actionId: 
+    conditionKey: Bell3
+    ignoreKeys: 
+  - id: 918f65e022294fd2bb5e2cf4957e9bd5
+    kind: 1
+    position: {x: 1497, y: 250}
+    actionId: Open3
+    conditionKey: 
+    ignoreKeys: 
+  - id: 085d2424a0484e91b03e172a6d311192
+    kind: 3
+    position: {x: 1497, y: 383}
+    actionId: 
+    conditionKey: 
+    ignoreKeys: 
+  - id: b72728a78c7c49389a261a2140104cca
+    kind: 4
+    position: {x: 1726, y: 357}
+    actionId: 
+    conditionKey: 
+    ignoreKeys: 
+  edges:
+  - fromId: 4b95640b405a45979b0d8053a04cf960
+    fromPort: 0
+    toId: 934d12d133ac467688bb062883f02ca8
+  - fromId: 934d12d133ac467688bb062883f02ca8
+    fromPort: 0
+    toId: 20333b9633de40f6bc2f8b17ee26cc32
+  - fromId: 20333b9633de40f6bc2f8b17ee26cc32
+    fromPort: 0
+    toId: 579959d1340249f2a6735d076670cbf6
+  - fromId: 579959d1340249f2a6735d076670cbf6
+    fromPort: 0
+    toId: 3850c29cf8a24ad492a38ec0a1da5618
+  - fromId: 579959d1340249f2a6735d076670cbf6
+    fromPort: 1
+    toId: 2c418ea1c86543bb92561b71de9a568d
+  - fromId: 3850c29cf8a24ad492a38ec0a1da5618
+    fromPort: 0
+    toId: 70b7f772b54c4c65b12959b810a8ca91
+  - fromId: 70b7f772b54c4c65b12959b810a8ca91
+    fromPort: 0
+    toId: 918f65e022294fd2bb5e2cf4957e9bd5
+  - fromId: 70b7f772b54c4c65b12959b810a8ca91
+    fromPort: 1
+    toId: 085d2424a0484e91b03e172a6d311192
+  - fromId: 918f65e022294fd2bb5e2cf4957e9bd5
+    fromPort: 0
+    toId: b72728a78c7c49389a261a2140104cca

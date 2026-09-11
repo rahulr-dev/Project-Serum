@@ -22,12 +22,12 @@ MonoBehaviour:
     executeHandlerId: 
   - id: 11f7aff302374f67afdb20aeb6bb3443
     kind: 2
-    position: {x: 222.66666, y: 120.66667}
+    position: {x: 223, y: 121}
     duration: 0
     executeHandlerId: f6be0c450e6743ae90b33f06205d8a6c
   - id: edefc3ed23524a8cba8e9f8076048413
     kind: 3
-    position: {x: 398.6667, y: 120.66667}
+    position: {x: 399, y: 121}
     duration: 0
     executeHandlerId: 
   edges:
