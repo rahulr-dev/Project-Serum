@@ -10,6 +10,7 @@ namespace Character
     {
         [SerializeField] float moveSpeed = 6f;
         [SerializeField] float stealthMoveSpeed = 2.5f;
+        [SerializeField] float pushMoveSpeed = 2f;
         [SerializeField] float moveSmoothTime = 0.12f;
         [SerializeField] float turnSmoothTime = 0.1f;
         [SerializeField] float inputDeadzone = 0.15f;
@@ -57,7 +58,19 @@ namespace Character
         public float MoveSpeed => ActiveMoveSpeed;
         public float WalkSpeed => moveSpeed;
         public float StealthMoveSpeed => stealthMoveSpeed;
+        public float PushMoveSpeed => pushMoveSpeed;
         public float HorizontalSpeed => _currentSpeed;
+
+        public float FacingSign
+        {
+            get
+            {
+                float yaw = transform.eulerAngles.y;
+                float toRight = Mathf.Abs(Mathf.DeltaAngle(yaw, rightYaw));
+                float toLeft = Mathf.Abs(Mathf.DeltaAngle(yaw, leftYaw));
+                return toRight <= toLeft ? 1f : -1f;
+            }
+        }
         public float NormalizedSpeed
         {
             get
@@ -74,13 +87,22 @@ namespace Character
         {
             get
             {
-                if (GameStateManager.Instance != null &&
-                    GameStateManager.Instance.CurrentState == GameState.GameplayStealth)
+                if (GameStateManager.Instance == null)
+                    return moveSpeed;
+
+                GameState state = GameStateManager.Instance.CurrentState;
+                if (state == GameState.GameplayStealth)
                     return stealthMoveSpeed;
+                if (state == GameState.GameplayPushing)
+                    return pushMoveSpeed;
 
                 return moveSpeed;
             }
         }
+
+        bool IsPushing =>
+            GameStateManager.Instance != null &&
+            GameStateManager.Instance.CurrentState == GameState.GameplayPushing;
 
         CharacterController _controller;
         Vector3 _scriptedStart;
@@ -99,11 +121,26 @@ namespace Character
         float _jumpCooldownTimer;
         bool _jumpCutApplied;
         bool _wasJumpHeld;
+        bool _pushLockApplied;
+        bool _rotationLockedBeforePush;
 
         void Awake()
         {
             _controller = GetComponent<CharacterController>();
             _targetYaw = transform.eulerAngles.y;
+        }
+
+        void OnEnable()
+        {
+            GameStateManager.OnStateChanged += HandleStateChanged;
+            ApplyPushLock(GameStateManager.Instance != null
+                ? GameStateManager.Instance.CurrentState
+                : GameState.Gameplay);
+        }
+
+        void OnDisable()
+        {
+            GameStateManager.OnStateChanged -= HandleStateChanged;
         }
 
         public void SetLocomotionEnabled(bool enabled)
@@ -217,6 +254,14 @@ namespace Character
         {
             UpdateScriptedRun();
 
+            if (!LocomotionEnabled && !IsScriptedRunning)
+            {
+                _currentSpeed = 0f;
+                _speedVelocity = 0f;
+                _verticalVelocity = 0f;
+                return;
+            }
+
             InteractionManager input = InteractionManager.Instance;
             float inputX = 0f;
             bool jumpHeld = false;
@@ -225,8 +270,11 @@ namespace Character
             if (LocomotionEnabled && !IsScriptedRunning)
             {
                 inputX = input != null ? input.MoveInput.x : 0f;
-                jumpHeld = input != null && input.IsJumpHeld;
-                jumpPressed = input != null && (input.JumpPressedThisFrame || (jumpHeld && !_wasJumpHeld));
+                if (!IsPushing)
+                {
+                    jumpHeld = input != null && input.IsJumpHeld;
+                    jumpPressed = input != null && (input.JumpPressedThisFrame || (jumpHeld && !_wasJumpHeld));
+                }
             }
 
             _wasJumpHeld = jumpHeld;
@@ -235,6 +283,9 @@ namespace Character
                 inputX = 0f;
             else
                 inputX = Mathf.Clamp(inputX, -1f, 1f);
+
+            if (IsPushing && inputX * FacingSign < 0f)
+                inputX = 0f;
 
             if (LocomotionEnabled && !IsScriptedRunning)
             {
@@ -268,7 +319,7 @@ namespace Character
                 _jumpCooldownTimer -= Time.deltaTime;
 
             bool jumpedThisFrame = false;
-            if (LocomotionEnabled && !IsScriptedRunning &&
+            if (LocomotionEnabled && !IsScriptedRunning && !IsPushing &&
                 _jumpBufferTimer > 0f &&
                 _coyoteTimer > 0f &&
                 _jumpCooldownTimer <= 0f)
@@ -322,6 +373,35 @@ namespace Character
                 float yaw = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetYaw, ref _yawVelocity, turnSmoothTime);
                 transform.rotation = Quaternion.Euler(0f, yaw, 0f);
             }
+        }
+
+        void HandleStateChanged(GameState previous, GameState current)
+        {
+            ApplyPushLock(current);
+        }
+
+        void ApplyPushLock(GameState state)
+        {
+            bool pushing = state == GameState.GameplayPushing;
+            if (pushing && !_pushLockApplied)
+            {
+                _rotationLockedBeforePush = lockRotation;
+                SnapFacingToSide();
+                lockRotation = true;
+                _pushLockApplied = true;
+                return;
+            }
+
+            if (!pushing && _pushLockApplied)
+            {
+                lockRotation = _rotationLockedBeforePush;
+                _pushLockApplied = false;
+            }
+        }
+
+        void SnapFacingToSide()
+        {
+            SetFacing(FacingSign >= 0f ? rightYaw : leftYaw);
         }
 
         void UpdateScriptedRun()

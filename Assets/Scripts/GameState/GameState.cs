@@ -12,6 +12,8 @@ namespace Game
         Cutscene,
         QTE,
         Paused,
-        GameOver
+        GameOver,
+        GameplayPushing,
+        GameplayClimbing
     }
 }

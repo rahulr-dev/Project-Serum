@@ -878,6 +878,22 @@ namespace Events
             UnlockPlayerControl();
         }
 
+        public void EnterGameplayPushing()
+        {
+            if (GameStateManager.Instance == null)
+            {
+                Debug.LogWarning("SerumActionBridge.EnterGameplayPushing requires GameStateManager.", this);
+                return;
+            }
+
+            GameStateManager.Instance.EnterGameplayPushing();
+        }
+
+        public void ExitGameplayPushing()
+        {
+            UnlockPlayerControl();
+        }
+
         public void EnterQTEState()
         {
             if (GameStateManager.Instance == null)

@@ -293,7 +293,8 @@ namespace SequenceSystem
             return state == GameState.Gameplay ||
                    state == GameState.GameplayNoJump ||
                    state == GameState.GameplayStealth ||
-                   state == GameState.GameplayDialogue;
+                   state == GameState.GameplayDialogue ||
+                   state == GameState.GameplayPushing;
         }
 
 #if UNITY_EDITOR

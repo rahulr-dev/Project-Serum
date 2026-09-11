@@ -14,6 +14,7 @@ namespace Character
         [SerializeField] string speedParam = "speed";
         [SerializeField] string jumpParam = "jump";
         [SerializeField] string stealthParam = "stealth";
+        [SerializeField] string pushingParam = "pushing";
         [SerializeField] float dampTime = 0.1f;
         [SerializeField] float stealthDampTime = 0.25f;
 
@@ -21,9 +22,12 @@ namespace Character
         int _speedHash;
         int _jumpHash;
         int _stealthHash;
+        int _pushingHash;
         bool _speedOverrideActive;
         float _speedOverride;
         float _stealthTarget = StealthOff;
+        bool _pushing;
+        const float PushAnimSpeed = 0.05f;
 
         void Awake()
         {
@@ -36,6 +40,7 @@ namespace Character
             _speedHash = Animator.StringToHash(speedParam);
             _jumpHash = Animator.StringToHash(jumpParam);
             _stealthHash = Animator.StringToHash(stealthParam);
+            _pushingHash = Animator.StringToHash(pushingParam);
             _speedSource = moveSpeedSource as INormalizedMoveSpeed;
             if (_speedSource == null)
             {
@@ -54,9 +59,10 @@ namespace Character
             }
 
             GameStateManager.OnStateChanged += HandleStateChanged;
-            ApplyStealth(GameStateManager.Instance != null
+            GameState state = GameStateManager.Instance != null
                 ? GameStateManager.Instance.CurrentState
-                : GameState.Gameplay);
+                : GameState.Gameplay;
+            ApplyStealth(state);
         }
 
         void OnDisable()
@@ -75,16 +81,25 @@ namespace Character
             if (animator == null)
                 return;
 
+            GameState state = GameStateManager.Instance != null
+                ? GameStateManager.Instance.CurrentState
+                : GameState.Gameplay;
+
             float speed = _speedOverrideActive
                 ? _speedOverride
                 : _speedSource != null
                     ? _speedSource.NormalizedSpeed
                     : 0f;
 
-            if (dampTime > 0f)
-                animator.SetFloat(_speedHash, speed, dampTime, Time.deltaTime);
-            else
+            bool wantPush = state == GameState.GameplayPushing &&
+                            (_pushing || speed > PushAnimSpeed);
+
+            if (wantPush || dampTime <= 0f)
                 animator.SetFloat(_speedHash, speed);
+            else
+                animator.SetFloat(_speedHash, speed, dampTime, Time.deltaTime);
+
+            ApplyPushing(wantPush);
 
             if (stealthDampTime > 0f)
                 animator.SetFloat(_stealthHash, _stealthTarget, stealthDampTime, Time.deltaTime);
@@ -110,7 +125,7 @@ namespace Character
 
         void HandleJumped()
         {
-            if (animator == null)
+            if (animator == null || _pushing)
                 return;
 
             animator.SetTrigger(_jumpHash);
@@ -132,6 +147,13 @@ namespace Character
         void ApplyStealth(GameState state)
         {
             _stealthTarget = state == GameState.GameplayStealth ? StealthOn : StealthOff;
+        }
+
+        void ApplyPushing(bool pushing)
+        {
+            _pushing = pushing;
+            if (animator != null)
+                animator.SetBool(_pushingHash, pushing);
         }
     }
 }
