@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d2d17ca1516f7043934cc413c30988a, type: 3}
-  m_Name: Bell4
+  m_Name: Bell1_Interactor
   m_EditorClassIdentifier: Assembly-CSharp::InteractionSystem.InteractionGraph
   playState: 2
   endState: 2
   nodes:
   - id: 4ad1365adf84444d8f0d183637bc2f0b
     kind: 0
-    position: {x: 79, y: 94}
+    position: {x: 79.33334, y: 94}
     duration: 1
     executeHandlerId: 
   - id: e5102221b83a4e77ae54d8366871bdfa
     kind: 2
-    position: {x: 236, y: 120}
+    position: {x: 237.33334, y: 121.33333}
     duration: 0
-    executeHandlerId: 1733d907c8254b1c9ab246a662d53d83
+    executeHandlerId: 0ac10e6b7e7641b7a3f63ceb0faab9c0
   - id: 922ef580fe77413385704167faea77e4
     kind: 3
-    position: {x: 398, y: 159}
+    position: {x: 398, y: 159.33333}
     duration: 0
     executeHandlerId: 
   edges:

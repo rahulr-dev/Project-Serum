@@ -23,55 +23,55 @@ MonoBehaviour:
     ignoreKeys: 
   - id: 934d12d133ac467688bb062883f02ca8
     kind: 2
-    position: {x: 231, y: 160}
+    position: {x: 231.33334, y: 160}
     actionId: 
     conditionKey: Bell
     ignoreKeys: 
   - id: 20333b9633de40f6bc2f8b17ee26cc32
     kind: 1
-    position: {x: 477, y: 263}
+    position: {x: 477.3333, y: 261.33334}
     actionId: Open1
     conditionKey: 
     ignoreKeys: 
   - id: 579959d1340249f2a6735d076670cbf6
     kind: 2
-    position: {x: 719, y: 217}
+    position: {x: 719.3333, y: 217.33333}
     actionId: 
     conditionKey: Bell2
     ignoreKeys: 
   - id: 3850c29cf8a24ad492a38ec0a1da5618
     kind: 1
-    position: {x: 983, y: 286}
+    position: {x: 983.3334, y: 286}
     actionId: Open2
     conditionKey: 
     ignoreKeys: 
   - id: 2c418ea1c86543bb92561b71de9a568d
     kind: 3
-    position: {x: 979, y: 143}
+    position: {x: 979.3334, y: 143.33333}
     actionId: 
     conditionKey: 
     ignoreKeys: 
   - id: 70b7f772b54c4c65b12959b810a8ca91
     kind: 2
-    position: {x: 1179, y: 243}
+    position: {x: 1179.3334, y: 243.33334}
     actionId: 
     conditionKey: Bell3
     ignoreKeys: 
   - id: 918f65e022294fd2bb5e2cf4957e9bd5
     kind: 1
-    position: {x: 1497, y: 250}
+    position: {x: 1497.3334, y: 250}
     actionId: Open3
     conditionKey: 
     ignoreKeys: 
   - id: 085d2424a0484e91b03e172a6d311192
     kind: 3
-    position: {x: 1497, y: 383}
+    position: {x: 1497.3334, y: 383.33334}
     actionId: 
     conditionKey: 
     ignoreKeys: 
   - id: b72728a78c7c49389a261a2140104cca
     kind: 4
-    position: {x: 1726, y: 357}
+    position: {x: 1726, y: 357.33334}
     actionId: 
     conditionKey: 
     ignoreKeys: 
