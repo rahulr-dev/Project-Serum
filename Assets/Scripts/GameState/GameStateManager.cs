@@ -43,7 +43,7 @@ namespace Game
         static readonly Color OverlayIdleBg = new Color(0.18f, 0.18f, 0.18f, 1f);
         static readonly Color OverlayActiveBg = new Color(0.15f, 0.85f, 0.28f, 1f);
         static readonly Color OverlayIdleText = new Color(0.75f, 0.75f, 0.75f, 1f);
-        Rect _overlayRect = new Rect(230f, 12f, 220f, 370f);
+        Rect _overlayRect = new Rect(230f, 12f, 220f, 340f);
         GUIStyle _overlayKeyStyle;
 #endif
 
@@ -109,7 +109,6 @@ namespace Game
         public void EnterGameplayStealth() => SetState(GameState.GameplayStealth);
         public void EnterGameplayDialogue() => SetState(GameState.GameplayDialogue);
         public void EnterGameplayPushing() => SetState(GameState.GameplayPushing);
-        public void EnterGameplayClimbing() => SetState(GameState.GameplayClimbing);
         public void EnterDialogue() => SetState(GameState.Dialogue);
         public void EnterCutscene() => SetState(GameState.Cutscene);
         public void EnterQTE() => SetState(GameState.QTE);
@@ -158,8 +157,6 @@ namespace Game
                 EnterGameplayDialogue();
             if (GUILayout.Button("Gameplay Pushing"))
                 EnterGameplayPushing();
-            if (GUILayout.Button("Gameplay Climbing"))
-                EnterGameplayClimbing();
             if (GUILayout.Button("Dialogue"))
                 EnterDialogue();
             if (GUILayout.Button("Cutscene"))

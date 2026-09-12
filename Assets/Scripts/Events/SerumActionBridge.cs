@@ -41,11 +41,26 @@ namespace Events
             new NamedUnityEvent { id = "DodgeStart" },
             new NamedUnityEvent { id = "ScriptedRunStarted" },
             new NamedUnityEvent { id = "ScriptedRunEnded" },
+            new NamedUnityEvent { id = "SmoothMoveEnded" },
+            new NamedUnityEvent { id = "SmoothRotateEnded" },
+            new NamedUnityEvent { id = "FollowEnded" },
+            new NamedUnityEvent { id = "MaintainLookAtEnded" },
         };
 
         Transform _transform;
         Coroutine _moveRoutine;
         Coroutine _rotateRoutine;
+        Coroutine _followRoutine;
+        Coroutine _lookRoutine;
+        ICharacterLocomotion _motor;
+
+        public event Action<string> NamedEventRaised;
+
+        public bool IsScriptedRunning => _motor != null && _motor.IsScriptedRunning;
+        public bool IsSmoothMoving => _moveRoutine != null;
+        public bool IsSmoothRotating => _rotateRoutine != null;
+        public bool IsFollowing => _followRoutine != null;
+        public bool IsLooking => _lookRoutine != null;
 
         void Awake()
         {
@@ -54,32 +69,60 @@ namespace Events
             if (characterAnimation == null)
                 characterAnimation = GetComponent<CharacterAnimation>();
 
-            if (locomotion == null)
-                locomotion = GetComponent<SideScrollerController>();
+            ResolveMotor();
         }
 
         void OnEnable()
         {
-            if (!forwardControllerEvents || locomotion == null)
+            ResolveMotor();
+            if (!forwardControllerEvents || _motor == null)
                 return;
 
-            locomotion.OnJumped += HandleJumped;
-            locomotion.OnLanded += HandleLanded;
-            locomotion.OnMovingChanged += HandleMovingChanged;
-            locomotion.OnScriptedRunStarted += HandleScriptedRunStarted;
-            locomotion.OnScriptedRunCompleted += HandleScriptedRunCompleted;
+            _motor.OnJumped += HandleJumped;
+            _motor.OnLanded += HandleLanded;
+            _motor.OnMovingChanged += HandleMovingChanged;
+            _motor.OnScriptedRunStarted += HandleScriptedRunStarted;
+            _motor.OnScriptedRunCompleted += HandleScriptedRunCompleted;
         }
 
         void OnDisable()
         {
-            if (locomotion == null)
+            if (_motor == null)
                 return;
 
-            locomotion.OnJumped -= HandleJumped;
-            locomotion.OnLanded -= HandleLanded;
-            locomotion.OnMovingChanged -= HandleMovingChanged;
-            locomotion.OnScriptedRunStarted -= HandleScriptedRunStarted;
-            locomotion.OnScriptedRunCompleted -= HandleScriptedRunCompleted;
+            _motor.OnJumped -= HandleJumped;
+            _motor.OnLanded -= HandleLanded;
+            _motor.OnMovingChanged -= HandleMovingChanged;
+            _motor.OnScriptedRunStarted -= HandleScriptedRunStarted;
+            _motor.OnScriptedRunCompleted -= HandleScriptedRunCompleted;
+        }
+
+        void ResolveMotor()
+        {
+            if (_motor != null)
+                return;
+
+            if (locomotion == null)
+                locomotion = GetComponent<SideScrollerController>();
+
+            if (locomotion != null)
+            {
+                _motor = locomotion;
+                return;
+            }
+
+            _motor = GetComponent<NpcLocomotionController>();
+        }
+
+        bool TryGetMotor(string method, out ICharacterLocomotion motor)
+        {
+            ResolveMotor();
+            motor = _motor;
+            if (motor != null)
+                return true;
+
+            Debug.LogWarning($"SerumActionBridge.{method} requires a locomotion controller.", this);
+            return false;
         }
 
         void HandleJumped()
@@ -585,9 +628,11 @@ namespace Events
         {
             StopMoveRoutine();
             StopRotateRoutine();
+            StopFollowRoutine(false);
+            StopLookRoutine(false);
 
-            if (locomotion != null && locomotion.IsScriptedRunning)
-                locomotion.StopScriptedRun();
+            if (_motor != null && _motor.IsScriptedRunning)
+                _motor.StopScriptedRun();
         }
 
         public void SetActive(bool enabled)
@@ -631,8 +676,15 @@ namespace Events
 
         public void Raise(string eventId)
         {
+            NotifyNamedEvent(eventId, true);
+        }
+
+        void NotifyNamedEvent(string eventId, bool warnIfMissing)
+        {
             if (string.IsNullOrEmpty(eventId))
                 return;
+
+            NamedEventRaised?.Invoke(eventId);
 
             for (int i = 0; i < namedEvents.Count; i++)
             {
@@ -644,7 +696,8 @@ namespace Events
                 return;
             }
 
-            Debug.LogWarning($"SerumActionBridge could not find named event '{eventId}'.", this);
+            if (warnIfMissing)
+                Debug.LogWarning($"SerumActionBridge could not find named event '{eventId}'.", this);
         }
 
         public void PlayIdle()
@@ -703,46 +756,34 @@ namespace Events
 
         public void SetLocomotionEnabled(bool enabled)
         {
-            if (locomotion == null)
-            {
-                Debug.LogWarning("SerumActionBridge.SetLocomotionEnabled requires SideScrollerController.", this);
+            if (!TryGetMotor(nameof(SetLocomotionEnabled), out ICharacterLocomotion motor))
                 return;
-            }
 
-            locomotion.SetLocomotionEnabled(enabled);
+            motor.SetLocomotionEnabled(enabled);
         }
 
         public void ForceJump()
         {
-            if (locomotion == null)
-            {
-                Debug.LogWarning("SerumActionBridge.ForceJump requires SideScrollerController.", this);
+            if (!TryGetMotor(nameof(ForceJump), out ICharacterLocomotion motor))
                 return;
-            }
 
-            locomotion.ForceJump();
+            motor.ForceJump();
         }
 
         public void FacePlayerLeft()
         {
-            if (locomotion == null)
-            {
-                Debug.LogWarning("SerumActionBridge.FacePlayerLeft requires SideScrollerController.", this);
+            if (!TryGetMotor(nameof(FacePlayerLeft), out ICharacterLocomotion motor))
                 return;
-            }
 
-            locomotion.FaceLeft();
+            motor.FaceLeft();
         }
 
         public void FacePlayerRight()
         {
-            if (locomotion == null)
-            {
-                Debug.LogWarning("SerumActionBridge.FacePlayerRight requires SideScrollerController.", this);
+            if (!TryGetMotor(nameof(FacePlayerRight), out ICharacterLocomotion motor))
                 return;
-            }
 
-            locomotion.FaceRight();
+            motor.FaceRight();
         }
 
         public void RunRight(float distance)
@@ -792,11 +833,8 @@ namespace Events
 
         public void RunTo(float offsetX, float offsetZ, float speed)
         {
-            if (locomotion == null)
-            {
-                Debug.LogWarning("SerumActionBridge.RunTo requires SideScrollerController.", this);
+            if (!TryGetMotor(nameof(RunTo), out ICharacterLocomotion motor))
                 return;
-            }
 
             Vector3 offset = new Vector3(offsetX, 0f, offsetZ);
             if (offset.sqrMagnitude <= 0.0001f)
@@ -805,7 +843,7 @@ namespace Events
             float runSpeed = Mathf.Max(0.01f, speed);
             SetLocomotionEnabled(false);
             SetAnimSpeed(GetRunAnimSpeed(runSpeed));
-            locomotion.StartScriptedRunAtSpeed(offset, runSpeed);
+            motor.StartScriptedRunAtSpeed(offset, runSpeed);
         }
 
         public void RunToDefault(float offsetX, float offsetZ)
@@ -815,11 +853,8 @@ namespace Events
 
         public void RunToOverDuration(float offsetX, float offsetZ, float duration)
         {
-            if (locomotion == null)
-            {
-                Debug.LogWarning("SerumActionBridge.RunToOverDuration requires SideScrollerController.", this);
+            if (!TryGetMotor(nameof(RunToOverDuration), out _))
                 return;
-            }
 
             Vector3 offset = new Vector3(offsetX, 0f, offsetZ);
             if (offset.sqrMagnitude <= 0.0001f)
@@ -829,15 +864,84 @@ namespace Events
             RunTo(offsetX, offsetZ, runSpeed);
         }
 
-        public void StopScriptedRun()
+        public void RunToWorld(Vector3 worldPosition, float speed)
         {
-            if (locomotion == null)
+            Vector3 origin = _transform != null ? _transform.position : transform.position;
+            RunTo(worldPosition.x - origin.x, worldPosition.z - origin.z, speed);
+        }
+
+        public void LookAt(Transform target)
+        {
+            if (target == null)
+                return;
+
+            StopLookRoutine(false);
+            StopRotateRoutine();
+            ApplyYaw(YawToward(target.position));
+        }
+
+        public void SmoothLookAt(Transform target, float speed)
+        {
+            if (target == null)
+                return;
+
+            StopLookRoutine(false);
+            StopRotateRoutine();
+
+            float rotateSpeed = Mathf.Max(0.01f, speed);
+            float remaining = Mathf.Abs(Mathf.DeltaAngle(_transform.eulerAngles.y, YawToward(target.position)));
+            if (remaining <= 0.5f)
             {
-                Debug.LogWarning("SerumActionBridge.StopScriptedRun requires SideScrollerController.", this);
+                ApplyYaw(YawToward(target.position));
                 return;
             }
 
-            locomotion.StopScriptedRun();
+            _rotateRoutine = StartCoroutine(SmoothLookAtRoutine(target, rotateSpeed));
+        }
+
+        public void MaintainLookAt(Transform target, float duration)
+        {
+            if (target == null)
+                return;
+
+            StopLookRoutine(false);
+            _lookRoutine = StartCoroutine(MaintainLookAtRoutine(target, duration));
+        }
+
+        public void StopLookAt()
+        {
+            StopRotateRoutine();
+            StopLookRoutine(true);
+        }
+
+        public void Follow(Transform target, float speed, float stopDistance, float duration)
+        {
+            if (target == null)
+                return;
+
+            StopFollowRoutine(false);
+            StopMoveRoutine();
+            if (_motor != null && _motor.IsScriptedRunning)
+                _motor.StopScriptedRun();
+
+            float runSpeed = Mathf.Max(0.01f, speed);
+            SetLocomotionEnabled(false);
+            PlayRun();
+            SetAnimSpeed(GetRunAnimSpeed(runSpeed));
+            _followRoutine = StartCoroutine(FollowRoutine(target, runSpeed, Mathf.Max(0f, stopDistance), duration));
+        }
+
+        public void StopFollow()
+        {
+            StopFollowRoutine(true);
+        }
+
+        public void StopScriptedRun()
+        {
+            if (!TryGetMotor(nameof(StopScriptedRun), out ICharacterLocomotion motor))
+                return;
+
+            motor.StopScriptedRun();
         }
 
         public void LockPlayerControl()
@@ -937,6 +1041,7 @@ namespace Events
 
             _transform.position = target;
             _moveRoutine = null;
+            NotifyNamedEvent("SmoothMoveEnded", false);
         }
 
         void RotateByWorldAxis(Vector3 worldAxis, float degrees)
@@ -990,6 +1095,7 @@ namespace Events
 
             _transform.rotation = target;
             _rotateRoutine = null;
+            NotifyNamedEvent("SmoothRotateEnded", false);
         }
 
         IEnumerator RotateToWorldAxisRoutine(int axisIndex, float targetDegrees, float duration)
@@ -1011,6 +1117,144 @@ namespace Events
             endEuler[axisIndex] = targetDegrees;
             _transform.rotation = Quaternion.Euler(endEuler);
             _rotateRoutine = null;
+            NotifyNamedEvent("SmoothRotateEnded", false);
+        }
+
+        IEnumerator SmoothLookAtRoutine(Transform target, float speed)
+        {
+            while (target != null)
+            {
+                float desired = YawToward(target.position);
+                float current = _transform.eulerAngles.y;
+                float remaining = Mathf.DeltaAngle(current, desired);
+                if (Mathf.Abs(remaining) <= 0.5f)
+                    break;
+
+                float step = speed * Time.deltaTime;
+                ApplyYaw(Mathf.MoveTowardsAngle(current, desired, step));
+                yield return null;
+            }
+
+            if (target != null)
+                ApplyYaw(YawToward(target.position));
+
+            _rotateRoutine = null;
+            NotifyNamedEvent("SmoothRotateEnded", false);
+        }
+
+        IEnumerator MaintainLookAtRoutine(Transform target, float duration)
+        {
+            float elapsed = 0f;
+            bool timed = duration > 0.01f;
+
+            while (target != null)
+            {
+                ApplyYaw(YawToward(target.position));
+                if (timed)
+                {
+                    elapsed += Time.deltaTime;
+                    if (elapsed >= duration)
+                        break;
+                }
+
+                yield return null;
+            }
+
+            _lookRoutine = null;
+            NotifyNamedEvent("MaintainLookAtEnded", false);
+        }
+
+        IEnumerator FollowRoutine(Transform target, float speed, float stopDistance, float duration)
+        {
+            CharacterController controller = GetComponent<CharacterController>();
+            float elapsed = 0f;
+            bool timed = duration > 0.01f;
+
+            while (target != null)
+            {
+                Vector3 origin = _transform.position;
+                Vector3 toTarget = target.position - origin;
+                toTarget.y = 0f;
+                float distance = toTarget.magnitude;
+                if (distance <= stopDistance)
+                    break;
+
+                ApplyYaw(YawToward(target.position));
+                float step = speed * Time.deltaTime;
+                Vector3 move = toTarget.normalized * Mathf.Min(step, distance - stopDistance);
+                if (controller != null)
+                    controller.Move(move);
+                else
+                    _transform.position += move;
+
+                if (timed)
+                {
+                    elapsed += Time.deltaTime;
+                    if (elapsed >= duration)
+                        break;
+                }
+
+                yield return null;
+            }
+
+            FinishFollow(true);
+        }
+
+        float YawToward(Vector3 worldPosition)
+        {
+            Vector3 origin = _transform != null ? _transform.position : transform.position;
+            Vector3 delta = worldPosition - origin;
+            delta.y = 0f;
+            if (delta.sqrMagnitude <= 0.0001f)
+                return _transform.eulerAngles.y;
+
+            return Mathf.Atan2(delta.x, delta.z) * Mathf.Rad2Deg;
+        }
+
+        void ApplyYaw(float yaw)
+        {
+            ResolveMotor();
+            if (_motor != null)
+            {
+                _motor.SetFacing(yaw);
+                return;
+            }
+
+            Vector3 euler = _transform.eulerAngles;
+            euler.y = yaw;
+            _transform.rotation = Quaternion.Euler(euler);
+        }
+
+        void StopFollowRoutine(bool notify)
+        {
+            if (_followRoutine == null)
+                return;
+
+            StopCoroutine(_followRoutine);
+            FinishFollow(notify);
+        }
+
+        void FinishFollow(bool notify)
+        {
+            _followRoutine = null;
+            if (clearAnimOnRunComplete && characterAnimation != null)
+                ClearAnimOverride();
+
+            if (characterAnimation != null)
+                PlayIdle();
+            if (notify)
+                NotifyNamedEvent("FollowEnded", false);
+        }
+
+        void StopLookRoutine(bool notify)
+        {
+            if (_lookRoutine == null)
+                return;
+
+            StopCoroutine(_lookRoutine);
+            _lookRoutine = null;
+            if (notify)
+                NotifyNamedEvent("MaintainLookAtEnded", false);
         }
 
         static float DurationFromDistance(float distance, float speed)
@@ -1025,11 +1269,12 @@ namespace Events
 
         float GetRunAnimSpeed(float runSpeed)
         {
-            if (locomotion == null)
+            ResolveMotor();
+            if (_motor == null)
                 return 1f;
 
-            return locomotion.MoveSpeed > 0f
-                ? Mathf.Clamp01(runSpeed / locomotion.MoveSpeed)
+            return _motor.MoveSpeed > 0f
+                ? Mathf.Clamp01(runSpeed / _motor.MoveSpeed)
                 : 1f;
         }
 

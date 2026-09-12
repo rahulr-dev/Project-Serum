@@ -13,7 +13,6 @@ namespace Game
         QTE,
         Paused,
         GameOver,
-        GameplayPushing,
-        GameplayClimbing
+        GameplayPushing
     }
 }
