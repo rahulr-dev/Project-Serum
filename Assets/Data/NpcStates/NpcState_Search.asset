@@ -15,7 +15,7 @@ MonoBehaviour:
   nodes:
   - id: 64745109a68d44c3a15274b77a4fb57a
     kind: 0
-    position: {x: 80, y: 180}
+    position: {x: 80.000015, y: 180}
     duration: 1
     characterAction: 0
     distance: 4
@@ -55,7 +55,7 @@ MonoBehaviour:
     endOutcome: 1
   - id: 273b1c55a0d7466f8695fc292fe6d58a
     kind: 1
-    position: {x: 799.3334, y: 180}
+    position: {x: 799.3333, y: 180}
     duration: 1
     characterAction: 0
     distance: 4
@@ -75,7 +75,7 @@ MonoBehaviour:
     endOutcome: 1
   - id: 9c0300ad55e342169340cf2e8700b747
     kind: 3
-    position: {x: 236, y: 180}
+    position: {x: 238.00002, y: 180}
     duration: 1
     characterAction: 32
     distance: 4
@@ -84,7 +84,7 @@ MonoBehaviour:
     offsetZ: 0
     animSpeed: 1
     degrees: 180
-    rotateSpeed: 20
+    rotateSpeed: 60
     eventId: 
     waitUntilDone: 1
     executeHandlerId: 

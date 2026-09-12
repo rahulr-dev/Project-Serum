@@ -15,7 +15,7 @@ MonoBehaviour:
   nodes:
   - id: 96c45943c64f4d789dcaf0254e9b3426
     kind: 0
-    position: {x: 68.66666, y: 142.66667}
+    position: {x: 68.66667, y: 142.66667}
     duration: 1
     characterAction: 0
     distance: 4
@@ -68,14 +68,14 @@ MonoBehaviour:
     eventId: 
     waitUntilDone: 1
     executeHandlerId: 
-    moveTargetId: 3d2e68e1b8344dc89e079483a55b8fbe
+    moveTargetId: f17ad00bdf4a4ba8856d91d317c4542c
     branchCount: 2
-    stopDistance: 3
+    stopDistance: 5
     waitEventId: ScriptedRunEnded
     endOutcome: 1
   - id: a5952534801842bd9e147e92cb54681e
     kind: 3
-    position: {x: 188, y: 142.66667}
+    position: {x: 188.00002, y: 142.66667}
     duration: 0
     characterAction: 38
     distance: 4
@@ -88,7 +88,7 @@ MonoBehaviour:
     eventId: 
     waitUntilDone: 0
     executeHandlerId: 
-    moveTargetId: 3d2e68e1b8344dc89e079483a55b8fbe
+    moveTargetId: f17ad00bdf4a4ba8856d91d317c4542c
     branchCount: 2
     stopDistance: 0.4
     waitEventId: ScriptedRunEnded

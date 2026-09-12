@@ -15,7 +15,7 @@ MonoBehaviour:
   nodes:
   - id: f3c3804be5a84cf9a948e332c3c2ddb5
     kind: 0
-    position: {x: 106.66666, y: 179.33333}
+    position: {x: 106.66667, y: 179.33333}
     duration: 1
     characterAction: 0
     distance: 4
@@ -35,7 +35,7 @@ MonoBehaviour:
     endOutcome: 1
   - id: 6e1bbf202a1b44ef9c18ed896b04dad4
     kind: 6
-    position: {x: 269.33334, y: 179.33333}
+    position: {x: 269.3333, y: 179.33333}
     duration: 1
     characterAction: 0
     distance: 4
@@ -55,7 +55,7 @@ MonoBehaviour:
     endOutcome: 1
   - id: 28fbe635e9f542eaa6e1e0d560f4087a
     kind: 1
-    position: {x: 943.3334, y: 199.33333}
+    position: {x: 943.3333, y: 199.33333}
     duration: 1
     characterAction: 0
     distance: 4
@@ -75,11 +75,11 @@ MonoBehaviour:
     endOutcome: 1
   - id: ab55adf0971e43ea886532d69e073f68
     kind: 3
-    position: {x: 564, y: 65.333336}
+    position: {x: 646, y: 60.666664}
     duration: 1
     characterAction: 34
     distance: 4
-    speed: 2
+    speed: 3
     offsetX: 0
     offsetZ: 0
     animSpeed: 1
@@ -88,18 +88,18 @@ MonoBehaviour:
     eventId: 
     waitUntilDone: 1
     executeHandlerId: 
-    moveTargetId: 40b1c46dd28b4da8bc92a32e64719372
+    moveTargetId: 2e50b213f2d34240a631f0c30550a1ee
     branchCount: 2
     stopDistance: 0.4
     waitEventId: ScriptedRunEnded
     endOutcome: 1
   - id: 7434929cc8084422aa4c521fcb4deab1
     kind: 3
-    position: {x: 564, y: 272}
+    position: {x: 645.3334, y: 226}
     duration: 1
     characterAction: 34
     distance: 4
-    speed: 2
+    speed: 3
     offsetX: 0
     offsetZ: 0
     animSpeed: 1
@@ -108,24 +108,70 @@ MonoBehaviour:
     eventId: 
     waitUntilDone: 1
     executeHandlerId: 
-    moveTargetId: 866f298736714777982dec6b37606f9c
+    moveTargetId: 2ea53c46d69d4267b0eca2e193e871a0
+    branchCount: 2
+    stopDistance: 0.4
+    waitEventId: ScriptedRunEnded
+    endOutcome: 1
+  - id: b4d4184a542a4f91993d1569cf288c33
+    kind: 3
+    position: {x: 422, y: -72.66667}
+    duration: 1
+    characterAction: 37
+    distance: 4
+    speed: 4
+    offsetX: 0
+    offsetZ: 0
+    animSpeed: 1
+    degrees: 45
+    rotateSpeed: 50
+    eventId: 
+    waitUntilDone: 1
+    executeHandlerId: 
+    moveTargetId: 2e50b213f2d34240a631f0c30550a1ee
+    branchCount: 2
+    stopDistance: 0.4
+    waitEventId: ScriptedRunEnded
+    endOutcome: 1
+  - id: 44f51d5300fb47168af1b3460a67dc42
+    kind: 3
+    position: {x: 466.6667, y: 389.33334}
+    duration: 1
+    characterAction: 37
+    distance: 4
+    speed: 4
+    offsetX: 0
+    offsetZ: 0
+    animSpeed: 1
+    degrees: 45
+    rotateSpeed: 50
+    eventId: 
+    waitUntilDone: 1
+    executeHandlerId: 
+    moveTargetId: 2ea53c46d69d4267b0eca2e193e871a0
     branchCount: 2
     stopDistance: 0.4
     waitEventId: ScriptedRunEnded
     endOutcome: 1
   edges:
-  - fromId: f3c3804be5a84cf9a948e332c3c2ddb5
-    fromPort: 0
-    toId: 6e1bbf202a1b44ef9c18ed896b04dad4
-  - fromId: 6e1bbf202a1b44ef9c18ed896b04dad4
-    fromPort: 0
-    toId: ab55adf0971e43ea886532d69e073f68
-  - fromId: 6e1bbf202a1b44ef9c18ed896b04dad4
-    fromPort: 1
-    toId: 7434929cc8084422aa4c521fcb4deab1
   - fromId: 7434929cc8084422aa4c521fcb4deab1
     fromPort: 0
     toId: 28fbe635e9f542eaa6e1e0d560f4087a
   - fromId: ab55adf0971e43ea886532d69e073f68
     fromPort: 0
     toId: 28fbe635e9f542eaa6e1e0d560f4087a
+  - fromId: f3c3804be5a84cf9a948e332c3c2ddb5
+    fromPort: 0
+    toId: 6e1bbf202a1b44ef9c18ed896b04dad4
+  - fromId: 6e1bbf202a1b44ef9c18ed896b04dad4
+    fromPort: 0
+    toId: b4d4184a542a4f91993d1569cf288c33
+  - fromId: b4d4184a542a4f91993d1569cf288c33
+    fromPort: 0
+    toId: ab55adf0971e43ea886532d69e073f68
+  - fromId: 6e1bbf202a1b44ef9c18ed896b04dad4
+    fromPort: 1
+    toId: 44f51d5300fb47168af1b3460a67dc42
+  - fromId: 44f51d5300fb47168af1b3460a67dc42
+    fromPort: 0
+    toId: 7434929cc8084422aa4c521fcb4deab1
