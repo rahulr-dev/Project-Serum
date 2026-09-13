@@ -62,6 +62,12 @@ namespace Character
             dolly.CameraPosition = _currentPosition;
         }
 
+        public void SetTarget(Transform follow)
+        {
+            target = follow;
+            CacheMover();
+        }
+
         float ToCameraPosition(float normalizedT)
         {
             Spline spline = dolly.Spline.Spline;
