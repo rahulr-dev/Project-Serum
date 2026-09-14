@@ -1,0 +1,180 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16f6336ad21230c468ac096c409b2a9e, type: 3}
+  m_Name: Village_Helper_Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue.DialogueGraph
+  playState: 6
+  endState: 2
+  charsPerSecond: 40
+  choiceRepeatDelay: 0.2
+  nodes:
+  - id: e095e222f30e4ff3aae07007718e5091
+    kind: 0
+    position: {x: -223, y: 124}
+    speaker: 
+    body: 
+    advanceMode: 0
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  - id: 7136f00953bc454e91789b289fb5765f
+    kind: 3
+    position: {x: 3532, y: 29}
+    speaker: 
+    body: 
+    advanceMode: 0
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  - id: 24c219c2420b458abf6118360e6af579
+    kind: 1
+    position: {x: -72, y: 80}
+    speaker: Selvan
+    body: Kid. Run.
+    advanceMode: 0
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  - id: d706657368394562bc51ec64e4921d86
+    kind: 2
+    position: {x: 155, y: 80}
+    speaker: 
+    body: 
+    advanceMode: 0
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels:
+    - What's Happening?. Who are these evil people?
+    - Who are you waiting for?
+  - id: e846bc3073234ad1b7c557ea2c4e6623
+    kind: 1
+    position: {x: 626, y: -165}
+    speaker: Selvan
+    body: I dont know exactly whats going on. But they are taking us peoples as hostages
+      for some evil things. so run.
+    advanceMode: 0
+    autoDelay: 0
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  - id: 0bc106ee373e42b2aa4f7259d811b47b
+    kind: 1
+    position: {x: 726, y: 136}
+    speaker: Selvan
+    body: They killed my child, there's no one left for me in this world. So i better
+      die here.
+    advanceMode: 0
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  - id: 3c68ca9db9f844ab84bb7d71b11f5afa
+    kind: 2
+    position: {x: 1576, y: 29}
+    speaker: 
+    body: 
+    advanceMode: 0
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels:
+    - 'But how? '
+    - 'So sorry to hear this. '
+  - id: 746b9d636a1f43ffab53fee085098c58
+    kind: 1
+    position: {x: 1949, y: 226}
+    speaker: Selvan
+    body: I lost. I Completely lost. and You
+    advanceMode: 0
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  - id: 3a54e10a2f024309b25b770528361158
+    kind: 1
+    position: {x: 2308, y: -4}
+    speaker: Selvan
+    body: Just move forward, u will be seeing a old ancient temple. Just pass throught
+      it to it, to get out of our village.
+    advanceMode: 0
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  - id: 7cb4d4b9895640c48e6acec901df56db
+    kind: 1
+    position: {x: 3208, y: 29}
+    speaker: Nedumaaran
+    body: Thanks. Stay alive.
+    advanceMode: 0
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  edges:
+  - fromId: e095e222f30e4ff3aae07007718e5091
+    fromPort: 0
+    toId: 24c219c2420b458abf6118360e6af579
+  - fromId: 24c219c2420b458abf6118360e6af579
+    fromPort: 0
+    toId: d706657368394562bc51ec64e4921d86
+  - fromId: 0bc106ee373e42b2aa4f7259d811b47b
+    fromPort: 0
+    toId: 3c68ca9db9f844ab84bb7d71b11f5afa
+  - fromId: 746b9d636a1f43ffab53fee085098c58
+    fromPort: 0
+    toId: 3a54e10a2f024309b25b770528361158
+  - fromId: 3a54e10a2f024309b25b770528361158
+    fromPort: 0
+    toId: 7cb4d4b9895640c48e6acec901df56db
+  - fromId: e846bc3073234ad1b7c557ea2c4e6623
+    fromPort: 0
+    toId: 3c68ca9db9f844ab84bb7d71b11f5afa
+  - fromId: 7cb4d4b9895640c48e6acec901df56db
+    fromPort: 0
+    toId: 7136f00953bc454e91789b289fb5765f
+  - fromId: d706657368394562bc51ec64e4921d86
+    fromPort: 0
+    toId: e846bc3073234ad1b7c557ea2c4e6623
+  - fromId: d706657368394562bc51ec64e4921d86
+    fromPort: 1
+    toId: 0bc106ee373e42b2aa4f7259d811b47b
+  - fromId: 3c68ca9db9f844ab84bb7d71b11f5afa
+    fromPort: 0
+    toId: 3a54e10a2f024309b25b770528361158
+  - fromId: 3c68ca9db9f844ab84bb7d71b11f5afa
+    fromPort: 1
+    toId: 746b9d636a1f43ffab53fee085098c58

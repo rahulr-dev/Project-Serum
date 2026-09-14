@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16f6336ad21230c468ac096c409b2a9e, type: 3}
-  m_Name: DialogueGraph_Test_Dialogue
+  m_Name: PushCart_Random-Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue.DialogueGraph
-  playState: 4
+  playState: 6
   endState: 2
-  charsPerSecond: 20
+  charsPerSecond: 40
   choiceRepeatDelay: 0.2
   nodes:
-  - id: ac0c27fc0edc40a991871ae66ac4f950
+  - id: 93f6bf5ec1f547edbc636223c2558408
     kind: 0
-    position: {x: 80, y: 160}
+    position: {x: -19, y: 123}
     speaker: 
     body: 
     advanceMode: 0
@@ -29,35 +29,35 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     choiceLabels: []
-  - id: 7bdac539f2fd4ae9911b944b9b4ec628
+  - id: 5c8038e77da24bccbc19ea76ae5d4960
+    kind: 1
+    position: {x: 129, y: 123}
+    speaker: Nedu maaran
+    body: 'Strange. So strange. '
+    advanceMode: 1
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  - id: 091fd01514b34b06b83c4ed7e01ba812
+    kind: 1
+    position: {x: 430, y: 138}
+    speaker: Nedu maaran
+    body: Hostage for evil activities. Sounds so disturbing
+    advanceMode: 1
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  - id: aab82aa2e87b48b789a217e234bfee9c
     kind: 3
-    position: {x: 754, y: 81}
+    position: {x: 885, y: 173}
     speaker: 
     body: 
-    advanceMode: 0
-    autoDelay: 1
-    charsPerSecond: 0
-    onStart:
-      m_PersistentCalls:
-        m_Calls: []
-    choiceLabels: []
-  - id: 5a3e84afccb2422fa3f2facd2002cc75
-    kind: 1
-    position: {x: 237, y: 113}
-    speaker: Dummy
-    body: Testing 1
-    advanceMode: 0
-    autoDelay: 1
-    charsPerSecond: 0
-    onStart:
-      m_PersistentCalls:
-        m_Calls: []
-    choiceLabels: []
-  - id: 6effe4a0774844559229a613fc602cfc
-    kind: 1
-    position: {x: 491, y: 127}
-    speaker: Dummy 2
-    body: Testing 2
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0
@@ -66,12 +66,12 @@ MonoBehaviour:
         m_Calls: []
     choiceLabels: []
   edges:
-  - fromId: ac0c27fc0edc40a991871ae66ac4f950
+  - fromId: 93f6bf5ec1f547edbc636223c2558408
     fromPort: 0
-    toId: 5a3e84afccb2422fa3f2facd2002cc75
-  - fromId: 5a3e84afccb2422fa3f2facd2002cc75
+    toId: 5c8038e77da24bccbc19ea76ae5d4960
+  - fromId: 5c8038e77da24bccbc19ea76ae5d4960
     fromPort: 0
-    toId: 6effe4a0774844559229a613fc602cfc
-  - fromId: 6effe4a0774844559229a613fc602cfc
+    toId: 091fd01514b34b06b83c4ed7e01ba812
+  - fromId: 091fd01514b34b06b83c4ed7e01ba812
     fromPort: 0
-    toId: 7bdac539f2fd4ae9911b944b9b4ec628
+    toId: aab82aa2e87b48b789a217e234bfee9c
