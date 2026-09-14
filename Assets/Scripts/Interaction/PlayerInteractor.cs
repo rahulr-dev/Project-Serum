@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Game;
 using Interaction;
@@ -33,6 +34,9 @@ namespace InteractionSystem
         public Collider CurrentCollider { get; private set; }
         public IReadOnlyList<OverlapHit> Overlaps => _overlaps;
 
+        /// <summary>Fired when the focused interactable changes. Null when nothing is in range.</summary>
+        public event Action<Interactable> OnCurrentChanged;
+
         public struct OverlapHit
         {
             public Collider Collider;
@@ -60,8 +64,7 @@ namespace InteractionSystem
                 Instance = null;
 
             _overlaps.Clear();
-            Current = null;
-            CurrentCollider = null;
+            SetCurrent(null, null);
         }
 
         void FixedUpdate()
@@ -111,8 +114,6 @@ namespace InteractionSystem
 
             _overlaps.Clear();
             _seenColliders.Clear();
-            Current = null;
-            CurrentCollider = null;
 
             Vector3 origin = DetectionOrigin;
             float radiusSq = radius * radius;
@@ -133,6 +134,8 @@ namespace InteractionSystem
                     TryAddHit(colliders[c], origin, radiusSq);
             }
 
+            Interactable best = null;
+            Collider bestCollider = null;
             float bestDist = float.MaxValue;
             for (int i = 0; i < _overlaps.Count; i++)
             {
@@ -144,10 +147,22 @@ namespace InteractionSystem
                 if (dist < bestDist)
                 {
                     bestDist = dist;
-                    Current = hit.Interactable;
-                    CurrentCollider = hit.Collider;
+                    best = hit.Interactable;
+                    bestCollider = hit.Collider;
                 }
             }
+
+            SetCurrent(best, bestCollider);
+        }
+
+        void SetCurrent(Interactable interactable, Collider col)
+        {
+            if (Current == interactable && CurrentCollider == col)
+                return;
+
+            Current = interactable;
+            CurrentCollider = col;
+            OnCurrentChanged?.Invoke(Current);
         }
 
         void TryAddHit(Collider col, Vector3 origin, float radiusSq)

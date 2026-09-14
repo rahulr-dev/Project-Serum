@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d2d17ca1516f7043934cc413c30988a, type: 3}
+  m_Name: Village_Villager_1_NPC_Interaction
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionSystem.InteractionGraph
+  playState: 2
+  endState: 2
+  nodes:
+  - id: 54b1b7ba656141c4a482d0afe9743a0c
+    kind: 0
+    position: {x: 80, y: 160}
+    duration: 1
+    executeHandlerId: 
+  - id: 8736ed57ea7c4e1596eec203ecbf7d3d
+    kind: 3
+    position: {x: 392.6667, y: 160}
+    duration: 0
+    executeHandlerId: 
+  - id: 650c6f530a354df9b96be42d9e35fefb
+    kind: 2
+    position: {x: 228, y: 169.33333}
+    duration: 0
+    executeHandlerId: d57c0313296d48a3b58f338d1d333ebd
+  edges:
+  - fromId: 54b1b7ba656141c4a482d0afe9743a0c
+    fromPort: 0
+    toId: 650c6f530a354df9b96be42d9e35fefb
+  - fromId: 650c6f530a354df9b96be42d9e35fefb
+    fromPort: 0
+    toId: 8736ed57ea7c4e1596eec203ecbf7d3d

@@ -31,7 +31,7 @@ MonoBehaviour:
     choiceLabels: []
   - id: 7bdac539f2fd4ae9911b944b9b4ec628
     kind: 3
-    position: {x: 1209, y: 210}
+    position: {x: 1209.3334, y: 210}
     speaker: 
     body: 
     advanceMode: 0

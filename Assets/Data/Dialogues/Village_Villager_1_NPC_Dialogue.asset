@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16f6336ad21230c468ac096c409b2a9e, type: 3}
-  m_Name: Village_Helper_Dialogue
+  m_Name: Village_Villager_1_NPC_Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue.DialogueGraph
   playState: 6
   endState: 2
@@ -19,7 +19,7 @@ MonoBehaviour:
   nodes:
   - id: e095e222f30e4ff3aae07007718e5091
     kind: 0
-    position: {x: -223, y: 124}
+    position: {x: -222.66667, y: 124}
     speaker: 
     body: 
     advanceMode: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
     choiceLabels: []
   - id: 7136f00953bc454e91789b289fb5765f
     kind: 3
-    position: {x: 3532, y: 29}
+    position: {x: 3532, y: 29.333332}
     speaker: 
     body: 
     advanceMode: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
     choiceLabels: []
   - id: d706657368394562bc51ec64e4921d86
     kind: 2
-    position: {x: 155, y: 80}
+    position: {x: 155.33334, y: 80}
     speaker: 
     body: 
     advanceMode: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
     - Who are you waiting for?
   - id: e846bc3073234ad1b7c557ea2c4e6623
     kind: 1
-    position: {x: 626, y: -165}
+    position: {x: 626, y: -164.66667}
     speaker: Selvan
     body: I dont know exactly whats going on. But they are taking us peoples as hostages
       for some evil things. so run.
@@ -95,7 +95,7 @@ MonoBehaviour:
     choiceLabels: []
   - id: 3c68ca9db9f844ab84bb7d71b11f5afa
     kind: 2
-    position: {x: 1576, y: 29}
+    position: {x: 1576, y: 29.333332}
     speaker: 
     body: 
     advanceMode: 0
@@ -109,7 +109,7 @@ MonoBehaviour:
     - 'So sorry to hear this. '
   - id: 746b9d636a1f43ffab53fee085098c58
     kind: 1
-    position: {x: 1949, y: 226}
+    position: {x: 1949.3333, y: 226}
     speaker: Selvan
     body: I lost. I Completely lost. and You
     advanceMode: 0
@@ -134,7 +134,7 @@ MonoBehaviour:
     choiceLabels: []
   - id: 7cb4d4b9895640c48e6acec901df56db
     kind: 1
-    position: {x: 3208, y: 29}
+    position: {x: 3208.6667, y: 29.333332}
     speaker: Nedumaaran
     body: Thanks. Stay alive.
     advanceMode: 0
@@ -142,7 +142,19 @@ MonoBehaviour:
     charsPerSecond: 0
     onStart:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     choiceLabels: []
   edges:
   - fromId: e095e222f30e4ff3aae07007718e5091

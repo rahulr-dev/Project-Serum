@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d2d17ca1516f7043934cc413c30988a, type: 3}
+  m_Name: Temple_Pick_Up_Bell_Interaction
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionSystem.InteractionGraph
+  playState: 2
+  endState: 2
+  nodes:
+  - id: ac3d48f3ae3846f984bfefe1b491610a
+    kind: 0
+    position: {x: 80, y: 160}
+    duration: 1
+    executeHandlerId: 
+  - id: f2c9562b897d4866a18f7279c2959e92
+    kind: 2
+    position: {x: 210.66666, y: 182.66667}
+    duration: 0
+    executeHandlerId: c0d4bd6e77f04c0d9459bb12ac3afd1a
+  - id: 3f8e64d1a31c4345a0c2108a23221201
+    kind: 3
+    position: {x: 430.6667, y: 81.333336}
+    duration: 0
+    executeHandlerId: 
+  edges:
+  - fromId: ac3d48f3ae3846f984bfefe1b491610a
+    fromPort: 0
+    toId: f2c9562b897d4866a18f7279c2959e92
+  - fromId: f2c9562b897d4866a18f7279c2959e92
+    fromPort: 0
+    toId: 3f8e64d1a31c4345a0c2108a23221201
