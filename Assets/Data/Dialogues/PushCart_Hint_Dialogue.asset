@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16f6336ad21230c468ac096c409b2a9e, type: 3}
+  m_Name: PushCart_Hint_Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue.DialogueGraph
+  playState: 6
+  endState: 2
+  charsPerSecond: 40
+  choiceRepeatDelay: 0.2
+  nodes:
+  - id: bcad220592454798825e8377b6bdd8f7
+    kind: 0
+    position: {x: 80, y: 160}
+    speaker: 
+    body: 
+    advanceMode: 0
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  - id: c45ca4324d5b402fa4ea046c2fa42eac
+    kind: 1
+    position: {x: 210, y: 169}
+    speaker: 
+    body: "\tI need something to cross over the fence"
+    advanceMode: 0
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  edges:
+  - fromId: bcad220592454798825e8377b6bdd8f7
+    fromPort: 0
+    toId: c45ca4324d5b402fa4ea046c2fa42eac
