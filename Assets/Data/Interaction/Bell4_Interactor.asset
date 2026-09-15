@@ -10,30 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d2d17ca1516f7043934cc413c30988a, type: 3}
-  m_Name: Temple_Attach_Bell_Interaction
+  m_Name: Bell4_Interactor
   m_EditorClassIdentifier: Assembly-CSharp::InteractionSystem.InteractionGraph
   playState: 2
   endState: 2
   nodes:
-  - id: 1f2854f907a34a3c973d0af92b29ce8c
+  - id: 26cc19706d8a48588d25cb135745fe5a
     kind: 0
-    position: {x: 89, y: 174}
+    position: {x: 80, y: 160}
     duration: 1
     executeHandlerId: 
-  - id: 51dcda5e84984c7988041fb8ba983839
+  - id: c87ddcf8ad504af1aed3c2afb3a59395
     kind: 3
-    position: {x: 485, y: 121}
-    duration: 0
+    position: {x: 420, y: 160}
+    duration: 1
     executeHandlerId: 
-  - id: 82ed479b65e14464adfd9500eeac670f
+  - id: bf613994f40f4e35b4b66fa83be76192
     kind: 2
-    position: {x: 280, y: 121}
+    position: {x: 185, y: 154}
     duration: 0
-    executeHandlerId: 42fa8e94bd5141f0b9b2e81454881d76
+    executeHandlerId: 05588fb029704049ab852cd010b36302
   edges:
-  - fromId: 1f2854f907a34a3c973d0af92b29ce8c
+  - fromId: 26cc19706d8a48588d25cb135745fe5a
     fromPort: 0
-    toId: 82ed479b65e14464adfd9500eeac670f
-  - fromId: 82ed479b65e14464adfd9500eeac670f
+    toId: bf613994f40f4e35b4b66fa83be76192
+  - fromId: bf613994f40f4e35b4b66fa83be76192
     fromPort: 0
-    toId: 51dcda5e84984c7988041fb8ba983839
+    toId: c87ddcf8ad504af1aed3c2afb3a59395

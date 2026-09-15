@@ -10,30 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d2d17ca1516f7043934cc413c30988a, type: 3}
-  m_Name: Bell2
+  m_Name: Bell5_Interactor
   m_EditorClassIdentifier: Assembly-CSharp::InteractionSystem.InteractionGraph
   playState: 2
   endState: 2
   nodes:
-  - id: 4ad1365adf84444d8f0d183637bc2f0b
+  - id: 53b2f9ceaf464e70a87b4014f508c220
     kind: 0
-    position: {x: 79.33334, y: 94}
+    position: {x: 80, y: 160}
     duration: 1
     executeHandlerId: 
-  - id: e5102221b83a4e77ae54d8366871bdfa
-    kind: 2
-    position: {x: 236, y: 121.33333}
-    duration: 0
-    executeHandlerId: d73429f4932c4fd4a99c79141a715121
-  - id: 922ef580fe77413385704167faea77e4
+  - id: 68a6da5ba2d8444d8f361f06d90c3847
     kind: 3
-    position: {x: 398, y: 159.33333}
-    duration: 0
+    position: {x: 420, y: 160}
+    duration: 1
     executeHandlerId: 
+  - id: 8bd85d4978b744acb1bb9c34d49b302e
+    kind: 2
+    position: {x: 219, y: 160}
+    duration: 0
+    executeHandlerId: aea9d10b1c4b44399d45915f8d3540e6
   edges:
-  - fromId: 4ad1365adf84444d8f0d183637bc2f0b
+  - fromId: 53b2f9ceaf464e70a87b4014f508c220
     fromPort: 0
-    toId: e5102221b83a4e77ae54d8366871bdfa
-  - fromId: e5102221b83a4e77ae54d8366871bdfa
+    toId: 8bd85d4978b744acb1bb9c34d49b302e
+  - fromId: 8bd85d4978b744acb1bb9c34d49b302e
     fromPort: 0
-    toId: 922ef580fe77413385704167faea77e4
+    toId: 68a6da5ba2d8444d8f361f06d90c3847

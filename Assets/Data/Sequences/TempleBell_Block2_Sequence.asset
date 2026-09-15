@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f3c2a91e6b04d7aa1c45e90b2d8f314, type: 3}
+  m_Name: TempleBell_Block2_Sequence
+  m_EditorClassIdentifier: Assembly-CSharp::SequenceSystem.SequenceGraph
+  playState: 2
+  endState: 2
+  nodes:
+  - id: 16921c0adfe3414b860ab0565b976159
+    kind: 0
+    position: {x: 80, y: 160}
+    actionId: 
+    conditionKey: default
+    ignoreKeys: 
+  - id: 66c50c04efef411e85b83c6ef44f5c82
+    kind: 2
+    position: {x: 179, y: 132}
+    actionId: 
+    conditionKey: Bell3
+    ignoreKeys: 
+  - id: f61c9897f3cf475987e98adac1cac869
+    kind: 1
+    position: {x: 390, y: 120}
+    actionId: Open3
+    conditionKey: 
+    ignoreKeys: 
+  - id: e0208b93fcde4f1782e3b12ee26392cd
+    kind: 3
+    position: {x: 411, y: 290}
+    actionId: 
+    conditionKey: 
+    ignoreKeys: 
+  - id: 4dad617a91b14bada730124e1377f1ee
+    kind: 2
+    position: {x: 622, y: 188}
+    actionId: 
+    conditionKey: Bell4
+    ignoreKeys: 
+  - id: 9d484d7c9e154c0093af0adac6946aaa
+    kind: 1
+    position: {x: 839, y: 217}
+    actionId: Open4
+    conditionKey: 
+    ignoreKeys: 
+  - id: 463605d391714fa8b3fc508089716016
+    kind: 3
+    position: {x: 809, y: 401}
+    actionId: 
+    conditionKey: 
+    ignoreKeys: 
+  - id: fe3bf1795fba4d0cb402bd036a3fb1ca
+    kind: 2
+    position: {x: 1076, y: 305}
+    actionId: 
+    conditionKey: Bell5
+    ignoreKeys: 
+  - id: 367d50eb12f1449c9dfaf77129dc1448
+    kind: 1
+    position: {x: 1347, y: 345}
+    actionId: Open5
+    conditionKey: 
+    ignoreKeys: 
+  - id: 681da6fc8fbb45168f2356b655a27457
+    kind: 4
+    position: {x: 1551, y: 358}
+    actionId: 
+    conditionKey: 
+    ignoreKeys: 
+  - id: 5d97f5630d384bf682ec9d37880482d5
+    kind: 3
+    position: {x: 1275, y: 483}
+    actionId: 
+    conditionKey: 
+    ignoreKeys: 
+  edges:
+  - fromId: 16921c0adfe3414b860ab0565b976159
+    fromPort: 0
+    toId: 66c50c04efef411e85b83c6ef44f5c82
+  - fromId: 66c50c04efef411e85b83c6ef44f5c82
+    fromPort: 0
+    toId: f61c9897f3cf475987e98adac1cac869
+  - fromId: 66c50c04efef411e85b83c6ef44f5c82
+    fromPort: 1
+    toId: e0208b93fcde4f1782e3b12ee26392cd
+  - fromId: f61c9897f3cf475987e98adac1cac869
+    fromPort: 0
+    toId: 4dad617a91b14bada730124e1377f1ee
+  - fromId: 4dad617a91b14bada730124e1377f1ee
+    fromPort: 0
+    toId: 9d484d7c9e154c0093af0adac6946aaa
+  - fromId: 4dad617a91b14bada730124e1377f1ee
+    fromPort: 1
+    toId: 463605d391714fa8b3fc508089716016
+  - fromId: 9d484d7c9e154c0093af0adac6946aaa
+    fromPort: 0
+    toId: fe3bf1795fba4d0cb402bd036a3fb1ca
+  - fromId: fe3bf1795fba4d0cb402bd036a3fb1ca
+    fromPort: 0
+    toId: 367d50eb12f1449c9dfaf77129dc1448
+  - fromId: 367d50eb12f1449c9dfaf77129dc1448
+    fromPort: 0
+    toId: 681da6fc8fbb45168f2356b655a27457
+  - fromId: fe3bf1795fba4d0cb402bd036a3fb1ca
+    fromPort: 1
+    toId: 5d97f5630d384bf682ec9d37880482d5
