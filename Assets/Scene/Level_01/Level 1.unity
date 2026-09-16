@@ -11361,10 +11361,10 @@ MonoBehaviour:
         z: 26.511961
       Rotation:
         value:
-          x: 0.01628206
-          y: 0.71405566
+          x: 0.016282061
+          y: 0.7140558
           z: 0.029433424
-          w: 0.6992804
+          w: 0.6992803
     - Position:
         x: 363.9475
         y: 2.0657034
@@ -11469,10 +11469,10 @@ MonoBehaviour:
         z: 9.172099
       Rotation:
         value:
-          x: 0.4141916
-          y: 0.40623897
-          z: 0.65493727
-          w: 0.48422348
+          x: 0.41419154
+          y: 0.4062389
+          z: 0.6549373
+          w: 0.4842236
     - Position:
         x: 635.0845
         y: 20.894966
@@ -30873,11 +30873,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 794652333919320195, guid: 441b50cf679331044acb7e18a4d9a212, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -29.615479
+      value: -29.615417
       objectReference: {fileID: 0}
     - target: {fileID: 3398524518560896132, guid: 441b50cf679331044acb7e18a4d9a212, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -29.615479
+      value: -29.615417
       objectReference: {fileID: 0}
     - target: {fileID: 4403704609955237864, guid: 441b50cf679331044acb7e18a4d9a212, type: 3}
       propertyPath: interactor
