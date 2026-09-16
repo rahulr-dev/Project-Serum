@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16f6336ad21230c468ac096c409b2a9e, type: 3}
   m_Name: PushCart_Hint_Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue.DialogueGraph
-  playState: 6
+  playState: 5
   endState: 2
   charsPerSecond: 40
   choiceRepeatDelay: 0.2
@@ -31,10 +31,10 @@ MonoBehaviour:
     choiceLabels: []
   - id: c45ca4324d5b402fa4ea046c2fa42eac
     kind: 1
-    position: {x: 210, y: 169}
+    position: {x: 210, y: 169.33333}
     speaker: 
     body: "\tI need something to cross over the fence"
-    advanceMode: 0
+    advanceMode: 1
     autoDelay: 1
     charsPerSecond: 0
     onStart:

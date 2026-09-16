@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16f6336ad21230c468ac096c409b2a9e, type: 3}
   m_Name: PushCart_Random-Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue.DialogueGraph
-  playState: 6
+  playState: 5
   endState: 2
   charsPerSecond: 40
   choiceRepeatDelay: 0.2
   nodes:
   - id: 93f6bf5ec1f547edbc636223c2558408
     kind: 0
-    position: {x: -19, y: 123}
+    position: {x: -18.666672, y: 123.33333}
     speaker: 
     body: 
     advanceMode: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
     choiceLabels: []
   - id: 5c8038e77da24bccbc19ea76ae5d4960
     kind: 1
-    position: {x: 129, y: 123}
+    position: {x: 129.33334, y: 123.33333}
     speaker: Nedu maaran
     body: 'Strange. So strange. '
     advanceMode: 1
@@ -55,7 +55,7 @@ MonoBehaviour:
     choiceLabels: []
   - id: aab82aa2e87b48b789a217e234bfee9c
     kind: 3
-    position: {x: 885, y: 173}
+    position: {x: 885.3334, y: 173.33333}
     speaker: 
     body: 
     advanceMode: 0
