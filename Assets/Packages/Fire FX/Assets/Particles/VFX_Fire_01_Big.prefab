@@ -34082,6 +34082,7 @@ GameObject:
   - component: {fileID: 8829451551789304536}
   - component: {fileID: 8829451551789304543}
   - component: {fileID: 3630983130738417110}
+  - component: {fileID: 166317910812249718}
   m_Layer: 0
   m_Name: VFX_Fire_01_Big
   m_TagString: Untagged
@@ -39019,3 +39020,39 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!205 &166317910812249718
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8829451551789304542}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -0.41341972, y: 1.1759052, z: -0.16726112}
+  m_Size: 21.711102
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.694406
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 2359408214380708955}
+    - renderer: {fileID: 4765668986698542331}
+    - renderer: {fileID: 7326915200721114938}
+    - renderer: {fileID: 3415927245348612235}
+    - renderer: {fileID: 8274860978047510816}
+    - renderer: {fileID: 1554108587470130511}
+    - renderer: {fileID: 5002624857657970101}
+  - screenRelativeHeight: 0.37835371
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 2359408214380708955}
+    - renderer: {fileID: 7326915200721114938}
+    - renderer: {fileID: 8274860978047510816}
+    - renderer: {fileID: 1554108587470130511}
+  - screenRelativeHeight: 0.05766788
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 7326915200721114938}
+  m_Enabled: 1
