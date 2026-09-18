@@ -1,0 +1,223 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33a22a3c07a322c4ab07b474ae9cf7e1, type: 3}
+  m_Name: NpcState_Patrol_2
+  m_EditorClassIdentifier: Assembly-CSharp::NpcAi.NpcStateGraph
+  nodes:
+  - id: f3c3804be5a84cf9a948e332c3c2ddb5
+    kind: 0
+    position: {x: 106.66666, y: 179.33333}
+    duration: 1
+    characterAction: 0
+    distance: 4
+    speed: 4
+    offsetX: 0
+    offsetZ: 0
+    animSpeed: 1
+    degrees: 45
+    rotateSpeed: 360
+    eventId: 
+    waitUntilDone: 1
+    executeHandlerId: 
+    moveTargetId: 
+    branchCount: 2
+    stopDistance: 0.4
+    waitEventId: ScriptedRunEnded
+    endOutcome: 1
+  - id: ab55adf0971e43ea886532d69e073f68
+    kind: 3
+    position: {x: 656, y: 167.33333}
+    duration: 1
+    characterAction: 34
+    distance: 4
+    speed: 3
+    offsetX: 0
+    offsetZ: 0
+    animSpeed: 1
+    degrees: 45
+    rotateSpeed: 360
+    eventId: 
+    waitUntilDone: 1
+    executeHandlerId: 
+    moveTargetId: 742b02bfdb5e4b82b9d8a566db9efb7f
+    branchCount: 2
+    stopDistance: 0.4
+    waitEventId: ScriptedRunEnded
+    endOutcome: 1
+  - id: 7434929cc8084422aa4c521fcb4deab1
+    kind: 3
+    position: {x: 1394, y: 157.33333}
+    duration: 1
+    characterAction: 34
+    distance: 4
+    speed: 3
+    offsetX: 0
+    offsetZ: 0
+    animSpeed: 1
+    degrees: 45
+    rotateSpeed: 360
+    eventId: 
+    waitUntilDone: 1
+    executeHandlerId: 
+    moveTargetId: 160457e91943456ca4e65b12d6225020
+    branchCount: 2
+    stopDistance: 0.4
+    waitEventId: ScriptedRunEnded
+    endOutcome: 1
+  - id: b4d4184a542a4f91993d1569cf288c33
+    kind: 3
+    position: {x: 256, y: 167.33333}
+    duration: 1
+    characterAction: 37
+    distance: 4
+    speed: 4
+    offsetX: 0
+    offsetZ: 0
+    animSpeed: 1
+    degrees: 45
+    rotateSpeed: 50
+    eventId: 
+    waitUntilDone: 1
+    executeHandlerId: 
+    moveTargetId: 742b02bfdb5e4b82b9d8a566db9efb7f
+    branchCount: 2
+    stopDistance: 0.4
+    waitEventId: ScriptedRunEnded
+    endOutcome: 1
+  - id: 44f51d5300fb47168af1b3460a67dc42
+    kind: 3
+    position: {x: 1038, y: 167.33333}
+    duration: 1
+    characterAction: 37
+    distance: 4
+    speed: 4
+    offsetX: 0
+    offsetZ: 0
+    animSpeed: 1
+    degrees: 45
+    rotateSpeed: 50
+    eventId: 
+    waitUntilDone: 1
+    executeHandlerId: 
+    moveTargetId: 160457e91943456ca4e65b12d6225020
+    branchCount: 2
+    stopDistance: 0.4
+    waitEventId: ScriptedRunEnded
+    endOutcome: 1
+  - id: c8f69e23520d4d939095bf1ef9c5fa30
+    kind: 3
+    position: {x: 1790.6666, y: 157.33333}
+    duration: 1
+    characterAction: 37
+    distance: 4
+    speed: 4
+    offsetX: 0
+    offsetZ: 0
+    animSpeed: 1
+    degrees: 45
+    rotateSpeed: 50
+    eventId: 
+    waitUntilDone: 1
+    executeHandlerId: 
+    moveTargetId: eda785bdbaff4c0cb41b837993a7a4dd
+    branchCount: 2
+    stopDistance: 0.4
+    waitEventId: ScriptedRunEnded
+    endOutcome: 1
+  - id: 9305ae9a79094063bea7d5810097bdcc
+    kind: 3
+    position: {x: 2121.3333, y: 124.66667}
+    duration: 1
+    characterAction: 34
+    distance: 4
+    speed: 3
+    offsetX: 0
+    offsetZ: 0
+    animSpeed: 1
+    degrees: 45
+    rotateSpeed: 360
+    eventId: 
+    waitUntilDone: 1
+    executeHandlerId: 
+    moveTargetId: eda785bdbaff4c0cb41b837993a7a4dd
+    branchCount: 2
+    stopDistance: 0.4
+    waitEventId: ScriptedRunEnded
+    endOutcome: 1
+  - id: dc4dad5a62554302a881b6cb3e3020aa
+    kind: 3
+    position: {x: 2550, y: 156}
+    duration: 1
+    characterAction: 37
+    distance: 4
+    speed: 4
+    offsetX: 0
+    offsetZ: 0
+    animSpeed: 1
+    degrees: 45
+    rotateSpeed: 50
+    eventId: 
+    waitUntilDone: 1
+    executeHandlerId: 
+    moveTargetId: bfd31464f98f4cafbd31a2e2d427c066
+    branchCount: 2
+    stopDistance: 0.4
+    waitEventId: ScriptedRunEnded
+    endOutcome: 1
+  - id: dfbf0a76364944c198d2b8a0661f12ec
+    kind: 3
+    position: {x: 2722, y: -304}
+    duration: 1
+    characterAction: 34
+    distance: 4
+    speed: 3
+    offsetX: 0
+    offsetZ: 0
+    animSpeed: 1
+    degrees: 45
+    rotateSpeed: 360
+    eventId: 
+    waitUntilDone: 1
+    executeHandlerId: 
+    moveTargetId: bfd31464f98f4cafbd31a2e2d427c066
+    branchCount: 2
+    stopDistance: 0.4
+    waitEventId: ScriptedRunEnded
+    endOutcome: 1
+  edges:
+  - fromId: b4d4184a542a4f91993d1569cf288c33
+    fromPort: 0
+    toId: ab55adf0971e43ea886532d69e073f68
+  - fromId: 44f51d5300fb47168af1b3460a67dc42
+    fromPort: 0
+    toId: 7434929cc8084422aa4c521fcb4deab1
+  - fromId: c8f69e23520d4d939095bf1ef9c5fa30
+    fromPort: 0
+    toId: 9305ae9a79094063bea7d5810097bdcc
+  - fromId: dc4dad5a62554302a881b6cb3e3020aa
+    fromPort: 0
+    toId: dfbf0a76364944c198d2b8a0661f12ec
+  - fromId: f3c3804be5a84cf9a948e332c3c2ddb5
+    fromPort: 0
+    toId: b4d4184a542a4f91993d1569cf288c33
+  - fromId: ab55adf0971e43ea886532d69e073f68
+    fromPort: 0
+    toId: 44f51d5300fb47168af1b3460a67dc42
+  - fromId: 7434929cc8084422aa4c521fcb4deab1
+    fromPort: 0
+    toId: c8f69e23520d4d939095bf1ef9c5fa30
+  - fromId: 9305ae9a79094063bea7d5810097bdcc
+    fromPort: 0
+    toId: dc4dad5a62554302a881b6cb3e3020aa
+  - fromId: dfbf0a76364944c198d2b8a0661f12ec
+    fromPort: 0
+    toId: b4d4184a542a4f91993d1569cf288c33

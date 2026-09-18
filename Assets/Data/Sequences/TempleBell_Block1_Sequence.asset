@@ -29,25 +29,25 @@ MonoBehaviour:
     ignoreKeys: Bell2
   - id: 20333b9633de40f6bc2f8b17ee26cc32
     kind: 1
-    position: {x: 477, y: 261}
+    position: {x: 477.3333, y: 261.33334}
     actionId: Open1
     conditionKey: 
     ignoreKeys: 
   - id: 579959d1340249f2a6735d076670cbf6
     kind: 2
-    position: {x: 719, y: 217}
+    position: {x: 719.3333, y: 217.33333}
     actionId: 
     conditionKey: Bell2
     ignoreKeys: 
   - id: 3850c29cf8a24ad492a38ec0a1da5618
     kind: 1
-    position: {x: 983, y: 286}
+    position: {x: 983.3334, y: 286}
     actionId: Open2
     conditionKey: 
     ignoreKeys: 
   - id: 2c418ea1c86543bb92561b71de9a568d
     kind: 3
-    position: {x: 979, y: 143}
+    position: {x: 979.3334, y: 143.33333}
     actionId: 
     conditionKey: 
     ignoreKeys: 

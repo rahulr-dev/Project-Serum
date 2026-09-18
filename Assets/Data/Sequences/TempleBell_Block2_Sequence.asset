@@ -23,7 +23,7 @@ MonoBehaviour:
     ignoreKeys: 
   - id: 66c50c04efef411e85b83c6ef44f5c82
     kind: 2
-    position: {x: 179, y: 132}
+    position: {x: 179.33334, y: 132}
     actionId: 
     conditionKey: Bell3
     ignoreKeys: 
@@ -31,12 +31,6 @@ MonoBehaviour:
     kind: 1
     position: {x: 390, y: 120}
     actionId: Open3
-    conditionKey: 
-    ignoreKeys: 
-  - id: e0208b93fcde4f1782e3b12ee26392cd
-    kind: 3
-    position: {x: 411, y: 290}
-    actionId: 
     conditionKey: 
     ignoreKeys: 
   - id: 4dad617a91b14bada730124e1377f1ee
@@ -47,38 +41,38 @@ MonoBehaviour:
     ignoreKeys: 
   - id: 9d484d7c9e154c0093af0adac6946aaa
     kind: 1
-    position: {x: 839, y: 217}
+    position: {x: 839.3334, y: 217.33333}
     actionId: Open4
     conditionKey: 
     ignoreKeys: 
   - id: 463605d391714fa8b3fc508089716016
     kind: 3
-    position: {x: 809, y: 401}
+    position: {x: 1578, y: 650.6667}
     actionId: 
     conditionKey: 
     ignoreKeys: 
   - id: fe3bf1795fba4d0cb402bd036a3fb1ca
     kind: 2
-    position: {x: 1076, y: 305}
+    position: {x: 1076, y: 305.33334}
     actionId: 
     conditionKey: Bell5
     ignoreKeys: 
   - id: 367d50eb12f1449c9dfaf77129dc1448
     kind: 1
-    position: {x: 1347, y: 345}
+    position: {x: 1347.3334, y: 345.33334}
     actionId: Open5
     conditionKey: 
     ignoreKeys: 
   - id: 681da6fc8fbb45168f2356b655a27457
     kind: 4
-    position: {x: 1551, y: 358}
+    position: {x: 1551.3334, y: 358}
     actionId: 
     conditionKey: 
     ignoreKeys: 
-  - id: 5d97f5630d384bf682ec9d37880482d5
-    kind: 3
-    position: {x: 1275, y: 483}
-    actionId: 
+  - id: bea9d839f5d94c70bce79c01db1b8143
+    kind: 1
+    position: {x: 1363.3334, y: 612.6667}
+    actionId: Close
     conditionKey: 
     ignoreKeys: 
   edges:
@@ -88,18 +82,12 @@ MonoBehaviour:
   - fromId: 66c50c04efef411e85b83c6ef44f5c82
     fromPort: 0
     toId: f61c9897f3cf475987e98adac1cac869
-  - fromId: 66c50c04efef411e85b83c6ef44f5c82
-    fromPort: 1
-    toId: e0208b93fcde4f1782e3b12ee26392cd
   - fromId: f61c9897f3cf475987e98adac1cac869
     fromPort: 0
     toId: 4dad617a91b14bada730124e1377f1ee
   - fromId: 4dad617a91b14bada730124e1377f1ee
     fromPort: 0
     toId: 9d484d7c9e154c0093af0adac6946aaa
-  - fromId: 4dad617a91b14bada730124e1377f1ee
-    fromPort: 1
-    toId: 463605d391714fa8b3fc508089716016
   - fromId: 9d484d7c9e154c0093af0adac6946aaa
     fromPort: 0
     toId: fe3bf1795fba4d0cb402bd036a3fb1ca
@@ -109,6 +97,15 @@ MonoBehaviour:
   - fromId: 367d50eb12f1449c9dfaf77129dc1448
     fromPort: 0
     toId: 681da6fc8fbb45168f2356b655a27457
+  - fromId: 4dad617a91b14bada730124e1377f1ee
+    fromPort: 1
+    toId: bea9d839f5d94c70bce79c01db1b8143
+  - fromId: bea9d839f5d94c70bce79c01db1b8143
+    fromPort: 0
+    toId: 463605d391714fa8b3fc508089716016
   - fromId: fe3bf1795fba4d0cb402bd036a3fb1ca
     fromPort: 1
-    toId: 5d97f5630d384bf682ec9d37880482d5
+    toId: bea9d839f5d94c70bce79c01db1b8143
+  - fromId: 66c50c04efef411e85b83c6ef44f5c82
+    fromPort: 1
+    toId: bea9d839f5d94c70bce79c01db1b8143
