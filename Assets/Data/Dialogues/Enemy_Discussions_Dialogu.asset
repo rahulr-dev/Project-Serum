@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16f6336ad21230c468ac096c409b2a9e, type: 3}
+  m_Name: Enemy_Discussions_Dialogu
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue.DialogueGraph
+  playState: 6
+  endState: 2
+  charsPerSecond: 40
+  choiceRepeatDelay: 0.2
+  nodes:
+  - id: 0e57a5d0090c4911a0270b43b94dbfa7
+    kind: 0
+    position: {x: 80, y: 160}
+    speaker: 
+    body: 
+    advanceMode: 0
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  - id: eb1a08b548bc4181949ab955511159a7
+    kind: 1
+    position: {x: 254, y: 155}
+    speaker: NPC1
+    body: "I heard they got the scientist with the serum, but what\u2019s with these
+      people? \nWhy are they taking these villagers as hostage?\r\n"
+    advanceMode: 1
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  - id: 8c3281e531f0480ab1d734d7aa91af23
+    kind: 1
+    position: {x: 859, y: 151}
+    speaker: NPC 2
+    body: "Actually, no one really knows why they\u2019re taking these people hostage."
+    advanceMode: 1
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  - id: 5282cf81dd2c49e98138087fed50bf3b
+    kind: 1
+    position: {x: 1439, y: 208}
+    speaker: NPC2
+    body: "But I heard a rumor that they\u2019re transporting them offshore to the
+      Genesis Laboratory. \nSome people say they\u2019re using the villagers as human
+      subjects for their experiments."
+    advanceMode: 1
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  - id: 3a56b261e2e9408d94d374e76265f92f
+    kind: 3
+    position: {x: 2078, y: 252}
+    speaker: 
+    body: 
+    advanceMode: 0
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+  edges:
+  - fromId: 0e57a5d0090c4911a0270b43b94dbfa7
+    fromPort: 0
+    toId: eb1a08b548bc4181949ab955511159a7
+  - fromId: eb1a08b548bc4181949ab955511159a7
+    fromPort: 0
+    toId: 8c3281e531f0480ab1d734d7aa91af23
+  - fromId: 8c3281e531f0480ab1d734d7aa91af23
+    fromPort: 0
+    toId: 5282cf81dd2c49e98138087fed50bf3b
+  - fromId: 5282cf81dd2c49e98138087fed50bf3b
+    fromPort: 0
+    toId: 3a56b261e2e9408d94d374e76265f92f
