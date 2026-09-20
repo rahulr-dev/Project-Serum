@@ -284,9 +284,6 @@ namespace Character
             else
                 inputX = Mathf.Clamp(inputX, -1f, 1f);
 
-            if (IsPushing && inputX * FacingSign < 0f)
-                inputX = 0f;
-
             if (LocomotionEnabled && !IsScriptedRunning)
             {
                 float targetSpeed = ActiveMoveSpeed * inputX;
