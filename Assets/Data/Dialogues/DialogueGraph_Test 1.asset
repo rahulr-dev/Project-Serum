@@ -22,6 +22,7 @@ MonoBehaviour:
     position: {x: 80, y: 160}
     speaker: 
     body: 
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0
@@ -31,9 +32,10 @@ MonoBehaviour:
     choiceLabels: []
   - id: 7bdac539f2fd4ae9911b944b9b4ec628
     kind: 3
-    position: {x: 1209, y: 210}
+    position: {x: 1209.3334, y: 210}
     speaker: 
     body: 
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0
@@ -43,9 +45,10 @@ MonoBehaviour:
     choiceLabels: []
   - id: 5a3e84afccb2422fa3f2facd2002cc75
     kind: 1
-    position: {x: 238, y: 112}
+    position: {x: 238.66666, y: 112}
     speaker: Dummy
     body: Hi Bruh
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0
@@ -58,6 +61,7 @@ MonoBehaviour:
     position: {x: 770, y: -38}
     speaker: Dummy 2
     body: Hi, See you araound!
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0
@@ -70,6 +74,7 @@ MonoBehaviour:
     position: {x: 546, y: 210}
     speaker: 
     body: 
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0
@@ -84,6 +89,7 @@ MonoBehaviour:
     position: {x: 770, y: 302}
     speaker: Dummy 3
     body: YO, WTF is wrong with you bruh
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0

@@ -240,7 +240,11 @@ namespace Dialogue
                     break;
                 case DialogueNodeKind.Line:
                     node.onStart?.Invoke();
-                    OnLineStarted?.Invoke(new DialogueLineInfo(node.speaker, node.body ?? "", node.advanceMode));
+                    OnLineStarted?.Invoke(new DialogueLineInfo(
+                        node.speaker,
+                        node.body ?? "",
+                        node.advanceMode,
+                        _graph.ResolveDialogueColour(node.colourPreset)));
                     _visibleChars = 0f;
                     if (string.IsNullOrEmpty(node.body))
                         RevealAll();

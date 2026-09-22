@@ -22,6 +22,7 @@ MonoBehaviour:
     position: {x: -18.666672, y: 123.33333}
     speaker: 
     body: 
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0
@@ -34,6 +35,7 @@ MonoBehaviour:
     position: {x: 129.33334, y: 123.33333}
     speaker: Nedu maaran
     body: 'Strange. So strange. '
+    colourPreset: 0
     advanceMode: 1
     autoDelay: 1
     charsPerSecond: 0
@@ -46,6 +48,7 @@ MonoBehaviour:
     position: {x: 430, y: 138}
     speaker: Nedu maaran
     body: Hostage for evil activities. Sounds so disturbing
+    colourPreset: 0
     advanceMode: 1
     autoDelay: 1
     charsPerSecond: 0
@@ -58,6 +61,7 @@ MonoBehaviour:
     position: {x: 885.3334, y: 173.33333}
     speaker: 
     body: 
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0

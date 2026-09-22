@@ -22,6 +22,7 @@ MonoBehaviour:
     position: {x: 80, y: 160}
     speaker: 
     body: 
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0
@@ -31,9 +32,10 @@ MonoBehaviour:
     choiceLabels: []
   - id: c45ca4324d5b402fa4ea046c2fa42eac
     kind: 1
-    position: {x: 210, y: 169}
+    position: {x: 210, y: 169.33333}
     speaker: 
     body: "\tI need something to cross over the fence"
+    colourPreset: 0
     advanceMode: 1
     autoDelay: 1
     charsPerSecond: 0

@@ -963,7 +963,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65756360}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0010971683, y: 0.697903, z: -0.0010691525, w: 0.7161907}
+  m_LocalRotation: {x: 0.07489635, y: -0.017756352, z: 0.0013338444, w: 0.99703234}
   m_LocalPosition: {x: -256.7197, y: 2.341553, z: -240.36475}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10742,9 +10742,9 @@ MonoBehaviour:
       Rotation:
         value:
           x: -0.37175772
-          y: 0.605393
+          y: 0.60539293
           z: -0.3656204
-          w: 0.60134625
+          w: 0.6013462
     - Position:
         x: 80.22856
         y: 2.1827183
@@ -11119,10 +11119,10 @@ MonoBehaviour:
         z: 2.8203979
       Rotation:
         value:
-          x: -0.14244682
-          y: 0.6310405
+          x: -0.14244685
+          y: 0.63104063
           z: 0.049264997
-          w: 0.76096624
+          w: 0.7609662
     - Position:
         x: 598.4292
         y: 11.119902
@@ -11137,10 +11137,10 @@ MonoBehaviour:
         z: 5.7929845
       Rotation:
         value:
-          x: -0.17684574
+          x: -0.17684576
           y: 0.6493464
           z: 0.13410711
-          w: 0.7273858
+          w: 0.7273859
     - Position:
         x: 619.2228
         y: 17.296843
@@ -11173,9 +11173,9 @@ MonoBehaviour:
         z: 5.3707113
       Rotation:
         value:
-          x: 0.046640784
+          x: 0.04664078
           y: 0.6992208
-          z: -0.0052714227
+          z: -0.0052714185
           w: 0.7133633
     - Position:
         x: 654.7363
@@ -17591,7 +17591,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760746732}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0010971683, y: 0.697903, z: -0.0010691526, w: 0.71619076}
+  m_LocalRotation: {x: 0.07489633, y: -0.017756347, z: 0.0013338436, w: 0.99703234}
   m_LocalPosition: {x: -256.7197, y: 2.341553, z: -240.36475}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -18982,11 +18982,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 843936606834843478, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 145.1
+      value: -257.09
       objectReference: {fileID: 0}
     - target: {fileID: 843936606834843478, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.04
+      value: 0.77
       objectReference: {fileID: 0}
     - target: {fileID: 843936606834843478, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: m_LocalPosition.z
@@ -23670,22 +23670,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 794652333919320195, guid: 441b50cf679331044acb7e18a4d9a212, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -29.615234
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398524518560896132, guid: 441b50cf679331044acb7e18a4d9a212, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -29.615234
-      objectReference: {fileID: 0}
-    - target: {fileID: 4403704609955237864, guid: 441b50cf679331044acb7e18a4d9a212, type: 3}
-      propertyPath: interactor
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5217467612600474783, guid: 441b50cf679331044acb7e18a4d9a212, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -315.7744
-      objectReference: {fileID: 0}
     - target: {fileID: 8726847909536439474, guid: 441b50cf679331044acb7e18a4d9a212, type: 3}
       propertyPath: m_Name
       value: UI (Canvas)
@@ -23769,10 +23753,6 @@ PrefabInstance:
     - target: {fileID: 8759010388120693070, guid: 441b50cf679331044acb7e18a4d9a212, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8905752312937841483, guid: 441b50cf679331044acb7e18a4d9a212, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -315.7744
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

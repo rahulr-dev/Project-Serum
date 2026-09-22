@@ -64,5 +64,11 @@ namespace Dialogue
                 return node.charsPerSecond;
             return charsPerSecond > 0f ? charsPerSecond : 40f;
         }
+
+        public Color ResolveDialogueColour(DialogueColourPreset preset)
+        {
+            DialogueColourPalette palette = Resources.Load<DialogueColourPalette>("DialogueColourPalette");
+            return palette != null ? palette.Resolve(preset) : Color.white;
+        }
     }
 }

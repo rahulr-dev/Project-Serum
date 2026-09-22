@@ -91,6 +91,10 @@ namespace Dialogue.Editor
                 body.RegisterValueChangedCallback(evt => Data.body = evt.newValue);
                 extensionContainer.Add(body);
 
+                EnumField colour = new EnumField("Colour", Data.colourPreset);
+                colour.RegisterValueChangedCallback(evt => Data.colourPreset = (DialogueColourPreset)evt.newValue);
+                extensionContainer.Add(colour);
+
                 EnumField mode = new EnumField("Advance", Data.advanceMode);
                 mode.RegisterValueChangedCallback(evt => Data.advanceMode = (DialogueAdvanceMode)evt.newValue);
                 extensionContainer.Add(mode);

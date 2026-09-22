@@ -22,6 +22,7 @@ MonoBehaviour:
     position: {x: 80, y: 160}
     speaker: 
     body: 
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0
@@ -31,9 +32,10 @@ MonoBehaviour:
     choiceLabels: []
   - id: 7bdac539f2fd4ae9911b944b9b4ec628
     kind: 3
-    position: {x: 754, y: 81}
+    position: {x: 754, y: 81.333336}
     speaker: 
     body: 
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0
@@ -43,9 +45,10 @@ MonoBehaviour:
     choiceLabels: []
   - id: 5a3e84afccb2422fa3f2facd2002cc75
     kind: 1
-    position: {x: 237, y: 113}
+    position: {x: 237.33334, y: 113.33333}
     speaker: Dummy
     body: Testing 1
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0
@@ -55,9 +58,10 @@ MonoBehaviour:
     choiceLabels: []
   - id: 6effe4a0774844559229a613fc602cfc
     kind: 1
-    position: {x: 491, y: 127}
+    position: {x: 491.3333, y: 127.33333}
     speaker: Dummy 2
     body: Testing 2
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0

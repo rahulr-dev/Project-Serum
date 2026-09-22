@@ -13,6 +13,7 @@ namespace Dialogue
         public Vector2 position;
         public string speaker = "";
         public string body = "";
+        public DialogueColourPreset colourPreset = DialogueColourPreset.NPC;
         public DialogueAdvanceMode advanceMode = DialogueAdvanceMode.Interact;
         public float autoDelay = 1f;
         public float charsPerSecond;
@@ -33,12 +34,14 @@ namespace Dialogue
         public readonly string Speaker;
         public readonly string FullText;
         public readonly DialogueAdvanceMode AdvanceMode;
+        public readonly Color Colour;
 
-        public DialogueLineInfo(string speaker, string fullText, DialogueAdvanceMode advanceMode)
+        public DialogueLineInfo(string speaker, string fullText, DialogueAdvanceMode advanceMode, Color colour)
         {
             Speaker = speaker;
             FullText = fullText;
             AdvanceMode = advanceMode;
+            Colour = colour;
         }
     }
 }

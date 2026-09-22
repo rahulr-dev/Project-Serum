@@ -16,6 +16,7 @@ namespace Dialogue.Editor
         string _filter = "";
         DialogueSearchWindow _search;
         SerializedObject _serializedGraph;
+        SerializedObject _serializedPalette;
 
         [MenuItem("Serum/Dialogue Editor", false, 20)]
         public static void Open()
@@ -134,6 +135,28 @@ namespace Dialogue.Editor
                 EditorGUILayout.PropertyField(_serializedGraph.FindProperty("choiceRepeatDelay"));
                 _serializedGraph.ApplyModifiedProperties();
             }
+
+            DrawSharedColours();
+        }
+
+        void DrawSharedColours()
+        {
+            DialogueColourPalette palette = Resources.Load<DialogueColourPalette>("DialogueColourPalette");
+            if (palette == null)
+            {
+                EditorGUILayout.HelpBox("DialogueColourPalette is missing from Assets/Resources.", MessageType.Error);
+                return;
+            }
+
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Shared Dialogue Colours", EditorStyles.boldLabel);
+            _serializedPalette ??= new SerializedObject(palette);
+            _serializedPalette.Update();
+            EditorGUILayout.PropertyField(_serializedPalette.FindProperty("protagonistColour"), new GUIContent("Protagonist"));
+            EditorGUILayout.PropertyField(_serializedPalette.FindProperty("npcColour"), new GUIContent("NPC"));
+            EditorGUILayout.PropertyField(_serializedPalette.FindProperty("enemiesColour"), new GUIContent("Enemies"));
+            EditorGUILayout.PropertyField(_serializedPalette.FindProperty("interactionColour"), new GUIContent("Interaction"));
+            _serializedPalette.ApplyModifiedProperties();
         }
 
         void DrawInspector()

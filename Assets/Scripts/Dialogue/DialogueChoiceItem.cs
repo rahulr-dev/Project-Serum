@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace Dialogue
 {
@@ -7,7 +8,7 @@ namespace Dialogue
     {
         [SerializeField] GameObject highlight;
         [SerializeField] Image highlightImage;
-        [SerializeField] Text label;
+        [SerializeField] TMP_Text label;
         [SerializeField] Button button;
         [SerializeField] Color normalColor = Color.white;
         [SerializeField] Color selectedColor = new Color(1f, 0.92f, 0.4f, 1f);

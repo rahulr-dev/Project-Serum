@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 namespace Dialogue
 {
@@ -10,13 +10,15 @@ namespace Dialogue
         [SerializeField] GameObject rootPanel;
         [SerializeField] GameObject linePanel;
         [SerializeField] GameObject choicesPanel;
-        [SerializeField] Text speakerText;
-        [SerializeField] Text bodyText;
+        [Tooltip("Single TMP label that displays {Speaker: dialogue}.")]
+        [SerializeField] TMP_Text dialogueText;
         [SerializeField] Transform choicesRoot;
         [SerializeField] DialogueChoiceItem choicePrefab;
         [SerializeField] bool hideOnEnd = true;
 
         readonly List<DialogueChoiceItem> _spawned = new List<DialogueChoiceItem>();
+        string _speaker;
+        Color _dialogueColour = Color.white;
 
         void Awake()
         {
@@ -89,13 +91,14 @@ namespace Dialogue
                 linePanel.SetActive(true);
             SetChoicesVisible(false);
             ClearChoices();
-            SetText(speakerText, info.Speaker);
-            SetText(bodyText, "");
+            _speaker = info.Speaker ?? "";
+            _dialogueColour = info.Colour;
+            SetDialogueText("");
         }
 
         void HandleLineTextUpdated(string visible)
         {
-            SetText(bodyText, visible);
+            SetDialogueText(visible);
         }
 
         void HandleChoicesPresented(IReadOnlyList<string> labels)
@@ -158,10 +161,16 @@ namespace Dialogue
             _spawned.Clear();
         }
 
-        static void SetText(Text target, string value)
+        void SetDialogueText(string body)
         {
-            if (target != null)
-                target.text = value ?? "";
+            if (dialogueText == null)
+                return;
+
+            string visibleBody = body ?? string.Empty;
+            dialogueText.color = _dialogueColour;
+            dialogueText.text = string.IsNullOrEmpty(_speaker)
+                ? visibleBody
+                : $"{_speaker}: {visibleBody}";
         }
     }
 }
