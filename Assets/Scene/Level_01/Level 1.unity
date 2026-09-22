@@ -11137,10 +11137,10 @@ MonoBehaviour:
         z: 5.7929845
       Rotation:
         value:
-          x: -0.17684576
+          x: -0.17684574
           y: 0.6493464
-          z: 0.13410711
-          w: 0.7273859
+          z: 0.13410713
+          w: 0.7273858
     - Position:
         x: 619.2228
         y: 17.296843
@@ -19023,10 +19023,6 @@ PrefabInstance:
     - target: {fileID: 1230067383513024119, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5433483226477213512, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
