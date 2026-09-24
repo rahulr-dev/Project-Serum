@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3db6c16b48a4a37aa8afc669fb9ea31, type: 3}
+  m_Name: MovementSound_Dustbin
+  m_EditorClassIdentifier: Assembly-CSharp::Serum.Audio.MovementSoundProfile
+  movementLoops:
+  - {fileID: 8300000, guid: 8a6eea1558a8c68408605c525220309f, type: 3}
+  - {fileID: 8300000, guid: c7cde1c61b43fb343a38f43a190952c4, type: 3}
+  - {fileID: 8300000, guid: 7a2e1302d16018c4aa025683752445af, type: 3}
+  - {fileID: 8300000, guid: 858b9d531c3384e4683b138b5d6a5cc6, type: 3}
+  startClips: []
+  stopClips: []
+  startSpeed: 0.05
+  maxSpeed: 3
+  maxVolume: 0.4
+  pitchRange: {x: 0.85, y: 1.1}
+  intensityResponse: 8
+  scrapePulseAmount: 0.06
+  scrapePulseFrequency: 4
+  minDistance: 1
+  maxDistance: 14

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace InteractionSystem
@@ -12,6 +13,8 @@ namespace InteractionSystem
         Rigidbody _body;
 
         public bool IsBeingPushed { get; private set; }
+        public event Action PushStarted;
+        public event Action PushStopped;
 
         void Reset()
         {
@@ -50,12 +53,20 @@ namespace InteractionSystem
             velocity.x = worldDeltaX / dt;
             velocity.z = 0f;
             _body.linearVelocity = velocity;
-            IsBeingPushed = true;
+            if (!IsBeingPushed)
+            {
+                IsBeingPushed = true;
+                PushStarted?.Invoke();
+            }
         }
 
         public void ClearPush()
         {
-            IsBeingPushed = false;
+            if (IsBeingPushed)
+            {
+                IsBeingPushed = false;
+                PushStopped?.Invoke();
+            }
             if (_body == null)
                 return;
 

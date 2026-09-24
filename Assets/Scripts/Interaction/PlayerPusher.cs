@@ -27,6 +27,10 @@ namespace InteractionSystem
         int _missedFrames;
         bool _ownsPushState;
         GameState _stateBeforePush = GameState.Gameplay;
+        float _pushIntensity;
+
+        /// <summary>Smoothed 0..1 value while the player is actively pushing. Safe for animation and VFX.</summary>
+        public float PushIntensity01 => _pushIntensity;
 
         Vector3 DetectionOrigin
         {
@@ -57,6 +61,10 @@ namespace InteractionSystem
 
             float x = transform.position.x;
             float movedX = x - _lastX;
+            float targetPushIntensity = _active != null && locomotion != null
+                ? Mathf.Clamp01(Mathf.Abs(locomotion.HorizontalSpeed) / Mathf.Max(0.01f, locomotion.PushMoveSpeed))
+                : 0f;
+            _pushIntensity = Mathf.MoveTowards(_pushIntensity, targetPushIntensity, 8f * Time.deltaTime);
 
             if (locomotion != null && locomotion.HorizontalSpeed * locomotion.FacingSign < 0f)
             {
@@ -157,6 +165,7 @@ namespace InteractionSystem
                 _active.ClearPush();
             _active = null;
             _missedFrames = 0;
+            _pushIntensity = 0f;
 
             bool restore = _ownsPushState;
             _ownsPushState = false;
