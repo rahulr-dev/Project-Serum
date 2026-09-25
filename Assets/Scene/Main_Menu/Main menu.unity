@@ -3771,7 +3771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5179fe19d9fd4defa6cfa012ee552b95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Serum.MenuUI.SerumMainMenu
-  newGameBuildIndex: -1
+  newGameBuildIndex: 1
   newGameButton: {fileID: 913495890}
   selection: {fileID: 396906632}
   underline: {fileID: 1247648793}
