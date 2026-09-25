@@ -53,13 +53,21 @@ namespace Character
 
         public bool IsGrounded { get; private set; }
         public bool IsMoving { get; private set; }
+        public bool IsClimbing { get; private set; }
         public bool LocomotionEnabled { get; private set; } = true;
         public bool IsScriptedRunning { get; private set; }
         public float MoveSpeed => ActiveMoveSpeed;
         public float WalkSpeed => moveSpeed;
+        public float RunSpeed => moveSpeed;
         public float StealthMoveSpeed => stealthMoveSpeed;
         public float PushMoveSpeed => pushMoveSpeed;
         public float HorizontalSpeed => _currentSpeed;
+        public float VerticalSpeed => _verticalVelocity;
+        public float Gravity => gravity;
+        public float FallGravityMultiplier => fallGravityMultiplier;
+        public float LastLandingImpactSpeed { get; private set; }
+        public bool UseAnimationRootMotion { get; set; }
+        public bool UseAnimationRootMotionInAir { get; set; }
 
         public float FacingSign
         {
@@ -75,9 +83,14 @@ namespace Character
         {
             get
             {
-                float maxSpeed = ActiveMoveSpeed;
+                float maxSpeed = moveSpeed;
                 if (IsScriptedRunning)
                     return maxSpeed > 0f ? Mathf.Clamp01(_scriptedRunSpeed / maxSpeed) : 1f;
+
+                if (GameStateManager.Instance != null && GameStateManager.Instance.CurrentState == GameState.GameplayStealth)
+                    maxSpeed = stealthMoveSpeed;
+                else if (IsPushing)
+                    maxSpeed = pushMoveSpeed;
 
                 return maxSpeed > 0f ? Mathf.Clamp01(Mathf.Abs(_currentSpeed) / maxSpeed) : 0f;
             }
@@ -119,6 +132,9 @@ namespace Character
         float _coyoteTimer;
         float _jumpBufferTimer;
         float _jumpCooldownTimer;
+        float _landingRunMoveTimer;
+        float _landingRunMoveSpeed;
+        float _landingRunMoveDirection;
         bool _jumpCutApplied;
         bool _wasJumpHeld;
         bool _pushLockApplied;
@@ -300,7 +316,13 @@ namespace Character
             bool wasGrounded = IsGrounded;
             IsGrounded = CheckGrounded();
             if (IsGrounded && !wasGrounded)
+            {
+                LastLandingImpactSpeed = Mathf.Max(0f, -_verticalVelocity);
                 OnLanded?.Invoke();
+            }
+
+            if (_landingRunMoveTimer > 0f && !IsGrounded)
+                _landingRunMoveTimer = 0f;
 
             if (IsGrounded)
                 _coyoteTimer = coyoteTime;
@@ -353,11 +375,25 @@ namespace Character
 
             if (IsScriptedRunning)
             {
-                _controller.Move(_scriptedHorizDelta + new Vector3(0f, _verticalVelocity, 0f) * Time.deltaTime);
+                CollisionFlags moveFlags = _controller.Move(
+                    _scriptedHorizDelta + new Vector3(0f, _verticalVelocity, 0f) * Time.deltaTime);
+                HandleMoveCollision(moveFlags);
             }
             else
             {
-                _controller.Move(new Vector3(_currentSpeed, _verticalVelocity, 0f) * Time.deltaTime);
+                // Root motion drives grounded strides; air control remains motor-driven because
+                // jump/fall clips commonly have no horizontal root translation.
+                float horizontalDelta = _landingRunMoveTimer > 0f
+                    ? _landingRunMoveDirection * _landingRunMoveSpeed * Time.deltaTime
+                    : UseAnimationRootMotion && (IsGrounded || UseAnimationRootMotionInAir)
+                    ? 0f
+                    : _currentSpeed * Time.deltaTime;
+                CollisionFlags moveFlags = _controller.Move(
+                    new Vector3(horizontalDelta, _verticalVelocity * Time.deltaTime, 0f));
+                HandleMoveCollision(moveFlags);
+
+                if (_landingRunMoveTimer > 0f)
+                    _landingRunMoveTimer = Mathf.Max(0f, _landingRunMoveTimer - Time.deltaTime);
             }
 
             if (LocomotionEnabled && !IsScriptedRunning && !lockRotation)
@@ -370,6 +406,51 @@ namespace Character
                 float yaw = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetYaw, ref _yawVelocity, turnSmoothTime);
                 transform.rotation = Quaternion.Euler(0f, yaw, 0f);
             }
+        }
+
+        public void SetClimbing(bool climbing)
+        {
+            IsClimbing = climbing;
+            if (climbing)
+            {
+                _verticalVelocity = 0f;
+                _jumpBufferTimer = 0f;
+            }
+        }
+
+        public void ApplyAnimationRootMotion(Vector3 worldDelta)
+        {
+            if (!UseAnimationRootMotion || IsClimbing || (!IsGrounded && !UseAnimationRootMotionInAir) ||
+                IsScriptedRunning || _landingRunMoveTimer > 0f || _controller == null)
+                return;
+
+            // The game is a side-scroller: keep only horizontal world movement from the clip.
+            _controller.Move(new Vector3(worldDelta.x, 0f, 0f));
+        }
+
+        public void StartLandingRunMovement(float duration, float horizontalSpeed)
+        {
+            if (_controller == null || IsScriptedRunning || !LocomotionEnabled || duration <= 0f)
+                return;
+
+            float speed = Mathf.Abs(horizontalSpeed);
+            if (speed <= 0.01f)
+                return;
+
+            _landingRunMoveSpeed = speed;
+            _landingRunMoveDirection = Mathf.Sign(horizontalSpeed);
+            _landingRunMoveTimer = duration;
+        }
+
+        void HandleMoveCollision(CollisionFlags moveFlags)
+        {
+            if ((moveFlags & CollisionFlags.Below) == 0 || IsGrounded)
+                return;
+
+            IsGrounded = true;
+            _coyoteTimer = coyoteTime;
+            LastLandingImpactSpeed = Mathf.Max(0f, -_verticalVelocity);
+            OnLanded?.Invoke();
         }
 
         void HandleStateChanged(GameState previous, GameState current)
@@ -435,6 +516,7 @@ namespace Character
             _jumpCooldownTimer = jumpCooldown;
             _jumpCutApplied = false;
             IsGrounded = false;
+            LastLandingImpactSpeed = 0f;
             OnJumped?.Invoke();
         }
 

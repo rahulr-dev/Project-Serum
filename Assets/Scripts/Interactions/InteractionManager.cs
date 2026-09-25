@@ -389,6 +389,7 @@ namespace Interaction
             _jump.AddBinding("<Gamepad>/buttonSouth");
             _jump.started += HandleJumpStarted;
             _jump.canceled += HandleJumpCanceled;
+
         }
 
         void HandleInteractStarted(InputAction.CallbackContext context)
