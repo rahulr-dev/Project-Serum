@@ -21,53 +21,80 @@ MonoBehaviour:
     nodeName: 
   - id: b7daf1552b624a378a35ac2ad1434026
     kind: 2
-    position: {x: 301.3333, y: 52}
+    position: {x: 397.3333, y: -106.666664}
     stateGraph: {fileID: 11400000, guid: 497d32571745aea43be9a1ec091cb433, type: 2}
     actionId: 
     nodeName: Patrol
   - id: 115baa73cc3e43e799d12b17d202b675
     kind: 2
-    position: {x: 301.3333, y: 262.66666}
+    position: {x: 397.3333, y: 312}
     stateGraph: {fileID: 11400000, guid: bdb97321e2112174786e035ca7d13f7a, type: 2}
     actionId: 
     nodeName: Search
   - id: 90d1a129947042e3bd0f591f8aab1977
     kind: 1
-    position: {x: 996.6666, y: 170.66667}
+    position: {x: 1436, y: 164}
     stateGraph: {fileID: 0}
     actionId: 
     nodeName: 
   - id: f5ebc815b7514698a09a56ba408ab82a
     kind: 2
-    position: {x: 570.6667, y: 170.66667}
+    position: {x: 1010, y: 164}
     stateGraph: {fileID: 11400000, guid: cf9331189d40afc49961b79492e5bfe6, type: 2}
     actionId: 
     nodeName: Chase
   - id: 704ea7ba0fe74b0484a9c518d7490244
     kind: 3
-    position: {x: 761.3333, y: 170.66667}
+    position: {x: 1200.6666, y: 164}
     stateGraph: {fileID: 0}
     actionId: dead
     nodeName: 
+  - id: 16bdb7bf51b64200a9cff8dff9eac47e
+    kind: 3
+    position: {x: 208.66666, y: -106.666664}
+    stateGraph: {fileID: 0}
+    actionId: Patrol
+    nodeName: 
+  - id: ff86043e938747f1840b4c9a035b8c87
+    kind: 3
+    position: {x: 839.3334, y: 192.66667}
+    stateGraph: {fileID: 0}
+    actionId: Chase
+    nodeName: 
+  - id: 1879b857f9694d06aed2f71c8f2574f9
+    kind: 3
+    position: {x: 208.66666, y: 338}
+    stateGraph: {fileID: 0}
+    actionId: Search
+    nodeName: 
   edges:
-  - fromId: 233c7ac2d42e4915b25f9ae60f2c4034
-    fromPort: 0
-    toId: b7daf1552b624a378a35ac2ad1434026
-  - fromId: 115baa73cc3e43e799d12b17d202b675
-    fromPort: 0
-    toId: b7daf1552b624a378a35ac2ad1434026
-  - fromId: b7daf1552b624a378a35ac2ad1434026
-    fromPort: 0
-    toId: 115baa73cc3e43e799d12b17d202b675
-  - fromId: b7daf1552b624a378a35ac2ad1434026
-    fromPort: 2
-    toId: f5ebc815b7514698a09a56ba408ab82a
-  - fromId: 115baa73cc3e43e799d12b17d202b675
-    fromPort: 2
-    toId: f5ebc815b7514698a09a56ba408ab82a
   - fromId: 704ea7ba0fe74b0484a9c518d7490244
     fromPort: 0
     toId: 90d1a129947042e3bd0f591f8aab1977
   - fromId: f5ebc815b7514698a09a56ba408ab82a
     fromPort: 0
     toId: 704ea7ba0fe74b0484a9c518d7490244
+  - fromId: 233c7ac2d42e4915b25f9ae60f2c4034
+    fromPort: 0
+    toId: 16bdb7bf51b64200a9cff8dff9eac47e
+  - fromId: 16bdb7bf51b64200a9cff8dff9eac47e
+    fromPort: 0
+    toId: b7daf1552b624a378a35ac2ad1434026
+  - fromId: b7daf1552b624a378a35ac2ad1434026
+    fromPort: 0
+    toId: 1879b857f9694d06aed2f71c8f2574f9
+  - fromId: 1879b857f9694d06aed2f71c8f2574f9
+    fromPort: 0
+    toId: 115baa73cc3e43e799d12b17d202b675
+  - fromId: 115baa73cc3e43e799d12b17d202b675
+    fromPort: 0
+    toId: 16bdb7bf51b64200a9cff8dff9eac47e
+  - fromId: b7daf1552b624a378a35ac2ad1434026
+    fromPort: 2
+    toId: ff86043e938747f1840b4c9a035b8c87
+  - fromId: 115baa73cc3e43e799d12b17d202b675
+    fromPort: 2
+    toId: ff86043e938747f1840b4c9a035b8c87
+  - fromId: ff86043e938747f1840b4c9a035b8c87
+    fromPort: 0
+    toId: f5ebc815b7514698a09a56ba408ab82a
