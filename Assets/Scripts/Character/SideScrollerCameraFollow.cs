@@ -1,6 +1,7 @@
 using Unity.Cinemachine;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Splines;
 
 namespace Character
@@ -8,14 +9,18 @@ namespace Character
     public class SideScrollerCameraFollow : MonoBehaviour
     {
         [SerializeField] Transform target;
+        [SerializeField] Transform lookAt;
         [SerializeField] CinemachineSplineDolly dolly;
-        [SerializeField] float offsetX;
-        [SerializeField] float followSmoothTime = 0.12f;
-        [SerializeField] float lookAhead;
+        [SerializeField] Vector3 offset;
+        [FormerlySerializedAs("smoothTime")]
+        [FormerlySerializedAs("followSmoothTime")]
+        [SerializeField, Min(0f)] float followSmoothTime = 0.12f;
+        [SerializeField, Min(0f)] float lookAtSmoothTime = 0.5f;
 
         float _currentPosition;
         float _positionVelocity;
-        SideScrollerController _mover;
+        CinemachineCamera _camera;
+        CinemachineRotationComposer _rotationComposer;
 
         void OnEnable()
         {
@@ -24,7 +29,7 @@ namespace Character
 
             _currentPosition = dolly != null ? dolly.CameraPosition : 0f;
             _positionVelocity = 0f;
-            CacheMover();
+            CacheCamera();
         }
 
         void LateUpdate()
@@ -37,20 +42,9 @@ namespace Character
             if (dolly == null || dolly.Spline == null)
                 return;
 
-            if (_mover == null)
-                CacheMover();
+            UpdateLookAtTarget();
 
-            float lookAheadX = 0f;
-            if (lookAhead != 0f && _mover != null)
-            {
-                float speed = _mover.HorizontalSpeed;
-                if (speed != 0f)
-                    lookAheadX = Mathf.Sign(speed) * lookAhead;
-            }
-
-            Vector3 query = target.position;
-            query.x += offsetX + lookAheadX;
-            query.y = dolly.Spline.transform.position.y;
+            Vector3 query = target.position + offset;
 
             float3 local = dolly.Spline.transform.InverseTransformPoint(query);
             SplineUtility.GetNearestPoint(dolly.Spline.Spline, local, out _, out float normalizedT);
@@ -65,7 +59,12 @@ namespace Character
         public void SetTarget(Transform follow)
         {
             target = follow;
-            CacheMover();
+        }
+
+        public void SetLookAt(Transform targetTransform)
+        {
+            lookAt = targetTransform;
+            UpdateLookAtTarget();
         }
 
         float ToCameraPosition(float normalizedT)
@@ -82,9 +81,22 @@ namespace Character
             }
         }
 
-        void CacheMover()
+        void CacheCamera()
         {
-            _mover = target != null ? target.GetComponent<SideScrollerController>() : null;
+            _camera = dolly != null ? dolly.GetComponent<CinemachineCamera>() : null;
+            _rotationComposer = dolly != null ? dolly.GetComponent<CinemachineRotationComposer>() : null;
+        }
+
+        void UpdateLookAtTarget()
+        {
+            if (_camera == null)
+                CacheCamera();
+
+            if (_camera != null)
+                _camera.Target.LookAtTarget = lookAt != null ? lookAt : target;
+
+            if (_rotationComposer != null)
+                _rotationComposer.Damping = Vector2.one * lookAtSmoothTime;
         }
     }
 }

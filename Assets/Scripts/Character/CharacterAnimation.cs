@@ -24,6 +24,8 @@ namespace Character
         [SerializeField] string pushingParam = "pushing";
         [SerializeField] float dampTime = 0.1f;
         [SerializeField] float stealthDampTime = 0.25f;
+        [Tooltip("How long root motion remains disabled after pushing stops.")]
+        [SerializeField, Min(0f)] float pushingReleaseDelay = 1f;
 
         [Header("Idle Variants")]
         [Tooltip("Animator Trigger parameters that play the one-shot idle clips.")]
@@ -67,6 +69,8 @@ namespace Character
         float _speedOverride;
         float _stealthTarget = StealthOff;
         bool _pushing;
+        bool _rootMotionDisabledForPushing;
+        float _rootMotionRestoreTime;
         bool _landingAnimationTriggered;
         bool _landRunLandingPending;
         float _landRunLandingSpeed;
@@ -121,10 +125,7 @@ namespace Character
                 : GameState.Gameplay;
             ApplyStealth(state);
 
-            if (animator != null)
-                animator.applyRootMotion = true;
-            if (locomotion != null)
-                locomotion.UseAnimationRootMotion = true;
+            SetRootMotionEnabled(true);
         }
 
         void OnDisable()
@@ -398,9 +399,51 @@ namespace Character
 
         void ApplyPushing(bool pushing)
         {
+            if (pushing)
+            {
+                SetPushing(true);
+                DisableRootMotionForPushing();
+                return;
+            }
+
+            SetPushing(false);
+            if (!_rootMotionDisabledForPushing)
+                return;
+
+            if (_rootMotionRestoreTime <= 0f)
+                _rootMotionRestoreTime = Time.time + pushingReleaseDelay;
+
+            if (Time.time < _rootMotionRestoreTime)
+                return;
+
+            _rootMotionRestoreTime = 0f;
+            _rootMotionDisabledForPushing = false;
+            SetRootMotionEnabled(true);
+        }
+
+        void SetPushing(bool pushing)
+        {
+            if (_pushing == pushing)
+                return;
+
             _pushing = pushing;
             if (animator != null)
                 animator.SetBool(_pushingHash, pushing);
+        }
+
+        void DisableRootMotionForPushing()
+        {
+            _rootMotionRestoreTime = 0f;
+            _rootMotionDisabledForPushing = true;
+            SetRootMotionEnabled(false);
+        }
+
+        void SetRootMotionEnabled(bool enabled)
+        {
+            if (animator != null)
+                animator.applyRootMotion = enabled;
+            if (locomotion != null)
+                locomotion.UseAnimationRootMotion = enabled;
         }
 
         INormalizedMoveSpeed FindSpeedSource()

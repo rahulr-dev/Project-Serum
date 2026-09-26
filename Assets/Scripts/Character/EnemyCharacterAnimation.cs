@@ -16,16 +16,42 @@ namespace Character
         [SerializeField] string walkTrigger = "walk";
         [SerializeField] string runTrigger = "run";
 
+        [Header("Movement")]
+        [Tooltip("Root transform whose world movement drives the walk animation. Defaults to the top-level enemy object.")]
+        [SerializeField] Transform movementRoot;
+        [Tooltip("Scales the measured root movement before it is applied to the walk animation.")]
+        [SerializeField, Min(0f)] float movementSpeedMultiplier = 1f;
+        [SerializeField] string movementSpeedParam = "Speed";
+
         int _searchTriggerHash;
         int _walkTriggerHash;
         int _runTriggerHash;
+        int _movementSpeedHash;
+        float _movementSpeed;
+        Vector3 _lastMovementRootPosition;
+        bool _hasMovementRootPosition;
+
+        public float MovementSpeed => _movementSpeed;
 
         void Awake()
         {
             if (animator == null)
                 animator = GetComponent<Animator>();
 
+            if (movementRoot == null)
+                movementRoot = transform.root;
+
             CacheParameterHashes();
+        }
+
+        void LateUpdate()
+        {
+            UpdateMovementSpeed();
+        }
+
+        void OnEnable()
+        {
+            _hasMovementRootPosition = false;
         }
 
         /// <summary>Fires the search trigger.</summary>
@@ -43,7 +69,15 @@ namespace Character
             if (animator == null)
                 return;
 
+            animator.SetFloat(_movementSpeedHash, _movementSpeed);
             animator.SetTrigger(_walkTriggerHash);
+        }
+
+        /// <summary>Overrides the transform used to measure movement for the walk animation.</summary>
+        public void SetMovementRoot(Transform root)
+        {
+            movementRoot = root;
+            _hasMovementRootPosition = false;
         }
 
         /// <summary>Fires the run trigger.</summary>
@@ -66,6 +100,32 @@ namespace Character
             _searchTriggerHash = Animator.StringToHash(searchTrigger);
             _walkTriggerHash = Animator.StringToHash(walkTrigger);
             _runTriggerHash = Animator.StringToHash(runTrigger);
+            _movementSpeedHash = Animator.StringToHash(movementSpeedParam);
+        }
+
+        void UpdateMovementSpeed()
+        {
+            if (animator == null || movementRoot == null)
+                return;
+
+            Vector3 currentPosition = movementRoot.position;
+            if (!_hasMovementRootPosition)
+            {
+                _lastMovementRootPosition = currentPosition;
+                _hasMovementRootPosition = true;
+                _movementSpeed = 0f;
+            }
+            else
+            {
+                Vector3 delta = currentPosition - _lastMovementRootPosition;
+                delta.y = 0f;
+                _movementSpeed = Time.deltaTime > 0f
+                    ? delta.magnitude / Time.deltaTime * movementSpeedMultiplier
+                    : 0f;
+                _lastMovementRootPosition = currentPosition;
+            }
+
+            animator.SetFloat(_movementSpeedHash, _movementSpeed);
         }
     }
 }

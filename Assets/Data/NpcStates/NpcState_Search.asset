@@ -35,7 +35,7 @@ MonoBehaviour:
     endOutcome: 1
   - id: 3a8a886f31f64c09aea392a4ba178c3e
     kind: 2
-    position: {x: 560, y: 180}
+    position: {x: 563.3333, y: 180}
     duration: 0.25
     characterAction: 0
     distance: 4
@@ -73,18 +73,18 @@ MonoBehaviour:
     stopDistance: 0.4
     waitEventId: ScriptedRunEnded
     endOutcome: 1
-  - id: 9c0300ad55e342169340cf2e8700b747
+  - id: fd5af0777d1b41498bfaa8c320c2b907
     kind: 3
-    position: {x: 238, y: 180}
+    position: {x: 236.66666, y: 180}
     duration: 1
-    characterAction: 32
+    characterAction: 29
     distance: 4
     speed: 4
     offsetX: 0
     offsetZ: 0
     animSpeed: 1
     degrees: 180
-    rotateSpeed: 60
+    rotateSpeed: 50
     eventId: 
     waitUntilDone: 1
     executeHandlerId: 
@@ -99,7 +99,7 @@ MonoBehaviour:
     toId: 273b1c55a0d7466f8695fc292fe6d58a
   - fromId: 64745109a68d44c3a15274b77a4fb57a
     fromPort: 0
-    toId: 9c0300ad55e342169340cf2e8700b747
-  - fromId: 9c0300ad55e342169340cf2e8700b747
+    toId: fd5af0777d1b41498bfaa8c320c2b907
+  - fromId: fd5af0777d1b41498bfaa8c320c2b907
     fromPort: 0
     toId: 3a8a886f31f64c09aea392a4ba178c3e

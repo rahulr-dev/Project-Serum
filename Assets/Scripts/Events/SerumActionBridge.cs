@@ -1016,10 +1016,19 @@ namespace Events
 
         IEnumerator SmoothMoveByRoutine(Vector3 delta, float speed)
         {
-            Vector3 start = _transform.position;
-            Vector3 target = start + delta;
-            float duration = DurationFromDistance(delta.magnitude, speed);
-            yield return SmoothMoveRoutine(start, target, duration);
+            Vector3 target = _transform.position + delta;
+            float moveSpeed = Mathf.Max(0.01f, speed);
+
+            while ((_transform.position - target).sqrMagnitude > 0.0001f)
+            {
+                _transform.position = Vector3.MoveTowards(
+                    _transform.position, target, moveSpeed * Time.deltaTime);
+                yield return null;
+            }
+
+            _transform.position = target;
+            _moveRoutine = null;
+            NotifyNamedEvent("SmoothMoveEnded", false);
         }
 
         IEnumerator MoveToRoutine(Vector3 target, float duration)

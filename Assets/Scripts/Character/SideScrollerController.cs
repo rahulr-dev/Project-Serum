@@ -19,6 +19,11 @@ namespace Character
         [Tooltip("When enabled, locomotion does not turn the player. They keep the current facing.")]
         public bool lockRotation;
 
+        [Header("Stealth Collider")]
+        [Tooltip("Multiplier applied to the CharacterController height while in GameplayStealth. The original height and center are restored when leaving stealth.")]
+        [Range(0.1f, 1f)]
+        [SerializeField] float stealthColliderHeightMultiplier = 0.6f;
+
         [Header("Jump")]
         [Tooltip("Downward acceleration while airborne.")]
         [SerializeField] float gravity = 40f;
@@ -118,6 +123,8 @@ namespace Character
             GameStateManager.Instance.CurrentState == GameState.GameplayPushing;
 
         CharacterController _controller;
+        float _defaultControllerHeight;
+        Vector3 _defaultControllerCenter;
         Vector3 _scriptedStart;
         Vector3 _scriptedOffset;
         float _scriptedDuration;
@@ -143,6 +150,8 @@ namespace Character
         void Awake()
         {
             _controller = GetComponent<CharacterController>();
+            _defaultControllerHeight = _controller.height;
+            _defaultControllerCenter = _controller.center;
             _targetYaw = transform.eulerAngles.y;
         }
 
@@ -150,6 +159,9 @@ namespace Character
         {
             GameStateManager.OnStateChanged += HandleStateChanged;
             ApplyPushLock(GameStateManager.Instance != null
+                ? GameStateManager.Instance.CurrentState
+                : GameState.Gameplay);
+            ApplyStealthCollider(GameStateManager.Instance != null
                 ? GameStateManager.Instance.CurrentState
                 : GameState.Gameplay);
         }
@@ -456,6 +468,29 @@ namespace Character
         void HandleStateChanged(GameState previous, GameState current)
         {
             ApplyPushLock(current);
+            ApplyStealthCollider(current);
+        }
+
+        void ApplyStealthCollider(GameState state)
+        {
+            if (_controller == null)
+                return;
+
+            if (state != GameState.GameplayStealth)
+            {
+                _controller.height = _defaultControllerHeight;
+                _controller.center = _defaultControllerCenter;
+                return;
+            }
+
+            // A CharacterController requires its height to be at least twice its radius.
+            float height = Mathf.Max(_controller.radius * 2f, _defaultControllerHeight * stealthColliderHeightMultiplier);
+            float bottom = _defaultControllerCenter.y - (_defaultControllerHeight * 0.5f);
+            _controller.height = height;
+            _controller.center = new Vector3(
+                _defaultControllerCenter.x,
+                bottom + (height * 0.5f),
+                _defaultControllerCenter.z);
         }
 
         void ApplyPushLock(GameState state)
