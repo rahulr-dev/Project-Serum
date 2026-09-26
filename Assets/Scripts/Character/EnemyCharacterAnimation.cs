@@ -19,8 +19,10 @@ namespace Character
         [Header("Movement")]
         [Tooltip("Root transform whose world movement drives the walk animation. Defaults to the top-level enemy object.")]
         [SerializeField] Transform movementRoot;
-        [Tooltip("Scales the measured root movement before it is applied to the walk animation.")]
+        [Tooltip("Scales the normalized root movement before it is applied to the walk animation.")]
         [SerializeField, Min(0f)] float movementSpeedMultiplier = 1f;
+        [Tooltip("Used as the normalization maximum when the movement root has no locomotion controller.")]
+        [SerializeField, Min(0.01f)] float fallbackMaxMovementSpeed = 4f;
         [SerializeField] string movementSpeedParam = "Speed";
 
         int _searchTriggerHash;
@@ -30,6 +32,7 @@ namespace Character
         float _movementSpeed;
         Vector3 _lastMovementRootPosition;
         bool _hasMovementRootPosition;
+        ICharacterLocomotion _rootLocomotion;
 
         public float MovementSpeed => _movementSpeed;
 
@@ -41,6 +44,7 @@ namespace Character
             if (movementRoot == null)
                 movementRoot = transform.root;
 
+            CacheRootLocomotion();
             CacheParameterHashes();
         }
 
@@ -78,6 +82,7 @@ namespace Character
         {
             movementRoot = root;
             _hasMovementRootPosition = false;
+            CacheRootLocomotion();
         }
 
         /// <summary>Fires the run trigger.</summary>
@@ -119,13 +124,33 @@ namespace Character
             {
                 Vector3 delta = currentPosition - _lastMovementRootPosition;
                 delta.y = 0f;
-                _movementSpeed = Time.deltaTime > 0f
-                    ? delta.magnitude / Time.deltaTime * movementSpeedMultiplier
-                    : 0f;
+                float worldSpeed = Time.deltaTime > 0f ? delta.magnitude / Time.deltaTime : 0f;
+                float maxSpeed = _rootLocomotion != null
+                    ? _rootLocomotion.MoveSpeed
+                    : fallbackMaxMovementSpeed;
+                _movementSpeed = Mathf.Clamp01(
+                    worldSpeed / Mathf.Max(0.01f, maxSpeed) * movementSpeedMultiplier);
                 _lastMovementRootPosition = currentPosition;
             }
 
             animator.SetFloat(_movementSpeedHash, _movementSpeed);
+        }
+
+        void CacheRootLocomotion()
+        {
+            _rootLocomotion = null;
+            if (movementRoot == null)
+                return;
+
+            MonoBehaviour[] components = movementRoot.GetComponents<MonoBehaviour>();
+            for (int i = 0; i < components.Length; i++)
+            {
+                if (components[i] is ICharacterLocomotion locomotion)
+                {
+                    _rootLocomotion = locomotion;
+                    return;
+                }
+            }
         }
     }
 }
