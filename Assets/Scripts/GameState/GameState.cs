@@ -13,6 +13,7 @@ namespace Game
         QTE,
         Paused,
         GameOver,
-        GameplayPushing
+        GameplayPushing,
+        GameplayStealthForced
     }
 }

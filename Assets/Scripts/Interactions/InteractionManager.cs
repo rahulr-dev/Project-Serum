@@ -120,6 +120,7 @@ namespace Interaction
         void Update()
         {
             ClearQTEPressCounters();
+            HandleStealthToggleKeyboard();
 
             Vector2 move = AllowsMove && _move != null ? _move.ReadValue<Vector2>() : Vector2.zero;
             if (move != MoveInput)
@@ -132,7 +133,8 @@ namespace Interaction
                 MoveInput = move;
             }
 
-            bool interactHeld = AllowsInteract && _interact != null && _interact.IsPressed();
+            bool interactHeld = AllowsInteract && _interact != null && _interact.IsPressed() &&
+                                !IsStealthToggleButtonHeld();
             if (IsInteractHeld && !interactHeld)
                 OnInteractCanceled?.Invoke();
             IsInteractHeld = interactHeld;
@@ -397,8 +399,63 @@ namespace Interaction
             if (!AllowsInteract)
                 return;
 
+            // In normal gameplay, the west face button is the stealth toggle.
+            // Keep it available as the QTE/interact input in other states.
+            if (IsGamepadWestButton(context) && TryToggleStealth())
+                return;
+
             IsInteractHeld = true;
             OnInteractStarted?.Invoke();
+        }
+
+        void HandleStealthToggleKeyboard()
+        {
+            Keyboard keyboard = Keyboard.current;
+            if (keyboard == null ||
+                (!keyboard.leftCtrlKey.wasPressedThisFrame &&
+                 !keyboard.rightCtrlKey.wasPressedThisFrame &&
+                 !keyboard.cKey.wasPressedThisFrame))
+                return;
+
+            TryToggleStealth();
+        }
+
+        static bool IsGamepadWestButton(InputAction.CallbackContext context)
+        {
+            return context.control != null &&
+                   context.control.device is Gamepad &&
+                   context.control.path.EndsWith("/buttonWest", StringComparison.OrdinalIgnoreCase);
+        }
+
+        static bool TryToggleStealth()
+        {
+            GameStateManager stateManager = GameStateManager.Instance;
+            if (stateManager == null || stateManager.IsForcedStealth)
+                return false;
+
+            if (stateManager.CurrentState == GameState.Gameplay)
+            {
+                stateManager.EnterGameplayStealth();
+                return true;
+            }
+
+            if (stateManager.CurrentState == GameState.GameplayStealth)
+            {
+                stateManager.EnterGameplay();
+                return true;
+            }
+
+            return false;
+        }
+
+        static bool IsStealthToggleButtonHeld()
+        {
+            GameStateManager stateManager = GameStateManager.Instance;
+            Gamepad pad = Gamepad.current;
+            return stateManager != null &&
+                   (stateManager.CurrentState == GameState.Gameplay ||
+                    stateManager.CurrentState == GameState.GameplayStealth) &&
+                   pad != null && pad.buttonWest.isPressed;
         }
 
         void HandleInteractCanceled(InputAction.CallbackContext context)

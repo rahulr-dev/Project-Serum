@@ -92,7 +92,7 @@ namespace Character
                 if (IsScriptedRunning)
                     return maxSpeed > 0f ? Mathf.Clamp01(_scriptedRunSpeed / maxSpeed) : 1f;
 
-                if (GameStateManager.Instance != null && GameStateManager.Instance.CurrentState == GameState.GameplayStealth)
+                if (GameStateManager.Instance != null && GameStateManager.Instance.IsStealthActive)
                     maxSpeed = stealthMoveSpeed;
                 else if (IsPushing)
                     maxSpeed = pushMoveSpeed;
@@ -109,7 +109,7 @@ namespace Character
                     return moveSpeed;
 
                 GameState state = GameStateManager.Instance.CurrentState;
-                if (state == GameState.GameplayStealth)
+                if (state == GameState.GameplayStealth || state == GameState.GameplayStealthForced)
                     return stealthMoveSpeed;
                 if (state == GameState.GameplayPushing)
                     return pushMoveSpeed;
@@ -476,7 +476,7 @@ namespace Character
             if (_controller == null)
                 return;
 
-            if (state != GameState.GameplayStealth)
+            if (state != GameState.GameplayStealth && state != GameState.GameplayStealthForced)
             {
                 _controller.height = _defaultControllerHeight;
                 _controller.center = _defaultControllerCenter;

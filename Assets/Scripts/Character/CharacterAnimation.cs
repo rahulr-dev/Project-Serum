@@ -394,7 +394,9 @@ namespace Character
 
         void ApplyStealth(GameState state)
         {
-            _stealthTarget = state == GameState.GameplayStealth ? StealthOn : StealthOff;
+            _stealthTarget = state == GameState.GameplayStealth || state == GameState.GameplayStealthForced
+                ? StealthOn
+                : StealthOff;
         }
 
         void ApplyPushing(bool pushing)

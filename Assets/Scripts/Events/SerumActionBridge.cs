@@ -982,6 +982,23 @@ namespace Events
             UnlockPlayerControl();
         }
 
+        public void EnterGameplayStealthForced()
+        {
+            if (GameStateManager.Instance == null)
+            {
+                Debug.LogWarning("SerumActionBridge.EnterGameplayStealthForced requires GameStateManager.", this);
+                return;
+            }
+
+            GameStateManager.Instance.EnterGameplayStealthForced();
+        }
+
+        public void ExitGameplayStealthForced()
+        {
+            if (GameStateManager.Instance != null && GameStateManager.Instance.IsForcedStealth)
+                UnlockPlayerControl();
+        }
+
         public void EnterGameplayPushing()
         {
             if (GameStateManager.Instance == null)

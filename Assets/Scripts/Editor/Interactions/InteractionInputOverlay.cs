@@ -94,7 +94,7 @@ namespace Interaction.Editor
                 stickActive, "Gamepad leftStick", 230f);
 
             DrawRawKey("Cross / A  Jump", input.GamepadSouth, "Gamepad buttonSouth", 230f);
-            DrawRawKey("Square / X  Interact", input.GamepadWest, "Gamepad buttonWest", 230f);
+            DrawRawKey("Square / X  Stealth / Interact", input.GamepadWest, "Gamepad buttonWest", 230f);
             DrawRawKey("Triangle / Y", input.GamepadNorth, "Gamepad buttonNorth", 230f);
             DrawRawKey("Circle / B", input.GamepadEast, "Gamepad buttonEast", 230f);
 

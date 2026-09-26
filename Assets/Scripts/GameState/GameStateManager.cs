@@ -23,6 +23,7 @@ namespace Game
             CurrentState == GameState.Gameplay ||
             CurrentState == GameState.GameplayNoJump ||
             CurrentState == GameState.GameplayStealth ||
+            CurrentState == GameState.GameplayStealthForced ||
             CurrentState == GameState.GameplayDialogue ||
             CurrentState == GameState.GameplayPushing;
 
@@ -34,10 +35,14 @@ namespace Game
             CurrentState == GameState.Gameplay ||
             CurrentState == GameState.GameplayNoJump ||
             CurrentState == GameState.GameplayStealth ||
+            CurrentState == GameState.GameplayStealthForced ||
             CurrentState == GameState.GameplayDialogue ||
             CurrentState == GameState.GameplayPushing ||
             CurrentState == GameState.Dialogue;
         public bool AllowsQTEInput => CurrentState == GameState.QTE;
+        public bool IsStealthActive => CurrentState == GameState.GameplayStealth ||
+                                       CurrentState == GameState.GameplayStealthForced;
+        public bool IsForcedStealth => CurrentState == GameState.GameplayStealthForced;
 
 #if UNITY_EDITOR
         static readonly Color OverlayIdleBg = new Color(0.18f, 0.18f, 0.18f, 1f);
@@ -107,6 +112,7 @@ namespace Game
         public void EnterGameplay() => SetState(GameState.Gameplay);
         public void EnterGameplayNoJump() => SetState(GameState.GameplayNoJump);
         public void EnterGameplayStealth() => SetState(GameState.GameplayStealth);
+        public void EnterGameplayStealthForced() => SetState(GameState.GameplayStealthForced);
         public void EnterGameplayDialogue() => SetState(GameState.GameplayDialogue);
         public void EnterGameplayPushing() => SetState(GameState.GameplayPushing);
         public void EnterDialogue() => SetState(GameState.Dialogue);
@@ -153,6 +159,8 @@ namespace Game
                 EnterGameplayNoJump();
             if (GUILayout.Button("Gameplay Stealth"))
                 EnterGameplayStealth();
+            if (GUILayout.Button("Gameplay Stealth Forced"))
+                EnterGameplayStealthForced();
             if (GUILayout.Button("Gameplay Dialogue"))
                 EnterGameplayDialogue();
             if (GUILayout.Button("Gameplay Pushing"))

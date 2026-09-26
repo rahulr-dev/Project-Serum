@@ -70,7 +70,7 @@ MonoBehaviour:
     executeHandlerId: 
     moveTargetId: f17ad00bdf4a4ba8856d91d317c4542c
     branchCount: 2
-    stopDistance: 5
+    stopDistance: 2
     waitEventId: ScriptedRunEnded
     endOutcome: 1
   - id: a5952534801842bd9e147e92cb54681e
