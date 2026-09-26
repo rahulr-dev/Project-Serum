@@ -19,7 +19,7 @@ MonoBehaviour:
   nodes:
   - id: 93f6bf5ec1f547edbc636223c2558408
     kind: 0
-    position: {x: -18.666672, y: 123.33333}
+    position: {x: -19, y: 123}
     speaker: 
     body: 
     colourPreset: 1
@@ -32,7 +32,7 @@ MonoBehaviour:
     choiceLabels: []
   - id: 5c8038e77da24bccbc19ea76ae5d4960
     kind: 1
-    position: {x: 129.33334, y: 123.33333}
+    position: {x: 129, y: 123}
     speaker: Nedu maaran
     body: 'Strange. So strange. '
     colourPreset: 0
@@ -58,7 +58,7 @@ MonoBehaviour:
     choiceLabels: []
   - id: aab82aa2e87b48b789a217e234bfee9c
     kind: 3
-    position: {x: 885.3334, y: 173.33333}
+    position: {x: 885, y: 173}
     speaker: 
     body: 
     colourPreset: 1

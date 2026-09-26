@@ -19,9 +19,10 @@ MonoBehaviour:
   nodes:
   - id: e095e222f30e4ff3aae07007718e5091
     kind: 0
-    position: {x: -222.66667, y: 124}
+    position: {x: -223, y: 124}
     speaker: 
     body: 
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0
@@ -31,9 +32,10 @@ MonoBehaviour:
     choiceLabels: []
   - id: 7136f00953bc454e91789b289fb5765f
     kind: 3
-    position: {x: 3532, y: 29.333332}
+    position: {x: 3532, y: 29}
     speaker: 
     body: 
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0
@@ -46,6 +48,7 @@ MonoBehaviour:
     position: {x: -72, y: 80}
     speaker: Selvan
     body: Kid. Run.
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0
@@ -55,9 +58,10 @@ MonoBehaviour:
     choiceLabels: []
   - id: d706657368394562bc51ec64e4921d86
     kind: 2
-    position: {x: 155.33334, y: 80}
+    position: {x: 155, y: 80}
     speaker: 
     body: 
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0
@@ -69,10 +73,11 @@ MonoBehaviour:
     - Who are you waiting for?
   - id: e846bc3073234ad1b7c557ea2c4e6623
     kind: 1
-    position: {x: 626, y: -164.66667}
+    position: {x: 626, y: -165}
     speaker: Selvan
     body: I dont know exactly whats going on. But they are taking us peoples as hostages
       for some evil things. so run.
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 0
     charsPerSecond: 0
@@ -86,6 +91,7 @@ MonoBehaviour:
     speaker: Selvan
     body: They killed my child, there's no one left for me in this world. So i better
       die here.
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0
@@ -95,9 +101,10 @@ MonoBehaviour:
     choiceLabels: []
   - id: 3c68ca9db9f844ab84bb7d71b11f5afa
     kind: 2
-    position: {x: 1576, y: 29.333332}
+    position: {x: 1576, y: 29}
     speaker: 
     body: 
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0
@@ -109,9 +116,10 @@ MonoBehaviour:
     - 'So sorry to hear this. '
   - id: 746b9d636a1f43ffab53fee085098c58
     kind: 1
-    position: {x: 1949.3333, y: 226}
+    position: {x: 1949, y: 226}
     speaker: Selvan
     body: I lost. I Completely lost. and You
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0
@@ -125,6 +133,7 @@ MonoBehaviour:
     speaker: Selvan
     body: Just move forward, u will be seeing a old ancient temple. Just pass throught
       it to it, to get out of our village.
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0
@@ -134,9 +143,10 @@ MonoBehaviour:
     choiceLabels: []
   - id: 7cb4d4b9895640c48e6acec901df56db
     kind: 1
-    position: {x: 3208.6667, y: 29.333332}
+    position: {x: 3209, y: 29}
     speaker: Nedumaaran
     body: Thanks. Stay alive.
+    colourPreset: 1
     advanceMode: 0
     autoDelay: 1
     charsPerSecond: 0
