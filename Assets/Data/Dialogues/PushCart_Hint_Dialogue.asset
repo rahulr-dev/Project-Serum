@@ -32,7 +32,7 @@ MonoBehaviour:
     choiceLabels: []
   - id: c45ca4324d5b402fa4ea046c2fa42eac
     kind: 1
-    position: {x: 210, y: 169.33333}
+    position: {x: 210, y: 169}
     speaker: 
     body: "\tI need something to cross over the fence"
     colourPreset: 0

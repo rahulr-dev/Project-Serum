@@ -32,7 +32,7 @@ MonoBehaviour:
     choiceLabels: []
   - id: eb1a08b548bc4181949ab955511159a7
     kind: 1
-    position: {x: 254, y: 155.33333}
+    position: {x: 254, y: 155}
     speaker: NPC1
     body: "I heard they got the scientist with the serum, but what\u2019s with these
       people? \nWhy are they taking these villagers as hostage?\r\n"
@@ -46,7 +46,7 @@ MonoBehaviour:
     choiceLabels: []
   - id: 8c3281e531f0480ab1d734d7aa91af23
     kind: 1
-    position: {x: 859.3334, y: 151.33333}
+    position: {x: 859, y: 151}
     speaker: NPC 2
     body: "Actually, no one really knows why they\u2019re taking these people hostage."
     colourPreset: 1
@@ -59,7 +59,7 @@ MonoBehaviour:
     choiceLabels: []
   - id: 5282cf81dd2c49e98138087fed50bf3b
     kind: 1
-    position: {x: 1439.3334, y: 208}
+    position: {x: 1439, y: 208}
     speaker: NPC2
     body: "But I heard a rumor that they\u2019re transporting them offshore to the
       Genesis Laboratory. \nSome people say they\u2019re using the villagers as human

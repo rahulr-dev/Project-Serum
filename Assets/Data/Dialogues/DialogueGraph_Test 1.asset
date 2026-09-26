@@ -32,7 +32,7 @@ MonoBehaviour:
     choiceLabels: []
   - id: 7bdac539f2fd4ae9911b944b9b4ec628
     kind: 3
-    position: {x: 1209.3334, y: 210}
+    position: {x: 1209, y: 210}
     speaker: 
     body: 
     colourPreset: 1
@@ -45,7 +45,7 @@ MonoBehaviour:
     choiceLabels: []
   - id: 5a3e84afccb2422fa3f2facd2002cc75
     kind: 1
-    position: {x: 238.66666, y: 112}
+    position: {x: 239, y: 112}
     speaker: Dummy
     body: Hi Bruh
     colourPreset: 1
