@@ -54,6 +54,7 @@ namespace QTE.Editor
                     "SerumActionBridge methods:\n" +
                     "Transform: SmoothMoveLeft/Right/Forward/Backward/Up (distance, speed), " +
                     "SmoothFaceLeft/Right (speed), MoveLeft, MoveRight, Activate, Deactivate\n" +
+                    "Physics: ApplyImpulse (uses the configured Rigidbody and impulse)\n" +
                     "Events: Raise (string id)\n" +
                     "Player: PlayIdle, PlayRun, RunLeft/Right/Forward/Backward (distance, speed), " +
                     "RunTo (offsetX, offsetZ, speed), StopSmoothMotion, ForceJump, EnableLocomotion, " +

@@ -54,6 +54,7 @@ namespace NpcAi.Editor
                 EditorGUILayout.HelpBox(
                     "SerumActionBridge methods:\n" +
                     "Transform: SmoothMoveLeft/Right/Forward/Backward (distance, speed), StopSmoothMotion\n" +
+                    "Physics: ApplyImpulse (uses the configured Rigidbody and impulse)\n" +
                     "Events: Raise (string id)\n" +
                     "Character: PlayIdle, PlayRun, RunLeft/Right/Forward/Backward (distance, speed), " +
                     "RunTo (offsetX, offsetZ, speed), ForceJump, EnableLocomotion, DisableLocomotion, " +

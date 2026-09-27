@@ -25,6 +25,12 @@ namespace Events
         [SerializeField] float faceLeftYaw = -90f;
         [SerializeField] float faceRightYaw = 90f;
 
+        [Header("Impulse")]
+        [Tooltip("The Rigidbody that receives the configured impulse.")]
+        [SerializeField] Rigidbody impulseRigidbody;
+        [Tooltip("World-space force applied by ApplyImpulse using ForceMode.Impulse.")]
+        [SerializeField] Vector3 impulse = new Vector3(0f, 5f, 0f);
+
         [Header("Optional Player")]
         [SerializeField] CharacterAnimation characterAnimation;
         [SerializeField] SideScrollerController locomotion;
@@ -273,6 +279,29 @@ namespace Events
         {
             StopSmoothMotion();
             _transform.position += delta;
+        }
+
+        /// <summary>Applies the configured world-space impulse to the assigned Rigidbody.</summary>
+        public void ApplyImpulse()
+        {
+            ApplyImpulse(impulse);
+        }
+
+        /// <summary>Applies a world-space impulse to the assigned Rigidbody.</summary>
+        public void ApplyImpulse(Vector3 force)
+        {
+            if (impulseRigidbody == null)
+            {
+                Debug.LogWarning("SerumActionBridge.ApplyImpulse requires an Impulse Rigidbody.", this);
+                return;
+            }
+
+            impulseRigidbody.AddForce(force, ForceMode.Impulse);
+        }
+
+        public void ApplyImpulse(float x, float y, float z)
+        {
+            ApplyImpulse(new Vector3(x, y, z));
         }
 
         public void MoveTo(Vector3 worldPos, float speed)
