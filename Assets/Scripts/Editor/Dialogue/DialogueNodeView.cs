@@ -58,6 +58,8 @@ namespace Dialogue.Editor
             {
                 if (Data.choiceLabels == null)
                     Data.choiceLabels = new List<string>();
+                if (Data.tamilChoiceLabels == null)
+                    Data.tamilChoiceLabels = new List<string>();
                 if (Data.choiceLabels.Count == 0)
                     Data.choiceLabels.Add("Option");
 
@@ -82,14 +84,15 @@ namespace Dialogue.Editor
         {
             if (Data.kind == DialogueNodeKind.Line)
             {
-                TextField speaker = new TextField("Speaker") { value = Data.speaker };
-                speaker.RegisterValueChangedCallback(evt => Data.speaker = evt.newValue);
-                extensionContainer.Add(speaker);
-
-                TextField body = new TextField("Text") { value = Data.body, multiline = true };
+                TextField body = new TextField("English Text") { value = Data.body, multiline = true };
                 body.style.minHeight = 60;
                 body.RegisterValueChangedCallback(evt => Data.body = evt.newValue);
                 extensionContainer.Add(body);
+
+                TextField tamilBody = new TextField("Tamil Text") { value = Data.tamilBody, multiline = true };
+                tamilBody.style.minHeight = 60;
+                tamilBody.RegisterValueChangedCallback(evt => Data.tamilBody = evt.newValue);
+                extensionContainer.Add(tamilBody);
 
                 EnumField colour = new EnumField("Colour", Data.colourPreset);
                 colour.RegisterValueChangedCallback(evt => Data.colourPreset = (DialogueColourPreset)evt.newValue);
@@ -110,9 +113,15 @@ namespace Dialogue.Editor
 
             if (Data.kind == DialogueNodeKind.Choice)
             {
+                if (Data.choiceLabels == null)
+                    Data.choiceLabels = new List<string>();
+                if (Data.tamilChoiceLabels == null)
+                    Data.tamilChoiceLabels = new List<string>();
+
                 Button add = new Button(() =>
                 {
                     Data.choiceLabels.Add("Option");
+                    Data.tamilChoiceLabels.Add("Option");
                     RebuildChoiceOutputs();
                     RefreshChoiceLabelFields();
                 }) { text = "Add option" };
@@ -136,7 +145,7 @@ namespace Dialogue.Editor
             for (int i = 0; i < Data.choiceLabels.Count; i++)
             {
                 int index = i;
-                TextField field = new TextField($"Option {index}") { value = Data.choiceLabels[index] };
+                TextField field = new TextField($"English Option {index}") { value = Data.choiceLabels[index] };
                 field.RegisterValueChangedCallback(evt =>
                 {
                     Data.choiceLabels[index] = evt.newValue;
@@ -144,6 +153,13 @@ namespace Dialogue.Editor
                         OutputPorts[index].portName = string.IsNullOrEmpty(evt.newValue) ? $"Out {index}" : evt.newValue;
                 });
                 extensionContainer.Add(field);
+
+                while (Data.tamilChoiceLabels.Count <= index)
+                    Data.tamilChoiceLabels.Add("");
+
+                TextField tamilField = new TextField($"Tamil Option {index}") { value = Data.tamilChoiceLabels[index] };
+                tamilField.RegisterValueChangedCallback(evt => Data.tamilChoiceLabels[index] = evt.newValue);
+                extensionContainer.Add(tamilField);
             }
         }
     }

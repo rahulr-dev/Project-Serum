@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16f6336ad21230c468ac096c409b2a9e, type: 3}
   m_Name: DialogueGraph_Test 1
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue.DialogueGraph
+  updateGameState: 1
   playState: 3
   endState: 2
   charsPerSecond: 20
@@ -20,8 +21,8 @@ MonoBehaviour:
   - id: ac0c27fc0edc40a991871ae66ac4f950
     kind: 0
     position: {x: 80, y: 160}
-    speaker: 
     body: 
+    tamilBody: 
     colourPreset: 1
     advanceMode: 0
     autoDelay: 1
@@ -30,11 +31,12 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     choiceLabels: []
+    tamilChoiceLabels: []
   - id: 7bdac539f2fd4ae9911b944b9b4ec628
     kind: 3
-    position: {x: 1209, y: 210}
-    speaker: 
+    position: {x: 1209.3334, y: 210}
     body: 
+    tamilBody: 
     colourPreset: 1
     advanceMode: 0
     autoDelay: 1
@@ -43,11 +45,12 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     choiceLabels: []
+    tamilChoiceLabels: []
   - id: 5a3e84afccb2422fa3f2facd2002cc75
     kind: 1
-    position: {x: 239, y: 112}
-    speaker: Dummy
+    position: {x: 239.33334, y: 112}
     body: Hi Bruh
+    tamilBody: 
     colourPreset: 1
     advanceMode: 0
     autoDelay: 1
@@ -56,11 +59,12 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     choiceLabels: []
+    tamilChoiceLabels: []
   - id: 6effe4a0774844559229a613fc602cfc
     kind: 1
     position: {x: 770, y: -38}
-    speaker: Dummy 2
     body: Hi, See you araound!
+    tamilBody: 
     colourPreset: 1
     advanceMode: 0
     autoDelay: 1
@@ -69,11 +73,12 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     choiceLabels: []
+    tamilChoiceLabels: []
   - id: 8187a9d421bd42dcba667028dcf103ff
     kind: 2
     position: {x: 546, y: 210}
-    speaker: 
     body: 
+    tamilBody: 
     colourPreset: 1
     advanceMode: 0
     autoDelay: 1
@@ -84,11 +89,14 @@ MonoBehaviour:
     choiceLabels:
     - HI
     - Bye
+    tamilChoiceLabels:
+    - 
+    - 
   - id: a94240fb1e424b718f91eec454b6ca46
     kind: 1
     position: {x: 770, y: 302}
-    speaker: Dummy 3
     body: YO, WTF is wrong with you bruh
+    tamilBody: 
     colourPreset: 1
     advanceMode: 0
     autoDelay: 1
@@ -97,6 +105,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     choiceLabels: []
+    tamilChoiceLabels: []
   edges:
   - fromId: ac0c27fc0edc40a991871ae66ac4f950
     fromPort: 0

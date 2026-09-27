@@ -7,6 +7,8 @@ namespace Dialogue
     [CreateAssetMenu(fileName = "DialogueGraph", menuName = "Serum/Dialogue Graph", order = 0)]
     public class DialogueGraph : ScriptableObject
     {
+        [Tooltip("When disabled, this dialogue does not change the game state when it starts or ends.")]
+        public bool updateGameState = true;
         public GameState playState = GameState.Dialogue;
         public GameState endState = GameState.Gameplay;
         public float charsPerSecond = 40f;

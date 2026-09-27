@@ -18,7 +18,9 @@ namespace Dialogue
         public IReadOnlyList<string> CurrentChoices => _choiceLabels;
 
         DialogueGraph _graph;
+        DialogueManager.Language _language;
         DialogueNodeData _current;
+        string _lineText;
         float _visibleChars;
         float _autoTimer;
         bool _lineRevealed;
@@ -28,10 +30,11 @@ namespace Dialogue
         float _choiceRepeatTimer;
         int _choiceHoldDir;
 
-        public void Start(DialogueGraph graph)
+        public void Start(DialogueGraph graph, DialogueManager.Language language)
         {
             Stop(false);
             _graph = graph;
+            _language = language;
             IsPlaying = graph != null;
             if (!IsPlaying)
             {
@@ -55,6 +58,7 @@ namespace Dialogue
             IsPlaying = false;
             _graph = null;
             _current = null;
+            _lineText = null;
             _inChoice = false;
             _waitingAuto = false;
             _choiceLabels.Clear();
@@ -120,11 +124,10 @@ namespace Dialogue
                 int before = Mathf.FloorToInt(_visibleChars);
                 _visibleChars += cps * deltaTime;
                 int after = Mathf.FloorToInt(_visibleChars);
-                string body = _current.body ?? "";
-                if (after >= body.Length)
+                if (after >= _lineText.Length)
                     RevealAll();
                 else if (after != before)
-                    OnLineTextUpdated?.Invoke(body.Substring(0, Mathf.Max(0, after)));
+                    OnLineTextUpdated?.Invoke(_lineText.Substring(0, Mathf.Max(0, after)));
                 return;
             }
 
@@ -193,10 +196,9 @@ namespace Dialogue
 
         void RevealAll()
         {
-            string body = _current.body ?? "";
-            _visibleChars = body.Length;
+            _visibleChars = _lineText.Length;
             _lineRevealed = true;
-            OnLineTextUpdated?.Invoke(body);
+            OnLineTextUpdated?.Invoke(_lineText);
 
             if (_current.advanceMode == DialogueAdvanceMode.Auto)
             {
@@ -230,6 +232,7 @@ namespace Dialogue
             _inChoice = false;
             _waitingAuto = false;
             _lineRevealed = false;
+            _lineText = null;
             _choiceHoldDir = 0;
             _choiceRepeatTimer = 0f;
 
@@ -239,22 +242,23 @@ namespace Dialogue
                     Enter(_graph.FindNext(node.id, 0));
                     break;
                 case DialogueNodeKind.Line:
+                    _lineText = node.GetBody(_language);
                     node.onStart?.Invoke();
                     OnLineStarted?.Invoke(new DialogueLineInfo(
-                        node.speaker,
-                        node.body ?? "",
+                        _lineText,
                         node.advanceMode,
                         _graph.ResolveDialogueColour(node.colourPreset)));
                     _visibleChars = 0f;
-                    if (string.IsNullOrEmpty(node.body))
+                    if (string.IsNullOrEmpty(_lineText))
                         RevealAll();
                     else
                         OnLineTextUpdated?.Invoke("");
                     break;
                 case DialogueNodeKind.Choice:
                     _choiceLabels.Clear();
-                    if (node.choiceLabels != null)
-                        _choiceLabels.AddRange(node.choiceLabels);
+                    IReadOnlyList<string> choiceLabels = node.GetChoiceLabels(_language);
+                    if (choiceLabels != null)
+                        _choiceLabels.AddRange(choiceLabels);
                     if (_choiceLabels.Count == 0)
                     {
                         Finish();

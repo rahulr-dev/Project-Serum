@@ -10,14 +10,13 @@ namespace Dialogue
         [SerializeField] GameObject rootPanel;
         [SerializeField] GameObject linePanel;
         [SerializeField] GameObject choicesPanel;
-        [Tooltip("Single TMP label that displays {Speaker: dialogue}.")]
+        [Tooltip("Single TMP label that displays dialogue text.")]
         [SerializeField] TMP_Text dialogueText;
         [SerializeField] Transform choicesRoot;
         [SerializeField] DialogueChoiceItem choicePrefab;
         [SerializeField] bool hideOnEnd = true;
 
         readonly List<DialogueChoiceItem> _spawned = new List<DialogueChoiceItem>();
-        string _speaker;
         Color _dialogueColour = Color.white;
 
         void Awake()
@@ -91,7 +90,6 @@ namespace Dialogue
                 linePanel.SetActive(true);
             SetChoicesVisible(false);
             ClearChoices();
-            _speaker = info.Speaker ?? "";
             _dialogueColour = info.Colour;
             SetDialogueText("");
         }
@@ -166,11 +164,8 @@ namespace Dialogue
             if (dialogueText == null)
                 return;
 
-            string visibleBody = body ?? string.Empty;
             dialogueText.color = _dialogueColour;
-            dialogueText.text = string.IsNullOrEmpty(_speaker)
-                ? visibleBody
-                : $"{_speaker}: {visibleBody}";
+            dialogueText.text = body ?? string.Empty;
         }
     }
 }

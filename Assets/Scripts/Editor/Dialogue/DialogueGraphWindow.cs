@@ -129,8 +129,13 @@ namespace Dialogue.Editor
                 EditorGUILayout.LabelField("Graph", EditorStyles.boldLabel);
                 _serializedGraph ??= new SerializedObject(_graph);
                 _serializedGraph.Update();
-                EditorGUILayout.PropertyField(_serializedGraph.FindProperty("playState"));
-                EditorGUILayout.PropertyField(_serializedGraph.FindProperty("endState"));
+                SerializedProperty updateGameState = _serializedGraph.FindProperty("updateGameState");
+                EditorGUILayout.PropertyField(updateGameState, new GUIContent("Update Game State"));
+                using (new EditorGUI.DisabledScope(!updateGameState.boolValue))
+                {
+                    EditorGUILayout.PropertyField(_serializedGraph.FindProperty("playState"), new GUIContent("Enter State"));
+                    EditorGUILayout.PropertyField(_serializedGraph.FindProperty("endState"), new GUIContent("Exit State"));
+                }
                 EditorGUILayout.PropertyField(_serializedGraph.FindProperty("charsPerSecond"));
                 EditorGUILayout.PropertyField(_serializedGraph.FindProperty("choiceRepeatDelay"));
                 _serializedGraph.ApplyModifiedProperties();
@@ -192,7 +197,7 @@ namespace Dialogue.Editor
                     continue;
 
                 so.Update();
-                EditorGUILayout.LabelField($"On Start — {selected.Data.speaker}", EditorStyles.boldLabel);
+                EditorGUILayout.LabelField("On Start", EditorStyles.boldLabel);
                 EditorGUILayout.PropertyField(node.FindPropertyRelative("onStart"));
                 so.ApplyModifiedProperties();
                 break;

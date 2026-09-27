@@ -11,14 +11,40 @@ namespace Dialogue
         public string id;
         public DialogueNodeKind kind;
         public Vector2 position;
-        public string speaker = "";
         public string body = "";
+        [TextArea] public string tamilBody = "";
         public DialogueColourPreset colourPreset = DialogueColourPreset.NPC;
         public DialogueAdvanceMode advanceMode = DialogueAdvanceMode.Interact;
         public float autoDelay = 1f;
         public float charsPerSecond;
         public UnityEvent onStart = new UnityEvent();
         public List<string> choiceLabels = new List<string>();
+        public List<string> tamilChoiceLabels = new List<string>();
+
+        public string GetBody(DialogueManager.Language language)
+        {
+            return language == DialogueManager.Language.Tamil && !string.IsNullOrEmpty(tamilBody)
+                ? tamilBody
+                : body ?? "";
+        }
+
+        public IReadOnlyList<string> GetChoiceLabels(DialogueManager.Language language)
+        {
+            if (choiceLabels == null)
+                return null;
+
+            if (language != DialogueManager.Language.Tamil || tamilChoiceLabels == null)
+                return choiceLabels;
+
+            List<string> labels = new List<string>(choiceLabels.Count);
+            for (int i = 0; i < choiceLabels.Count; i++)
+            {
+                string tamilLabel = i < tamilChoiceLabels.Count ? tamilChoiceLabels[i] : null;
+                labels.Add(!string.IsNullOrEmpty(tamilLabel) ? tamilLabel : choiceLabels[i]);
+            }
+
+            return labels;
+        }
     }
 
     [Serializable]
@@ -31,14 +57,12 @@ namespace Dialogue
 
     public readonly struct DialogueLineInfo
     {
-        public readonly string Speaker;
         public readonly string FullText;
         public readonly DialogueAdvanceMode AdvanceMode;
         public readonly Color Colour;
 
-        public DialogueLineInfo(string speaker, string fullText, DialogueAdvanceMode advanceMode, Color colour)
+        public DialogueLineInfo(string fullText, DialogueAdvanceMode advanceMode, Color colour)
         {
-            Speaker = speaker;
             FullText = fullText;
             AdvanceMode = advanceMode;
             Colour = colour;

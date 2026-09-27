@@ -1724,6 +1724,8 @@ MonoBehaviour:
   defaultRotateSpeed: 360
   faceLeftYaw: -90
   faceRightYaw: 90
+  impulseRigidbody: {fileID: 0}
+  impulse: {x: 0, y: 5, z: 0}
   characterAnimation: {fileID: 0}
   locomotion: {fileID: 0}
   forwardControllerEvents: 1
@@ -2190,6 +2192,10 @@ GameObject:
   - component: {fileID: 1073004087680822343}
   - component: {fileID: 1958387444882704560}
   - component: {fileID: 9081413478858342690}
+  - component: {fileID: 6810006228757539340}
+  - component: {fileID: 2457723435630519807}
+  - component: {fileID: 6320967040766499784}
+  - component: {fileID: 2673470984639535708}
   m_Layer: 0
   m_Name: PatrolEnemy
   m_TagString: Untagged
@@ -2281,6 +2287,8 @@ MonoBehaviour:
   defaultRotateSpeed: 360
   faceLeftYaw: -90
   faceRightYaw: 90
+  impulseRigidbody: {fileID: 0}
+  impulse: {x: 0, y: 5, z: 0}
   characterAnimation: {fileID: 0}
   locomotion: {fileID: 0}
   forwardControllerEvents: 1
@@ -2413,6 +2421,96 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NpcAi.NpcStateMachineBridge
   machine: {fileID: 1958387444882704560}
   interruptNodeId: b7daf1552b624a378a35ac2ad1434026
+--- !u!114 &6810006228757539340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6929153060784531279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f6f2f37c384c2f8d0f6d6a4f8421e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NpcAi.NpcNoiseDetection
+  machine: {fileID: 1958387444882704560}
+  interruptNodeIds:
+  - b7daf1552b624a378a35ac2ad1434026
+  - 115baa73cc3e43e799d12b17d202b675
+  normalNoiseRadius: 8
+  stealthNoiseRadius: 3
+  sphereCenter: {x: 0, y: 0, z: 0}
+  normalNoiseSphere: {fileID: 2457723435630519807}
+  stealthNoiseSphere: {fileID: 6320967040766499784}
+--- !u!135 &2457723435630519807
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6929153060784531279}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 8
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &6320967040766499784
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6929153060784531279}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &2673470984639535708
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6929153060784531279}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6937751790497191892
 GameObject:
   m_ObjectHideFlags: 0
@@ -2582,6 +2680,10 @@ MonoBehaviour:
   searchTrigger: Search
   walkTrigger: Walk
   runTrigger: Run
+  movementRoot: {fileID: 0}
+  movementSpeedMultiplier: 1
+  fallbackMaxMovementSpeed: 4
+  movementSpeedParam: Speed
 --- !u!1 &7378505895712623849
 GameObject:
   m_ObjectHideFlags: 0

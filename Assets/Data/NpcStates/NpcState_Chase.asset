@@ -68,7 +68,7 @@ MonoBehaviour:
     eventId: 
     waitUntilDone: 1
     executeHandlerId: 
-    moveTargetId: f17ad00bdf4a4ba8856d91d317c4542c
+    moveTargetId: 2df6956cfb8449b9835b49378f16877e
     branchCount: 2
     stopDistance: 2
     waitEventId: ScriptedRunEnded
@@ -88,7 +88,7 @@ MonoBehaviour:
     eventId: 
     waitUntilDone: 0
     executeHandlerId: 
-    moveTargetId: f17ad00bdf4a4ba8856d91d317c4542c
+    moveTargetId: 2df6956cfb8449b9835b49378f16877e
     branchCount: 2
     stopDistance: 0.4
     waitEventId: ScriptedRunEnded

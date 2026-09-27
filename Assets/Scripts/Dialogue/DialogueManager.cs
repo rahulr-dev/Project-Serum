@@ -11,6 +11,12 @@ namespace Dialogue
 {
     public class DialogueManager : MonoBehaviour
     {
+        public enum Language
+        {
+            English,
+            Tamil
+        }
+
         public static DialogueManager Instance { get; private set; }
 
         public event Action<DialogueGraph> OnDialogueStarted;
@@ -22,8 +28,11 @@ namespace Dialogue
 
         public const string OverlayPrefsKey = "Serum.DialogueOverlay.Enabled";
 
+        [SerializeField] Language language = Language.English;
+
         public bool IsPlaying => _runner != null && _runner.IsPlaying;
         public DialogueGraph CurrentGraph { get; private set; }
+        public Language CurrentLanguage => language;
 
         readonly DialogueRunner _runner = new DialogueRunner();
         bool _ending;
@@ -91,11 +100,16 @@ namespace Dialogue
                 StopDialogue();
 
             CurrentGraph = graph;
-            if (GameStateManager.Instance != null)
+            if (graph.updateGameState && GameStateManager.Instance != null)
                 GameStateManager.Instance.SetState(graph.playState);
 
             OnDialogueStarted?.Invoke(graph);
-            _runner.Start(graph);
+            _runner.Start(graph, language);
+        }
+
+        public void SetLanguage(Language selectedLanguage)
+        {
+            language = selectedLanguage;
         }
 
         public void StopDialogue()
@@ -145,7 +159,7 @@ namespace Dialogue
             _ending = true;
             DialogueGraph graph = CurrentGraph;
             CurrentGraph = null;
-            if (GameStateManager.Instance != null && graph != null)
+            if (graph != null && graph.updateGameState && GameStateManager.Instance != null)
                 GameStateManager.Instance.SetState(graph.endState);
 
             OnDialogueEnded?.Invoke();
