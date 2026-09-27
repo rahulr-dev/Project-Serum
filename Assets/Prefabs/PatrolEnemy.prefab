@@ -2484,7 +2484,7 @@ MonoBehaviour:
   interruptNodeIds:
   - b7daf1552b624a378a35ac2ad1434026
   - 115baa73cc3e43e799d12b17d202b675
-  normalNoiseRadius: 8
+  normalNoiseRadius: 10
   stealthNoiseRadius: 3
   sphereCenter: {x: 0, y: 0, z: 0}
   normalNoiseSphere: {fileID: 2457723435630519807}
@@ -2508,7 +2508,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 8
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2673470984639535708
 Rigidbody:
