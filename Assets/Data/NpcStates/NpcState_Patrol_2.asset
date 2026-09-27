@@ -35,7 +35,7 @@ MonoBehaviour:
     endOutcome: 1
   - id: ab55adf0971e43ea886532d69e073f68
     kind: 3
-    position: {x: 656, y: 167.33333}
+    position: {x: 578.6667, y: 167.33333}
     duration: 1
     characterAction: 34
     distance: 4
@@ -55,7 +55,7 @@ MonoBehaviour:
     endOutcome: 1
   - id: 7434929cc8084422aa4c521fcb4deab1
     kind: 3
-    position: {x: 1394, y: 157.33333}
+    position: {x: 1255.3334, y: 167.33333}
     duration: 1
     characterAction: 34
     distance: 4
@@ -95,7 +95,7 @@ MonoBehaviour:
     endOutcome: 1
   - id: 44f51d5300fb47168af1b3460a67dc42
     kind: 3
-    position: {x: 1038, y: 167.33333}
+    position: {x: 931.3334, y: 167.33333}
     duration: 1
     characterAction: 37
     distance: 4
@@ -115,7 +115,7 @@ MonoBehaviour:
     endOutcome: 1
   - id: c8f69e23520d4d939095bf1ef9c5fa30
     kind: 3
-    position: {x: 1792, y: 157.33333}
+    position: {x: 1650, y: 167.33333}
     duration: 1
     characterAction: 37
     distance: 4
@@ -135,7 +135,7 @@ MonoBehaviour:
     endOutcome: 1
   - id: 9305ae9a79094063bea7d5810097bdcc
     kind: 3
-    position: {x: 2121.3333, y: 124.66667}
+    position: {x: 1980.6667, y: 167.33333}
     duration: 1
     characterAction: 34
     distance: 4
@@ -155,7 +155,7 @@ MonoBehaviour:
     endOutcome: 1
   - id: dc4dad5a62554302a881b6cb3e3020aa
     kind: 3
-    position: {x: 2550, y: 156}
+    position: {x: 2346, y: 167.33333}
     duration: 1
     characterAction: 37
     distance: 4
@@ -175,7 +175,7 @@ MonoBehaviour:
     endOutcome: 1
   - id: dfbf0a76364944c198d2b8a0661f12ec
     kind: 3
-    position: {x: 2722, y: -304}
+    position: {x: 2697.3333, y: 167.33333}
     duration: 1
     characterAction: 34
     distance: 4
@@ -189,6 +189,26 @@ MonoBehaviour:
     waitUntilDone: 1
     executeHandlerId: 
     moveTargetId: bfd31464f98f4cafbd31a2e2d427c066
+    branchCount: 2
+    stopDistance: 0.4
+    waitEventId: ScriptedRunEnded
+    endOutcome: 1
+  - id: ad4deea0ebc24562934ebb9f8797fc5a
+    kind: 1
+    position: {x: 3132, y: 167.33333}
+    duration: 1
+    characterAction: 0
+    distance: 4
+    speed: 4
+    offsetX: 0
+    offsetZ: 0
+    animSpeed: 1
+    degrees: 45
+    rotateSpeed: 360
+    eventId: 
+    waitUntilDone: 1
+    executeHandlerId: 
+    moveTargetId: 
     branchCount: 2
     stopDistance: 0.4
     waitEventId: ScriptedRunEnded
@@ -220,4 +240,4 @@ MonoBehaviour:
     toId: dc4dad5a62554302a881b6cb3e3020aa
   - fromId: dfbf0a76364944c198d2b8a0661f12ec
     fromPort: 0
-    toId: b4d4184a542a4f91993d1569cf288c33
+    toId: ad4deea0ebc24562934ebb9f8797fc5a

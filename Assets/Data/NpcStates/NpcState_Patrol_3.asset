@@ -15,7 +15,7 @@ MonoBehaviour:
   nodes:
   - id: f3c3804be5a84cf9a948e332c3c2ddb5
     kind: 0
-    position: {x: 106.66666, y: 179.33333}
+    position: {x: 285.3333, y: -51.333336}
     duration: 1
     characterAction: 0
     distance: 4
@@ -35,7 +35,7 @@ MonoBehaviour:
     endOutcome: 1
   - id: ab55adf0971e43ea886532d69e073f68
     kind: 3
-    position: {x: 657.3333, y: 198.66667}
+    position: {x: 698.6667, y: -51.333336}
     duration: 1
     characterAction: 34
     distance: 4
@@ -55,27 +55,7 @@ MonoBehaviour:
     endOutcome: 1
   - id: b4d4184a542a4f91993d1569cf288c33
     kind: 3
-    position: {x: 272.6667, y: 179.33333}
-    duration: 1
-    characterAction: 37
-    distance: 4
-    speed: 4
-    offsetX: 0
-    offsetZ: 0
-    animSpeed: 1
-    degrees: 45
-    rotateSpeed: 50
-    eventId: 
-    waitUntilDone: 0
-    executeHandlerId: 
-    moveTargetId: ac80becceadf424296be276a7ff9aaff
-    branchCount: 2
-    stopDistance: 0.4
-    waitEventId: ScriptedRunEnded
-    endOutcome: 1
-  - id: dc4dad5a62554302a881b6cb3e3020aa
-    kind: 3
-    position: {x: 272.6667, y: -320.66666}
+    position: {x: 420.6667, y: -51.333336}
     duration: 1
     characterAction: 37
     distance: 4
@@ -93,9 +73,29 @@ MonoBehaviour:
     stopDistance: 0.4
     waitEventId: ScriptedRunEnded
     endOutcome: 1
+  - id: dc4dad5a62554302a881b6cb3e3020aa
+    kind: 3
+    position: {x: 1028, y: -51.333336}
+    duration: 1
+    characterAction: 37
+    distance: 4
+    speed: 4
+    offsetX: 0
+    offsetZ: 0
+    animSpeed: 1
+    degrees: 45
+    rotateSpeed: 50
+    eventId: 
+    waitUntilDone: 1
+    executeHandlerId: 
+    moveTargetId: e5e73c9e4a094cbd9fe6a038c43d4dfd
+    branchCount: 2
+    stopDistance: 0.4
+    waitEventId: ScriptedRunEnded
+    endOutcome: 1
   - id: dfbf0a76364944c198d2b8a0661f12ec
     kind: 3
-    position: {x: 688.6667, y: -261.3333}
+    position: {x: 1308.6666, y: -51.333336}
     duration: 1
     characterAction: 34
     distance: 4
@@ -113,6 +113,26 @@ MonoBehaviour:
     stopDistance: 0.4
     waitEventId: ScriptedRunEnded
     endOutcome: 1
+  - id: 9534e5fc26964529ab1e1ffd4dbd80fe
+    kind: 1
+    position: {x: 1616, y: -51.333336}
+    duration: 1
+    characterAction: 0
+    distance: 4
+    speed: 4
+    offsetX: 0
+    offsetZ: 0
+    animSpeed: 1
+    degrees: 45
+    rotateSpeed: 360
+    eventId: 
+    waitUntilDone: 1
+    executeHandlerId: 
+    moveTargetId: 
+    branchCount: 2
+    stopDistance: 0.4
+    waitEventId: ScriptedRunEnded
+    endOutcome: 1
   edges:
   - fromId: b4d4184a542a4f91993d1569cf288c33
     fromPort: 0
@@ -123,9 +143,9 @@ MonoBehaviour:
   - fromId: f3c3804be5a84cf9a948e332c3c2ddb5
     fromPort: 0
     toId: b4d4184a542a4f91993d1569cf288c33
-  - fromId: dfbf0a76364944c198d2b8a0661f12ec
-    fromPort: 0
-    toId: b4d4184a542a4f91993d1569cf288c33
   - fromId: ab55adf0971e43ea886532d69e073f68
     fromPort: 0
     toId: dc4dad5a62554302a881b6cb3e3020aa
+  - fromId: dfbf0a76364944c198d2b8a0661f12ec
+    fromPort: 0
+    toId: 9534e5fc26964529ab1e1ffd4dbd80fe
