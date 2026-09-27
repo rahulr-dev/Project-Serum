@@ -5,8 +5,7 @@ namespace Dialogue.Editor
 {
     public static class SerumDialogueOverlayMenu
     {
-        const string EnablePath = "Serum/Enable Dialogue Overlay";
-        const string DisablePath = "Serum/Disable Dialogue Overlay";
+        const string TogglePath = "Serum/Dialogue Overlay";
 
         public static bool IsEnabled
         {
@@ -14,28 +13,17 @@ namespace Dialogue.Editor
             private set => EditorPrefs.SetBool(DialogueManager.OverlayPrefsKey, value);
         }
 
-        [MenuItem(EnablePath, false, 4)]
-        static void EnableOverlay()
+        [MenuItem(TogglePath, false, 4)]
+        static void ToggleOverlay()
         {
-            IsEnabled = true;
+            IsEnabled = !IsEnabled;
         }
 
-        [MenuItem(EnablePath, true)]
-        static bool EnableOverlayValidate()
+        [MenuItem(TogglePath, true)]
+        static bool ToggleOverlayValidate()
         {
-            return !IsEnabled;
-        }
-
-        [MenuItem(DisablePath, false, 5)]
-        static void DisableOverlay()
-        {
-            IsEnabled = false;
-        }
-
-        [MenuItem(DisablePath, true)]
-        static bool DisableOverlayValidate()
-        {
-            return IsEnabled;
+            Menu.SetChecked(TogglePath, IsEnabled);
+            return true;
         }
     }
 }

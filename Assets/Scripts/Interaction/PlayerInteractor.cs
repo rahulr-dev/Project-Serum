@@ -19,9 +19,6 @@ namespace InteractionSystem
         [SerializeField] bool drawGizmos = true;
         [SerializeField] Color gizmoColor = new Color(1f, 0.85f, 0.15f, 1f);
 
-        [Header("Overlay")]
-        [SerializeField] bool showScreenOverlay = true;
-
         public const string OverlayPrefsKey = "Serum.InteractablesOverlay.Enabled";
 
         static readonly Collider[] Hits = new Collider[64];
@@ -213,7 +210,7 @@ namespace InteractionSystem
 #if UNITY_EDITOR
         void OnGUI()
         {
-            if (!showScreenOverlay && !EditorPrefs.GetBool(OverlayPrefsKey, false))
+            if (!EditorPrefs.GetBool(OverlayPrefsKey, false))
                 return;
 
             _overlayRect = GUI.Window(GetInstanceID(), _overlayRect, DrawOverlay, "Interactor");

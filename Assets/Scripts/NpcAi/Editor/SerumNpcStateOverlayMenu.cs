@@ -5,8 +5,7 @@ namespace NpcAi.Editor
 {
     public static class SerumNpcStateOverlayMenu
     {
-        const string EnablePath = "Serum/Enable NPC State Overlay";
-        const string DisablePath = "Serum/Disable NPC State Overlay";
+        const string TogglePath = "Serum/NPC State Overlay";
 
         public static bool IsEnabled
         {
@@ -14,28 +13,17 @@ namespace NpcAi.Editor
             private set => EditorPrefs.SetBool(NpcStateActor.OverlayPrefsKey, value);
         }
 
-        [MenuItem(EnablePath, false, 12)]
-        static void EnableOverlay()
+        [MenuItem(TogglePath, false, 12)]
+        static void ToggleOverlay()
         {
-            IsEnabled = true;
+            IsEnabled = !IsEnabled;
         }
 
-        [MenuItem(EnablePath, true)]
-        static bool EnableOverlayValidate()
+        [MenuItem(TogglePath, true)]
+        static bool ToggleOverlayValidate()
         {
-            return !IsEnabled;
-        }
-
-        [MenuItem(DisablePath, false, 13)]
-        static void DisableOverlay()
-        {
-            IsEnabled = false;
-        }
-
-        [MenuItem(DisablePath, true)]
-        static bool DisableOverlayValidate()
-        {
-            return IsEnabled;
+            Menu.SetChecked(TogglePath, IsEnabled);
+            return true;
         }
     }
 }

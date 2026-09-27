@@ -5,8 +5,7 @@ namespace Character.Editor
 {
     public static class SerumCloneOverlayMenu
     {
-        const string EnablePath = "Serum/Enable Clone Overlay";
-        const string DisablePath = "Serum/Disable Clone Overlay";
+        const string TogglePath = "Serum/Clone Overlay";
 
         public static bool IsEnabled
         {
@@ -14,28 +13,17 @@ namespace Character.Editor
             private set => EditorPrefs.SetBool(PlayerCloneSystem.OverlayPrefsKey, value);
         }
 
-        [MenuItem(EnablePath, false, 14)]
-        static void EnableOverlay()
+        [MenuItem(TogglePath, false, 14)]
+        static void ToggleOverlay()
         {
-            IsEnabled = true;
+            IsEnabled = !IsEnabled;
         }
 
-        [MenuItem(EnablePath, true)]
-        static bool EnableOverlayValidate()
+        [MenuItem(TogglePath, true)]
+        static bool ToggleOverlayValidate()
         {
-            return !IsEnabled;
-        }
-
-        [MenuItem(DisablePath, false, 15)]
-        static void DisableOverlay()
-        {
-            IsEnabled = false;
-        }
-
-        [MenuItem(DisablePath, true)]
-        static bool DisableOverlayValidate()
-        {
-            return IsEnabled;
+            Menu.SetChecked(TogglePath, IsEnabled);
+            return true;
         }
     }
 }

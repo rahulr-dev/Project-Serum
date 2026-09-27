@@ -6,6 +6,7 @@ using UnityEngine.Splines;
 
 namespace Character
 {
+    [ExecuteAlways]
     public class SideScrollerCameraFollow : MonoBehaviour
     {
         [SerializeField] Transform target;
@@ -30,9 +31,28 @@ namespace Character
             _currentPosition = dolly != null ? dolly.CameraPosition : 0f;
             _positionVelocity = 0f;
             CacheCamera();
+            UpdateCamera();
+        }
+
+        void Update()
+        {
+            if (!Application.isPlaying)
+                UpdateCamera();
         }
 
         void LateUpdate()
+        {
+            if (Application.isPlaying)
+                UpdateCamera();
+        }
+
+        void OnValidate()
+        {
+            if (!Application.isPlaying)
+                UpdateCamera();
+        }
+
+        void UpdateCamera()
         {
             if (target == null)
                 return;
@@ -51,8 +71,17 @@ namespace Character
             normalizedT = Mathf.Clamp01(normalizedT);
 
             float desired = ToCameraPosition(normalizedT);
-            _currentPosition = Mathf.SmoothDamp(
-                _currentPosition, desired, ref _positionVelocity, followSmoothTime);
+            if (Application.isPlaying)
+            {
+                _currentPosition = Mathf.SmoothDamp(
+                    _currentPosition, desired, ref _positionVelocity, followSmoothTime);
+            }
+            else
+            {
+                _currentPosition = desired;
+                _positionVelocity = 0f;
+            }
+
             dolly.CameraPosition = _currentPosition;
         }
 

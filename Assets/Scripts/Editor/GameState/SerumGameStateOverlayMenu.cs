@@ -5,8 +5,7 @@ namespace Game.Editor
 {
     public static class SerumGameStateOverlayMenu
     {
-        const string EnablePath = "Serum/Enable Game State Overlay";
-        const string DisablePath = "Serum/Disable Game State Overlay";
+        const string TogglePath = "Serum/Game State Overlay";
 
         public static bool IsEnabled
         {
@@ -14,28 +13,17 @@ namespace Game.Editor
             private set => EditorPrefs.SetBool(GameStateManager.OverlayPrefsKey, value);
         }
 
-        [MenuItem(EnablePath, false, 2)]
-        static void EnableOverlay()
+        [MenuItem(TogglePath, false, 2)]
+        static void ToggleOverlay()
         {
-            IsEnabled = true;
+            IsEnabled = !IsEnabled;
         }
 
-        [MenuItem(EnablePath, true)]
-        static bool EnableOverlayValidate()
+        [MenuItem(TogglePath, true)]
+        static bool ToggleOverlayValidate()
         {
-            return !IsEnabled;
-        }
-
-        [MenuItem(DisablePath, false, 3)]
-        static void DisableOverlay()
-        {
-            IsEnabled = false;
-        }
-
-        [MenuItem(DisablePath, true)]
-        static bool DisableOverlayValidate()
-        {
-            return IsEnabled;
+            Menu.SetChecked(TogglePath, IsEnabled);
+            return true;
         }
     }
 }

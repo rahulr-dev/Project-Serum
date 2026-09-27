@@ -5,8 +5,7 @@ namespace InteractionSystem.Editor
 {
     public static class SerumInteractablesOverlayMenu
     {
-        const string EnablePath = "Serum/Enable Interactables Overlay";
-        const string DisablePath = "Serum/Disable Interactables Overlay";
+        const string TogglePath = "Serum/Interactables Overlay";
 
         public static bool IsEnabled
         {
@@ -14,28 +13,17 @@ namespace InteractionSystem.Editor
             private set => EditorPrefs.SetBool(PlayerInteractor.OverlayPrefsKey, value);
         }
 
-        [MenuItem(EnablePath, false, 24)]
-        static void EnableOverlay()
+        [MenuItem(TogglePath, false, 24)]
+        static void ToggleOverlay()
         {
-            IsEnabled = true;
+            IsEnabled = !IsEnabled;
         }
 
-        [MenuItem(EnablePath, true)]
-        static bool EnableOverlayValidate()
+        [MenuItem(TogglePath, true)]
+        static bool ToggleOverlayValidate()
         {
-            return !IsEnabled;
-        }
-
-        [MenuItem(DisablePath, false, 25)]
-        static void DisableOverlay()
-        {
-            IsEnabled = false;
-        }
-
-        [MenuItem(DisablePath, true)]
-        static bool DisableOverlayValidate()
-        {
-            return IsEnabled;
+            Menu.SetChecked(TogglePath, IsEnabled);
+            return true;
         }
     }
 }

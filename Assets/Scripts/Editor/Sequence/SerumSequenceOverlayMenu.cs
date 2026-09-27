@@ -5,8 +5,7 @@ namespace SequenceSystem.Editor
 {
     public static class SerumSequenceOverlayMenu
     {
-        const string EnablePath = "Serum/Enable Sequence Overlay";
-        const string DisablePath = "Serum/Disable Sequence Overlay";
+        const string TogglePath = "Serum/Sequence Overlay";
 
         public static bool IsEnabled
         {
@@ -14,28 +13,17 @@ namespace SequenceSystem.Editor
             private set => EditorPrefs.SetBool(Sequencer.OverlayPrefsKey, value);
         }
 
-        [MenuItem(EnablePath, false, 10)]
-        static void EnableOverlay()
+        [MenuItem(TogglePath, false, 10)]
+        static void ToggleOverlay()
         {
-            IsEnabled = true;
+            IsEnabled = !IsEnabled;
         }
 
-        [MenuItem(EnablePath, true)]
-        static bool EnableOverlayValidate()
+        [MenuItem(TogglePath, true)]
+        static bool ToggleOverlayValidate()
         {
-            return !IsEnabled;
-        }
-
-        [MenuItem(DisablePath, false, 11)]
-        static void DisableOverlay()
-        {
-            IsEnabled = false;
-        }
-
-        [MenuItem(DisablePath, true)]
-        static bool DisableOverlayValidate()
-        {
-            return IsEnabled;
+            Menu.SetChecked(TogglePath, IsEnabled);
+            return true;
         }
     }
 }
