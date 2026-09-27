@@ -1,13 +1,14 @@
 using Character;
 using Game;
+using Interaction;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace NpcAi
 {
     /// <summary>
-    /// Detects player noise in one of two trigger spheres. Normal gameplay uses the
-    /// larger sphere; stealth gameplay uses the smaller one.
+    /// Detects player noise with one trigger sphere. Its radius shrinks while the
+    /// player is in stealth.
     /// </summary>
     [ExecuteAlways]
     public class NpcNoiseDetection : MonoBehaviour
@@ -18,9 +19,11 @@ namespace NpcAi
         [SerializeField, Min(0.05f)] float stealthNoiseRadius = 4f;
         [SerializeField] Vector3 sphereCenter = Vector3.zero;
         [SerializeField, HideInInspector] SphereCollider normalNoiseSphere;
+        // Retained only to remove the second collider created by older versions of this component.
         [SerializeField, HideInInspector] SphereCollider stealthNoiseSphere;
 
         SideScrollerController _player;
+        readonly HashSet<Collider> _touchingPlayerColliders = new HashSet<Collider>();
         bool _isStealthActive;
 
         void Reset()
@@ -41,19 +44,21 @@ namespace NpcAi
             Resolve();
             EnsureSpheres();
             GameStateManager.OnStateChanged += HandleStateChanged;
+            InteractionManager.OnMove += HandlePlayerMove;
             RefreshState();
         }
 
         void OnDisable()
         {
             GameStateManager.OnStateChanged -= HandleStateChanged;
+            InteractionManager.OnMove -= HandlePlayerMove;
+            _touchingPlayerColliders.Clear();
         }
 
         void Start()
         {
             // All Awake calls have completed here, so the manager's initial state is available.
             RefreshState();
-            TryHear(ResolvePlayer());
         }
 
         void OnValidate()
@@ -64,25 +69,38 @@ namespace NpcAi
 
         void OnTriggerEnter(Collider other)
         {
-            TryHear(other.GetComponentInParent<SideScrollerController>());
+            TrackPlayerCollider(other);
         }
 
         // Also covers a player already inside the other sphere when stealth changes.
         void OnTriggerStay(Collider other)
         {
-            TryHear(other.GetComponentInParent<SideScrollerController>());
+            TrackPlayerCollider(other);
+        }
+
+        void OnTriggerExit(Collider other)
+        {
+            _touchingPlayerColliders.Remove(other);
         }
 
         void OnDrawGizmos()
         {
-            DrawSphereGizmo(normalNoiseRadius, new Color(1f, 0.66f, 0.1f, 0.8f));
-            DrawSphereGizmo(stealthNoiseRadius, new Color(0.2f, 0.8f, 1f, 0.9f));
+            float radius = _isStealthActive ? stealthNoiseRadius : normalNoiseRadius;
+            Color color = _isStealthActive
+                ? new Color(0.2f, 0.8f, 1f, 0.9f)
+                : new Color(1f, 0.66f, 0.1f, 0.8f);
+            DrawSphereGizmo(radius, color);
         }
 
         void HandleStateChanged(GameState previous, GameState current)
         {
             SetStealthActive(IsStealthState(current));
-            TryHear(ResolvePlayer());
+        }
+
+        void HandlePlayerMove(Vector2 moveInput)
+        {
+            if (moveInput.sqrMagnitude > 0f)
+                TryHear(_player);
         }
 
         void RefreshState()
@@ -94,12 +112,31 @@ namespace NpcAi
         void SetStealthActive(bool isStealthActive)
         {
             _isStealthActive = isStealthActive;
+            _touchingPlayerColliders.Clear();
             ApplySphereSettings();
+        }
+
+        void TrackPlayerCollider(Collider other)
+        {
+            if (other == null)
+                return;
+
+            SideScrollerController player = other.GetComponentInParent<SideScrollerController>();
+            if (player == null || IsOwnedByNpc(player.transform))
+                return;
+
+            _player = player;
+            _touchingPlayerColliders.Add(other);
+            TryHear(player);
         }
 
         void TryHear(SideScrollerController player)
         {
-            if (!Application.isPlaying || player == null)
+            if (!Application.isPlaying || player == null || !player.IsMoving)
+                return;
+
+            _touchingPlayerColliders.RemoveWhere(collider => collider == null);
+            if (_touchingPlayerColliders.Count == 0)
                 return;
 
             if (machine == null)
@@ -108,35 +145,11 @@ namespace NpcAi
             if (machine == null || !machine.IsPlaying)
                 return;
 
-            float activeRadius = _isStealthActive ? stealthNoiseRadius : normalNoiseRadius;
-            Vector3 origin = transform.TransformPoint(sphereCenter);
-            if ((player.transform.position - origin).sqrMagnitude > activeRadius * activeRadius)
-                return;
-
             for (int i = 0; i < interruptNodeIds.Count; i++)
             {
                 if (machine.TryInterrupt(interruptNodeIds[i]))
                     return;
             }
-        }
-
-        SideScrollerController ResolvePlayer()
-        {
-            if (_player != null)
-                return _player;
-
-            SideScrollerController[] candidates = FindObjectsByType<SideScrollerController>(FindObjectsSortMode.None);
-            for (int i = 0; i < candidates.Length; i++)
-            {
-                SideScrollerController candidate = candidates[i];
-                if (candidate == null || IsOwnedByNpc(candidate.transform))
-                    continue;
-
-                _player = candidate;
-                break;
-            }
-
-            return _player;
         }
 
         bool IsOwnedByNpc(Transform target)
@@ -154,29 +167,12 @@ namespace NpcAi
 
         void EnsureSpheres()
         {
-            if (normalNoiseSphere == null || stealthNoiseSphere == null || normalNoiseSphere == stealthNoiseSphere)
-            {
-                SphereCollider[] spheres = GetComponents<SphereCollider>();
-                if (normalNoiseSphere == null && spheres.Length > 0)
-                    normalNoiseSphere = spheres[0];
-
-                if (stealthNoiseSphere == null || stealthNoiseSphere == normalNoiseSphere)
-                {
-                    for (int i = 0; i < spheres.Length; i++)
-                    {
-                        if (spheres[i] != normalNoiseSphere)
-                        {
-                            stealthNoiseSphere = spheres[i];
-                            break;
-                        }
-                    }
-                }
-            }
-
+            if (normalNoiseSphere == null)
+                normalNoiseSphere = GetComponent<SphereCollider>();
             if (normalNoiseSphere == null)
                 normalNoiseSphere = gameObject.AddComponent<SphereCollider>();
-            if (stealthNoiseSphere == null || stealthNoiseSphere == normalNoiseSphere)
-                stealthNoiseSphere = gameObject.AddComponent<SphereCollider>();
+
+            RemoveLegacyStealthSphere();
 
             Rigidbody body = GetComponent<Rigidbody>();
             if (body == null)
@@ -187,22 +183,32 @@ namespace NpcAi
             ApplySphereSettings();
         }
 
+        void RemoveLegacyStealthSphere()
+        {
+            if (stealthNoiseSphere == null || stealthNoiseSphere == normalNoiseSphere)
+            {
+                stealthNoiseSphere = null;
+                return;
+            }
+
+            if (Application.isPlaying)
+                Destroy(stealthNoiseSphere);
+            else
+                DestroyImmediate(stealthNoiseSphere);
+
+            stealthNoiseSphere = null;
+        }
+
         void ApplySphereSettings()
         {
             if (normalNoiseSphere != null)
             {
                 normalNoiseSphere.center = sphereCenter;
-                normalNoiseSphere.radius = Mathf.Max(0.05f, normalNoiseRadius);
+                normalNoiseSphere.radius = Mathf.Max(
+                    0.05f,
+                    _isStealthActive ? stealthNoiseRadius : normalNoiseRadius);
                 normalNoiseSphere.isTrigger = true;
-                normalNoiseSphere.enabled = !_isStealthActive;
-            }
-
-            if (stealthNoiseSphere != null)
-            {
-                stealthNoiseSphere.center = sphereCenter;
-                stealthNoiseSphere.radius = Mathf.Max(0.05f, stealthNoiseRadius);
-                stealthNoiseSphere.isTrigger = true;
-                stealthNoiseSphere.enabled = _isStealthActive;
+                normalNoiseSphere.enabled = true;
             }
         }
 

@@ -25,24 +25,24 @@ MonoBehaviour:
     kind: 2
     position: {x: 179.33334, y: 132}
     actionId: 
-    conditionKey: Bell3
+    conditionKey: Bell1
     ignoreKeys: 
   - id: f61c9897f3cf475987e98adac1cac869
     kind: 1
     position: {x: 390, y: 120}
-    actionId: Open3
+    actionId: Open1
     conditionKey: 
     ignoreKeys: 
   - id: 4dad617a91b14bada730124e1377f1ee
     kind: 2
-    position: {x: 622, y: 188}
+    position: {x: 622, y: 190}
     actionId: 
-    conditionKey: Bell4
+    conditionKey: Bell2
     ignoreKeys: 
   - id: 9d484d7c9e154c0093af0adac6946aaa
     kind: 1
     position: {x: 839.3334, y: 217.33333}
-    actionId: Open4
+    actionId: Open2
     conditionKey: 
     ignoreKeys: 
   - id: 463605d391714fa8b3fc508089716016
@@ -55,12 +55,12 @@ MonoBehaviour:
     kind: 2
     position: {x: 1076, y: 305.33334}
     actionId: 
-    conditionKey: Bell5
+    conditionKey: Bell3
     ignoreKeys: 
   - id: 367d50eb12f1449c9dfaf77129dc1448
     kind: 1
     position: {x: 1347.3334, y: 345.33334}
-    actionId: Open5
+    actionId: Open3
     conditionKey: 
     ignoreKeys: 
   - id: 681da6fc8fbb45168f2356b655a27457

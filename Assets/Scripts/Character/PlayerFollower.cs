@@ -2,11 +2,12 @@ using UnityEngine;
 
 namespace Character
 {
-    /// <summary>Follows a player's world X position while preserving this object's Y and Z coordinates.</summary>
+    /// <summary>Follows a player's world X and Y positions with independent offsets, preserving Z.</summary>
     public class PlayerFollower : MonoBehaviour
     {
         [SerializeField] Transform player;
         [SerializeField] float xOffset;
+        [SerializeField] float yOffset;
 
         void Awake()
         {
@@ -25,6 +26,7 @@ namespace Character
 
             Vector3 position = transform.position;
             position.x = player.position.x + xOffset;
+            position.y = player.position.y + yOffset;
             transform.position = position;
         }
 

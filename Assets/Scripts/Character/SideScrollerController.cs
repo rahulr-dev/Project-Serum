@@ -130,6 +130,7 @@ namespace Character
         float _scriptedDuration;
         float _scriptedElapsed;
         float _scriptedRunSpeed;
+        float _startZ;
         Vector3 _scriptedHorizDelta;
         float _currentSpeed;
         float _speedVelocity;
@@ -153,6 +154,11 @@ namespace Character
             _defaultControllerHeight = _controller.height;
             _defaultControllerCenter = _controller.center;
             _targetYaw = transform.eulerAngles.y;
+        }
+
+        void Start()
+        {
+            _startZ = transform.position.z;
         }
 
         void OnEnable()
@@ -418,6 +424,8 @@ namespace Character
                 float yaw = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetYaw, ref _yawVelocity, turnSmoothTime);
                 transform.rotation = Quaternion.Euler(0f, yaw, 0f);
             }
+
+            ClampZPosition();
         }
 
         public void SetClimbing(bool climbing)
@@ -438,6 +446,16 @@ namespace Character
 
             // The game is a side-scroller: keep only horizontal world movement from the clip.
             _controller.Move(new Vector3(worldDelta.x, 0f, 0f));
+            ClampZPosition();
+        }
+
+        void ClampZPosition()
+        {
+            Vector3 position = transform.position;
+            if (Mathf.Approximately(position.z, _startZ))
+                return;
+
+            transform.position = new Vector3(position.x, position.y, _startZ);
         }
 
         public void StartLandingRunMovement(float duration, float horizontalSpeed)

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e3f27a3564dafd48b24d06d77bcfc9d, type: 3}
-  m_Name: NpcBrain_PatrolSearch_2
+  m_Name: NpcBrain_PatrolSearch_3
   m_EditorClassIdentifier: Assembly-CSharp::NpcAi.NpcStateMachineGraph
   nodes:
   - id: 233c7ac2d42e4915b25f9ae60f2c4034
@@ -21,13 +21,13 @@ MonoBehaviour:
     nodeName: 
   - id: b7daf1552b624a378a35ac2ad1434026
     kind: 2
-    position: {x: 397.3333, y: -106.666664}
-    stateGraph: {fileID: 11400000, guid: 497d32571745aea43be9a1ec091cb433, type: 2}
+    position: {x: 477.3333, y: -134}
+    stateGraph: {fileID: 11400000, guid: 5a7aa48a2e372b34a80733bcd7664e54, type: 2}
     actionId: 
     nodeName: Patrol
   - id: 115baa73cc3e43e799d12b17d202b675
     kind: 2
-    position: {x: 446.6667, y: 290}
+    position: {x: 455.3333, y: 312}
     stateGraph: {fileID: 11400000, guid: bdb97321e2112174786e035ca7d13f7a, type: 2}
     actionId: 
     nodeName: Search
@@ -57,7 +57,7 @@ MonoBehaviour:
     nodeName: 
   - id: ff86043e938747f1840b4c9a035b8c87
     kind: 3
-    position: {x: 793.3334, y: 164}
+    position: {x: 728.6667, y: 164}
     stateGraph: {fileID: 0}
     actionId: Chase
     nodeName: 

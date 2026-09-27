@@ -5289,8 +5289,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WindSwayGroup
   hingeOffset: {x: 0, y: 0, z: 0}
   swingTogether: []
-  maxAngle: 8
-  gustSpeed: 0.8
+  maxAngle: 9
+  gustSpeed: 1
   maxOffset: 0
   axisMask: {x: 1, y: 0, z: 1}
 --- !u!1 &4678689939779918602

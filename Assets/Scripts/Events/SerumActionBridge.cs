@@ -410,14 +410,18 @@ namespace Events
             SmoothMoveBy(Vector3.up * distance, speed);
         }
 
-        public void SmoothMoveTo(Vector3 worldPos, float speed)
+        public void SmoothMoveTo(Vector3 localPos, float speed)
         {
-            SmoothMoveBy(worldPos - _transform.position, speed);
+            if ((_transform.localPosition - localPos).sqrMagnitude <= 0.0001f)
+                return;
+
+            StopSmoothMotion();
+            _moveRoutine = StartCoroutine(SmoothMoveToLocalRoutine(localPos, speed));
         }
 
-        public void SmoothMoveToDefault(Vector3 worldPos)
+        public void SmoothMoveToDefault(Vector3 localPos)
         {
-            SmoothMoveTo(worldPos, defaultMoveSpeed);
+            SmoothMoveTo(localPos, defaultMoveSpeed);
         }
 
         public void SmoothMoveTo(float x, float y, float z, float speed)
@@ -430,39 +434,39 @@ namespace Events
             SmoothMoveTo(new Vector3(x, y, z), defaultMoveSpeed);
         }
 
-        public void SmoothMoveToX(float worldX)
+        public void SmoothMoveToX(float localX)
         {
-            SmoothMoveToX(worldX, defaultMoveSpeed);
+            SmoothMoveToX(localX, defaultMoveSpeed);
         }
 
-        public void SmoothMoveToX(float worldX, float speed)
+        public void SmoothMoveToX(float localX, float speed)
         {
-            Vector3 pos = _transform.position;
-            pos.x = worldX;
+            Vector3 pos = _transform.localPosition;
+            pos.x = localX;
             SmoothMoveTo(pos, speed);
         }
 
-        public void SmoothMoveToY(float worldY)
+        public void SmoothMoveToY(float localY)
         {
-            SmoothMoveToY(worldY, defaultMoveSpeed);
+            SmoothMoveToY(localY, defaultMoveSpeed);
         }
 
-        public void SmoothMoveToY(float worldY, float speed)
+        public void SmoothMoveToY(float localY, float speed)
         {
-            Vector3 pos = _transform.position;
-            pos.y = worldY;
+            Vector3 pos = _transform.localPosition;
+            pos.y = localY;
             SmoothMoveTo(pos, speed);
         }
 
-        public void SmoothMoveToZ(float worldZ)
+        public void SmoothMoveToZ(float localZ)
         {
-            SmoothMoveToZ(worldZ, defaultMoveSpeed);
+            SmoothMoveToZ(localZ, defaultMoveSpeed);
         }
 
-        public void SmoothMoveToZ(float worldZ, float speed)
+        public void SmoothMoveToZ(float localZ, float speed)
         {
-            Vector3 pos = _transform.position;
-            pos.z = worldZ;
+            Vector3 pos = _transform.localPosition;
+            pos.z = localZ;
             SmoothMoveTo(pos, speed);
         }
 
@@ -1063,16 +1067,37 @@ namespace Events
         IEnumerator SmoothMoveByRoutine(Vector3 delta, float speed)
         {
             Vector3 target = _transform.position + delta;
+            yield return SmoothMoveToWorldRoutine(target, speed);
+        }
+
+        IEnumerator SmoothMoveToWorldRoutine(Vector3 worldTarget, float speed)
+        {
             float moveSpeed = Mathf.Max(0.01f, speed);
 
-            while ((_transform.position - target).sqrMagnitude > 0.0001f)
+            while ((_transform.position - worldTarget).sqrMagnitude > 0.0001f)
             {
                 _transform.position = Vector3.MoveTowards(
-                    _transform.position, target, moveSpeed * Time.deltaTime);
+                    _transform.position, worldTarget, moveSpeed * Time.deltaTime);
                 yield return null;
             }
 
-            _transform.position = target;
+            _transform.position = worldTarget;
+            _moveRoutine = null;
+            NotifyNamedEvent("SmoothMoveEnded", false);
+        }
+
+        IEnumerator SmoothMoveToLocalRoutine(Vector3 localTarget, float speed)
+        {
+            float moveSpeed = Mathf.Max(0.01f, speed);
+
+            while ((_transform.localPosition - localTarget).sqrMagnitude > 0.0001f)
+            {
+                _transform.localPosition = Vector3.MoveTowards(
+                    _transform.localPosition, localTarget, moveSpeed * Time.deltaTime);
+                yield return null;
+            }
+
+            _transform.localPosition = localTarget;
             _moveRoutine = null;
             NotifyNamedEvent("SmoothMoveEnded", false);
         }

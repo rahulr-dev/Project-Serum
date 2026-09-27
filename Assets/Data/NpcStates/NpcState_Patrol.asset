@@ -115,7 +115,7 @@ MonoBehaviour:
     endOutcome: 1
   - id: b4d4184a542a4f91993d1569cf288c33
     kind: 3
-    position: {x: 560.6667, y: -100}
+    position: {x: 560.6667, y: -104.666664}
     duration: 1
     characterAction: 37
     distance: 4

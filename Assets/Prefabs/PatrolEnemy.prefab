@@ -2194,7 +2194,6 @@ GameObject:
   - component: {fileID: 9081413478858342690}
   - component: {fileID: 6810006228757539340}
   - component: {fileID: 2457723435630519807}
-  - component: {fileID: 6320967040766499784}
   - component: {fileID: 2673470984639535708}
   m_Layer: 0
   m_Name: PatrolEnemy
@@ -2395,6 +2394,54 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - id: Chase
+    onRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4345896052034501598}
+          m_TargetAssemblyTypeName: Character.EnemyCharacterAnimation, Assembly-CSharp
+          m_MethodName: PlayRun
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - id: Patrol
+    onRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4345896052034501598}
+          m_TargetAssemblyTypeName: Character.EnemyCharacterAnimation, Assembly-CSharp
+          m_MethodName: PlayWalk
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - id: Search
+    onRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4345896052034501598}
+          m_TargetAssemblyTypeName: Character.EnemyCharacterAnimation, Assembly-CSharp
+          m_MethodName: PlaySearch
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   onStarted:
     m_PersistentCalls:
       m_Calls: []
@@ -2441,7 +2488,7 @@ MonoBehaviour:
   stealthNoiseRadius: 3
   sphereCenter: {x: 0, y: 0, z: 0}
   normalNoiseSphere: {fileID: 2457723435630519807}
-  stealthNoiseSphere: {fileID: 6320967040766499784}
+  stealthNoiseSphere: {fileID: 0}
 --- !u!135 &2457723435630519807
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2462,27 +2509,6 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 8
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &6320967040766499784
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6929153060784531279}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2673470984639535708
 Rigidbody:
