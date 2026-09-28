@@ -116,7 +116,7 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _OutlineWidth: 0.0001
-    - _OutlineWidthPixels: 1
+    - _OutlineWidthPixels: 2
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1

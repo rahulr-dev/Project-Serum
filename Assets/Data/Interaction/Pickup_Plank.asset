@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d2d17ca1516f7043934cc413c30988a, type: 3}
+  m_Name: Pickup_Plank
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionSystem.InteractionGraph
+  playState: 2
+  endState: 2
+  nodes:
+  - id: bdf95f4260a248e7bc4c7d71aa3df491
+    kind: 0
+    position: {x: 80, y: 160}
+    duration: 1
+    executeHandlerId: 
+  - id: 111995095c334f32ac38cfc8cc936363
+    kind: 3
+    position: {x: 420, y: 160}
+    duration: 1
+    executeHandlerId: 
+  - id: 9c06ec27399b49a0be374dec37540a6f
+    kind: 2
+    position: {x: 252, y: 120.66667}
+    duration: 0
+    executeHandlerId: 0d680e8f0aa743c7927ef4cdd48d79d7
+  edges:
+  - fromId: bdf95f4260a248e7bc4c7d71aa3df491
+    fromPort: 0
+    toId: 9c06ec27399b49a0be374dec37540a6f
+  - fromId: 9c06ec27399b49a0be374dec37540a6f
+    fromPort: 0
+    toId: 111995095c334f32ac38cfc8cc936363

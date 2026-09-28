@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16f6336ad21230c468ac096c409b2a9e, type: 3}
+  m_Name: Forest_Bridge_Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue.DialogueGraph
+  updateGameState: 1
+  playState: 6
+  endState: 2
+  charsPerSecond: 40
+  choiceRepeatDelay: 0.2
+  nodes:
+  - id: 0f7713c4bd8a456b98212cc420d8006d
+    kind: 0
+    position: {x: 80, y: 160}
+    body: 
+    tamilBody: 
+    colourPreset: 1
+    advanceMode: 0
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+    tamilChoiceLabels: []
+  - id: f9a2cf25fc14453398737eada451c42a
+    kind: 3
+    position: {x: 692, y: 132.66667}
+    body: 
+    tamilBody: 
+    colourPreset: 1
+    advanceMode: 0
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+    tamilChoiceLabels: []
+  - id: 2be7432e9ee94610a8472febd23ea477
+    kind: 1
+    position: {x: 237.33334, y: 33.333332}
+    body: Need something to crossover this Shi**y bridge
+    tamilBody: 
+    colourPreset: 0
+    advanceMode: 0
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+    tamilChoiceLabels: []
+  edges:
+  - fromId: 0f7713c4bd8a456b98212cc420d8006d
+    fromPort: 0
+    toId: 2be7432e9ee94610a8472febd23ea477
+  - fromId: 2be7432e9ee94610a8472febd23ea477
+    fromPort: 0
+    toId: f9a2cf25fc14453398737eada451c42a

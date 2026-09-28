@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d2d17ca1516f7043934cc413c30988a, type: 3}
+  m_Name: Attach_Plank
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionSystem.InteractionGraph
+  playState: 2
+  endState: 2
+  nodes:
+  - id: 61ae3f7de46f465ab6b40647ddad5e70
+    kind: 0
+    position: {x: 80, y: 160}
+    duration: 1
+    executeHandlerId: 
+  - id: 36753761d3ee431cb21ce58c9890da4c
+    kind: 3
+    position: {x: 420, y: 160}
+    duration: 1
+    executeHandlerId: 
+  - id: 2f06d25848314b77b8f71973229d5813
+    kind: 2
+    position: {x: 221.33334, y: 171.33333}
+    duration: 0
+    executeHandlerId: 8b0d3ecccf1140c78ad4d7b4c42010d4
+  edges:
+  - fromId: 61ae3f7de46f465ab6b40647ddad5e70
+    fromPort: 0
+    toId: 2f06d25848314b77b8f71973229d5813
+  - fromId: 2f06d25848314b77b8f71973229d5813
+    fromPort: 0
+    toId: 36753761d3ee431cb21ce58c9890da4c
