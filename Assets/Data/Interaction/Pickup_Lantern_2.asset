@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d2d17ca1516f7043934cc413c30988a, type: 3}
+  m_Name: Pickup_Lantern_2
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionSystem.InteractionGraph
+  playState: 2
+  endState: 2
+  nodes:
+  - id: 6172754baaac44049856a5312f39b69a
+    kind: 0
+    position: {x: 80, y: 160}
+    duration: 1
+    executeHandlerId: 
+  - id: 6f62f5cabb82453fb2cccfd93341c62c
+    kind: 3
+    position: {x: 420, y: 160}
+    duration: 1
+    executeHandlerId: 
+  - id: 595d08bba50a4a338b8d6e4747dbf295
+    kind: 2
+    position: {x: 216.66666, y: 160}
+    duration: 0
+    executeHandlerId: d581dc15c2fc420d8da15df0737fdcfc
+  edges:
+  - fromId: 6172754baaac44049856a5312f39b69a
+    fromPort: 0
+    toId: 595d08bba50a4a338b8d6e4747dbf295
+  - fromId: 595d08bba50a4a338b8d6e4747dbf295
+    fromPort: 0
+    toId: 6f62f5cabb82453fb2cccfd93341c62c

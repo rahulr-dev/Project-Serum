@@ -245,12 +245,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2715488022885621132}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.30598715, y: 0.63747305, z: 0.63747305, w: 0.30598715}
-  m_LocalPosition: {x: 1.0709993, y: 2.9410002, z: 0.005999544}
-  m_LocalScale: {x: 86.547195, y: 58.04116, z: 89.83235}
+  m_LocalRotation: {x: 0.00000004470348, y: -0.000000119209275, z: 0.901523, w: 0.43273115}
+  m_LocalPosition: {x: 0.00047998427, y: -0.0005599892, z: -0.0048}
+  m_LocalScale: {x: 0.8654721, y: 0.5804116, z: 0.8983235}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5451003831812276656}
+  m_Father: {fileID: 992519120330978503}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &341906014048291859
 Light:
@@ -372,12 +372,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3401526747143740077}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.69133264, y: -0.14852342, z: -0.14852342, w: 0.69133264}
-  m_LocalPosition: {x: 1.0730228, y: 3.0143487, z: -0.089095555}
-  m_LocalScale: {x: 0.37076855, y: 0.3707686, z: 0.37076864}
+  m_LocalRotation: {x: 0.000000119209275, y: 0.000000029802319, z: -0.21004383, w: 0.977692}
+  m_LocalPosition: {x: 0.000500226, y: 0.0003909579, z: -0.004066512}
+  m_LocalScale: {x: 0.003707685, y: 0.0037076862, z: 0.0037076864}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5451003831812276656}
+  m_Father: {fileID: 992519120330978503}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &963959526666171494
 ParticleSystem:
@@ -5216,6 +5216,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5415795278014660280}
+  - {fileID: 4556626812010656427}
+  - {fileID: 5492457014191805364}
   m_Father: {fileID: 5451003831812276656}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6868307623630206031
@@ -5322,9 +5324,7 @@ Transform:
   m_LocalScale: {x: 2.4587038, y: 2.4587033, z: 2.4587038}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4556626812010656427}
   - {fileID: 3352682894814963076}
-  - {fileID: 5492457014191805364}
   - {fileID: 992519120330978503}
   - {fileID: 8295035947029981531}
   m_Father: {fileID: 0}
