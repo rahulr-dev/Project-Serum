@@ -1,3 +1,4 @@
+using Character;
 using UnityEngine;
 
 namespace Serum.Audio
@@ -13,6 +14,9 @@ namespace Serum.Audio
         [SerializeField] LayerMask groundLayers = ~0;
         [SerializeField, Min(0.05f)] float raycastDistance = 0.6f;
         [SerializeField, Min(0f)] float raycastStartHeight = 0.15f;
+        [Header("Event filtering")]
+        [Tooltip("Ignores duplicate events for the same foot while animation clips blend.")]
+        [SerializeField, Min(0f)] float duplicateEventCooldown = 0.08f;
         [Header("Debug")]
         [SerializeField] bool showDebugGizmos = true;
         [SerializeField] bool logFootsteps;
@@ -24,15 +28,34 @@ namespace Serum.Audio
         bool leftHitGround;
         bool rightHitGround;
         AudioSource footstepSource;
+        SideScrollerController locomotion;
+        float lastLeftFootstepTime = float.NegativeInfinity;
+        float lastRightFootstepTime = float.NegativeInfinity;
 
         void Awake()
         {
+            locomotion = GetComponent<SideScrollerController>();
             footstepSource = GetComponent<AudioSource>();
             if (footstepSource == null)
                 footstepSource = gameObject.AddComponent<AudioSource>();
             footstepSource.enabled = true;
             footstepSource.mute = false;
             footstepSource.playOnAwake = false;
+        }
+
+        void OnEnable()
+        {
+            if (locomotion == null)
+                locomotion = GetComponent<SideScrollerController>();
+
+            if (locomotion != null)
+                locomotion.OnLanded += PlayLandingSound;
+        }
+
+        void OnDisable()
+        {
+            if (locomotion != null)
+                locomotion.OnLanded -= PlayLandingSound;
         }
 
 #if UNITY_EDITOR
@@ -43,9 +66,57 @@ namespace Serum.Audio
         }
 #endif
 
-        public void FootstepLeft() => PlayFootstep(leftFoot, true);
-        public void FootstepRight() => PlayFootstep(rightFoot, false);
-        public void Landing() => PlaySoundAtFeet(landingSound);
+        public void FootstepLeft()
+        {
+            if (!CanPlayFootstep(ref lastLeftFootstepTime, "FootstepLeft"))
+                return;
+
+            if (logFootsteps)
+                Debug.Log($"{name}: received FootstepLeft animation event.", this);
+
+            PlayFootstep(leftFoot, true);
+        }
+
+        public void FootstepRight()
+        {
+            if (!CanPlayFootstep(ref lastRightFootstepTime, "FootstepRight"))
+                return;
+
+            if (logFootsteps)
+                Debug.Log($"{name}: received FootstepRight animation event.", this);
+
+            PlayFootstep(rightFoot, false);
+        }
+        public void Landing()
+        {
+            // Characters with SideScrollerController play this from its confirmed physics landing.
+            // Keep this method for animation-only characters and existing animation clips.
+            if (locomotion == null)
+                PlayLandingSound();
+        }
+
+        void PlayLandingSound()
+        {
+            if (logFootsteps)
+                Debug.Log($"{name}: confirmed landing.", this);
+
+            PlaySoundAtFeet(landingSound);
+        }
+
+        bool CanPlayFootstep(ref float lastEventTime, string eventName)
+        {
+            float now = Time.time;
+            if (now - lastEventTime < duplicateEventCooldown)
+            {
+                if (logFootsteps)
+                    Debug.Log($"{name}: ignored duplicate {eventName} animation event.", this);
+
+                return false;
+            }
+
+            lastEventTime = now;
+            return true;
+        }
 
         void PlayFootstep(Transform foot, bool isLeft)
         {

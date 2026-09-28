@@ -152,7 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineSplineDolly
   m_SplineSettings:
     Spline: {fileID: 1152758491}
-    Position: 0.0016096683
+    Position: 0.00047510388
     Units: 1
   SplineOffset: {x: 0, y: 0, z: 0}
   CameraRotation: 0
@@ -256,8 +256,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 77298554}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.07443454, y: -0.075040795, z: 0.0056171804, w: 0.9943827}
-  m_LocalPosition: {x: 1.2659608, y: 8.56, z: -15.280001}
+  m_LocalRotation: {x: 0.07727362, y: -0.025818694, z: 0.002001762, w: 0.9966736}
+  m_LocalPosition: {x: 0.43490994, y: 8.600407, z: -15.328733}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -745,10 +745,10 @@ MonoBehaviour:
         z: 12.226953
       Rotation:
         value:
-          x: -0.37175772
+          x: -0.37175775
           y: 0.605393
           z: -0.3656204
-          w: 0.60134625
+          w: 0.6013462
     - Position:
         x: 80.22856
         y: 2.1827183
@@ -1123,10 +1123,10 @@ MonoBehaviour:
         z: 2.8203979
       Rotation:
         value:
-          x: -0.14244685
-          y: 0.63104063
+          x: -0.14244682
+          y: 0.6310405
           z: 0.049264997
-          w: 0.7609662
+          w: 0.76096624
     - Position:
         x: 598.4292
         y: 11.119902
@@ -1141,7 +1141,7 @@ MonoBehaviour:
         z: 5.7929845
       Rotation:
         value:
-          x: -0.17684574
+          x: -0.17684573
           y: 0.6493464
           z: 0.13410713
           w: 0.7273858
@@ -1177,9 +1177,9 @@ MonoBehaviour:
         z: 5.3707113
       Rotation:
         value:
-          x: 0.04664078
+          x: 0.046640784
           y: 0.6992208
-          z: -0.0052714185
+          z: -0.0052714227
           w: 0.7133633
     - Position:
         x: 654.7363
@@ -1396,10 +1396,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Character.SideScrollerCameraFollow
   target: {fileID: 1320907921}
+  lookAt: {fileID: 0}
   dolly: {fileID: 77298555}
-  offsetX: 0
+  offset: {x: 0, y: 0, z: 0}
   followSmoothTime: 0.5
-  lookAhead: 0
+  lookAtSmoothTime: 0.5
 --- !u!4 &1292095292
 Transform:
   m_ObjectHideFlags: 0
@@ -1588,8 +1589,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1723430124}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.07443457, y: -0.07504081, z: 0.005617183, w: 0.9943827}
-  m_LocalPosition: {x: 1.2659608, y: 8.56, z: -15.280001}
+  m_LocalRotation: {x: 0.07727362, y: -0.025818694, z: 0.0020017629, w: 0.9966736}
+  m_LocalPosition: {x: 0.43490994, y: 8.600407, z: -15.328733}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1922,6 +1923,10 @@ PrefabInstance:
       propertyPath: maxLandingAnticipationDistance
       value: 1.01
       objectReference: {fileID: 0}
+    - target: {fileID: 6097701584220506821, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
+      propertyPath: showDebugGizmos
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6799146035775957961, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: m_SlopeLimit
       value: 40
@@ -1986,7 +1991,8 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7931618723406381199, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
     m_RemovedGameObjects:
     - {fileID: 4008829896477282586, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
     - {fileID: 6782391324378830621, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
