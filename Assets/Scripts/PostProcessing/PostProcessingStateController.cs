@@ -1,16 +1,18 @@
-using Game;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 namespace Serum.PostProcessing
 {
     /// <summary>
-    /// Controls one existing post-processing Volume for selected GameStates.
+    /// Controls one existing post-processing Volume for selected post-processing states.
     /// Configure the Volume's profile normally; this component only controls its weight.
     /// </summary>
     public class PostProcessingStateController : MonoBehaviour
     {
-        [SerializeField] GameState[] states = { GameState.Gameplay };
+        [SerializeField] PostProcessingStateManager.PostProcessingState[] states =
+        {
+            PostProcessingStateManager.PostProcessingState.Gameplay
+        };
         [SerializeField] Volume volume;
         [SerializeField, Min(0f)] float transitionDuration = 1.5f;
 
@@ -22,7 +24,7 @@ namespace Serum.PostProcessing
         public bool IsActive => isActive;
         public float TransitionDuration => transitionDuration;
 
-        public bool MatchesState(GameState state)
+        public bool MatchesState(PostProcessingStateManager.PostProcessingState state)
         {
             if (states == null)
                 return false;
@@ -63,7 +65,7 @@ namespace Serum.PostProcessing
                 volume.weight = currentWeight;
         }
 
-        /// <summary>Called by PostProcessingStateManager when GameState changes.</summary>
+        /// <summary>Called by PostProcessingStateManager when its state changes.</summary>
         public void SetActive(bool active, bool immediate = false)
         {
             Initialize();

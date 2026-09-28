@@ -1,19 +1,47 @@
 using System.Collections.Generic;
-using Game;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Serum.PostProcessing
 {
     /// <summary>
-    /// Connects post-processing looks to GameState. Controllers are scene-local,
-    /// while this manager persists with the other game managers.
+    /// Owns the current post-processing state. Controllers are scene-local, while
+    /// this manager persists with the other game managers. Gameplay systems should
+    /// set this state directly; it deliberately does not subscribe to GameState.
     /// </summary>
     public class PostProcessingStateManager : MonoBehaviour
     {
+        // Keep the legacy values aligned with GameState so existing controller
+        // assignments in scenes remain valid after this system is decoupled.
+        public enum PostProcessingState
+        {
+            Loading = 0,
+            MainMenu = 1,
+            Gameplay = 2,
+            GameplayNoJump = 3,
+            GameplayStealth = 4,
+            GameplayDialogue = 5,
+            Dialogue = 6,
+            Cutscene = 7,
+            QTE = 8,
+            Paused = 9,
+            GameOver = 10,
+            GameplayPushing = 11,
+            GameplayStealthForced = 12,
+
+            Indoor = 13,
+            Chase = 14,
+            StealthArea = 15
+        }
+
         public static PostProcessingStateManager Instance { get; private set; }
 
+        [SerializeField] PostProcessingState initialState = PostProcessingState.Gameplay;
+
         readonly List<PostProcessingStateController> controllers = new();
+
+        public PostProcessingState CurrentState { get; private set; }
+        public PostProcessingState PreviousState { get; private set; }
 
         void Awake()
         {
@@ -25,11 +53,12 @@ namespace Serum.PostProcessing
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            CurrentState = initialState;
+            PreviousState = initialState;
         }
 
         void OnEnable()
         {
-            GameStateManager.OnStateChanged += HandleGameStateChanged;
             SceneManager.sceneLoaded += HandleSceneLoaded;
         }
 
@@ -41,7 +70,6 @@ namespace Serum.PostProcessing
 
         void OnDisable()
         {
-            GameStateManager.OnStateChanged -= HandleGameStateChanged;
             SceneManager.sceneLoaded -= HandleSceneLoaded;
         }
 
@@ -63,9 +91,24 @@ namespace Serum.PostProcessing
                 Instance.controllers.Remove(controller);
         }
 
-        void HandleGameStateChanged(GameState previousState, GameState currentState)
+        /// <summary>
+        /// Changes the active post-processing state. Call this from a trigger,
+        /// encounter controller, or other gameplay object that owns the context.
+        /// </summary>
+        public void SetState(PostProcessingState state, bool immediate = false)
         {
-            ApplyState(currentState, false);
+            if (CurrentState == state)
+                return;
+
+            PreviousState = CurrentState;
+            CurrentState = state;
+            ApplyState(CurrentState, immediate);
+        }
+
+        /// <summary>Activates the game-over post-processing look.</summary>
+        public void EnterGameOver(bool immediate = false)
+        {
+            SetState(PostProcessingState.GameOver, immediate);
         }
 
         void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -90,17 +133,15 @@ namespace Serum.PostProcessing
 
             controllers.Add(controller);
 
-            if (GameStateManager.Instance != null)
-                controller.SetActive(controller.MatchesState(GameStateManager.Instance.CurrentState), false);
+            controller.SetActive(controller.MatchesState(CurrentState), false);
         }
 
         void ApplyCurrentState(bool immediate)
         {
-            if (GameStateManager.Instance != null)
-                ApplyState(GameStateManager.Instance.CurrentState, immediate);
+            ApplyState(CurrentState, immediate);
         }
 
-        void ApplyState(GameState state, bool immediate)
+        void ApplyState(PostProcessingState state, bool immediate)
         {
             for (int i = controllers.Count - 1; i >= 0; i--)
             {

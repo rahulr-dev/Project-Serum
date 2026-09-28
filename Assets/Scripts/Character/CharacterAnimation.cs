@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Game;
 using Interaction;
 using UnityEngine;
@@ -71,7 +72,11 @@ namespace Character
         float _airStartHeight;
         float _idleTimer;
         float _idleVariantCooldown;
+        Coroutine _idleVariantStateRoutine;
+        GameStateManager _idleVariantStateManager;
+        GameState _stateBeforeIdleVariant;
         const float PushAnimSpeed = 0.05f;
+        const float IdleVariantCutsceneDuration = 3f;
 
         void Awake()
         {
@@ -126,6 +131,7 @@ namespace Character
 
         void OnDisable()
         {
+            StopIdleVariantCutscene();
             _unbindJump?.Invoke();
             _unbindJump = null;
             InteractionManager.OnInteractStarted -= HandleInteractStarted;
@@ -181,7 +187,7 @@ namespace Character
                 TrackAirStartHeight();
             }
 
-            UpdateIdleVariant(speed);
+            UpdateIdleVariant(speed, state);
 
             ApplyPushing(wantPush);
 
@@ -207,9 +213,11 @@ namespace Character
             _speedOverrideActive = false;
         }
 
-        void UpdateIdleVariant(float speed)
+        void UpdateIdleVariant(float speed, GameState state)
         {
-            if (speed > idleSpeedThreshold || _pushing)
+            bool crouching = state == GameState.GameplayStealth ||
+                            state == GameState.GameplayStealthForced;
+            if (speed > idleSpeedThreshold || _pushing || crouching)
             {
                 _idleTimer = 0f;
                 _idleVariantCooldown = 0f;
@@ -233,6 +241,49 @@ namespace Character
                 animator.SetTrigger(_idleVariant3Hash);
             _idleTimer = 0f;
             _idleVariantCooldown = idleVariantInterval;
+            StartIdleVariantCutscene();
+        }
+
+        void StartIdleVariantCutscene()
+        {
+            if (_idleVariantStateRoutine != null)
+                StopIdleVariantCutscene();
+
+            GameStateManager stateManager = GameStateManager.Instance;
+            if (stateManager == null)
+                return;
+
+            _idleVariantStateManager = stateManager;
+            _stateBeforeIdleVariant = stateManager.CurrentState;
+            stateManager.EnterCutscene();
+            _idleVariantStateRoutine = StartCoroutine(
+                RestoreStateAfterIdleVariant(stateManager, _stateBeforeIdleVariant));
+        }
+
+        IEnumerator RestoreStateAfterIdleVariant(GameStateManager stateManager, GameState previousState)
+        {
+            yield return new WaitForSecondsRealtime(IdleVariantCutsceneDuration);
+
+            if (stateManager != null && stateManager.CurrentState == GameState.Cutscene)
+                stateManager.SetState(previousState);
+
+            _idleVariantStateRoutine = null;
+            _idleVariantStateManager = null;
+        }
+
+        void StopIdleVariantCutscene()
+        {
+            if (_idleVariantStateRoutine == null)
+                return;
+
+            StopCoroutine(_idleVariantStateRoutine);
+            _idleVariantStateRoutine = null;
+            if (_idleVariantStateManager != null &&
+                _idleVariantStateManager.CurrentState == GameState.Cutscene)
+            {
+                _idleVariantStateManager.SetState(_stateBeforeIdleVariant);
+            }
+            _idleVariantStateManager = null;
         }
 
         void HandleJumped()
