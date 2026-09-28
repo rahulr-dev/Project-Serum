@@ -37,20 +37,12 @@ namespace Character
         [SerializeField, Min(0f)] float idleVariantInterval = 2f;
         [SerializeField, Min(0f)] float idleSpeedThreshold = 0.02f;
         [Header("Landing")]
-        [Tooltip("Vertical impact speed required to select the impactful landing animation.")]
-        [SerializeField, Min(0f)] float impactfulLandingSpeed = 10f;
+        [Tooltip("Vertical distance fallen before the impactful landing animation is used.")]
+        [SerializeField, Min(0f)] float impactfulLandingDistance = 1.5f;
         [Tooltip("Horizontal speed required to select the running landing animation.")]
         [SerializeField, Min(0f)] float landRunSpeedThreshold = 0.5f;
         [Tooltip("How long the controller keeps the player moving after a non-impactful running landing.")]
         [SerializeField, Min(0f)] float landingRunMoveDuration = 1f;
-        [Header("Animation-only landing prediction")]
-        [SerializeField] LayerMask landingGroundLayers = ~0;
-        [Tooltip("How far ahead, in seconds, to start the landing animation.")]
-        [SerializeField, Min(0f)] float landingAnticipationTime = 0.1f;
-        [Tooltip("Maximum distance for the animation-only floor prediction.")]
-        [SerializeField, Min(0.01f)] float maxLandingAnticipationDistance = 0.65f;
-        [Tooltip("Floor hits closer than this mean the player is already at the landing point.")]
-        [SerializeField, Min(0f)] float landingContactMargin = 0.04f;
 
         INormalizedMoveSpeed _speedSource;
         Action _unbindJump;
@@ -71,14 +63,15 @@ namespace Character
         bool _pushing;
         bool _rootMotionDisabledForPushing;
         float _rootMotionRestoreTime;
-        bool _landingAnimationTriggered;
         bool _landRunLandingPending;
         float _landRunLandingSpeed;
         CharacterController _characterController;
+        bool _wasGrounded;
+        bool _airStartHeightRecorded;
+        float _airStartHeight;
         float _idleTimer;
         float _idleVariantCooldown;
         const float PushAnimSpeed = 0.05f;
-        bool _landingAnimationArmed;
 
         void Awake()
         {
@@ -117,7 +110,10 @@ namespace Character
             BindJumpEvent();
             InteractionManager.OnInteractStarted += HandleInteractStarted;
             if (locomotion != null)
+            {
                 locomotion.OnLanded += HandleLanded;
+                _wasGrounded = locomotion.IsGrounded;
+            }
 
             GameStateManager.OnStateChanged += HandleStateChanged;
             GameState state = GameStateManager.Instance != null
@@ -182,9 +178,8 @@ namespace Character
             {
                 animator.SetBool(_groundedHash, locomotion.IsGrounded);
                 animator.SetFloat(_verticalSpeedHash, locomotion.VerticalSpeed);
+                TrackAirStartHeight();
             }
-
-            PredictLandingAnimation();
 
             UpdateIdleVariant(speed);
 
@@ -243,10 +238,9 @@ namespace Character
         void HandleJumped()
         {
             ResetIdleTimer();
-            _landingAnimationTriggered = false;
-            _landingAnimationArmed = true;
             _landRunLandingPending = false;
             _landRunLandingSpeed = 0f;
+            RecordAirStartHeight();
 
             if (animator == null || _pushing)
                 return;
@@ -261,14 +255,21 @@ namespace Character
 
         void HandleLanded()
         {
-            if (!_landRunLandingPending || locomotion == null)
+            if (locomotion == null)
                 return;
 
-            _landRunLandingPending = false;
-            if (locomotion.LastLandingImpactSpeed >= impactfulLandingSpeed)
-                return;
+            float landedHeight = GetGroundHeight();
+            float fallDistance = _airStartHeightRecorded
+                ? Mathf.Max(0f, _airStartHeight - landedHeight)
+                : 0f;
+            _airStartHeightRecorded = false;
+            TriggerLandingAnimation(fallDistance);
 
-            locomotion.StartLandingRunMovement(landingRunMoveDuration, _landRunLandingSpeed);
+            if (_landRunLandingPending)
+            {
+                _landRunLandingPending = false;
+                locomotion.StartLandingRunMovement(landingRunMoveDuration, _landRunLandingSpeed);
+            }
         }
 
         void ResetIdleTimer()
@@ -277,78 +278,39 @@ namespace Character
             _idleVariantCooldown = 0f;
         }
 
-        void PredictLandingAnimation()
+        void TrackAirStartHeight()
         {
-            if (animator == null || locomotion == null || _characterController == null ||
-                !_landingAnimationArmed || locomotion.VerticalSpeed >= 0f)
-                return;
+            bool grounded = locomotion.IsGrounded;
+            if (!grounded && _wasGrounded)
+                RecordAirStartHeight();
 
-            float lookAhead = GetLandingLookAhead();
-            if (!TryFindLandingFloor(_characterController, lookAhead, out RaycastHit hit))
-            {
-                _landingAnimationTriggered = false;
-                _landRunLandingPending = false;
-                _landRunLandingSpeed = 0f;
-                return;
-            }
-
-            float remainingGap = Mathf.Clamp(hit.distance - _characterController.bounds.extents.y, 0f, lookAhead);
-            if (remainingGap <= landingContactMargin)
-            {
-                if (!_landingAnimationTriggered)
-                    TriggerLandingAnimation(Mathf.Abs(locomotion.VerticalSpeed));
-
-                _landingAnimationArmed = false;
-                _landingAnimationTriggered = false;
-                return;
-            }
-
-            if (_landingAnimationTriggered)
-                return;
-
-            float verticalSpeed = locomotion.VerticalSpeed;
-            float fallGravity = locomotion.Gravity * locomotion.FallGravityMultiplier;
-            float impactEstimate = Mathf.Sqrt(
-                verticalSpeed * verticalSpeed + 2f * fallGravity * remainingGap);
-            TriggerLandingAnimation(impactEstimate);
+            _wasGrounded = grounded;
         }
 
-        float GetLandingLookAhead()
+        void RecordAirStartHeight()
         {
-            if (locomotion == null)
-                return maxLandingAnticipationDistance;
+            if (_airStartHeightRecorded)
+                return;
 
-            return Mathf.Clamp(
-                Mathf.Abs(locomotion.VerticalSpeed) * landingAnticipationTime,
-                0.08f,
-                maxLandingAnticipationDistance);
+            _airStartHeight = GetGroundHeight();
+            _airStartHeightRecorded = true;
         }
 
-        bool TryFindLandingFloor(CharacterController characterController, float lookAhead, out RaycastHit hit)
+        float GetGroundHeight()
         {
-            Bounds bounds = characterController.bounds;
-            float castDistance = bounds.extents.y + lookAhead;
-            if (!Physics.Raycast(
-                    bounds.center,
-                    Vector3.down,
-                    out hit,
-                    castDistance,
-                    landingGroundLayers,
-                    QueryTriggerInteraction.Ignore))
-                return false;
-
-            float minimumGroundNormalY = Mathf.Cos(characterController.slopeLimit * Mathf.Deg2Rad);
-            return hit.normal.y >= minimumGroundNormalY;
+            return _characterController != null
+                ? _characterController.bounds.min.y
+                : transform.position.y;
         }
 
-        void TriggerLandingAnimation(float impactSpeed)
+        void TriggerLandingAnimation(float fallDistance)
         {
             animator.ResetTrigger(_landHash);
             animator.ResetTrigger(_landRunHash);
             animator.ResetTrigger(_impactfulLandHash);
 
             float horizontalSpeed = locomotion != null ? Mathf.Abs(locomotion.HorizontalSpeed) : 0f;
-            bool impactful = impactSpeed >= impactfulLandingSpeed;
+            bool impactful = fallDistance > impactfulLandingDistance;
             bool landRun = !impactful && horizontalSpeed >= landRunSpeedThreshold;
             _landRunLandingPending = landRun;
             _landRunLandingSpeed = landRun ? locomotion.HorizontalSpeed : 0f;
@@ -360,31 +322,6 @@ namespace Character
             else
                 animator.SetTrigger(_landHash);
 
-            _landingAnimationTriggered = true;
-        }
-
-        void OnDrawGizmosSelected()
-        {
-            CharacterController characterController = _characterController != null
-                ? _characterController
-                : GetComponent<CharacterController>();
-            if (characterController == null)
-                return;
-
-            Bounds bounds = characterController.bounds;
-            float lookAhead = Application.isPlaying ? GetLandingLookAhead() : maxLandingAnticipationDistance;
-            float castDistance = bounds.extents.y + lookAhead;
-            Vector3 end = bounds.center + Vector3.down * castDistance;
-
-            bool foundFloor = TryFindLandingFloor(characterController, lookAhead, out RaycastHit hit);
-            Gizmos.color = foundFloor ? new Color(0.2f, 0.9f, 0.3f, 1f) : new Color(1f, 0.55f, 0.1f, 1f);
-            Gizmos.DrawLine(bounds.center, end);
-            Gizmos.DrawWireSphere(end, 0.06f);
-            if (foundFloor)
-            {
-                Gizmos.DrawSphere(hit.point, 0.08f);
-                Gizmos.DrawLine(hit.point, hit.point + hit.normal * 0.3f);
-            }
         }
 
         void HandleStateChanged(GameState previous, GameState current)

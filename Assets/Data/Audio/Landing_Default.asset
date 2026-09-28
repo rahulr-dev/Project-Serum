@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Serum.Audio.SoundEvent
   clips:
   - {fileID: 8300000, guid: 633c9109c3ebe7e47a6eed74444fe53f, type: 3}
-  - {fileID: 8300000, guid: a939b73f473ae9445bb6213cb287c22e, type: 3}
-  volume: 0.6
+  volume: 0.2
   pitchRange: {x: 0.95, y: 1.05}
   mixerGroup: {fileID: 0}
   spatial: 1

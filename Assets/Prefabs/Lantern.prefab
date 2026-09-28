@@ -45,7 +45,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: d1bc2bbce1cd7f841b27ca6f8c751c41, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -54,7 +54,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 18
+  MaxDistance: 21.939384
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -104,7 +104,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5861111
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -373,9 +373,9 @@ Transform:
   m_GameObject: {fileID: 3401526747143740077}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000119209275, y: 0.000000029802319, z: -0.21004383, w: 0.977692}
-  m_LocalPosition: {x: 0.000500226, y: 0.0003909579, z: -0.004066512}
-  m_LocalScale: {x: 0.003707685, y: 0.0037076862, z: 0.0037076864}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: -0.004066512}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 992519120330978503}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -950,7 +950,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 1000
+    maxNumParticles: 10
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -2000,8 +2000,8 @@ ParticleSystem:
     orbitalX:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 5
-      minScalar: -5
+      scalar: 10
+      minScalar: -10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2053,8 +2053,8 @@ ParticleSystem:
     orbitalY:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 5
-      minScalar: -5
+      scalar: 10
+      minScalar: -10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2106,8 +2106,8 @@ ParticleSystem:
     orbitalZ:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 5
-      minScalar: -5
+      scalar: 10
+      minScalar: -10
       maxCurve:
         serializedVersion: 2
         m_Curve:
