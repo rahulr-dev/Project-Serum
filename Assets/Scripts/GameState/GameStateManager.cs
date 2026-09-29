@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -15,6 +17,12 @@ namespace Game
         public const string OverlayPrefsKey = "Serum.GameStateOverlay.Enabled";
 
         [SerializeField] GameState initialState = GameState.Gameplay;
+
+        const float GameOverUiDelay = 1f;
+        const float GameOverRestartDelay = 4f;
+        const string GameOverPanelName = "GameOver_Panel";
+
+        Coroutine _gameOverRestartRoutine;
 
         public GameState CurrentState { get; private set; }
         public GameState PreviousState { get; private set; }
@@ -68,8 +76,16 @@ namespace Game
 
         void OnDestroy()
         {
+            if (_gameOverRestartRoutine != null)
+                StopCoroutine(_gameOverRestartRoutine);
+
             if (Instance == this)
                 Instance = null;
+        }
+
+        void Start()
+        {
+            SetGameOverUiVisible(false);
         }
 
         public void SetState(GameState state)
@@ -82,10 +98,72 @@ namespace Game
             if (CurrentState == state)
                 return false;
 
+            if (_gameOverRestartRoutine != null)
+            {
+                StopCoroutine(_gameOverRestartRoutine);
+                _gameOverRestartRoutine = null;
+            }
+
+            if (state != GameState.GameOver)
+                SetGameOverUiVisible(false);
+
             PreviousState = CurrentState;
             CurrentState = state;
             OnStateChanged?.Invoke(PreviousState, CurrentState);
+
+            if (CurrentState == GameState.GameOver)
+            {
+                SetGameOverUiVisible(false);
+                _gameOverRestartRoutine = StartCoroutine(RestartAfterGameOverDelay());
+            }
+
             return true;
+        }
+
+        IEnumerator RestartAfterGameOverDelay()
+        {
+            yield return new WaitForSecondsRealtime(GameOverUiDelay);
+
+            if (CurrentState != GameState.GameOver)
+                yield break;
+
+            SetGameOverUiVisible(true);
+
+            yield return new WaitForSecondsRealtime(GameOverRestartDelay - GameOverUiDelay);
+
+            _gameOverRestartRoutine = null;
+
+            if (CurrentState != GameState.GameOver)
+                yield break;
+
+            if (SerumSceneManager.Instance != null)
+            {
+                SerumSceneManager.Instance.ReloadActiveScene();
+                yield break;
+            }
+
+            Scene activeScene = SceneManager.GetActiveScene();
+            if (activeScene.IsValid() && activeScene.isLoaded)
+            {
+                if (activeScene.buildIndex >= 0)
+                    SceneManager.LoadScene(activeScene.buildIndex);
+                else
+                    SceneManager.LoadScene(activeScene.name);
+            }
+        }
+
+        static void SetGameOverUiVisible(bool visible)
+        {
+            foreach (GameObject gameObject in Resources.FindObjectsOfTypeAll<GameObject>())
+            {
+                if (gameObject.name != GameOverPanelName ||
+                    !gameObject.scene.IsValid() ||
+                    !gameObject.scene.isLoaded)
+                    continue;
+
+                gameObject.SetActive(visible);
+                return;
+            }
         }
 
         public bool IsState(GameState state)

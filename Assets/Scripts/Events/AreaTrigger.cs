@@ -8,6 +8,8 @@ namespace Events
     [RequireComponent(typeof(Collider))]
     public class AreaTrigger : MonoBehaviour
     {
+        [Tooltip("Only colliders on these layers can activate this trigger. Enemy is excluded by default.")]
+        [SerializeField] LayerMask detectableLayers = ~(1 << 10);
         [SerializeField] UnityEvent onEnter = new UnityEvent();
         [SerializeField] UnityEvent onExit = new UnityEvent();
 
@@ -22,6 +24,9 @@ namespace Events
 
         void OnTriggerEnter(Collider other)
         {
+            if (!IsInDetectionMask(other))
+                return;
+
             if (!IsPlayer(other))
                 return;
 
@@ -34,6 +39,9 @@ namespace Events
 
         void OnTriggerExit(Collider other)
         {
+            if (!IsInDetectionMask(other))
+                return;
+
             if (!IsPlayer(other))
                 return;
 
@@ -53,6 +61,12 @@ namespace Events
         {
             return other != null
                 && other.GetComponentInParent<SideScrollerController>() != null;
+        }
+
+        bool IsInDetectionMask(Collider other)
+        {
+            return other != null
+                && (detectableLayers.value & (1 << other.gameObject.layer)) != 0;
         }
     }
 }

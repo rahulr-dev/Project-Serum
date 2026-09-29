@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 7688604098165733191}
   - component: {fileID: 6097701584220506821}
   - component: {fileID: 3275140623576157348}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -484,15 +484,9 @@ MonoBehaviour:
   idleVariantDelay: 5
   idleVariantInterval: 2
   idleSpeedThreshold: 0.02
-  impactfulLandingSpeed: 20
+  impactfulLandingDistance: 1.5
   landRunSpeedThreshold: 0.5
   landingRunMoveDuration: 0.5
-  landingGroundLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  landingAnticipationTime: 0.1
-  maxLandingAnticipationDistance: 1.01
-  landingContactMargin: 0.04
 --- !u!114 &1037593004992571058
 MonoBehaviour:
   m_ObjectHideFlags: 0

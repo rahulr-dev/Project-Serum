@@ -17,9 +17,9 @@ TagManager:
   - ladder
   - Occluders
   - Mud
-  - 
-  - 
-  - 
+  - Enemy
+  - AreaTrigger
+  - Player
   - 
   - 
   - 
