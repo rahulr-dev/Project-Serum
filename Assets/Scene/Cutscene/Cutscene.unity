@@ -818,7 +818,7 @@ GameObject:
   - component: {fileID: 686512288}
   - component: {fileID: 686512289}
   m_Layer: 0
-  m_Name: Train
+  m_Name: Sfx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1767,7 +1767,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1448531265}
   m_Layer: 0
-  m_Name: SFX
+  m_Name: Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
