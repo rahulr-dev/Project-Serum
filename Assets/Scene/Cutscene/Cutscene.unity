@@ -238,7 +238,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -851,7 +851,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1537,6 +1537,8 @@ PlayableDirector:
     value: {fileID: 686512289}
   - key: {fileID: -1835761715387770174, guid: b5b182d86055c1c4a9928753a37c795d, type: 2}
     value: {fileID: 51514310}
+  - key: {fileID: -4830668081591187670, guid: b5b182d86055c1c4a9928753a37c795d, type: 2}
+    value: {fileID: 1359172263}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1332085047
@@ -2129,7 +2131,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 584bcd42e4658ab46a21f77fc3fc4674, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
