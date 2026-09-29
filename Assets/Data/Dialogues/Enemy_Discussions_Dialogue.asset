@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16f6336ad21230c468ac096c409b2a9e, type: 3}
-  m_Name: DialogueGraph_Test 1
+  m_Name: Enemy_Discussions_Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue.DialogueGraph
   updateGameState: 1
-  playState: 3
+  playState: 6
   endState: 2
-  charsPerSecond: 20
+  charsPerSecond: 40
   choiceRepeatDelay: 0.2
   nodes:
-  - id: ac0c27fc0edc40a991871ae66ac4f950
+  - id: 0e57a5d0090c4911a0270b43b94dbfa7
     kind: 0
     position: {x: 80, y: 160}
     body: 
@@ -32,70 +32,55 @@ MonoBehaviour:
         m_Calls: []
     choiceLabels: []
     tamilChoiceLabels: []
-  - id: 7bdac539f2fd4ae9911b944b9b4ec628
+  - id: eb1a08b548bc4181949ab955511159a7
+    kind: 1
+    position: {x: 254, y: 155.33333}
+    body: "I heard they got the scientist with the serum, but what\u2019s with these
+      people? \nWhy are they taking these villagers as hostage?\r\n"
+    tamilBody: 
+    colourPreset: 1
+    advanceMode: 1
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+    tamilChoiceLabels: []
+  - id: 8c3281e531f0480ab1d734d7aa91af23
+    kind: 1
+    position: {x: 859.3334, y: 151.33333}
+    body: "Actually, no one really knows why they\u2019re taking these people hostage."
+    tamilBody: 
+    colourPreset: 1
+    advanceMode: 1
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+    tamilChoiceLabels: []
+  - id: 5282cf81dd2c49e98138087fed50bf3b
+    kind: 1
+    position: {x: 1439.3334, y: 208}
+    body: "But I heard a rumor that they\u2019re transporting them offshore to the
+      Genesis Laboratory. \nSome people say they\u2019re using the villagers as human
+      subjects for their experiments."
+    tamilBody: 
+    colourPreset: 1
+    advanceMode: 1
+    autoDelay: 1
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+    tamilChoiceLabels: []
+  - id: 3a56b261e2e9408d94d374e76265f92f
     kind: 3
-    position: {x: 1209.3334, y: 210}
+    position: {x: 2078, y: 252}
     body: 
-    tamilBody: 
-    colourPreset: 1
-    advanceMode: 0
-    autoDelay: 1
-    charsPerSecond: 0
-    onStart:
-      m_PersistentCalls:
-        m_Calls: []
-    choiceLabels: []
-    tamilChoiceLabels: []
-  - id: 5a3e84afccb2422fa3f2facd2002cc75
-    kind: 1
-    position: {x: 239.33334, y: 112}
-    body: Hi Bruh
-    tamilBody: 
-    colourPreset: 1
-    advanceMode: 0
-    autoDelay: 1
-    charsPerSecond: 0
-    onStart:
-      m_PersistentCalls:
-        m_Calls: []
-    choiceLabels: []
-    tamilChoiceLabels: []
-  - id: 6effe4a0774844559229a613fc602cfc
-    kind: 1
-    position: {x: 770, y: -38}
-    body: Hi, See you araound!
-    tamilBody: 
-    colourPreset: 1
-    advanceMode: 0
-    autoDelay: 1
-    charsPerSecond: 0
-    onStart:
-      m_PersistentCalls:
-        m_Calls: []
-    choiceLabels: []
-    tamilChoiceLabels: []
-  - id: 8187a9d421bd42dcba667028dcf103ff
-    kind: 2
-    position: {x: 546, y: 210}
-    body: 
-    tamilBody: 
-    colourPreset: 1
-    advanceMode: 0
-    autoDelay: 1
-    charsPerSecond: 0
-    onStart:
-      m_PersistentCalls:
-        m_Calls: []
-    choiceLabels:
-    - HI
-    - Bye
-    tamilChoiceLabels:
-    - 
-    - 
-  - id: a94240fb1e424b718f91eec454b6ca46
-    kind: 1
-    position: {x: 770, y: 302}
-    body: YO, WTF is wrong with you bruh
     tamilBody: 
     colourPreset: 1
     advanceMode: 0
@@ -107,21 +92,15 @@ MonoBehaviour:
     choiceLabels: []
     tamilChoiceLabels: []
   edges:
-  - fromId: ac0c27fc0edc40a991871ae66ac4f950
+  - fromId: 0e57a5d0090c4911a0270b43b94dbfa7
     fromPort: 0
-    toId: 5a3e84afccb2422fa3f2facd2002cc75
-  - fromId: 5a3e84afccb2422fa3f2facd2002cc75
+    toId: eb1a08b548bc4181949ab955511159a7
+  - fromId: eb1a08b548bc4181949ab955511159a7
     fromPort: 0
-    toId: 8187a9d421bd42dcba667028dcf103ff
-  - fromId: 6effe4a0774844559229a613fc602cfc
+    toId: 8c3281e531f0480ab1d734d7aa91af23
+  - fromId: 8c3281e531f0480ab1d734d7aa91af23
     fromPort: 0
-    toId: 7bdac539f2fd4ae9911b944b9b4ec628
-  - fromId: 8187a9d421bd42dcba667028dcf103ff
+    toId: 5282cf81dd2c49e98138087fed50bf3b
+  - fromId: 5282cf81dd2c49e98138087fed50bf3b
     fromPort: 0
-    toId: 6effe4a0774844559229a613fc602cfc
-  - fromId: 8187a9d421bd42dcba667028dcf103ff
-    fromPort: 1
-    toId: a94240fb1e424b718f91eec454b6ca46
-  - fromId: a94240fb1e424b718f91eec454b6ca46
-    fromPort: 0
-    toId: 7bdac539f2fd4ae9911b944b9b4ec628
+    toId: 3a56b261e2e9408d94d374e76265f92f
