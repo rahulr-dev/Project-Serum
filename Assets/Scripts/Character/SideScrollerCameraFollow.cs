@@ -96,6 +96,27 @@ namespace Character
             UpdateLookAtTarget();
         }
 
+        /// <summary>Moves the camera dolly to its target immediately, without follow smoothing.</summary>
+        public void SnapToTarget()
+        {
+            if (target == null)
+                return;
+
+            if (dolly == null)
+                dolly = GetComponent<CinemachineSplineDolly>();
+            if (dolly == null || dolly.Spline == null)
+                return;
+
+            Vector3 query = target.position + offset;
+            float3 local = dolly.Spline.transform.InverseTransformPoint(query);
+            SplineUtility.GetNearestPoint(dolly.Spline.Spline, local, out _, out float normalizedT);
+
+            _currentPosition = ToCameraPosition(Mathf.Clamp01(normalizedT));
+            _positionVelocity = 0f;
+            dolly.CameraPosition = _currentPosition;
+            UpdateLookAtTarget();
+        }
+
         float ToCameraPosition(float normalizedT)
         {
             Spline spline = dolly.Spline.Spline;

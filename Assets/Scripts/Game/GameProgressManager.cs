@@ -20,6 +20,7 @@ namespace Game
 
         [Header("Runtime References")]
         [SerializeField] SideScrollerController player;
+        [SerializeField] SideScrollerCameraFollow cameraFollow;
 
         [Header("Saved Progress")]
         [SerializeField] Vector3 savedLocation;
@@ -149,6 +150,10 @@ namespace Game
 
             if (controllerWasEnabled)
                 controller.enabled = true;
+
+            FindCameraFollow();
+            if (cameraFollow != null)
+                cameraFollow.SnapToTarget();
         }
 
         void LoadSavedProgress()
@@ -167,6 +172,12 @@ namespace Game
         {
             if (player == null)
                 player = FindFirstObjectByType<SideScrollerController>();
+        }
+
+        void FindCameraFollow()
+        {
+            if (cameraFollow == null)
+                cameraFollow = FindFirstObjectByType<SideScrollerCameraFollow>();
         }
     }
 }
