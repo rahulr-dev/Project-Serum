@@ -875,7 +875,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65756360}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16563194, y: -0.31927702, z: 0.056780733, w: 0.9313454}
+  m_LocalRotation: {x: 0.19807813, y: -0.2537885, z: 0.053180728, w: 0.94526625}
   m_LocalPosition: {x: 1.76, y: 7.07, z: -16.250002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13051,10 +13051,10 @@ MonoBehaviour:
         z: 10.865724
       Rotation:
         value:
-          x: 0.025158208
-          y: 0.7124071
-          z: 0.012926286
-          w: 0.7011962
+          x: 0.025158204
+          y: 0.712407
+          z: 0.012926283
+          w: 0.70119625
     - Position:
         x: 315.7087
         y: 0.9639375
@@ -13069,10 +13069,10 @@ MonoBehaviour:
         z: 3.2453184
       Rotation:
         value:
-          x: 0.18808374
+          x: 0.18808368
           y: 0.8019742
-          z: 0.03878605
-          w: 0.56564796
+          z: 0.03878602
+          w: 0.5656481
     - Position:
         x: 331.04865
         y: 1.2926946
@@ -13285,9 +13285,9 @@ MonoBehaviour:
         z: 3.7913883
       Rotation:
         value:
-          x: 0.0660472
+          x: 0.06604721
           y: 0.7410174
-          z: -0.04672853
+          z: -0.046728533
           w: 0.6665939
     - Position:
         x: 447.63986
@@ -13321,10 +13321,10 @@ MonoBehaviour:
         z: 4.781874
       Rotation:
         value:
-          x: -0.05103844
-          y: 0.6783277
-          z: 0.085791685
-          w: 0.72794664
+          x: -0.051038455
+          y: 0.67832774
+          z: 0.08579169
+          w: 0.7279467
     - Position:
         x: 478.02835
         y: 5.9632373
@@ -13339,10 +13339,10 @@ MonoBehaviour:
         z: 8.145069
       Rotation:
         value:
-          x: -0.08226211
+          x: -0.08226212
           y: 0.6902369
           z: 0.114677355
-          w: 0.70968664
+          w: 0.7096866
     - Position:
         x: 505.00922
         y: 9.228991
@@ -13537,8 +13537,8 @@ MonoBehaviour:
         z: 6.051374
       Rotation:
         value:
-          x: 0.45844215
-          y: 0.43555933
+          x: 0.4584421
+          y: 0.43555936
           z: 0.5273693
           w: 0.5674508
     - Position:
@@ -13611,7 +13611,7 @@ MonoBehaviour:
         value:
           x: -0.023314234
           y: 0.682495
-          z: 0.056581244
+          z: 0.056581236
           w: 0.72832376
     - Position:
         x: 714.9241
@@ -13717,9 +13717,9 @@ MonoBehaviour:
         z: 0
       Rotation:
         value:
-          x: 0.027660342
-          y: 1.4558563e-11
-          z: 0.012164028
+          x: 0.027660338
+          y: -1.4558563e-11
+          z: 0.012164025
           w: 0.99954337
     m_MetaData:
     - Mode: 2
@@ -21592,7 +21592,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760746732}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16563195, y: -0.31927702, z: 0.056780726, w: 0.9313454}
+  m_LocalRotation: {x: 0.19807811, y: -0.25378847, z: 0.053180713, w: 0.9452663}
   m_LocalPosition: {x: 1.76, y: 7.07, z: -16.250002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -23468,11 +23468,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 843936606834843478, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.6541595
+      value: -4.5071106
       objectReference: {fileID: 0}
     - target: {fileID: 843936606834843478, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.032671
+      value: 1.585187
       objectReference: {fileID: 0}
     - target: {fileID: 843936606834843478, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: m_LocalPosition.z
@@ -23509,6 +23509,10 @@ PrefabInstance:
     - target: {fileID: 1230067383513024119, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351130402044307269, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6097701584220506821, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: logFootsteps
