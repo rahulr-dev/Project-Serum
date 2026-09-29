@@ -430,9 +430,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23616a540695ef4c9cd635218125f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Character.SideScrollerController
-  moveSpeed: 4
-  stealthMoveSpeed: 2.5
-  pushMoveSpeed: 2
+  moveSpeed: 5
+  stealthMoveSpeed: 2
+  pushMoveSpeed: 1.5
   moveSmoothTime: 0.1
   turnSmoothTime: 0.1
   inputDeadzone: 0.15
@@ -634,9 +634,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 40
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
