@@ -64,6 +64,8 @@ namespace Serum.MenuUI
                 ShowMessage("CHOOSE A DESTINATION", "New Game points to the menu itself. Choose a different scene index on the Main Menu UI component.");
                 return;
             }
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
             StartCoroutine(LoadScene(next));
         }
 
