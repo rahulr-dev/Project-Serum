@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16f6336ad21230c468ac096c409b2a9e, type: 3}
   m_Name: Enemy_Discussions_Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue.DialogueGraph
-  updateGameState: 1
+  updateGameState: 0
   playState: 6
   endState: 2
   charsPerSecond: 40
@@ -34,7 +34,7 @@ MonoBehaviour:
     tamilChoiceLabels: []
   - id: eb1a08b548bc4181949ab955511159a7
     kind: 1
-    position: {x: 254, y: 155.33333}
+    position: {x: 254, y: 155}
     body: "I heard they got the scientist with the serum, but what\u2019s with these
       people? \nWhy are they taking these villagers as hostage?\r\n"
     tamilBody: 
@@ -49,7 +49,7 @@ MonoBehaviour:
     tamilChoiceLabels: []
   - id: 8c3281e531f0480ab1d734d7aa91af23
     kind: 1
-    position: {x: 859.3334, y: 151.33333}
+    position: {x: 859, y: 151}
     body: "Actually, no one really knows why they\u2019re taking these people hostage."
     tamilBody: 
     colourPreset: 1
@@ -63,7 +63,7 @@ MonoBehaviour:
     tamilChoiceLabels: []
   - id: 5282cf81dd2c49e98138087fed50bf3b
     kind: 1
-    position: {x: 1439.3334, y: 208}
+    position: {x: 1439, y: 208}
     body: "But I heard a rumor that they\u2019re transporting them offshore to the
       Genesis Laboratory. \nSome people say they\u2019re using the villagers as human
       subjects for their experiments."
