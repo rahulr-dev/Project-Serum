@@ -5304,6 +5304,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5451003831812276656}
+  - component: {fileID: 3074053360543689049}
   m_Layer: 0
   m_Name: Lantern
   m_TagString: Untagged
@@ -5329,6 +5330,37 @@ Transform:
   - {fileID: 8295035947029981531}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 24.25, z: 0}
+--- !u!205 &3074053360543689049
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4678689939779918602}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -3.6970253, y: -2.443119, z: 7.777027}
+  m_Size: 55.463837
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.9261322
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 8488421537527333939}
+    - renderer: {fileID: 2622392707606411341}
+    - renderer: {fileID: 5815763287280640626}
+    - renderer: {fileID: 2391076940661290076}
+  - screenRelativeHeight: 0.76006395
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 2622392707606411341}
+    - renderer: {fileID: 5815763287280640626}
+    - renderer: {fileID: 2391076940661290076}
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers: []
+  m_Enabled: 1
 --- !u!1 &5241731098537805692
 GameObject:
   m_ObjectHideFlags: 0
