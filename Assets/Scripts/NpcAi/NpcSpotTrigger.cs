@@ -24,6 +24,7 @@ namespace NpcAi
         float _builtAngle = -1f;
         int _builtSegments = -1;
         SideScrollerController _player;
+        Collider _playerBody;
 
         void Reset()
         {
@@ -45,6 +46,12 @@ namespace NpcAi
             SyncCone();
         }
 
+        void Start()
+        {
+            if (Application.isPlaying)
+                CachePlayer();
+        }
+
         void LateUpdate()
         {
             SyncCone();
@@ -60,10 +67,11 @@ namespace NpcAi
 
         void OnTriggerEnter(Collider other)
         {
-            if (other == null || other.GetComponent<InteractionSystem.PlayerInteractionSensor>() != null)
+            if (_player == null || other == null || other.isTrigger ||
+                !other.transform.IsChildOf(_player.transform))
                 return;
 
-            TrySpot(other.GetComponentInParent<SideScrollerController>());
+            TrySpot(_player);
         }
 
         void OnDrawGizmos()
@@ -76,12 +84,12 @@ namespace NpcAi
             if (!Application.isPlaying)
                 return;
 
-            SideScrollerController player = ResolvePlayer();
+            SideScrollerController player = _player;
             if (player == null)
                 return;
 
             Vector3 origin = transform.position;
-            Vector3 target = PlayerAimPoint(player);
+            Vector3 target = PlayerAimPoint();
             bool inCone = IsInsideCone(origin, target, coneRange, coneAngle);
             bool visible = inCone && HasLineOfSight(origin, target, player);
             Gizmos.color = visible ? Color.green : (inCone ? Color.red : new Color(1f, 1f, 1f, 0.12f));
@@ -110,7 +118,7 @@ namespace NpcAi
 
         void TryDetectPlayer()
         {
-            TrySpot(ResolvePlayer());
+            TrySpot(_player);
         }
 
         void TrySpot(SideScrollerController player)
@@ -118,14 +126,11 @@ namespace NpcAi
             if (player == null)
                 return;
 
-            if (machine == null)
-                machine = GetComponentInParent<NpcStateMachine>();
-
             if (machine == null || !machine.IsPlaying)
                 return;
 
             Vector3 origin = transform.position;
-            Vector3 target = PlayerAimPoint(player);
+            Vector3 target = PlayerAimPoint();
             float coneRange;
             float coneAngle;
             ReadCone(out coneRange, out coneAngle);
@@ -139,10 +144,9 @@ namespace NpcAi
             machine.TryInterrupt(interruptNodeId);
         }
 
-        SideScrollerController ResolvePlayer()
+        void CachePlayer()
         {
-            if (_player != null)
-                return _player;
+            // One attempt at startup. Missing or destroyed players are never reacquired.
 
             SideScrollerController[] candidates = FindObjectsByType<SideScrollerController>(FindObjectsSortMode.None);
             for (int i = 0; i < candidates.Length; i++)
@@ -158,7 +162,12 @@ namespace NpcAi
                 break;
             }
 
-            return _player;
+            if (_player != null)
+            {
+                _playerBody = _player.GetComponent<CharacterController>();
+                if (_playerBody == null)
+                    _playerBody = _player.GetComponent<Collider>();
+            }
         }
 
         bool IsOwnedByNpc(Transform target)
@@ -172,17 +181,11 @@ namespace NpcAi
                    (npcRoot != null && (target == npcRoot || target.IsChildOf(npcRoot)));
         }
 
-        static Vector3 PlayerAimPoint(SideScrollerController player)
+        Vector3 PlayerAimPoint()
         {
-            CharacterController controller = player.GetComponent<CharacterController>();
-            if (controller != null)
-                return controller.bounds.center;
-
-            Collider body = player.GetComponent<Collider>();
-            if (body != null)
-                return body.bounds.center;
-
-            return player.transform.position + Vector3.up;
+            return _playerBody != null
+                ? _playerBody.bounds.center
+                : _player.transform.position + Vector3.up;
         }
 
         bool IsInsideCone(Vector3 origin, Vector3 target, float coneRange, float coneAngle)
@@ -228,7 +231,7 @@ namespace NpcAi
             if (closest == null)
                 return true;
 
-            return closest.GetComponentInParent<SideScrollerController>() == player;
+            return closest.transform.IsChildOf(player.transform);
         }
 
         void AlignToLight()
