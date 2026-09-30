@@ -44,6 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8d40f63c2440c59caf0e6c891ab623, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.GameProgressManager
+  player: {fileID: 0}
+  cameraFollow: {fileID: 0}
+  savedLocation: {x: 0, y: 0, z: 0}
+  savedScene: 
 --- !u!1 &2961342436608351862
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,6 +270,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Serum.Audio.GameAudioStateManager
   initialState: 0
   stateControllers: []
+--- !u!1 &7083419658201746392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4829173650912746803}
+  - component: {fileID: 1753086429715063842}
+  m_Layer: 0
+  m_Name: AreaManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4829173650912746803
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7083419658201746392}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5396145905783869627}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1753086429715063842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7083419658201746392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c3b92e58a1048e3b1d6f4a7c9e2b501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.AreaManager
+  areaName: 
 --- !u!1 &7493158294610275386
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,6 +534,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6286637594802084564}
   - component: {fileID: 3354444679656628020}
+  - component: {fileID: 3671265245569029713}
   m_Layer: 0
   m_Name: SerumSceneManager
   m_TagString: Untagged
@@ -520,47 +570,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.SerumSceneManager
   sceneLoadDelay: 1.5
---- !u!1 &7083419658201746392
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4829173650912746803}
-  - component: {fileID: 1753086429715063842}
-  m_Layer: 0
-  m_Name: AreaManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4829173650912746803
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7083419658201746392}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5396145905783869627}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1753086429715063842
+--- !u!114 &3671265245569029713
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7083419658201746392}
+  m_GameObject: {fileID: 9212558999859901624}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c3b92e58a1048e3b1d6f4a7c9e2b501, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::Game.AreaManager
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.SignalReceiver
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 82dabc5fdd87a3d4c94db242a3077c25, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3354444679656628020}
+          m_TargetAssemblyTypeName: Game.SerumSceneManager, Assembly-CSharp
+          m_MethodName: LoadScene
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Main menu
+            m_BoolArgument: 0
+          m_CallState: 2

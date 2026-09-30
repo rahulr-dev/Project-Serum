@@ -5,6 +5,7 @@ using Game;
 using QTE;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 namespace Interaction
 {
@@ -18,6 +19,9 @@ namespace Interaction
         public static event Action OnInteractCanceled;
         public static event Action OnJumpStarted;
         public static event Action OnJumpCanceled;
+        /// <summary>Raw button input, even when gameplay is blocked. The argument indicates a Jump press.</summary>
+        public static event Action<bool> OnButtonPressed;
+        public static event Action OnPausePressed;
         public static event Action<QTEInputKind, string> OnQTEInputRegistered;
 
         public Vector2 MoveInput { get; private set; }
@@ -119,6 +123,7 @@ namespace Interaction
 
         void Update()
         {
+            PublishButtonPress();
             ClearQTEPressCounters();
             HandleStealthToggleKeyboard();
 
@@ -151,6 +156,47 @@ namespace Interaction
         void LateUpdate()
         {
             JumpPressedThisFrame = false;
+        }
+
+        void PublishButtonPress()
+        {
+            if (Instance != this)
+                return;
+
+            // Consume Escape when a pause controller is listening so it cannot also skip a cutscene.
+            if (OnPausePressed != null && Keyboard.current != null &&
+                Keyboard.current.escapeKey.wasPressedThisFrame)
+            {
+                OnPausePressed.Invoke();
+                return;
+            }
+
+            if (Time.timeScale == 0f ||
+                (GameStateManager.Instance != null && GameStateManager.Instance.CurrentState == GameState.Paused))
+                return;
+
+            if (OnButtonPressed == null || Instance != this)
+                return;
+
+            bool jumpPressed = _jump != null && _jump.WasPressedThisFrame();
+            bool anyPressed = jumpPressed;
+            foreach (InputDevice device in InputSystem.devices)
+            {
+                foreach (InputControl control in device.allControls)
+                {
+                    if (control is ButtonControl button && button.wasPressedThisFrame)
+                    {
+                        anyPressed = true;
+                        break;
+                    }
+                }
+
+                if (anyPressed)
+                    break;
+            }
+
+            if (anyPressed)
+                OnButtonPressed?.Invoke(jumpPressed);
         }
 
         void ClearQTEPressCounters()

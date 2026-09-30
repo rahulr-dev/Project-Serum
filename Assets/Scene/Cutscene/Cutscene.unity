@@ -331,18 +331,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 794652333919320195, guid: 441b50cf679331044acb7e18a4d9a212, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -29.615417
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398524518560896132, guid: 441b50cf679331044acb7e18a4d9a212, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 639.45044
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398524518560896132, guid: 441b50cf679331044acb7e18a4d9a212, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -29.615417
-      objectReference: {fileID: 0}
+    - target: {fileID: 5912867576104340985, guid: 441b50cf679331044acb7e18a4d9a212, type: 3}
+      propertyPath: onSkip.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1359172264}
     - target: {fileID: 8726847909536439474, guid: 441b50cf679331044acb7e18a4d9a212, type: 3}
       propertyPath: m_Name
       value: UI (Canvas)
@@ -2031,15 +2023,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5396145905783869627, guid: df2b835b0cae1fb4ea13d5d8d7c65651, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -49.11465
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5396145905783869627, guid: df2b835b0cae1fb4ea13d5d8d7c65651, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.97046
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5396145905783869627, guid: df2b835b0cae1fb4ea13d5d8d7c65651, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -228.34009
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5396145905783869627, guid: df2b835b0cae1fb4ea13d5d8d7c65651, type: 3}
       propertyPath: m_LocalRotation.w
