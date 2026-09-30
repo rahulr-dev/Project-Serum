@@ -21,9 +21,8 @@ namespace InteractionSystem
 
         public const string OverlayPrefsKey = "Serum.InteractablesOverlay.Enabled";
 
-        static readonly Collider[] Hits = new Collider[64];
+        PlayerInteractionSensor _sensor;
         readonly List<OverlapHit> _overlaps = new List<OverlapHit>(16);
-        readonly HashSet<int> _seenColliders = new HashSet<int>();
 
         public static PlayerInteractor Instance { get; private set; }
 
@@ -50,27 +49,61 @@ namespace InteractionSystem
 
         void OnEnable()
         {
+            _sensor = GetComponentInChildren<PlayerInteractionSensor>(true);
+            if (_sensor == null)
+            {
+                GameObject sensorObject = new GameObject("Interaction Sensor");
+                sensorObject.SetActive(false);
+                sensorObject.transform.SetParent(transform, false);
+                _sensor = sensorObject.AddComponent<PlayerInteractionSensor>();
+            }
+            _sensor.Initialize(this, detectionOffset, radius);
+            _sensor.gameObject.SetActive(true);
             Instance = this;
             InteractionManager.OnInteractStarted += HandleInteractStarted;
+            Interactable.AvailabilityChanged += RefreshDetection;
         }
 
         void OnDisable()
         {
             InteractionManager.OnInteractStarted -= HandleInteractStarted;
+            Interactable.AvailabilityChanged -= RefreshDetection;
             if (Instance == this)
                 Instance = null;
 
+            if (_sensor != null)
+                _sensor.gameObject.SetActive(false);
             _overlaps.Clear();
             SetCurrent(null, null);
         }
 
-        void FixedUpdate()
+        void OnDestroy()
         {
+            if (_sensor != null)
+                Destroy(_sensor.gameObject);
+        }
+
+        internal void TrackCollider(Collider col)
+        {
+            if (!isActiveAndEnabled || col == null || col.transform.IsChildOf(transform))
+                return;
+            if (((1 << col.gameObject.layer) & layerMask) == 0)
+                return;
+            for (int i = 0; i < _overlaps.Count; i++)
+                if (_overlaps[i].Collider == col)
+                    return;
+            Interactable interactable = ResolveInteractable(col);
+            if (interactable == null)
+                return;
+            _overlaps.Add(new OverlapHit { Collider = col, Interactable = interactable });
             RefreshDetection();
         }
 
-        void LateUpdate()
+        internal void UntrackCollider(Collider col)
         {
+            for (int i = _overlaps.Count - 1; i >= 0; i--)
+                if (_overlaps[i].Collider == col)
+                    _overlaps.RemoveAt(i);
             RefreshDetection();
         }
 
@@ -108,41 +141,26 @@ namespace InteractionSystem
 
         public void RefreshDetection()
         {
-            Physics.SyncTransforms();
-
-            _overlaps.Clear();
-            _seenColliders.Clear();
-
+            // Only inspect candidates delivered by trigger events.
             Vector3 origin = DetectionOrigin;
-            float radiusSq = radius * radius;
-
-            int count = Physics.OverlapSphereNonAlloc(origin, radius, Hits, layerMask, QueryTriggerInteraction.Collide);
-            for (int i = 0; i < count; i++)
-                TryAddHit(Hits[i], origin, radiusSq);
-
-            Interactable[] interactables = FindObjectsByType<Interactable>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-            for (int i = 0; i < interactables.Length; i++)
-            {
-                Interactable interactable = interactables[i];
-                if (interactable == null || !interactable.isActiveAndEnabled)
-                    continue;
-
-                Collider[] colliders = interactable.GetComponentsInChildren<Collider>(false);
-                for (int c = 0; c < colliders.Length; c++)
-                    TryAddHit(colliders[c], origin, radiusSq);
-            }
-
             Interactable best = null;
             Collider bestCollider = null;
             float bestDist = float.MaxValue;
-            for (int i = 0; i < _overlaps.Count; i++)
+            for (int i = _overlaps.Count - 1; i >= 0; i--)
             {
                 OverlapHit hit = _overlaps[i];
-                if (hit.Collider == null)
+                if (hit.Collider == null || !hit.Collider.enabled ||
+                    !hit.Collider.gameObject.activeInHierarchy || hit.Interactable == null)
+                {
+                    _overlaps.RemoveAt(i);
+                    continue;
+                }
+                if (!hit.Interactable.isActiveAndEnabled ||
+                    ((1 << hit.Collider.gameObject.layer) & layerMask) == 0)
                     continue;
 
                 float dist = Vector3.SqrMagnitude(hit.Collider.ClosestPoint(origin) - origin);
-                if (dist < bestDist)
+                if (dist <= radius * radius && dist < bestDist)
                 {
                     bestDist = dist;
                     best = hit.Interactable;
@@ -161,35 +179,6 @@ namespace InteractionSystem
             Current = interactable;
             CurrentCollider = col;
             OnCurrentChanged?.Invoke(Current);
-        }
-
-        void TryAddHit(Collider col, Vector3 origin, float radiusSq)
-        {
-            if (col == null || !col.enabled || !col.gameObject.activeInHierarchy)
-                return;
-
-            if (((1 << col.gameObject.layer) & layerMask) == 0)
-                return;
-
-            if (col.gameObject == gameObject)
-                return;
-
-            int id = col.GetInstanceID();
-            if (!_seenColliders.Add(id))
-                return;
-
-            Vector3 closest = col.ClosestPoint(origin);
-            if ((closest - origin).sqrMagnitude > radiusSq)
-                return;
-
-            Interactable interactable = ResolveInteractable(col);
-            if (interactable == null || !interactable.isActiveAndEnabled)
-                return;
-
-            if (interactable.gameObject == gameObject)
-                return;
-
-            _overlaps.Add(new OverlapHit { Collider = col, Interactable = interactable });
         }
 
         static Interactable ResolveInteractable(Collider col)

@@ -6,6 +6,11 @@ namespace InteractionSystem
 {
     public class Interactable : MonoBehaviour
     {
+        internal static event System.Action AvailabilityChanged;
+
+        void OnEnable() => AvailabilityChanged?.Invoke();
+        void OnDisable() => AvailabilityChanged?.Invoke();
+
         [SerializeField] InteractionGraph graph;
 
         [Header("Gizmos")]

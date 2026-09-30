@@ -60,6 +60,7 @@ namespace Events
         static bool IsPlayer(Collider other)
         {
             return other != null
+                && other.GetComponent<InteractionSystem.PlayerInteractionSensor>() == null
                 && other.GetComponentInParent<SideScrollerController>() != null;
         }
 

@@ -60,7 +60,7 @@ namespace NpcAi
 
         void OnTriggerEnter(Collider other)
         {
-            if (other == null)
+            if (other == null || other.GetComponent<InteractionSystem.PlayerInteractionSensor>() != null)
                 return;
 
             TrySpot(other.GetComponentInParent<SideScrollerController>());

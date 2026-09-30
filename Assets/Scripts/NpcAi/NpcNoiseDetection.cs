@@ -118,7 +118,7 @@ namespace NpcAi
 
         void TrackPlayerCollider(Collider other)
         {
-            if (other == null)
+            if (other == null || other.GetComponent<InteractionSystem.PlayerInteractionSensor>() != null)
                 return;
 
             SideScrollerController player = other.GetComponentInParent<SideScrollerController>();
