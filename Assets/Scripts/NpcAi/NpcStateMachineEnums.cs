@@ -13,6 +13,7 @@ namespace NpcAi
         None,
         Completed,
         Failed,
-        Interrupted
+        Interrupted,
+        Escaped
     }
 }

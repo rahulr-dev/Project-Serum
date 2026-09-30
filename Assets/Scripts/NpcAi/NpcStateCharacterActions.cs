@@ -148,7 +148,7 @@ namespace NpcAi
                     break;
                 case NpcStateCharacterAction.Follow:
                     ExecuteOnTarget(node, "Follow", target =>
-                        bridge.Follow(target, node.speed, node.stopDistance, 0f));
+                        bridge.Follow(target, node.speed, node.stopDistance, 0f, node.escapeDistance));
                     break;
                 case NpcStateCharacterAction.LookAt:
                     ExecuteOnTarget(node, "LookAt", target => bridge.LookAt(target));

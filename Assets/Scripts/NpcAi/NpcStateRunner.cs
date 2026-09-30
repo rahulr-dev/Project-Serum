@@ -134,6 +134,12 @@ namespace NpcAi
             if (string.IsNullOrEmpty(eventId) || !string.Equals(eventId, _waitEventId, StringComparison.Ordinal))
                 return;
 
+            if (eventId == NpcStateCharacterActions.FollowEnded && _subscribedBridge != null && _subscribedBridge.FollowEscaped)
+            {
+                Finish(NpcStateOutcome.Escaped);
+                return;
+            }
+
             ResolveWait(true);
         }
 
@@ -245,7 +251,9 @@ namespace NpcAi
                 case NpcStateNodeKind.End:
                     Finish(node.endOutcome == NpcStateOutcome.Failed
                         ? NpcStateOutcome.Failed
-                        : NpcStateOutcome.Completed);
+                        : node.endOutcome == NpcStateOutcome.Escaped
+                            ? NpcStateOutcome.Escaped
+                            : NpcStateOutcome.Completed);
                     break;
                 default:
                     Enter(_graph.FindNext(node.id, 0));
@@ -257,6 +265,12 @@ namespace NpcAi
         {
             SerumActionBridge bridge = _context != null ? _context.Bridge : null;
             NpcStateCharacterActions.Execute(bridge, node);
+
+            if (node.characterAction == NpcStateCharacterAction.Follow && bridge != null && bridge.FollowEscaped)
+            {
+                Finish(NpcStateOutcome.Escaped);
+                return;
+            }
 
             if (node.waitUntilDone &&
                 NpcStateCharacterActions.TryGetCompletionEvent(node.characterAction, out string eventId) &&

@@ -15,7 +15,7 @@ MonoBehaviour:
   nodes:
   - id: 96c45943c64f4d789dcaf0254e9b3426
     kind: 0
-    position: {x: 68.66666, y: 142.66667}
+    position: {x: 68.66667, y: 142.66667}
     duration: 1
     characterAction: 0
     distance: 4
@@ -31,6 +31,7 @@ MonoBehaviour:
     moveTargetId: 
     branchCount: 2
     stopDistance: 0.4
+    escapeDistance: 0
     waitEventId: ScriptedRunEnded
     endOutcome: 1
   - id: c06353816fce46c9adbe153b84da0e02
@@ -51,15 +52,16 @@ MonoBehaviour:
     moveTargetId: 
     branchCount: 2
     stopDistance: 0.4
+    escapeDistance: 0
     waitEventId: ScriptedRunEnded
     endOutcome: 1
   - id: e1673c021c8846b8b651761d03af7cd7
     kind: 3
-    position: {x: 468.6667, y: 142.66667}
+    position: {x: 469.33337, y: 142.66667}
     duration: 1
     characterAction: 35
     distance: 4
-    speed: 4
+    speed: 1
     offsetX: 0
     offsetZ: 0
     animSpeed: 1
@@ -71,11 +73,12 @@ MonoBehaviour:
     moveTargetId: 2df6956cfb8449b9835b49378f16877e
     branchCount: 2
     stopDistance: 2
+    escapeDistance: 20
     waitEventId: ScriptedRunEnded
     endOutcome: 1
   - id: a5952534801842bd9e147e92cb54681e
     kind: 3
-    position: {x: 188, y: 142.66667}
+    position: {x: 188.00002, y: 142.66667}
     duration: 0
     characterAction: 38
     distance: 4
@@ -91,6 +94,7 @@ MonoBehaviour:
     moveTargetId: 2df6956cfb8449b9835b49378f16877e
     branchCount: 2
     stopDistance: 0.4
+    escapeDistance: 0
     waitEventId: ScriptedRunEnded
     endOutcome: 1
   edges:

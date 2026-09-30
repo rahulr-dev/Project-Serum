@@ -66,6 +66,7 @@ namespace Events
         public bool IsSmoothMoving => _moveRoutine != null;
         public bool IsSmoothRotating => _rotateRoutine != null;
         public bool IsFollowing => _followRoutine != null;
+        public bool FollowEscaped { get; private set; }
         public bool IsLooking => _lookRoutine != null;
 
         void Awake()
@@ -947,8 +948,9 @@ namespace Events
             StopLookRoutine(true);
         }
 
-        public void Follow(Transform target, float speed, float stopDistance, float duration)
+        public void Follow(Transform target, float speed, float stopDistance, float duration, float escapeDistance = 0f)
         {
+            FollowEscaped = false;
             if (target == null)
                 return;
 
@@ -958,10 +960,21 @@ namespace Events
                 _motor.StopScriptedRun();
 
             float runSpeed = Mathf.Max(0.01f, speed);
+            stopDistance = Mathf.Max(0f, stopDistance);
+            escapeDistance = Mathf.Max(0f, escapeDistance);
             SetLocomotionEnabled(false);
+            float distance = Vector3.Distance(_transform.position, target.position);
+            // Complete before starting a coroutine that would finish synchronously,
+            // otherwise its returned handle would leave IsFollowing stuck true.
+            if (distance <= stopDistance || (escapeDistance > 0f && distance > escapeDistance))
+            {
+                FinishFollow(true, escapeDistance > 0f && distance > escapeDistance);
+                return;
+            }
+
             PlayRun();
             SetAnimSpeed(GetRunAnimSpeed(runSpeed));
-            _followRoutine = StartCoroutine(FollowRoutine(target, runSpeed, Mathf.Max(0f, stopDistance), duration));
+            _followRoutine = StartCoroutine(FollowRoutine(target, runSpeed, stopDistance, duration, escapeDistance));
         }
 
         public void StopFollow()
@@ -1244,7 +1257,7 @@ namespace Events
             NotifyNamedEvent("MaintainLookAtEnded", false);
         }
 
-        IEnumerator FollowRoutine(Transform target, float speed, float stopDistance, float duration)
+        IEnumerator FollowRoutine(Transform target, float speed, float stopDistance, float duration, float escapeDistance)
         {
             CharacterController controller = GetComponent<CharacterController>();
             float elapsed = 0f;
@@ -1253,15 +1266,18 @@ namespace Events
             while (target != null)
             {
                 Vector3 origin = _transform.position;
+                float distance = Vector3.Distance(origin, target.position);
                 Vector3 toTarget = target.position - origin;
                 toTarget.y = 0f;
-                float distance = toTarget.magnitude;
-                if (distance <= stopDistance)
-                    break;
+                if (distance <= stopDistance || (escapeDistance > 0f && distance > escapeDistance))
+                {
+                    FinishFollow(true, escapeDistance > 0f && distance > escapeDistance);
+                    yield break;
+                }
 
                 ApplyYaw(YawToward(target.position));
                 float step = speed * Time.deltaTime;
-                Vector3 move = toTarget.normalized * Mathf.Min(step, distance - stopDistance);
+                Vector3 move = toTarget.normalized * Mathf.Min(step, distance - stopDistance, toTarget.magnitude);
                 if (controller != null)
                     controller.Move(move);
                 else
@@ -1314,9 +1330,10 @@ namespace Events
             FinishFollow(notify);
         }
 
-        void FinishFollow(bool notify)
+        void FinishFollow(bool notify, bool escaped = false)
         {
             _followRoutine = null;
+            FollowEscaped = escaped;
             if (clearAnimOnRunComplete && characterAnimation != null)
                 ClearAnimOverride();
 

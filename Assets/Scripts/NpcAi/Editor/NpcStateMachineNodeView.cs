@@ -74,6 +74,7 @@ namespace NpcAi.Editor
                 AddOutput("Completed");
                 AddOutput("Failed");
                 AddOutput("Interrupt");
+                AddOutput("Escaped");
                 return;
             }
 

@@ -54,7 +54,10 @@ namespace NpcAi.Editor
                     EditorGUILayout.PropertyField(node.FindPropertyRelative("speed"));
                     EditorGUILayout.PropertyField(
                         node.FindPropertyRelative("stopDistance"),
-                        new GUIContent("Stop Distance", "How close the NPC gets before Follow ends."));
+                        new GUIContent("Stop Distance", "Follow ends within this 3D distance of the target, including height."));
+                    EditorGUILayout.PropertyField(
+                        node.FindPropertyRelative("escapeDistance"),
+                        new GUIContent("Escape Distance", "Follow ends when the target is farther than this 3D distance, including height. 0 disables this limit."));
                     EditorGUILayout.PropertyField(node.FindPropertyRelative("waitUntilDone"));
                     break;
                 case NpcStateCharacterAction.LookAt:

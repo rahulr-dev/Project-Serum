@@ -81,6 +81,9 @@ namespace NpcAi
                 case NpcStateOutcome.Failed:
                     EnterOrFinish(node.id, 1, NpcStateMachineOutcome.Failed);
                     return;
+                case NpcStateOutcome.Escaped:
+                    EnterOrFinish(node.id, 3, NpcStateMachineOutcome.Escaped);
+                    return;
                 default:
                     if (_host != null && _host.ConsumeSpotted())
                     {

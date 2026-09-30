@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using Game;
 using Interaction;
 using UnityEngine;
@@ -32,6 +31,8 @@ namespace Character
         [Tooltip("Animator Trigger parameters that play the one-shot idle clips.")]
         [SerializeField] string idleVariant2Trigger = "idleVariant2";
         [SerializeField] string idleVariant3Trigger = "idleVariant3";
+        [SerializeField] string idleVariantPlayingParam = "isPlayingIdleVariation";
+
         [Tooltip("How long the player must stand still before an additional idle can play.")]
         [SerializeField, Min(0f)] float idleVariantDelay = 8f;
         [Tooltip("Pause after a variant plays before starting the next idle delay.")]
@@ -44,6 +45,8 @@ namespace Character
         [SerializeField, Min(0f)] float landRunSpeedThreshold = 0.5f;
         [Tooltip("How long the controller keeps the player moving after a non-impactful running landing.")]
         [SerializeField, Min(0f)] float landingRunMoveDuration = 1f;
+
+        public bool IsPlayingIdleVariation { get; private set; }
 
         INormalizedMoveSpeed _speedSource;
         Action _unbindJump;
@@ -58,6 +61,7 @@ namespace Character
         int _pushingHash;
         int _idleVariant2Hash;
         int _idleVariant3Hash;
+        int _idleVariantPlayingHash;
         bool _speedOverrideActive;
         float _speedOverride;
         float _stealthTarget = StealthOff;
@@ -72,11 +76,9 @@ namespace Character
         float _airStartHeight;
         float _idleTimer;
         float _idleVariantCooldown;
-        Coroutine _idleVariantStateRoutine;
-        GameStateManager _idleVariantStateManager;
-        GameState _stateBeforeIdleVariant;
+        int _idleVariantStartFrame;
         const float PushAnimSpeed = 0.05f;
-        const float IdleVariantCutsceneDuration = 3f;
+        const string IdleVariantTag = "IdleVariation";
 
         void Awake()
         {
@@ -98,6 +100,7 @@ namespace Character
             _pushingHash = Animator.StringToHash(pushingParam);
             _idleVariant2Hash = Animator.StringToHash(idleVariant2Trigger);
             _idleVariant3Hash = Animator.StringToHash(idleVariant3Trigger);
+            _idleVariantPlayingHash = Animator.StringToHash(idleVariantPlayingParam);
             _speedSource = FindSpeedSource();
             if (_speedSource == null)
             {
@@ -114,6 +117,9 @@ namespace Character
 
             BindJumpEvent();
             InteractionManager.OnInteractStarted += HandleInteractStarted;
+            InteractionManager.OnMove += HandleMoveInput;
+            InteractionManager.OnJumpStarted += CancelIdleVariation;
+            InteractionManager.OnButtonPressed += HandleButtonPressed;
             if (locomotion != null)
             {
                 locomotion.OnLanded += HandleLanded;
@@ -131,10 +137,13 @@ namespace Character
 
         void OnDisable()
         {
-            StopIdleVariantCutscene();
+            CancelIdleVariation();
             _unbindJump?.Invoke();
             _unbindJump = null;
             InteractionManager.OnInteractStarted -= HandleInteractStarted;
+            InteractionManager.OnMove -= HandleMoveInput;
+            InteractionManager.OnJumpStarted -= CancelIdleVariation;
+            InteractionManager.OnButtonPressed -= HandleButtonPressed;
             if (locomotion != null)
                 locomotion.OnLanded -= HandleLanded;
 
@@ -215,12 +224,29 @@ namespace Character
 
         void UpdateIdleVariant(float speed, GameState state)
         {
-            bool crouching = state == GameState.GameplayStealth ||
-                            state == GameState.GameplayStealthForced;
-            if (speed > idleSpeedThreshold || _pushing || crouching)
+            InteractionManager input = InteractionManager.Instance;
+            bool hasInput = input != null &&
+                            (input.MoveInput.sqrMagnitude > 0f || input.IsJumpHeld || input.JumpPressedThisFrame);
+            bool canIdle = state == GameState.Gameplay || state == GameState.GameplayNoJump;
+            if (!canIdle || hasInput || speed > idleSpeedThreshold || _pushing ||
+                (locomotion != null && (!locomotion.IsGrounded || locomotion.IsClimbing ||
+                                        locomotion.IsScriptedRunning || !locomotion.LocomotionEnabled)))
             {
-                _idleTimer = 0f;
-                _idleVariantCooldown = 0f;
+                CancelIdleVariation();
+                return;
+            }
+
+            if (IsPlayingIdleVariation)
+            {
+                // Allow the trigger to be evaluated before checking for a natural exit.
+                bool inVariant = animator.GetCurrentAnimatorStateInfo(0).IsTag(IdleVariantTag) ||
+                                 (animator.IsInTransition(0) &&
+                                  animator.GetNextAnimatorStateInfo(0).IsTag(IdleVariantTag));
+                if (!inVariant && Time.frameCount > _idleVariantStartFrame + 1)
+                {
+                    CancelIdleVariation();
+                    _idleVariantCooldown = idleVariantInterval;
+                }
                 return;
             }
 
@@ -234,61 +260,52 @@ namespace Character
             if (_idleTimer < idleVariantDelay)
                 return;
 
+            SetIdleVariationPlaying(true);
+            _idleVariantStartFrame = Time.frameCount;
+
             // Idle 1 remains the default state. Fire one trigger so a variant plays once.
             if (UnityEngine.Random.value < 0.5f)
                 animator.SetTrigger(_idleVariant2Hash);
             else
                 animator.SetTrigger(_idleVariant3Hash);
             _idleTimer = 0f;
-            _idleVariantCooldown = idleVariantInterval;
-            StartIdleVariantCutscene();
         }
 
-        void StartIdleVariantCutscene()
+        void SetIdleVariationPlaying(bool playing)
         {
-            if (_idleVariantStateRoutine != null)
-                StopIdleVariantCutscene();
+            IsPlayingIdleVariation = playing;
+            if (animator != null)
+                animator.SetBool(_idleVariantPlayingHash, playing);
+        }
 
-            GameStateManager stateManager = GameStateManager.Instance;
-            if (stateManager == null)
+        void CancelIdleVariation()
+        {
+            ResetIdleTimer();
+            if (!IsPlayingIdleVariation)
                 return;
 
-            _idleVariantStateManager = stateManager;
-            _stateBeforeIdleVariant = stateManager.CurrentState;
-            stateManager.EnterCutscene();
-            _idleVariantStateRoutine = StartCoroutine(
-                RestoreStateAfterIdleVariant(stateManager, _stateBeforeIdleVariant));
-        }
-
-        IEnumerator RestoreStateAfterIdleVariant(GameStateManager stateManager, GameState previousState)
-        {
-            yield return new WaitForSecondsRealtime(IdleVariantCutsceneDuration);
-
-            if (stateManager != null && stateManager.CurrentState == GameState.Cutscene)
-                stateManager.SetState(previousState);
-
-            _idleVariantStateRoutine = null;
-            _idleVariantStateManager = null;
-        }
-
-        void StopIdleVariantCutscene()
-        {
-            if (_idleVariantStateRoutine == null)
-                return;
-
-            StopCoroutine(_idleVariantStateRoutine);
-            _idleVariantStateRoutine = null;
-            if (_idleVariantStateManager != null &&
-                _idleVariantStateManager.CurrentState == GameState.Cutscene)
+            SetIdleVariationPlaying(false);
+            if (animator != null)
             {
-                _idleVariantStateManager.SetState(_stateBeforeIdleVariant);
+                animator.ResetTrigger(_idleVariant2Hash);
+                animator.ResetTrigger(_idleVariant3Hash);
             }
-            _idleVariantStateManager = null;
+        }
+
+        void HandleMoveInput(Vector2 move)
+        {
+            if (move.sqrMagnitude > 0f)
+                CancelIdleVariation();
+        }
+
+        void HandleButtonPressed(bool isJump)
+        {
+            CancelIdleVariation();
         }
 
         void HandleJumped()
         {
-            ResetIdleTimer();
+            CancelIdleVariation();
             _landRunLandingPending = false;
             _landRunLandingSpeed = 0f;
             RecordAirStartHeight();
