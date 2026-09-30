@@ -20,7 +20,8 @@ An informative panel appears when the destination is not available.
 
 CONTROLS
 Mouse hover/click and keyboard arrows/submit select and activate menu items.
-Continue is intentionally disabled; no save-game system was added.
+Continue loads Level_1 directly, skipping the cutscene and preserving PlayerPrefs.
+New Game clears PlayerPrefs before loading gameplay.
 Options provides session-only master volume and fullscreen controls.
 Exit quits a built game or stops Play mode in the Unity Editor.
 

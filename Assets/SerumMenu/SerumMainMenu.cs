@@ -1,4 +1,5 @@
 using System.Collections;
+using Game;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,6 +13,7 @@ namespace Serum.MenuUI
         [Tooltip("-1 loads the scene immediately after this menu in the enabled build scene list.")]
         public int newGameBuildIndex = -1;
         public Button newGameButton;
+        public Button continueButton;
         public RectTransform selection;
         public RectTransform underline;
         public GameObject menuGroup;
@@ -25,9 +27,12 @@ namespace Serum.MenuUI
         public CanvasGroup fade;
         bool loading;
         SerumMenuItem activeItem;
+        bool CanContinue => GameProgressManager.Instance != null && GameProgressManager.Instance.HasCheckpoint;
 
         void Start()
         {
+            if (GameProgressManager.Instance == null)
+                new GameObject("GameProgressManager").AddComponent<GameProgressManager>();
             optionsPanel.SetActive(false);
             messagePanel.SetActive(false);
             fade.alpha = 0;
@@ -36,7 +41,36 @@ namespace Serum.MenuUI
             fullscreen.SetIsOnWithoutNotify(Screen.fullScreen);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            RefreshContinueButton();
             newGameButton.Select();
+        }
+
+        void Update()
+        {
+            if (!loading && continueButton != null && continueButton.interactable != CanContinue)
+                RefreshContinueButton();
+        }
+
+        void RefreshContinueButton()
+        {
+            if (continueButton == null) return;
+            bool canContinue = CanContinue;
+            continueButton.interactable = canContinue;
+            if (!canContinue && EventSystem.current != null &&
+                EventSystem.current.currentSelectedGameObject == continueButton.gameObject)
+                newGameButton.Select();
+
+            // Explicit navigation must skip Continue when it is disabled.
+            var exitButton = continueButton.navigation.selectOnUp;
+            var newGameNavigation = newGameButton.navigation;
+            newGameNavigation.selectOnUp = canContinue ? continueButton : exitButton;
+            newGameButton.navigation = newGameNavigation;
+            if (exitButton != null)
+            {
+                var exitNavigation = exitButton.navigation;
+                exitNavigation.selectOnDown = canContinue ? continueButton : newGameButton;
+                exitButton.navigation = exitNavigation;
+            }
         }
 
         public void Highlight(SerumMenuItem item)
@@ -51,6 +85,25 @@ namespace Serum.MenuUI
 
         public void NewGame()
         {
+            StartGame(true);
+        }
+
+        public void Continue()
+        {
+            if (loading) return;
+            RefreshContinueButton();
+            if (!CanContinue) return;
+            int levelOne = SceneUtility.GetBuildIndexByScenePath("Assets/Scene/Level_01/Level_1.unity");
+            if (levelOne < 0 || !Application.CanStreamedLevelBeLoaded(levelOne))
+            {
+                ShowMessage("THE JOURNEY AWAITS", "Enable Level_1 in the Build Profiles scene list, then try again.");
+                return;
+            }
+            StartCoroutine(LoadScene(levelOne));
+        }
+
+        void StartGame(bool clearPlayerPrefs)
+        {
             if (loading) return;
             int current = SceneManager.GetActiveScene().buildIndex;
             int next = newGameBuildIndex >= 0 ? newGameBuildIndex : (current >= 0 ? current + 1 : 1);
@@ -64,8 +117,11 @@ namespace Serum.MenuUI
                 ShowMessage("CHOOSE A DESTINATION", "New Game points to the menu itself. Choose a different scene index on the Main Menu UI component.");
                 return;
             }
-            PlayerPrefs.DeleteAll();
-            PlayerPrefs.Save();
+            if (clearPlayerPrefs)
+            {
+                PlayerPrefs.DeleteAll();
+                GameProgressManager.ClearSavedProgress();
+            }
             StartCoroutine(LoadScene(next));
         }
 
@@ -97,6 +153,7 @@ namespace Serum.MenuUI
             optionsPanel.SetActive(false);
             messagePanel.SetActive(false);
             menuGroup.SetActive(true);
+            RefreshContinueButton();
             newGameButton.Select();
         }
 
