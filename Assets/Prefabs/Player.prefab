@@ -585,7 +585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b9d2e4f1a834c7b8e0d5f6a3c1b9e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Character.PlayerCloneSystem
-  maxClones: 1
+  maxClones: 0
   spawnOffset: 1.2
   cameraFollow: {fileID: 0}
 --- !u!114 &6097701584220506821
