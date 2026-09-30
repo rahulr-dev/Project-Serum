@@ -73,20 +73,20 @@ namespace Serum.MenuUI.Editor
             group.anchoredPosition = Vector2.zero;
             menu.menuGroup = group.gameObject;
 
-            var disabled = Button("Continue", group, "CONTINUE", new Vector2(0, 0), 38);
-            disabled.interactable = false;
-            disabled.GetComponentInChildren<TMP_Text>().color = new Color(.53f, .53f, .51f, .65f);
+            var continueButton = Button("Continue", group, "CONTINUE", new Vector2(0, 0), 38);
             var newGame = Button("New Game", group, "NEW GAME", new Vector2(0, -84), 38);
             var options = Button("Options", group, "OPTIONS", new Vector2(0, -168), 38);
             var exit = Button("Exit", group, "EXIT", new Vector2(0, -252), 38);
             menu.newGameButton = newGame;
-            foreach (var b in new[] { newGame, options, exit })
+            menu.continueButton = continueButton;
+            foreach (var b in new[] { continueButton, newGame, options, exit })
             {
                 var item = b.gameObject.AddComponent<SerumMenuItem>();
                 item.menu = menu;
                 item.label = b.GetComponentInChildren<TMP_Text>();
             }
-            Nav(newGame, exit, options); Nav(options, newGame, exit); Nav(exit, options, newGame);
+            Nav(continueButton, exit, newGame); Nav(newGame, continueButton, options); Nav(options, newGame, exit); Nav(exit, options, continueButton);
+            UnityEventTools.AddPersistentListener(continueButton.onClick, menu.Continue);
             UnityEventTools.AddPersistentListener(newGame.onClick, menu.NewGame);
             UnityEventTools.AddPersistentListener(options.onClick, menu.OpenOptions);
             UnityEventTools.AddPersistentListener(exit.onClick, menu.Exit);
