@@ -61,7 +61,7 @@ MonoBehaviour:
     duration: 1
     characterAction: 35
     distance: 4
-    speed: 1
+    speed: 5
     offsetX: 0
     offsetZ: 0
     animSpeed: 1
