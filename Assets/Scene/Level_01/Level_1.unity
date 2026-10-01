@@ -944,8 +944,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65756360}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.23309496, y: -0.1929957, z: 0.04725762, w: 0.9519381}
-  m_LocalPosition: {x: 1.76, y: 7.07, z: -16.250002}
+  m_LocalRotation: {x: 0.043560516, y: -0.010286197, z: 0.00044852152, w: 0.99899775}
+  m_LocalPosition: {x: 551.56256, y: 4.5094466, z: -20.119246}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12891,6 +12891,154 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 858865518}
   m_SourcePrefab: {fileID: 100100000, guid: 10c6e993d27d04a46a6c046ba554cac8, type: 3}
+--- !u!1 &1019659604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1019659607}
+  - component: {fileID: 1019659606}
+  - component: {fileID: 1019659605}
+  m_Layer: 0
+  m_Name: Mouse_Audio_Emitter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1019659605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019659604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d997b38ce469ecd4096c139401c66f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Serum.Audio.AmbienceEmitter
+  clips:
+  - {fileID: 8300000, guid: 30bc73438031aa84b9b8666fee656273, type: 3}
+  - {fileID: 8300000, guid: 828f9cb89ac10f34cac05b890811c9fb, type: 3}
+  volume: 0.05
+  delayRange: {x: 5, y: 15}
+  playOnStart: 0
+--- !u!82 &1019659606
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019659604}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 2.1384773
+  MaxDistance: 35
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1019659607
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019659604}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 648.1, y: 23.1, z: 0.62}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1020237376 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4475644418081259153, guid: 43fe3c5d009f61048bb6bf03f58c359d, type: 3}
@@ -16055,7 +16203,7 @@ Transform:
   m_GameObject: {fileID: 1208544117}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 401.2, y: 8.65, z: 0.62}
+  m_LocalPosition: {x: 401.2, y: 8.7, z: 0.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -28409,7 +28557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineSplineDolly
   m_SplineSettings:
     Spline: {fileID: 1090854234}
-    Position: 0
+    Position: 566.3683
     Units: 0
   SplineOffset: {x: 0, y: 0, z: 0}
   CameraRotation: 0
@@ -28484,8 +28632,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760746732}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.23309495, y: -0.19299573, z: 0.04725762, w: 0.9519381}
-  m_LocalPosition: {x: 1.76, y: 7.07, z: -16.250002}
+  m_LocalRotation: {x: 0.043560516, y: -0.010286197, z: 0.00044852166, w: 0.99899775}
+  m_LocalPosition: {x: 551.56256, y: 4.5094466, z: -20.119246}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30497,11 +30645,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 843936606834843478, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.7857513
+      value: 551.2615
       objectReference: {fileID: 0}
     - target: {fileID: 843936606834843478, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.9895239
+      value: 3.2318254
       objectReference: {fileID: 0}
     - target: {fileID: 843936606834843478, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: m_LocalPosition.z
@@ -45339,6 +45487,7 @@ SceneRoots:
   - {fileID: 2022481115}
   - {fileID: 1143835869}
   - {fileID: 1208544120}
+  - {fileID: 1019659607}
   - {fileID: 745737466}
   - {fileID: 1842063654}
   - {fileID: 2088446006}

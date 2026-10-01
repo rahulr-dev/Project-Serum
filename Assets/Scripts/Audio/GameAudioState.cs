@@ -2,8 +2,10 @@ namespace Serum.Audio
 {
     public enum GameAudioState
     {
-        Forest,
+        GameplayForest,
         Indoor,
-        Battle
+        Battle,
+        Stealth,
+        GameOver
     }
 }

@@ -1,16 +1,17 @@
 using System;
 using System.Collections.Generic;
+using Game;
 using UnityEngine;
 
 namespace Serum.Audio
 {
-    /// <summary>Switches between ambient audio states using simultaneous crossfades.</summary>
+    /// <summary>Crossfades audio states. Only Game Over follows the game state automatically.</summary>
     public class GameAudioStateManager : MonoBehaviour
     {
         public static GameAudioStateManager Instance { get; private set; }
         public static event Action<GameAudioState, GameAudioState> OnStateChanged;
 
-        [SerializeField] GameAudioState initialState = GameAudioState.Forest;
+        [SerializeField] GameAudioState initialState = GameAudioState.GameplayForest;
         [SerializeField] AudioStateController[] stateControllers;
 
         readonly Dictionary<GameAudioState, AudioStateController> controllers = new();
@@ -33,9 +34,27 @@ namespace Serum.Audio
             PreviousState = initialState;
         }
 
+        void OnEnable()
+        {
+            if (Instance != this)
+                return;
+
+            GameStateManager.OnStateChanged += HandleGameStateChanged;
+            SyncGameOverState();
+        }
+
+        void OnDisable()
+        {
+            GameStateManager.OnStateChanged -= HandleGameStateChanged;
+        }
+
         void Start()
         {
+            if (Instance != this)
+                return;
+
             ApplyState(CurrentState, true);
+            SyncGameOverState();
         }
 
         void OnDestroy()
@@ -62,9 +81,23 @@ namespace Serum.Audio
         }
 
         public bool IsState(GameAudioState state) => CurrentState == state;
-        public void EnterForest() => SetState(GameAudioState.Forest);
+        public void EnterGameplayForest() => SetState(GameAudioState.GameplayForest);
         public void EnterIndoor() => SetState(GameAudioState.Indoor);
         public void EnterBattle() => SetState(GameAudioState.Battle);
+        public void EnterStealth() => SetState(GameAudioState.Stealth);
+        public void EnterGameOver() => SetState(GameAudioState.GameOver);
+
+        void HandleGameStateChanged(GameState previousState, GameState currentState)
+        {
+            if (currentState == GameState.GameOver)
+                EnterGameOver();
+        }
+
+        void SyncGameOverState()
+        {
+            if (GameStateManager.Instance != null && GameStateManager.Instance.IsState(GameState.GameOver))
+                EnterGameOver();
+        }
 
         void CacheControllers()
         {
