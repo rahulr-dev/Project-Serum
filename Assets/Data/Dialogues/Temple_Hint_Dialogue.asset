@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16f6336ad21230c468ac096c409b2a9e, type: 3}
   m_Name: Temple_Hint_Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue.DialogueGraph
-  updateGameState: 1
+  updateGameState: 0
   playState: 6
   endState: 2
   charsPerSecond: 40
@@ -48,12 +48,12 @@ MonoBehaviour:
     tamilChoiceLabels: []
   - id: 2be7432e9ee94610a8472febd23ea477
     kind: 1
-    position: {x: 237.33334, y: 33.333332}
+    position: {x: 236.66666, y: 42.666664}
     body: It's too dark, I need something to light up!
     tamilBody: 
     colourPreset: 0
-    advanceMode: 0
-    autoDelay: 1
+    advanceMode: 1
+    autoDelay: 3
     charsPerSecond: 0
     onStart:
       m_PersistentCalls:

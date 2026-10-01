@@ -2330,6 +2330,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
   m_Asset: {fileID: 729089823}
   m_ActionId: 44b200b1-1557-4083-816c-b22cbdf77ddf
+--- !u!1 &721331776
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 721331778}
+  - component: {fileID: 721331777}
+  m_Layer: 0
+  m_Name: PlayerFog
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &721331777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721331776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e245b54b9d6d4e06941f853d5a1e6c28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Character.PlayerFogArea
+  cameraFollow: {fileID: 0}
+  player: {fileID: 1750222021}
+  followY: 0
+  fixedY: 0
+  limitToPlayerArea: 1
+  centerOffset: {x: 0, y: 2, z: 10}
+  widthX: 70.8
+  heightY: 61.5
+  depthZ: 60
+  edgeFade: 3
+  sampleSpacing: 1
+  maxSteps: 8
+--- !u!4 &721331778
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721331776}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 34.21, y: 0, z: 49.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &729089823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5052,6 +5108,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b79d5d4c3802a2440a2e78add6a4e2fd, type: 3}
+--- !u!4 &1750222021 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5451003831812276656, guid: b79d5d4c3802a2440a2e78add6a4e2fd, type: 3}
+  m_PrefabInstance: {fileID: 1750222020}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1767024598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6360,3 +6421,4 @@ SceneRoots:
   - {fileID: 1950898416}
   - {fileID: 454759384}
   - {fileID: 1293735407}
+  - {fileID: 721331778}

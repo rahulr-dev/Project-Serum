@@ -12,6 +12,10 @@ namespace Character
         [SerializeField] SideScrollerCameraFollow cameraFollow;
         [Tooltip("Used when no camera follow target is available.")]
         [SerializeField] Transform player;
+        [Tooltip("Follow the player's Y position. Turn off to keep the fog at Fixed Y plus Center Offset Y.")]
+        [SerializeField] bool followY = true;
+        [Tooltip("World-space base Y position when Follow Y is disabled. Center Offset Y is added to this value.")]
+        [SerializeField] float fixedY = 0f;
 
         [Header("Fog bounds (world units, world axes)")]
         [Tooltip("Turn off to restore the original unlimited-area fog.")]
@@ -38,6 +42,14 @@ namespace Character
             ? cameraFollow.Target : player;
         Vector3 Size => new Vector3(Mathf.Max(0.1f, widthX), Mathf.Max(0.1f, heightY), Mathf.Max(0.1f, depthZ));
 
+        Vector3 GetCenter(Transform target)
+        {
+            Vector3 position = target.position;
+            if (!followY)
+                position.y = fixedY;
+            return position + centerOffset;
+        }
+
         void OnEnable()
         {
             if (cameraFollow == null)
@@ -56,7 +68,7 @@ namespace Character
             // One area controls AERO fog in the scene. Missing targets fail closed.
             owner = this;
             Transform target = Target;
-            Vector3 center = target != null ? target.position + centerOffset : Vector3.zero;
+            Vector3 center = target != null ? GetCenter(target) : Vector3.zero;
             Vector3 extents = Size * 0.5f;
             Shader.SetGlobalVector(CenterId, new Vector4(center.x, center.y, center.z, limitToPlayerArea ? 1f : 0f));
             Shader.SetGlobalVector(ExtentsId, new Vector4(extents.x, extents.y, extents.z, Mathf.Max(0f, edgeFade)));
@@ -77,7 +89,7 @@ namespace Character
             if (!limitToPlayerArea || Target == null)
                 return;
             Vector3 size = Size;
-            Vector3 center = Target.position + centerOffset;
+            Vector3 center = GetCenter(Target);
             Gizmos.color = new Color(0.3f, 0.85f, 1f, 1f);
             Gizmos.DrawWireCube(center, size);
             float fade = Mathf.Clamp(edgeFade, 0f, Mathf.Min(size.x, Mathf.Min(size.y, size.z)) * 0.5f);

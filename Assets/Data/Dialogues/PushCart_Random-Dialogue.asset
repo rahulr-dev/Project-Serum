@@ -15,12 +15,12 @@ MonoBehaviour:
   updateGameState: 0
   playState: 5
   endState: 2
-  charsPerSecond: 40
+  charsPerSecond: 300
   choiceRepeatDelay: 0.2
   nodes:
   - id: 93f6bf5ec1f547edbc636223c2558408
     kind: 0
-    position: {x: -19, y: 123}
+    position: {x: -18.666672, y: 123.33333}
     body: 
     tamilBody: 
     colourPreset: 1
@@ -34,12 +34,12 @@ MonoBehaviour:
     tamilChoiceLabels: []
   - id: 5c8038e77da24bccbc19ea76ae5d4960
     kind: 1
-    position: {x: 129, y: 123}
+    position: {x: 129.33334, y: 123.33333}
     body: 'Strange. So strange. '
     tamilBody: 
     colourPreset: 0
     advanceMode: 1
-    autoDelay: 1
+    autoDelay: 4
     charsPerSecond: 0
     onStart:
       m_PersistentCalls:
@@ -53,7 +53,7 @@ MonoBehaviour:
     tamilBody: 
     colourPreset: 0
     advanceMode: 1
-    autoDelay: 1
+    autoDelay: 3
     charsPerSecond: 0
     onStart:
       m_PersistentCalls:
@@ -62,7 +62,7 @@ MonoBehaviour:
     tamilChoiceLabels: []
   - id: aab82aa2e87b48b789a217e234bfee9c
     kind: 3
-    position: {x: 885, y: 173}
+    position: {x: 885.3334, y: 173.33333}
     body: 
     tamilBody: 
     colourPreset: 1
