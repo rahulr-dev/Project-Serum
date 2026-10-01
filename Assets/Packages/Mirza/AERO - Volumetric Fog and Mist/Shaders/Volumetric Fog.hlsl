@@ -6,6 +6,7 @@
 //#define _SURFACE_TYPE_TRANSPARENT
 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+#include "PlayerFogArea.hlsl"
 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Shadows.hlsl"
@@ -173,6 +174,10 @@ struct FogDensityData
 
     float Evaluate(float3 positionWS, Texture2D heightMaskTexture)
     {
+        // Also confines self-shadow density to the player's fog volume.
+        float areaMask = SerumFogAreaMask(positionWS);
+        if (areaMask <= 0.0)
+            return 0.0;
         float result = GetVolumetricFogDensity(positionWS);
 
         if (enableHeightMask)
@@ -207,7 +212,7 @@ struct FogDensityData
             result = lerp(result, result_heightMask, heightMaskBlend);
         }
 
-        return result;
+        return result * areaMask;
     }
 };
 
@@ -485,6 +490,19 @@ void VolumetricFog_float(
     
     float raymarchDistanceWS = distanceToSurfaceWS;    
     raymarchDistanceWS = min(raymarchDistanceWS, maxDistance);
+
+    float rayEntryWS = 0.0;
+    if (!SerumFogClipRay(rayOriginWS, directionToSurfaceWS, rayEntryWS, raymarchDistanceWS))
+    {
+        // No fog volume before the visible surface: no density or lighting work.
+        lighting = 0.0;
+        transmittance = 1.0;
+        composite = SAMPLE_TEXTURE2D(_BlitTexture, sampler_LinearClamp, uvSS);
+        return;
+    }
+    rayOriginWS += directionToSurfaceWS * rayEntryWS;
+    raymarchDistanceWS -= rayEntryWS;
+    steps = SerumFogStepCount(raymarchDistanceWS, steps);
     
     // Lighting.
     
@@ -596,6 +614,9 @@ void VolumetricFog_float(
         float stepDensity = densityData.Evaluate(stepPositionWS, heightMaskTexture);
                 
         stepDensity *= densityPerStepWS;
+
+        if (stepDensity <= 0.0)
+            continue;
                 
         // Calculate transmittance for this specific step (Beer-Lambert Law).
         

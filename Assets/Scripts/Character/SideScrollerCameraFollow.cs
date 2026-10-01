@@ -10,6 +10,7 @@ namespace Character
     public class SideScrollerCameraFollow : MonoBehaviour
     {
         [SerializeField] Transform target;
+        public Transform Target => target;
         [SerializeField] Transform lookAt;
         [SerializeField] CinemachineSplineDolly dolly;
         [SerializeField] Vector3 offset;
