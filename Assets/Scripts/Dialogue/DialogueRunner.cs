@@ -248,11 +248,7 @@ namespace Dialogue
                         _lineText,
                         node.advanceMode,
                         _graph.ResolveDialogueColour(node.colourPreset)));
-                    _visibleChars = 0f;
-                    if (string.IsNullOrEmpty(_lineText))
-                        RevealAll();
-                    else
-                        OnLineTextUpdated?.Invoke("");
+                    RevealAll();
                     break;
                 case DialogueNodeKind.Choice:
                     _choiceLabels.Clear();
