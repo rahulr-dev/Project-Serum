@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a6fead42180a21c408cb411070cc7f1e
+guid: 0fc9a5d550369cb4a98e09162399a81e
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -8,29 +8,29 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.001
-    second: {fileID: 2100000, guid: 7f903326c0beb7f4d9c5f5c443992081, type: 2}
+    second: {fileID: 2100000, guid: 7714b12d3c76ae24faf08eb7ed0bcaa4, type: 2}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Image_0
-    second: {fileID: 2800000, guid: 981166364086aea46b1bd47e82f9f672, type: 3}
+    second: {fileID: 2800000, guid: 34226cddf15c294468494308ae1a1468, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Image_2
-    second: {fileID: 2800000, guid: 999647a1365f10d4f9807f11f76a26bf, type: 3}
+    second: {fileID: 2800000, guid: 0b58df7e67932f44ab2d2f8f431ee71c, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: texture_0_metallic
-    second: {fileID: 2800000, guid: 01f09c64dd8b1e54c987dcd951c94534, type: 3}
+    second: {fileID: 2800000, guid: 001813a29be45b24889ef07b5ec54d18, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: texture_0_roughness
-    second: {fileID: 2800000, guid: 40f38770bed1c7a4280f74dbb0095110, type: 3}
+    second: {fileID: 2800000, guid: c054c91795f06054591fb3c6e94b8f15, type: 3}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -101,7 +101,7 @@ ModelImporter:
     tangentImportMode: 3
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
-    blendShapeNormalImportMode: 1
+    blendShapeNormalImportMode: 0
     normalSmoothingSource: 0
   referencedClips: []
   importAnimation: 1
