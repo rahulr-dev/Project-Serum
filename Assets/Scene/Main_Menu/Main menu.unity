@@ -2364,13 +2364,13 @@ MonoBehaviour:
   followY: 0
   fixedY: 0
   limitToPlayerArea: 1
-  centerOffset: {x: 0, y: 2, z: 10}
-  widthX: 70.8
-  heightY: 61.5
-  depthZ: 60
-  edgeFade: 3
+  centerOffset: {x: 0, y: 0, z: 0}
+  widthX: 74.6
+  heightY: 50
+  depthZ: 50
+  edgeFade: 0
   sampleSpacing: 1
-  maxSteps: 8
+  maxSteps: 16
 --- !u!4 &721331778
 Transform:
   m_ObjectHideFlags: 0
@@ -3779,6 +3779,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2850529106732292647, guid: 441b50cf679331044acb7e18a4d9a212, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398524518560896132, guid: 441b50cf679331044acb7e18a4d9a212, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -29.615479
+      objectReference: {fileID: 0}
     - target: {fileID: 6078009409132519611, guid: 441b50cf679331044acb7e18a4d9a212, type: 3}
       propertyPath: m_IsActive
       value: 0
