@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33a22a3c07a322c4ab07b474ae9cf7e1, type: 3}
-  m_Name: NpcState_Chase
+  m_Name: NpcState_Chase 1
   m_EditorClassIdentifier: Assembly-CSharp::NpcAi.NpcStateGraph
   nodes:
   - id: 96c45943c64f4d789dcaf0254e9b3426
     kind: 0
-    position: {x: 68.66667, y: 142.66667}
+    position: {x: -1044.6666, y: -40}
     duration: 1
     characterAction: 0
     distance: 4
@@ -39,7 +39,7 @@ MonoBehaviour:
     endOutcome: 1
   - id: c06353816fce46c9adbe153b84da0e02
     kind: 1
-    position: {x: 692.6667, y: 142.66667}
+    position: {x: 218.66667, y: -168}
     duration: 1
     characterAction: 0
     distance: 4
@@ -63,7 +63,7 @@ MonoBehaviour:
     endOutcome: 1
   - id: e1673c021c8846b8b651761d03af7cd7
     kind: 3
-    position: {x: 469.33337, y: 142.66667}
+    position: {x: -338, y: -286.66666}
     duration: 1
     characterAction: 35
     distance: 4
@@ -80,14 +80,14 @@ MonoBehaviour:
     branchCount: 2
     stopDistance: 2
     escapeDistance: 20
-    clampFollowX: 1
+    clampFollowX: 0
     followMinX: 100
     followMaxX: 163
     waitEventId: ScriptedRunEnded
     endOutcome: 1
   - id: a5952534801842bd9e147e92cb54681e
     kind: 3
-    position: {x: 188.00002, y: 142.66667}
+    position: {x: -657.3333, y: -40}
     duration: 0
     characterAction: 38
     distance: 4

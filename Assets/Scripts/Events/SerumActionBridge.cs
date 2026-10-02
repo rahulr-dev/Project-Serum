@@ -948,7 +948,8 @@ namespace Events
             StopLookRoutine(true);
         }
 
-        public void Follow(Transform target, float speed, float stopDistance, float duration, float escapeDistance = 0f)
+        public void Follow(Transform target, float speed, float stopDistance, float duration, float escapeDistance = 0f,
+            bool clampX = false, float minX = 0f, float maxX = 0f)
         {
             FollowEscaped = false;
             if (target == null)
@@ -962,11 +963,14 @@ namespace Events
             float runSpeed = Mathf.Max(0.01f, speed);
             stopDistance = Mathf.Max(0f, stopDistance);
             escapeDistance = Mathf.Max(0f, escapeDistance);
+            float lowerX = Mathf.Min(minX, maxX);
+            float upperX = Mathf.Max(minX, maxX);
             SetLocomotionEnabled(false);
             float distance = Vector3.Distance(_transform.position, target.position);
+            float arrivalTolerance = FollowArrivalTolerance(GetComponent<CharacterController>());
             // Complete before starting a coroutine that would finish synchronously,
             // otherwise its returned handle would leave IsFollowing stuck true.
-            if (distance <= stopDistance || (escapeDistance > 0f && distance > escapeDistance))
+            if (distance <= stopDistance + arrivalTolerance || (escapeDistance > 0f && distance > escapeDistance))
             {
                 FinishFollow(true, escapeDistance > 0f && distance > escapeDistance);
                 return;
@@ -974,7 +978,8 @@ namespace Events
 
             PlayRun();
             SetAnimSpeed(GetRunAnimSpeed(runSpeed));
-            _followRoutine = StartCoroutine(FollowRoutine(target, runSpeed, stopDistance, duration, escapeDistance));
+            _followRoutine = StartCoroutine(FollowRoutine(target, runSpeed, stopDistance, duration, escapeDistance,
+                clampX, lowerX, upperX));
         }
 
         public void StopFollow()
@@ -1257,11 +1262,14 @@ namespace Events
             NotifyNamedEvent("MaintainLookAtEnded", false);
         }
 
-        IEnumerator FollowRoutine(Transform target, float speed, float stopDistance, float duration, float escapeDistance)
+        IEnumerator FollowRoutine(Transform target, float speed, float stopDistance, float duration, float escapeDistance,
+            bool clampX, float minX, float maxX)
         {
             CharacterController controller = GetComponent<CharacterController>();
+            float arrivalTolerance = FollowArrivalTolerance(controller);
             float elapsed = 0f;
             bool timed = duration > 0.01f;
+            bool pausedAtClamp = false;
 
             while (target != null)
             {
@@ -1269,7 +1277,7 @@ namespace Events
                 float distance = Vector3.Distance(origin, target.position);
                 Vector3 toTarget = target.position - origin;
                 toTarget.y = 0f;
-                if (distance <= stopDistance || (escapeDistance > 0f && distance > escapeDistance))
+                if (distance <= stopDistance + arrivalTolerance || (escapeDistance > 0f && distance > escapeDistance))
                 {
                     FinishFollow(true, escapeDistance > 0f && distance > escapeDistance);
                     yield break;
@@ -1277,7 +1285,41 @@ namespace Events
 
                 ApplyYaw(YawToward(target.position));
                 float step = speed * Time.deltaTime;
-                Vector3 move = toTarget.normalized * Mathf.Min(step, distance - stopDistance, toTarget.magnitude);
+                // Movement is horizontal, but Stop Distance is a 3D radius. Move to
+                // its intersection with our horizontal plane instead of approaching asymptotically.
+                float heightDifference = target.position.y - origin.y;
+                float horizontalStopDistance = Mathf.Sqrt(Mathf.Max(0f,
+                    stopDistance * stopDistance - heightDifference * heightDifference));
+                float remaining = Mathf.Max(0f, toTarget.magnitude - horizontalStopDistance);
+                Vector3 move = toTarget.normalized * Mathf.Min(step, remaining);
+                if (clampX)
+                {
+                    // Clamp in the parent's coordinate system, matching localPosition in the Inspector.
+                    // CharacterController.Move still requires a world-space displacement.
+                    // If initially outside the zone, allow movement back in without teleporting.
+                    Transform parent = _transform.parent;
+                    Vector3 localMove = parent != null ? parent.InverseTransformVector(move) : move;
+                    float localX = _transform.localPosition.x;
+                    localMove.x = Mathf.Clamp(localX + localMove.x,
+                        Mathf.Min(minX, localX), Mathf.Max(maxX, localX)) - localX;
+                    move = parent != null ? parent.TransformVector(localMove) : localMove;
+                }
+
+                bool blockedByClamp = clampX && step > 0f && toTarget.sqrMagnitude > 0f && move.sqrMagnitude <= 1e-12f;
+                if (blockedByClamp != pausedAtClamp)
+                {
+                    pausedAtClamp = blockedByClamp;
+                    if (pausedAtClamp)
+                    {
+                        SetAnimSpeed(0f);
+                        PlayIdle();
+                    }
+                    else
+                    {
+                        PlayRun();
+                        SetAnimSpeed(GetRunAnimSpeed(speed));
+                    }
+                }
                 if (controller != null)
                     controller.Move(move);
                 else
@@ -1294,6 +1336,12 @@ namespace Events
             }
 
             FinishFollow(true);
+        }
+
+        static float FollowArrivalTolerance(CharacterController controller)
+        {
+            // Account for ignored sub-minimum controller moves and floating-point rounding.
+            return Mathf.Max(0.001f, controller != null ? controller.minMoveDistance : 0f) + 0.0001f;
         }
 
         float YawToward(Vector3 worldPosition)

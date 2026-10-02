@@ -39,8 +39,8 @@ MonoBehaviour:
     nodeName: 
   - id: f5ebc815b7514698a09a56ba408ab82a
     kind: 2
-    position: {x: 1010, y: 164}
-    stateGraph: {fileID: 11400000, guid: cf9331189d40afc49961b79492e5bfe6, type: 2}
+    position: {x: 1018.6666, y: 164}
+    stateGraph: {fileID: 11400000, guid: 844b5d9004ad7734888a694ce42ee04c, type: 2}
     actionId: 
     nodeName: Chase
   - id: 704ea7ba0fe74b0484a9c518d7490244

@@ -58,6 +58,16 @@ namespace NpcAi.Editor
                     EditorGUILayout.PropertyField(
                         node.FindPropertyRelative("escapeDistance"),
                         new GUIContent("Escape Distance", "Follow ends when the target is farther than this 3D distance, including height. 0 disables this limit."));
+                    SerializedProperty clampX = node.FindPropertyRelative("clampFollowX");
+                    EditorGUILayout.PropertyField(clampX,
+                        new GUIContent("Clamp X", "Limit local X movement relative to the object's parent without ending Follow. Movement resumes when the target returns within reach. Stop and escape distances still apply. Disabled by default."));
+                    if (clampX.boolValue)
+                    {
+                        EditorGUILayout.PropertyField(node.FindPropertyRelative("followMinX"),
+                            new GUIContent("Min X (Local)", "Lower local-position X boundary relative to the object's parent. Reversed limits are automatically sorted."));
+                        EditorGUILayout.PropertyField(node.FindPropertyRelative("followMaxX"),
+                            new GUIContent("Max X (Local)", "Upper local-position X boundary relative to the object's parent."));
+                    }
                     EditorGUILayout.PropertyField(node.FindPropertyRelative("waitUntilDone"));
                     break;
                 case NpcStateCharacterAction.LookAt:

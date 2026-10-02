@@ -28,6 +28,9 @@ namespace NpcAi
         public int branchCount = 2;
         public float stopDistance = 0.4f;
         public float escapeDistance = 0f;
+        public bool clampFollowX = false;
+        public float followMinX = 0f;
+        public float followMaxX = 0f;
 
         public string waitEventId = "ScriptedRunEnded";
 

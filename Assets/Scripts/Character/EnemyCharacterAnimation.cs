@@ -17,7 +17,7 @@ namespace Character
         [SerializeField] string runTrigger = "run";
 
         [Header("Movement")]
-        [Tooltip("Root transform whose world movement drives the walk animation. Defaults to the top-level enemy object.")]
+        [Tooltip("Transform whose world movement drives animation speed. Defaults to the nearest parent with a locomotion controller or SerumActionBridge, then this object.")]
         [SerializeField] Transform movementRoot;
         [Tooltip("Scales the normalized root movement before it is applied to the walk animation.")]
         [SerializeField, Min(0f)] float movementSpeedMultiplier = 1f;
@@ -42,7 +42,7 @@ namespace Character
                 animator = GetComponent<Animator>();
 
             if (movementRoot == null)
-                movementRoot = transform.root;
+                movementRoot = FindMovementRoot();
 
             CacheRootLocomotion();
             CacheParameterHashes();
@@ -151,6 +151,20 @@ namespace Character
                     return;
                 }
             }
+        }
+
+        Transform FindMovementRoot()
+        {
+            for (Transform candidate = transform; candidate != null; candidate = candidate.parent)
+            {
+                foreach (MonoBehaviour component in candidate.GetComponents<MonoBehaviour>())
+                {
+                    if (component is ICharacterLocomotion || component is Events.SerumActionBridge)
+                        return candidate;
+                }
+            }
+
+            return transform;
         }
     }
 }
