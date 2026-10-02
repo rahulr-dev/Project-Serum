@@ -27,6 +27,7 @@ namespace NpcAi
         public string moveTargetId = "";
         public int branchCount = 2;
         public float stopDistance = 0.4f;
+        [Min(0f)] public float deadDistance = 0.4f;
         public float escapeDistance = 0f;
         public bool clampFollowX = false;
         public float followMinX = 0f;

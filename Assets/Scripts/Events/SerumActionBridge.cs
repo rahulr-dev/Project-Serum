@@ -949,7 +949,7 @@ namespace Events
         }
 
         public void Follow(Transform target, float speed, float stopDistance, float duration, float escapeDistance = 0f,
-            bool clampX = false, float minX = 0f, float maxX = 0f)
+            bool clampX = false, float minX = 0f, float maxX = 0f, float deadDistance = 0.4f)
         {
             FollowEscaped = false;
             if (target == null)
@@ -962,6 +962,7 @@ namespace Events
 
             float runSpeed = Mathf.Max(0.01f, speed);
             stopDistance = Mathf.Max(0f, stopDistance);
+            deadDistance = Mathf.Max(0f, deadDistance);
             escapeDistance = Mathf.Max(0f, escapeDistance);
             float lowerX = Mathf.Min(minX, maxX);
             float upperX = Mathf.Max(minX, maxX);
@@ -970,7 +971,7 @@ namespace Events
             float arrivalTolerance = FollowArrivalTolerance(GetComponent<CharacterController>());
             // Complete before starting a coroutine that would finish synchronously,
             // otherwise its returned handle would leave IsFollowing stuck true.
-            if (distance <= stopDistance + arrivalTolerance || (escapeDistance > 0f && distance > escapeDistance))
+            if (distance <= deadDistance + arrivalTolerance || (escapeDistance > 0f && distance > escapeDistance))
             {
                 FinishFollow(true, escapeDistance > 0f && distance > escapeDistance);
                 return;
@@ -979,7 +980,7 @@ namespace Events
             PlayRun();
             SetAnimSpeed(GetRunAnimSpeed(runSpeed));
             _followRoutine = StartCoroutine(FollowRoutine(target, runSpeed, stopDistance, duration, escapeDistance,
-                clampX, lowerX, upperX));
+                clampX, lowerX, upperX, deadDistance));
         }
 
         public void StopFollow()
@@ -1263,13 +1264,13 @@ namespace Events
         }
 
         IEnumerator FollowRoutine(Transform target, float speed, float stopDistance, float duration, float escapeDistance,
-            bool clampX, float minX, float maxX)
+            bool clampX, float minX, float maxX, float deadDistance)
         {
             CharacterController controller = GetComponent<CharacterController>();
             float arrivalTolerance = FollowArrivalTolerance(controller);
             float elapsed = 0f;
             bool timed = duration > 0.01f;
-            bool pausedAtClamp = false;
+            bool movementPaused = false;
 
             while (target != null)
             {
@@ -1277,7 +1278,7 @@ namespace Events
                 float distance = Vector3.Distance(origin, target.position);
                 Vector3 toTarget = target.position - origin;
                 toTarget.y = 0f;
-                if (distance <= stopDistance + arrivalTolerance || (escapeDistance > 0f && distance > escapeDistance))
+                if (distance <= deadDistance + arrivalTolerance || (escapeDistance > 0f && distance > escapeDistance))
                 {
                     FinishFollow(true, escapeDistance > 0f && distance > escapeDistance);
                     yield break;
@@ -1292,6 +1293,9 @@ namespace Events
                     stopDistance * stopDistance - heightDifference * heightDifference));
                 float remaining = Mathf.Max(0f, toTarget.magnitude - horizontalStopDistance);
                 Vector3 move = toTarget.normalized * Mathf.Min(step, remaining);
+                bool withinStopDistance = distance <= stopDistance + arrivalTolerance;
+                if (withinStopDistance)
+                    move = Vector3.zero;
                 if (clampX)
                 {
                     // Clamp in the parent's coordinate system, matching localPosition in the Inspector.
@@ -1305,11 +1309,12 @@ namespace Events
                     move = parent != null ? parent.TransformVector(localMove) : localMove;
                 }
 
-                bool blockedByClamp = clampX && step > 0f && toTarget.sqrMagnitude > 0f && move.sqrMagnitude <= 1e-12f;
-                if (blockedByClamp != pausedAtClamp)
+                bool shouldPause = withinStopDistance ||
+                    (clampX && step > 0f && toTarget.sqrMagnitude > 0f && move.sqrMagnitude <= 1e-12f);
+                if (shouldPause != movementPaused)
                 {
-                    pausedAtClamp = blockedByClamp;
-                    if (pausedAtClamp)
+                    movementPaused = shouldPause;
+                    if (movementPaused)
                     {
                         SetAnimSpeed(0f);
                         PlayIdle();

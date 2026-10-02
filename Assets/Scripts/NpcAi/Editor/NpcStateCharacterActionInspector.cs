@@ -50,11 +50,16 @@ namespace NpcAi.Editor
                     EditorGUILayout.PropertyField(node.FindPropertyRelative("waitUntilDone"));
                     break;
                 case NpcStateCharacterAction.Follow:
-                    DrawMoveTarget(node.FindPropertyRelative("moveTargetId"), "The NPC will follow that object until it is within Stop Distance.");
+                    DrawMoveTarget(node.FindPropertyRelative("moveTargetId"), "The NPC follows this object, pauses at Stop Distance, and completes the chase at Dead Distance.");
                     EditorGUILayout.PropertyField(node.FindPropertyRelative("speed"));
                     EditorGUILayout.PropertyField(
                         node.FindPropertyRelative("stopDistance"),
-                        new GUIContent("Stop Distance", "Follow ends within this 3D distance of the target, including height."));
+                        new GUIContent("Stop Distance", "Pause movement within this 3D distance, including height. Follow stays active and resumes if the target moves away."));
+                    EditorGUILayout.PropertyField(
+                        node.FindPropertyRelative("deadDistance"),
+                        new GUIContent("Dead Distance", "Complete Follow and advance to the chase's dead/game-over action at or below this 3D distance (with a small arrival tolerance)."));
+                    if (node.FindPropertyRelative("deadDistance").floatValue < node.FindPropertyRelative("stopDistance").floatValue)
+                        EditorGUILayout.HelpBox("Dead Distance is below Stop Distance: the enemy will wait, and the target must move closer to trigger dead.", MessageType.Info);
                     EditorGUILayout.PropertyField(
                         node.FindPropertyRelative("escapeDistance"),
                         new GUIContent("Escape Distance", "Follow ends when the target is farther than this 3D distance, including height. 0 disables this limit."));
