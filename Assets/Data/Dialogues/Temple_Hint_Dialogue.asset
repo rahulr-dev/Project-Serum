@@ -34,7 +34,7 @@ MonoBehaviour:
     tamilChoiceLabels: []
   - id: f9a2cf25fc14453398737eada451c42a
     kind: 3
-    position: {x: 692, y: 132.66667}
+    position: {x: 692, y: 133}
     body: 
     tamilBody: 
     colourPreset: 1
@@ -48,9 +48,9 @@ MonoBehaviour:
     tamilChoiceLabels: []
   - id: 2be7432e9ee94610a8472febd23ea477
     kind: 1
-    position: {x: 236.66666, y: 42.666664}
+    position: {x: 237, y: 43}
     body: It's too dark, I need something to light up!
-    tamilBody: 
+    tamilBody: < d;y;;vy;; d;c;hd;k[;p/; tx m;pf;ht cp!
     colourPreset: 0
     advanceMode: 1
     autoDelay: 3
