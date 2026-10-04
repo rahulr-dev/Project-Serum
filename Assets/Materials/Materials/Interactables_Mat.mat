@@ -121,10 +121,10 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _ShineAngle: 0
-    - _ShineDuration: 0.6
+    - _ShineDuration: 1
     - _ShineExtraWidth: 0.15
     - _ShineExtraWidthPixels: 0
-    - _ShineInterval: 5
+    - _ShineInterval: 3
     - _ShineSoftness: 0.2
     - _ShineWidth: 0.01
     - _Smoothness: 0.5

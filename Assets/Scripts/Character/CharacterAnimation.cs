@@ -5,6 +5,8 @@ using UnityEngine;
 
 namespace Character
 {
+    // PlayerPusher performs its final controller correction in LateUpdate at default order.
+    [DefaultExecutionOrder(100)]
     public class CharacterAnimation : MonoBehaviour
     {
         const float StealthOff = 0.01f;
@@ -14,6 +16,13 @@ namespace Character
         [SerializeField] MonoBehaviour moveSpeedSource;
         [SerializeField] SideScrollerController locomotion;
         [SerializeField] string speedParam = "speed";
+        [Tooltip("Smoothed horizontal movement in world units per second, independent of input.")]
+        [SerializeField] string actualSpeedParam = "actualSpeed";
+        [Tooltip("Smoothed measured movement normalized to pushing speed (0..1).")]
+        [SerializeField] string pushSpeedParam = "pushSpeed";
+        [SerializeField, Min(0f)] float actualSpeedSmoothTime = 0.12f;
+        [Tooltip("Horizontal speeds below this value are treated as collision jitter (world units per second).")]
+        [SerializeField, Min(0f)] float actualSpeedDeadzone = 0.05f;
         [SerializeField] string jumpParam = "jump";
         [SerializeField] string landParam = "land";
         [SerializeField] string landRunParam = "landRun";
@@ -47,10 +56,15 @@ namespace Character
         [SerializeField, Min(0f)] float landingRunMoveDuration = 1f;
 
         public bool IsPlayingIdleVariation { get; private set; }
+        public float ActualSpeed { get; private set; }
+        public float PushSpeed01 { get; private set; }
 
         INormalizedMoveSpeed _speedSource;
         Action _unbindJump;
         int _speedHash;
+        int _actualSpeedHash;
+        int _pushSpeedHash;
+        Vector3 _previousPosition;
         int _jumpHash;
         int _landHash;
         int _landRunHash;
@@ -90,6 +104,8 @@ namespace Character
             _characterController = GetComponent<CharacterController>();
 
             _speedHash = Animator.StringToHash(speedParam);
+            _actualSpeedHash = Animator.StringToHash(actualSpeedParam);
+            _pushSpeedHash = Animator.StringToHash(pushSpeedParam);
             _jumpHash = Animator.StringToHash(jumpParam);
             _landHash = Animator.StringToHash(landParam);
             _landRunHash = Animator.StringToHash(landRunParam);
@@ -112,6 +128,10 @@ namespace Character
 
         void OnEnable()
         {
+            _previousPosition = transform.position;
+            ActualSpeed = 0f;
+            PushSpeed01 = 0f;
+
             if (locomotion == null)
                 locomotion = GetComponent<SideScrollerController>();
 
@@ -204,6 +224,43 @@ namespace Character
                 animator.SetFloat(_stealthHash, _stealthTarget, stealthDampTime, Time.deltaTime);
             else
                 animator.SetFloat(_stealthHash, _stealthTarget);
+        }
+
+        void LateUpdate()
+        {
+            // Sample after controller movement, root motion and PlayerPusher.LateUpdate.
+            // Only X matters for this side-scroller; jumping in place must not count as running.
+            Vector3 position = transform.position;
+            float measuredSpeed = Time.deltaTime > 0f
+                ? Mathf.Abs(position.x - _previousPosition.x) / Time.deltaTime
+                : 0f;
+            _previousPosition = position;
+
+            if (measuredSpeed < actualSpeedDeadzone)
+                measuredSpeed = 0f;
+
+            float blend = actualSpeedSmoothTime > 0f
+                ? 1f - Mathf.Exp(-Time.deltaTime / actualSpeedSmoothTime)
+                : 1f;
+            ActualSpeed = Mathf.Lerp(ActualSpeed, measuredSpeed, blend);
+            float pushTarget = locomotion != null && locomotion.PushMoveSpeed > 0f
+                ? Mathf.Clamp01(measuredSpeed / locomotion.PushMoveSpeed)
+                : 0f;
+            // Clamp before smoothing so a correction spike cannot saturate the blend for long.
+            PushSpeed01 = Mathf.Lerp(PushSpeed01, pushTarget, blend);
+            if (measuredSpeed == 0f)
+            {
+                if (ActualSpeed < 0.001f)
+                    ActualSpeed = 0f;
+                if (PushSpeed01 < 0.001f)
+                    PushSpeed01 = 0f;
+            }
+
+            if (animator != null)
+            {
+                animator.SetFloat(_actualSpeedHash, ActualSpeed);
+                animator.SetFloat(_pushSpeedHash, PushSpeed01);
+            }
         }
 
         public void SetSpeed(float value)
