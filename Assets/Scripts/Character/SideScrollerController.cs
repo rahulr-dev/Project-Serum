@@ -143,6 +143,8 @@ namespace Character
         float _landingRunMoveTimer;
         float _landingRunMoveSpeed;
         float _landingRunMoveDirection;
+        float _landingRunBlendOutTime;
+        float _landingRunWeight;
         bool _jumpCutApplied;
         bool _wasJumpHeld;
         bool _pushLockApplied;
@@ -182,6 +184,8 @@ namespace Character
             LocomotionEnabled = enabled;
             if (!enabled)
             {
+                _landingRunMoveTimer = 0f;
+                _landingRunWeight = 0f;
                 _currentSpeed = 0f;
                 _speedVelocity = 0f;
                 if (IsMoving)
@@ -258,6 +262,8 @@ namespace Character
             _scriptedElapsed = 0f;
             _scriptedHorizDelta = Vector3.zero;
             IsScriptedRunning = true;
+            _landingRunMoveTimer = 0f;
+            _landingRunWeight = 0f;
 
             if (!lockRotation)
             {
@@ -391,6 +397,15 @@ namespace Character
                 }
             }
 
+            // Cache one weight for both motor movement and this frame's root motion.
+            // SmoothStep eases the handoff instead of cutting the landing velocity abruptly.
+            if (!IsGrounded || IsClimbing)
+                _landingRunMoveTimer = 0f;
+            _landingRunWeight = _landingRunMoveTimer <= 0f ? 0f
+                : _landingRunBlendOutTime > 0f
+                    ? Mathf.SmoothStep(0f, 1f, _landingRunMoveTimer / _landingRunBlendOutTime)
+                    : 1f;
+
             if (IsScriptedRunning)
             {
                 CollisionFlags moveFlags = _controller.Move(
@@ -401,11 +416,11 @@ namespace Character
             {
                 // Root motion drives grounded strides; air control remains motor-driven because
                 // jump/fall clips commonly have no horizontal root translation.
-                float horizontalDelta = _landingRunMoveTimer > 0f
-                    ? _landingRunMoveDirection * _landingRunMoveSpeed * Time.deltaTime
-                    : UseAnimationRootMotion && (IsGrounded || UseAnimationRootMotionInAir)
+                float normalDelta = UseAnimationRootMotion && (IsGrounded || UseAnimationRootMotionInAir)
                     ? 0f
                     : _currentSpeed * Time.deltaTime;
+                float landingDelta = _landingRunMoveDirection * _landingRunMoveSpeed * Time.deltaTime;
+                float horizontalDelta = Mathf.Lerp(normalDelta, landingDelta, _landingRunWeight);
                 CollisionFlags moveFlags = _controller.Move(
                     new Vector3(horizontalDelta, _verticalVelocity * Time.deltaTime, 0f));
                 HandleMoveCollision(moveFlags);
@@ -441,11 +456,11 @@ namespace Character
         public void ApplyAnimationRootMotion(Vector3 worldDelta)
         {
             if (!UseAnimationRootMotion || IsClimbing || (!IsGrounded && !UseAnimationRootMotionInAir) ||
-                IsScriptedRunning || _landingRunMoveTimer > 0f || _controller == null)
+                IsScriptedRunning || _controller == null)
                 return;
 
             // The game is a side-scroller: keep only horizontal world movement from the clip.
-            _controller.Move(new Vector3(worldDelta.x, 0f, 0f));
+            _controller.Move(new Vector3(worldDelta.x * (1f - _landingRunWeight), 0f, 0f));
             ClampZPosition();
         }
 
@@ -458,7 +473,7 @@ namespace Character
             transform.position = new Vector3(position.x, position.y, _startZ);
         }
 
-        public void StartLandingRunMovement(float duration, float horizontalSpeed)
+        public void StartLandingRunMovement(float duration, float horizontalSpeed, float blendOutTime = 0.25f)
         {
             if (_controller == null || IsScriptedRunning || !LocomotionEnabled || duration <= 0f)
                 return;
@@ -470,6 +485,8 @@ namespace Character
             _landingRunMoveSpeed = speed;
             _landingRunMoveDirection = Mathf.Sign(horizontalSpeed);
             _landingRunMoveTimer = duration;
+            _landingRunBlendOutTime = Mathf.Clamp(blendOutTime, 0f, duration);
+            _landingRunWeight = 1f;
         }
 
         void HandleMoveCollision(CollisionFlags moveFlags)

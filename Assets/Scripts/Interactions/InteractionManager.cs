@@ -414,13 +414,15 @@ namespace Interaction
             _map = new InputActionMap("Interaction");
 
             _move = _map.AddAction("Move", InputActionType.Value, expectedControlLayout: "Vector2");
-            _move.AddCompositeBinding("2DVector")
+            // Digital mode keeps the axes independent: W/S must not reduce A/D speed.
+            // Keep Y available for climbing and leave the analog stick binding unchanged.
+            _move.AddCompositeBinding("2DVector(mode=1)")
                 .With("Up", "<Keyboard>/w")
                 .With("Down", "<Keyboard>/s")
                 .With("Left", "<Keyboard>/a")
                 .With("Right", "<Keyboard>/d");
             _move.AddBinding("<Gamepad>/leftStick");
-            _move.AddCompositeBinding("2DVector")
+            _move.AddCompositeBinding("2DVector(mode=1)")
                 .With("Up", "<Gamepad>/dpad/up")
                 .With("Down", "<Gamepad>/dpad/down")
                 .With("Left", "<Gamepad>/dpad/left")

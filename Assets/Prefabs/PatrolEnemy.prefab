@@ -729,6 +729,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a4a52462d109da9458cfa12717755d39, type: 2}
+  - {fileID: 2100000, guid: a4a52462d109da9458cfa12717755d39, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2728,13 +2729,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Character.EnemyCharacterAnimation
   animator: {fileID: 2210754506376874294}
-  searchTrigger: Search
-  walkTrigger: Walk
-  runTrigger: Run
+  movementSpeedParam: Speed
+  walkBlendSpeed: 0.5
+  runBlendSpeed: 1
+  speedSmoothTime: 0.15
   movementRoot: {fileID: 0}
   movementSpeedMultiplier: 1
   fallbackMaxMovementSpeed: 4
-  movementSpeedParam: Speed
 --- !u!82 &2016993505303381581
 AudioSource:
   m_ObjectHideFlags: 0

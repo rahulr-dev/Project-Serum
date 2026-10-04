@@ -468,6 +468,10 @@ MonoBehaviour:
   moveSpeedSource: {fileID: 1963161558023638404}
   locomotion: {fileID: 1963161558023638404}
   speedParam: speed
+  actualSpeedParam: actualSpeed
+  pushSpeedParam: pushSpeed
+  actualSpeedSmoothTime: 0.12
+  actualSpeedDeadzone: 0.05
   jumpParam: jump
   landParam: land
   landRunParam: landRun
@@ -481,6 +485,7 @@ MonoBehaviour:
   pushingReleaseDelay: 1
   idleVariant2Trigger: idleVariant2
   idleVariant3Trigger: idleVariant3
+  idleVariantPlayingParam: isPlayingIdleVariation
   idleVariantDelay: 5
   idleVariantInterval: 2
   idleSpeedThreshold: 0.02

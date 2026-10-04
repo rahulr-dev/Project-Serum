@@ -954,8 +954,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65756360}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12194857, y: -0.01412111, z: 0.0017351768, w: 0.99243444}
-  m_LocalPosition: {x: 555.13635, y: 4.1881537, z: -20.047249}
+  m_LocalRotation: {x: 0.20188461, y: -0.26154953, z: 0.056043547, w: 0.9421749}
+  m_LocalPosition: {x: 1.76, y: 7.07, z: -16.250002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15682,10 +15682,10 @@ MonoBehaviour:
         z: 4.331698
       Rotation:
         value:
-          x: -0.023326566
+          x: -0.023326568
           y: 0.68248135
-          z: 0.05659441
-          w: 0.72833514
+          z: 0.0565944
+          w: 0.7283352
     - Position:
         x: 714.9241
         y: 20.757936
@@ -15700,10 +15700,10 @@ MonoBehaviour:
         z: 2.1085196
       Rotation:
         value:
-          x: -0.014329139
-          y: 0.7988282
-          z: 0.36699337
-          w: 0.4764285
+          x: -0.014329198
+          y: 0.79882807
+          z: 0.36699346
+          w: 0.4764286
     - Position:
         x: 724.79224
         y: 22.981888
@@ -29907,7 +29907,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineSplineDolly
   m_SplineSettings:
     Spline: {fileID: 1090854234}
-    Position: 569.9575
+    Position: 0
     Units: 0
   SplineOffset: {x: 0, y: 0, z: 0}
   CameraRotation: 0
@@ -29982,8 +29982,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760746732}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12194857, y: -0.014121111, z: 0.0017351793, w: 0.99243444}
-  m_LocalPosition: {x: 555.13635, y: 4.1881537, z: -20.047249}
+  m_LocalRotation: {x: 0.20188461, y: -0.2615495, z: 0.05604353, w: 0.942175}
+  m_LocalPosition: {x: 1.76, y: 7.07, z: -16.250002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32123,11 +32123,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 843936606834843478, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 554.7223
+      value: -4.706787
       objectReference: {fileID: 0}
     - target: {fileID: 843936606834843478, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5567961
+      value: 1.4350338
       objectReference: {fileID: 0}
     - target: {fileID: 843936606834843478, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: m_LocalPosition.z
@@ -32168,6 +32168,18 @@ PrefabInstance:
     - target: {fileID: 2351130402044307269, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3047701456923642544, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
+      propertyPath: landRunSpeedThreshold
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3047701456923642544, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
+      propertyPath: landingRunBlendOutTime
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3047701456923642544, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
+      propertyPath: landingRunMoveDuration
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 6097701584220506821, guid: d4c0bf3a9226e504486509f05bf6e156, type: 3}
       propertyPath: logFootsteps

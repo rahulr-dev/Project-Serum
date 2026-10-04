@@ -54,6 +54,8 @@ namespace Character
         [SerializeField, Min(0f)] float landRunSpeedThreshold = 0.5f;
         [Tooltip("How long the controller keeps the player moving after a non-impactful running landing.")]
         [SerializeField, Min(0f)] float landingRunMoveDuration = 1f;
+        [Tooltip("Seconds at the end of landing movement spent smoothly blending back to normal movement. Clamped to the landing duration; zero disables smoothing.")]
+        [SerializeField, Min(0f)] float landingRunBlendOutTime = 0.25f;
 
         public bool IsPlayingIdleVariation { get; private set; }
         public float ActualSpeed { get; private set; }
@@ -393,7 +395,7 @@ namespace Character
             if (_landRunLandingPending)
             {
                 _landRunLandingPending = false;
-                locomotion.StartLandingRunMovement(landingRunMoveDuration, _landRunLandingSpeed);
+                locomotion.StartLandingRunMovement(landingRunMoveDuration, _landRunLandingSpeed, landingRunBlendOutTime);
             }
         }
 
