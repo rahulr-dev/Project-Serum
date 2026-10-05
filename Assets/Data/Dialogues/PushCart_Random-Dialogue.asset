@@ -20,7 +20,7 @@ MonoBehaviour:
   nodes:
   - id: 93f6bf5ec1f547edbc636223c2558408
     kind: 0
-    position: {x: -19, y: 123}
+    position: {x: 0, y: 0}
     body: 
     tamilBody: 
     colourPreset: 1
@@ -34,9 +34,23 @@ MonoBehaviour:
     tamilChoiceLabels: []
   - id: 5c8038e77da24bccbc19ea76ae5d4960
     kind: 1
-    position: {x: 129, y: 123}
+    position: {x: -94.66666, y: 232.66666}
     body: 'Strange. So strange. '
-    tamilBody: '];tcd;/. d;]h c;;tcd;/.'
+    tamilBody: ek;k CUy jpBu;D Vd; ,g;gbyhk; elf;FJ?
+    colourPreset: 0
+    advanceMode: 1
+    autoDelay: 5
+    charsPerSecond: 0
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    choiceLabels: []
+    tamilChoiceLabels: []
+  - id: 091fd01514b34b06b83c4ed7e01ba812
+    kind: 1
+    position: {x: 337.33337, y: 174}
+    body: Hostage for evil activities. Sounds so disturbing
+    tamilBody: kf;fisg; gzaf; ifjpfshfg; gpbj;Jr; nry;fpwhu;fNs!
     colourPreset: 0
     advanceMode: 1
     autoDelay: 4
@@ -46,23 +60,9 @@ MonoBehaviour:
         m_Calls: []
     choiceLabels: []
     tamilChoiceLabels: []
-  - id: 091fd01514b34b06b83c4ed7e01ba812
-    kind: 1
-    position: {x: 436, y: 138}
-    body: Hostage for evil activities. Sounds so disturbing
-    tamilBody: kf;fisg; gzaf; ifjpfshfg; gpbj;Jr; nry;fpwhu;fNs!
-    colourPreset: 0
-    advanceMode: 1
-    autoDelay: 3
-    charsPerSecond: 0
-    onStart:
-      m_PersistentCalls:
-        m_Calls: []
-    choiceLabels: []
-    tamilChoiceLabels: []
   - id: aab82aa2e87b48b789a217e234bfee9c
     kind: 3
-    position: {x: 885, y: 173}
+    position: {x: 664.6667, y: -39.333332}
     body: 
     tamilBody: 
     colourPreset: 1

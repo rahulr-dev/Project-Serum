@@ -88,6 +88,7 @@ namespace Dialogue
 
         void Update()
         {
+            _runner.SetLanguage(language);
             _runner.Tick(Time.deltaTime);
         }
 
@@ -110,6 +111,7 @@ namespace Dialogue
         public void SetLanguage(Language selectedLanguage)
         {
             language = selectedLanguage;
+            _runner.SetLanguage(language);
         }
 
         public void StopDialogue()

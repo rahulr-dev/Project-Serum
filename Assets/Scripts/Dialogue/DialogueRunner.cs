@@ -52,6 +52,36 @@ namespace Dialogue
             Enter(graph.FindNext(start.id, 0));
         }
 
+        public void SetLanguage(DialogueManager.Language language)
+        {
+            if (_language == language)
+                return;
+
+            _language = language;
+            if (!IsPlaying || _current == null)
+                return;
+
+            if (_current.kind == DialogueNodeKind.Line)
+            {
+                _lineText = _current.GetBody(_language);
+                if (_lineRevealed)
+                    _visibleChars = _lineText.Length;
+
+                int visibleCount = Mathf.Clamp(Mathf.FloorToInt(_visibleChars), 0, _lineText.Length);
+                OnLineTextUpdated?.Invoke(_lineText.Substring(0, visibleCount));
+            }
+            else if (_inChoice)
+            {
+                _choiceLabels.Clear();
+                IReadOnlyList<string> labels = _current.GetChoiceLabels(_language);
+                if (labels != null)
+                    _choiceLabels.AddRange(labels);
+
+                OnChoicesPresented?.Invoke(_choiceLabels);
+                OnChoiceIndexChanged?.Invoke(SelectedIndex);
+            }
+        }
+
         public void Stop(bool notifyFinished)
         {
             bool wasPlaying = IsPlaying;
